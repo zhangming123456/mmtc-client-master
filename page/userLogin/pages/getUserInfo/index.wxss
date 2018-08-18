@@ -1,0 +1,40 @@
+.getUserInfoPage {
+    position: absolute;
+    width: 100%;
+    top:40%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+.getUserInfoPage .azm-image {
+    width: 237rpx;
+    height: 195rpx;
+    margin-bottom: 30rpx;
+}
+.getUserInfoPage .azm-p{
+    font-family: PingFang-SC-Regular;
+    font-size: 30rpx;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #999999;
+    margin-bottom: 30rpx;
+}
+.getUserInfoPage button.azm-userInfo_btn {
+    font-size:13px;
+    padding:0 1.34em;
+    width: 260rpx;
+    height: 82rpx;
+    line-height: 82rpx;
+    box-sizing: border-box;
+    background-color: #ff538b;
+    border-radius: 40rpx;
+    border: solid 1px #ff538b;
+    color: #fff;
+}
+
+.getUserInfoPage button.azm-userInfo_btn:active{
+    border-width: 0;
+}
+.getUserInfoPage button.azm-userInfo_btn:before{
+    border-width: 0;
+}

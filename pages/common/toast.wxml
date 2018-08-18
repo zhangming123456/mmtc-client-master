@@ -1,0 +1,8 @@
+<view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">  
+<!--对话框标题-->  
+  <view class="title-view">  
+    <view class="toast-view">  
+      要显示的内容  
+    </view>  
+  </view>  
+</view>  

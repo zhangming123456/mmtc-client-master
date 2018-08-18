@@ -1,0 +1,98 @@
+<wxs src="../../utils/common.wxs" module="c" />
+<view class='toobar border-b'>
+  <view class="flex">
+    <view data-id="0" bindtap='toggleType' class='flex-con border-r {{type==0?"active":""}}'>
+      <image src='https://app.mmtcapp.com/mmtc/imgs/zan{{type==0?"3":"2"}}@2x.png' class='zan'></image>
+      赞
+    </view>
+    <view data-id="1" bindtap='toggleType' class='flex-con border-r {{type==1?"active":""}}'>
+      <image src='https://app.mmtcapp.com/mmtc/imgs/comments{{type==1?"1":""}}@2x.png' class='comment'></image>
+      评论
+    </view>
+    <view data-id="2" bindtap='toggleType' class='flex-con {{type==2?"active":""}}'>
+      <image src='https://app.mmtcapp.com/mmtc/imgs/notice{{type==2?"1":""}}@2x.png' class='notice'></image>
+      通知
+    </view>
+  </view>
+</view>
+
+<view class='hr'></view>
+<view class='content content0' hidden='{{type!=0}}'>
+  <view class='border-b content-item' wx:for="{{items}}" wx:key="id">
+    <view class='flex flex-stretch'>
+      <view>
+        <image src='{{c.absUrl(item.avatar,200) || "https://app.mmtcapp.com/mmtc/imgs/default.png"}}' class='avatar'></image>
+      </view>
+      <view class='item-info'>
+        <view class="flex">
+          <view class='username'>
+            {{item.username}} 赞了你
+          </view>
+          <view class='flex-con time'>
+            {{item.create_time}}
+          </view>
+        </view>
+
+        <view class='content-detail' bindtap='showNote' data-id="{{item.id}}">
+          相关帖子/日记/问答题目/标题： {{item.title||item.content}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='content' hidden='{{type!=1}}'>
+  <view class='border-b content-item' wx:for="{{items}}" wx:key="id">
+    <view class='flex flex-stretch'>
+      <view>
+        <image src='{{c.absUrl(item.avatar,200) || "https://app.mmtcapp.com/mmtc/imgs/default.png"}}' class='avatar'></image>
+      </view>
+      <view class='item-info'>
+        <view class="flex">
+          <view class='username'>
+            {{item.nickname}}
+          </view>
+          <view class='flex-con time'>
+            {{item.create_time}}
+          </view>
+        </view>
+        <view class='words'>
+          {{item.comment_content}}
+        </view>
+        <view class='content-detail' bindtap='showNote' data-id="{{item.note_id}}">
+          在“帖子/日记/问答题目/标题：{{item.title||item.content}}”中回复了你
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='content content2' hidden='{{type!=2}}'>
+  <view class='border-b content-item' wx:for="{{items}}" wx:key="id">
+    <view class='flex flex-stretch'>
+      <view>
+        <image src='https://app.mmtcapp.com/mmtc/imgs/update@2x.png' class='avatar'></image>
+      </view>
+      <view class='item-info'>
+        <view class="flex">
+          <view class='username'>
+            {{item.title}}
+          </view>
+          <view class='flex-con time'>
+            {{item.create_time}}
+          </view>
+        </view>
+
+        <view class='content-detail'>
+          {{item.content}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='empty-area' wx:if="{{isEmpty}}">
+  <image src='https://app.mmtcapp.com/mmtc/imgs/empty@2x.png' class=''></image>
+  <view class='text-center'>
+    ops，这里空空如也，逛逛其他的吧~
+  </view>
+</view>
+
+<include src="../common/more.wxml"></include>

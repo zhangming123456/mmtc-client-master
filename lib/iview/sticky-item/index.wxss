@@ -1,0 +1,1 @@
+.i-sticky-item-header{font-size:28rpx;width:100%;min-height:64rpx;line-height:64rpx}.i-sticky-item-content{font-size:28rpx}.i-sticky-title{width:100%;padding:0 0;box-sizing:border-box}.i-sticky-fixed .i-sticky-title{position:fixed;top:0}

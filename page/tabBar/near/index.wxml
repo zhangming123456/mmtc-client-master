@@ -1,0 +1,159 @@
+<wxs src="../../../utils/common.wxs" module="c"/>
+<import src="../../../wxParse/wxParse.wxml"/>
+<i-toast id="toast"/>
+<i-message id="message"/>
+
+<view class="p1">
+    <view class="flexBox">
+        <view class='flexBox-item fb-all' style="flex-grow: 1">
+            <!--地理位置-->
+            <azm-location position="pr" isShow="{{isShowLocation}}" is-tap="true"
+                          bindcallback="getLocationCallback"></azm-location>
+        </view>
+        <view class="flexBox-item fb-all" style="flex-grow: 2;box-sizing: border-box;padding-left: 20rpx;">
+            <view class='azm-search' bindtap='doSearch'>
+                <image src='https://app.mmtcapp.com/mmtc/imgs/search@2x.png'
+                       style='width: 24rpx;	height: 24rpx'></image>
+                <text>找店铺 找服务 找案例</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view id='toolbar' class='{{(topFixed||type!=-1)?"topFixedBefore":""}}'></view>
+<view class='border-t border-b toolbar {{(topFixed||type)!=-1?"topFixed":""}}'>
+    <view class='flex'>
+        <view class='flex-con {{type==0?"active":""}}' bindtap='toggleType' data-type="0">{{ctitle||'全部项目'}}</view>
+        <view class='flex-con {{type==1?"active":""}}' bindtap='toggleType' data-type="1">{{atitle||'全部地区'}}</view>
+        <view class='flex-con {{type==2?"active":""}}' bindtap='toggleType' data-type="2">{{stitle||'智能排序'}}</view>
+        <view class='flex-con {{type==3?"active":""}}' bindtap='toggleType' data-type="3">{{ltitle||'筛选'}}</view>
+    </view>
+</view>
+<view class='groups' hidden='{{type==-1}}'>
+    <view class='group category' hidden='{{type!==0}}'>
+        <view class='category-left'>
+            <view class='category-item {{categories[0].selected?"category-active":""}}' data-index="-1"
+                  bindtap='toggleCategory'>
+                {{categories[0].title}}
+            </view>
+            <view class='category-item {{ci.selected?"category-active":""}}' wx:for="{{categories[0].children}}"
+                  wx:key="id" wx:for-item="ci" bindtap='toggleCategory' data-index="{{index}}">
+                {{ci.title}}
+            </view>
+        </view>
+        <view class='category-right' wx:if="{{categories[1]}}">
+            <view class='category-item' bindtap='selectCategory' data-index="-1">
+                全部
+            </view>
+            <view class='category-item' bindtap='selectCategory' data-index="{{ciindex}}" wx:for="{{categories[1]}}"
+                  wx:for-item="ci" wx:key="id" wx:for-index="ciindex">
+                {{ci.title}}
+            </view>
+        </view>
+    </view>
+    <view class='group' hidden='{{type!==1}}'>
+        <view class='tabs flex'>
+            <view catchtap='toggleAreaType' data-type="0" class='flex-con {{areaType==0?"selected":""}}'>商圈</view>
+            <view catchtap='toggleAreaType' data-type="1" class='flex-con {{areaType==1?"selected":""}}'>地铁</view>
+        </view>
+        <view class='area'>
+            <view class='area-left'>
+                <view class='area-item {{index==areaIndex[areaType]?"active":""}}' catchtap='toggleTopArea'
+                      data-index="{{index}}" wx:for="{{topAreas}}" wx:for-item="trade" wx:key="id">
+                    {{trade.title}}
+                </view>
+            </view>
+            <scroll-view class='area-right' scroll-y="true">
+                <view class='area-item' catchtap='selectArea' data-index="{{index}}"
+                      wx:for="{{topAreas[areaIndex[areaType]].children}}" wx:key="id" wx:for-item="dd">{{dd.title}}
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+    <view class='group' hidden='{{type!==2}}'>
+        <view class='sort-item' data-index="0" catchtap='selectSortType'>智能排序</view>
+        <view class='sort-item' data-index="1" catchtap='selectSortType'>销量最高</view>
+        <view class='sort-item' data-index="2" catchtap='selectSortType'>价格最低</view>
+        <view class='sort-item' data-index="3" catchtap='selectSortType'>案例最多</view>
+        <view class='sort-item' data-index="4" catchtap='selectSortType'>好评优先</view>
+        <view class='sort-item' data-index="5" catchtap='selectSortType'>离我最近</view>
+    </view>
+    <view class='group' hidden='{{type!==3}}'>
+        <view class='sort-item' data-index="0" catchtap='selectFilterType'>全部</view>
+        <view class='sort-item' data-index="1" catchtap='selectFilterType'>拼团特惠</view>
+        <view class='sort-item' data-index="3" catchtap='selectFilterType'>买单优惠</view>
+    </view>
+</view>
+<view class='list-box'>
+    <block wx:for="{{shops}}" wx:key="{{i}}" wx:for-item="val" wx:for-index="i">
+        <block wx:for="{{val}}" wx:key="{{item.id}}">
+            <view class='list-box-item border-b' bindtap='showShopDetail' data-id="{{item.id}}">
+                <view class='flex flex-stretch'>
+                    <view>
+                        <image mode="top" src='{{c.absUrl(item.cover,200)}}' class='shop-cover'></image>
+                    </view>
+                    <view class='flex-con'>
+                        <view class='shop-info'>
+                            <view>
+                                <view class='shop-title one-line'>{{item.shop_name}}</view>
+                                <view class='stars'>
+                                    <block wx:for="{{c.num2arr(item.score)}}" wx:for-item="i" wx:key="index">
+                                        <image src="{{'https://app.mmtcapp.com/mmtc/imgs/start'+(i?1:2)+'@2x.png'}}"></image>
+                                    </block>
+                                </view>
+                                <view class='ib fz24 text999'>
+                                    {{item.loved_count||0}}人喜欢
+                                </view>
+                            </view>
+                            <view class='tags' wx:if="{{item.major_category}}">
+                                <view class='tag' wx:key="index" wx:for="{{c.split(item.major_category)}}"
+                                      wx:for-item="cc">
+                                    {{cc}}
+                                </view>
+                            </view>
+                            <view class='flex'>
+                                <view class='distance flex-con'>
+                                    <view class='flex'>
+                                        <view class='one-line'>
+                                            <text class="iconfont icon-address"
+                                                  style="font-size:24rpx;color: #ccc"></text>
+                                            <block wx:if="{{areaType==0&&areaIndex[0] == 0}}">
+                                                {{item.position_name}}
+                                            </block>
+                                            <block wx:else>
+                                                <text decode>距离{{areaType==0?'中心商圈':'地铁站'}}&nbsp;{{atitle}}</text>
+                                            </block>
+                                        </view>
+                                        <view class='nowrap'>
+                                            {{item.distance}}
+                                        </view>
+                                    </view>
+                                </view>
+                                <!--<view>-->
+                                <!--<view class='bought-area' wx:if="{{item.discount_type>0}}">-->
+                                <!--<view wx:if="{{item.discount_type==1}}">-->
+                                <!--买单-->
+                                <!--<view class='zk'>{{item.discount}}</view>-->
+                                <!--折-->
+                                <!--</view>-->
+                                <!--<view wx:else>-->
+                                <!--立减-->
+                                <!--<b class="zk">{{c.discount(item.discount)}}</b>元-->
+                                <!--</view>-->
+                                <!--</view>-->
+                                <!--</view>-->
+                            </view>
+                            <view class='discount' wx:if="{{item.has_group>0}}">
+                                <view class='discount-icon'>拼</view>
+                                拼团享优惠
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </block>
+</view>
+<view class='masker' hidden='{{type==-1}}' catchtap='closeFilter' catchtouchmove='noop'></view>
+
+<azm-gotop is-show="{{topFixed}}"></azm-gotop>
+<azm-more no-more="{{noMore}}" loading="true"></azm-more>

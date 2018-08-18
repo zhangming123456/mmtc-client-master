@@ -1,0 +1,439 @@
+.azm-card-bag {
+    .azm-card-bag-l {
+        flex: 2;
+    }
+    .azm-card-bag-r {
+        width: 72%;
+        position: relative;
+        box-sizing: border-box;
+        padding-left: 15*2rpx;
+        line-height: 45*1rpx;
+        .azm-label {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        .azm-card-bag-title {
+            position: relative;
+            padding-bottom: 34*1rpx;
+            font-size: 32*1rpx;
+            color: #323232;
+            box-sizing: border-box;
+            padding-right: 80*1rpx;
+        }
+        .azm-card-bag-price {
+            padding-bottom: 9*1rpx;
+            font-size: 28*1rpx;
+            color: #FF6182;
+            .azm-price {
+
+            }
+            .azm-m-price {
+                color: #666;
+                font-size: 12*2rpx;
+            }
+        }
+        .azm-card-bag-time {
+            color: #666;
+            font-size: 12*2rpx;
+        }
+    }
+}
+
+.navbar {
+    font-size: 28*1rpx;
+    color: #282828;
+    text-align: center;
+    background-color: #fff;
+    white-space: nowrap;
+    padding: 22*1rpx 0;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.navbar .flex-con {
+    white-space: nowrap;
+}
+
+page {
+    background-color: #f4f4f4;
+}
+
+.nav-item {
+    padding: 5*1rpx 0;
+    width: 131*1rpx;
+    text-align: center;
+}
+
+.navbar .active {
+    color: #ff538b;
+}
+
+page {
+    height: 100%;
+}
+
+.item {
+    background-color: #fff;
+    padding: 30*1rpx;
+    margin-top: 24*1rpx;
+}
+
+.avatar {
+    width: 188*1rpx;
+    height: 188*1rpx;
+    vertical-align: middle;
+}
+
+.item-info {
+    padding-left: 30*1rpx;
+    position: relative;
+}
+
+.item .title {
+    font-size: 32*1rpx;
+    color: #282828;
+}
+
+.price-area {
+    padding-top: 40*1rpx;
+    padding-bottom: 31*1rpx;
+}
+
+.price-area > view {
+    display: inline-block;
+}
+
+.unit {
+    font-size: 24*1rpx;
+    color: #ff538b;
+}
+
+.price {
+    font-size: 45*1rpx;
+    color: #ff538b;
+}
+
+.market-price {
+    font-size: 24*1rpx;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #999;
+    text-decoration: line-through;
+    margin-left: 32*1rpx;
+}
+
+.num {
+    font-size: 26*1rpx;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #666;
+}
+
+.bill-icon {
+    width: 36*1rpx;
+    height: 32*1rpx;
+    vertical-align: middle;
+    margin-right: 14*1rpx;
+}
+
+.order-item {
+    background-color: #fff;
+}
+
+.order-items > .flex,
+.order-item > .flex {
+    padding: 33*1rpx 32*1rpx;
+}
+
+.status {
+    font-size: 24*1rpx;
+    color: #ff538b;
+}
+
+.order-info {
+    font-size: 26*1rpx;
+    color: #282828;
+}
+
+.btn0,
+.btn1 {
+    height: 51*1rpx;
+    line-height: 51*1rpx;
+    border-radius: 24*1rpx;
+    width: 140*1rpx;
+    display: inline-block;
+    font-size: 28*1rpx;
+    text-align: center;
+}
+
+.btn0 {
+    border: solid 1*1rpx #fc075f;
+    color: #fd0f5d;
+    margin-left: 11*1rpx;
+}
+
+.btn1 {
+    background-color: #ff538b;
+    border: solid 1*1rpx #ff538b;
+    color: #fff;
+    margin-left: 11*1rpx;
+}
+
+.item-info .title {
+    font-size: 36*1rpx;
+    color: #282828;
+}
+
+.content {
+    margin-top: 79*1rpx;
+}
+
+.empty-area {
+    text-align: center;
+    padding-top: 257*1rpx;
+}
+
+.empty-area image {
+    width: 191*1rpx;
+    height: 190*1rpx;
+}
+
+.empty-area view {
+    font-size: 32*1rpx;
+    margin-top: 79*1rpx;
+    line-height: 0px;
+    letter-spacing: 0px;
+    color: #999;
+}
+
+.touse {
+    position: absolute;
+    right: 0;
+    bottom: -5*1rpx;
+    border: solid 1*1rpx #fc075f;
+    color: #fd0f5d;
+    height: 51*1rpx;
+    line-height: 51*1rpx;
+    border-radius: 24*1rpx;
+    padding-left: 24*1rpx;
+    padding-right: 24*1rpx;
+    display: inline-block;
+    font-size: 28*1rpx;
+    text-align: center;
+}
+
+.qrcode-area {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.qrcode-dlg {
+    background-color: #fff;
+    width: 590*1rpx;
+    border-radius: 8px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 151*1rpx;
+}
+
+.qrcode {
+    width: 280*1rpx;
+    height: 280*1rpx;
+    margin-top: 28*1rpx;
+    margin-bottom: 45*1rpx;
+}
+
+.qrcode-no {
+    font-size: 36*1rpx;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 40*1rpx;
+    color: #666;
+}
+
+.qrcode-no .num {
+    font-size: 48*1rpx;
+    font-weight: normal;
+    color: #282828;
+    display: inline-block;
+}
+
+.qrcode-tip {
+    font-size: 24*1rpx;
+    line-height: 30*1rpx;
+    color: #999;
+    margin-top: 44*1rpx;
+    margin-bottom: 28*1rpx;
+}
+
+.qrcode-btn {
+    font-size: 32*1rpx;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #ff538b;
+    padding: 29*1rpx 0;
+}
+
+.qrcode-close {
+    margin-top: 85*1rpx;
+}
+
+.qrcode-close image {
+    width: 35*1rpx;
+    height: 35*1rpx;
+}
+
+.order-no {
+    padding-top: 50*1rpx;
+}
+
+.redfullbtn {
+    color: #fff;
+    background-color: #ff538b;
+}
+
+.isused {
+    position: absolute;
+    right: 0;
+    bottom: -5*1rpx;
+    border: solid 1*1rpx #ff538b;
+    color: #ff538b;
+    height: 51*1rpx;
+    line-height: 51*1rpx;
+    border-radius: 24*1rpx;
+    padding-left: 24*1rpx;
+    padding-right: 24*1rpx;
+    display: inline-block;
+    font-size: 28*1rpx;
+    text-align: center;
+}
+
+.order-price-unit {
+    font-size: 24*1rpx;
+    color: #ff538b;
+    display: inline-block;
+}
+
+.order-price {
+    font-size: 45*1rpx;
+    color: #ff538b;
+    display: inline-block;
+}
+
+.order-type1 {
+    display: inline-block;
+    width: 104*1rpx;
+    height: 33*1rpx;
+    line-height: 33*1rpx;
+    text-align: center;
+    background-color: #f8a461;
+    border-radius: 5*1rpx;
+    font-size: 22*1rpx;
+    margin-left: 25*1rpx;
+    color: #f4f4f4;
+}
+
+.order-type1-area {
+    padding: 48*1rpx 30*1rpx;
+}
+
+/* 退款订单 */
+
+.topStatus {
+    height: 91*1rpx;
+    width: 100%;
+    /* background-color: skyblue; */
+    border: 1*1rpx solid #eeeeee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+.topStatus .shop2 {
+    width: 36*1rpx;
+    height: 32*1rpx;
+    margin-left: 29*1rpx;
+}
+
+.shopName {
+    margin-left: -254*1rpx;
+
+}
+
+.refund {
+    margin-bottom: 24*1rpx;
+}
+
+.statusBar {
+    font-size: 24*1rpx;
+    color: #ff538b;
+    margin-right: 32*1rpx;
+}
+
+.item-info {
+    box-sizing: border-box;
+    height: 241*1rpx;
+    width: 100%;
+    padding-left: 30*1rpx;
+    padding-top: 30*1rpx;
+    position: relative;
+    background-color: #ffffff;
+}
+
+.item-info .shopPhoto {
+    width: 180*1rpx;
+    height: 180*1rpx;
+}
+
+.item-info .shopTitle {
+    font-size: 36*1rpx;
+    position: absolute;
+    top: 30*1rpx;
+    left: 220*1rpx;
+}
+
+.item-info .ShopUnit {
+    position: absolute;
+    font-size: 24*1rpx;
+    color: #ff538b;
+    top: 136*1rpx;
+    left: 230*1rpx;
+}
+
+.item-info .ShopPrice {
+    font-size: 45*1rpx;
+    color: #ff538b;
+    top: 121*1rpx;
+    left: 258*1rpx;
+    position: absolute;
+}
+
+.item-info .shop-price {
+    position: absolute;
+    font-weight: normal;
+    font-stretch: normal;
+    text-decoration: line-through;
+    font-size: 24*1rpx;
+    color: #999999;
+    position: absolute;
+    top: 132*1rpx;
+    right: 183*1rpx;
+}
+
+.item-info .shopNum {
+    font-size: 26*1rpx;
+    color: #666666;
+    top: 186*1rpx;
+    left: 230*1rpx;
+    position: absolute;
+}

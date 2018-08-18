@@ -1,0 +1,40 @@
+<view class="bg text-center textfff">
+  <view class="money-area">
+    <span class="fz32">￥</span>
+    <span id="money">{{item.total}}</span>
+  </view>
+  <view class="fz26 pt02">
+    订单号：
+    <span id="order_no">{{item.order_no}}</span>
+  </view>
+</view>
+<view class='hr24'></view>
+<view class='bg-white'>
+  <view class='p30 border-b fz28 text282828'>
+    具体信息
+  </view>
+  <view class='pm border-b'>
+    <view class='flex'>
+      <view class='field'>订单类型：</view>
+      <view>买单订单</view>
+    </view>
+    <view class='flex'>
+      <view class='field'>订单状态：</view>
+      <view>已完成</view>
+    </view>
+    <view class='flex'>
+      <view class='field'>下单时间：</view>
+      <view>{{item.create_time}}</view>
+    </view>
+    <view class='flex'>
+      <view class='field'>支付时间：</view>
+      <view>{{item.pay_time}}</view>
+    </view>
+  </view>
+</view>
+<view class='tips'>
+<view class='tip'>
+  美美天成客服：400-184-8008
+</view>
+<view class='tip'>工作时间：每天9:00-20:00</view>
+</view>

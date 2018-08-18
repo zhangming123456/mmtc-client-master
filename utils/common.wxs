@@ -1,0 +1,189 @@
+var baseUrl = "https://app.mmtcapp.com";
+var c = {};
+module.exports.absUrl = function (url, imgw) {
+    if (url) {
+        var reg = getRegExp('^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$', 'i'),
+            reg2 = getRegExp('^(wxftp:)', 'i')
+        if (reg.test(url)) {
+            return url;
+        } else if (reg2.test(url)) {
+            return url.replace(reg2, '')
+        }
+        if (imgw) {
+            if (typeof imgw === 'boolean') {
+                if (url.indexOf('?') === -1) {
+                    url += '?'
+                } else {
+                    url += '&'
+                }
+                url += '_t=' + getDate().getTime();
+            } else {
+                url += '!' + imgw + 'x' + imgw;
+            }
+        }
+        return baseUrl + url;
+    } else {
+        return 'https://app.mmtcapp.com/mmtch5/images/imageErr.png';
+    }
+};
+module.exports.isEmpty = function (v) {
+    return !v || v == 0;
+};
+module.exports.str2attr = function (strs) {
+    if (strs) {
+        strs = strs.split(',');
+        return strs;
+    }
+    return [];
+};
+module.exports.zanedClass = function (item) {
+    if (item.zaned === true) {
+        return 'zaned';
+    }
+    return '';
+};
+module.exports.parseInt = function (v) {
+    return parseInt(v);
+};
+module.exports.mToKm = function (v, obj) {
+    var arr = [];
+    if (!v) {
+        return 0
+    }
+    v = parseInt(v);
+    if (v > 1000) {
+        var num = v / 1000;
+        return num.toFixed(2) + 'km'
+    } else {
+        return v + 'm'
+    }
+};
+
+module.exports.orderNumber = function (obj, type) {
+    // A:未支付 - 0  B:已支付 { 全部未使用：1，部分完成（含部分退款、部分已经写好日记与未使用）：2，全部使用：3，完成退款：4}
+    var status = 0,
+        flag = false;
+    if (obj.payed == 1 && obj.order_type == 0) {
+        if (obj.count > 0 && obj.count == obj.items.length) {
+            if (obj.count_used == 0 && obj.count_refund == 0) { //全部未使用
+                status = 1;
+                if (type == 2) {
+                    flag = true;
+                }
+            } else if (obj.count_used > 0 || obj.count_refund > 0 || obj.count_noted > 0) {
+                status = 2;
+                flag = true;
+            } else if (obj.count_used == obj.count) {
+                status = 3;
+                if (type == 3)
+                    flag = true;
+            } else if (type == 0 || type == 1 || type == 4) {
+                flag = true;
+            }
+            if (obj.count_refund == obj.count) {
+                status = 4;
+            }
+        }
+    }
+    return {
+        status: status,
+        flag: flag
+    };
+};
+
+// 计算项目详情服务总时间
+module.exports.numAbs = function (item) {
+    var num = 0;
+    for (var i = 0; i < item.length; i++) {
+        num += parseInt(item[i].time)
+    }
+    return num;
+}
+
+// 计算商品详情使用商品
+module.exports.item_brand_cf = function (item) {
+    var arr = [],
+        j = 0;
+    for (var i = 0; i < item.length / 2; i++) {
+        if (item[j + 1]) {
+            arr.push([item[j], item[j + 1]])
+        } else {
+            arr.push([item[j]])
+        }
+        j = i + 2
+    }
+    return arr;
+}
+
+module.exports.num2arr = function num2arr (num, attrlen) {
+    attrlen = attrlen || 5;
+    num = parseInt(num);
+    var rt = [];
+    for (var i = 0; i < 5; i++) {
+        if (i < num) {
+            rt.push(1);
+        } else {
+            rt.push(0);
+        }
+    }
+    return rt;
+}
+module.exports.discount = function discount (v) {
+    return v.split(':')[1] || '';
+}
+module.exports.split = function split (str) {
+    var rt = str.split(',');
+    if (rt.length > 2) {
+        return rt.slice(0, 2);
+    }
+    return rt;
+}
+
+module.exports.num2score = function num2score (num, attrlen) {
+    attrlen = attrlen || 5;
+    num = parseInt(num);
+    var rt = [];
+    for (var i = 0; i < 5; i++) {
+        if (i < num) {
+            rt.push(1);
+        } else {
+            rt.push(0);
+        }
+    }
+    return rt;
+};
+
+module.exports.picCount = function picCount (strs) {
+    if (strs) {
+        strs = strs.split(',');
+        if (strs.length > 3) {
+            return 3;
+        }
+        return strs.length;
+    }
+    return 0;
+}
+
+module.exports.shopLabel = function (arr) {
+    if (arr && "Array" === arr.constructor) {
+        var len = arr.length;
+        arr = arr.slice(0, 5);
+        return arr.join('、') + (len >= 5 ? '...' : '')
+    } else {
+        return ''
+    }
+}
+
+module.exports.itemArrSplit = function (arr) {
+    if (arr && "Array" === arr.constructor) {
+        var arr2 = [], j = 0;
+        for (var i = 0; arr.length > i; i = i + 2) {
+            arr2[j++] = [arr[i], arr[i + 1]]
+        }
+        return arr2;
+    } else {
+        return []
+    }
+}
+
+

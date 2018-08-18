@@ -1,0 +1,215 @@
+.weixin {
+    width: 60rpx;
+    height: 60rpx;
+}
+
+.tag {
+    width: 32rpx;
+    height: 32rpx;
+    display: inline-block;
+    border: 1rpx solid #999;
+    border-radius: 50%;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+.tag.selected {
+    border-color: #ff538b;
+    position: relative;
+    text-align: center;
+}
+
+.tag.selected:after {
+    background-color: #ff538b;
+    width: 16rpx;
+    height: 16rpx;
+    display: inline-block;
+    content: '';
+    position: absolute;
+    left: 8rpx;
+    top: 8rpx;
+    box-sizing: border-box;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.bg {
+    height: 374rpx;
+    background-color: #16d6c3;
+    color: white;
+}
+
+#money {
+    font-size: 60rpx;
+}
+
+.money-area {
+    padding-top: 75rpx;
+}
+
+.pt02 {
+    padding-top: 30rpx;
+    padding-right: 30rpx;
+}
+
+page {
+    background-color: #f4f4f4;
+}
+
+.btn2 {
+    height: 112rpx;
+    background-color: #16d6c3;
+    text-align: center;
+    line-height: 112rpx;
+    font-size: 32rpx;
+    color: #fff;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.pm {
+    padding: 0 30rpx;
+    color: #282828;
+    font-size: 24rpx;
+    padding-top: 23rpx;
+}
+
+.field {
+    color: #999999;
+}
+
+.field .fieldStatus {
+    margin-left: 495rpx;
+}
+
+.FieldStatus{
+    margin-left: 507rpx;
+}
+
+.fieldstatus{
+    margin-left:529rpx;
+}
+
+.pm>.flex {
+    padding-bottom: 23rpx;
+}
+
+.tips {
+    padding-top: 24rpx;
+    padding-left: 31rpx;
+    color: #999999;
+    font-size: 24rpx;
+    background-color: #ffffff;
+}
+
+.tip {
+    padding-bottom: 21rpx;
+    position: relative;
+}
+
+.tip .tipStatus {
+    /* margin-left: 20rpx; */
+    left: 160rpx;
+    position: absolute;
+}
+
+.p30 {
+    padding: 32rpx 29rpx;
+    line-height: 26rpx;
+}
+
+#order_no {
+    font-size: 60rpx;
+}
+
+.succeed {
+    padding-top: 28rpx;
+}
+
+.topStatus {
+    height: 91rpx;
+    width: 100%;
+    /* background-color: skyblue; */
+    border-bottom: 1rpx solid #eeeeee;
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    background-color: #ffffff;
+}
+
+.topStatus .shop2 {
+    width: 36rpx;
+    height: 32rpx;
+    margin-left: 29rpx;
+}
+
+.shopName {
+    /* margin-left: -332rpx; */
+    margin-left: 14rpx;
+}
+
+.statusBar {
+    font-size: 24rpx;
+    color: #ff538b;
+    margin-right: 32rpx;
+}
+
+.item-info {
+    box-sizing: border-box;
+    height: 241rpx;
+    width: 100%;
+    padding-left: 30rpx;
+    padding-top: 30rpx;
+    position: relative;
+    background-color: #ffffff;
+}
+
+.item-info .shopPhoto {
+    width: 180rpx;
+    height: 180rpx;
+}
+
+.item-info .shopTitle {
+    font-size: 36rpx;
+    position: absolute;
+    top: 30rpx;
+    left: 220rpx;
+}
+
+.item-info .ShopUnit {
+    position: absolute;
+    font-size: 24rpx;
+    color: #ff538b;
+    top: 136rpx;
+    left: 230rpx;
+}
+
+.item-info .ShopPrice {
+    font-size: 45rpx;
+    color: #ff538b;
+    top: 121rpx;
+    left: 258rpx;
+    position: absolute;
+}
+
+.item-info .shop-price {
+    position: absolute;
+    font-weight: normal;
+    font-stretch: normal;
+    text-decoration: line-through;
+    font-size: 24rpx;
+    color: #999999;
+    position: absolute;
+    top: 132rpx;
+    right: 183rpx;
+}
+
+.item-info .shopNum {
+    font-size: 26rpx;
+    color: #666666;
+    top: 186rpx;
+    left: 230rpx;
+    position: absolute;
+}

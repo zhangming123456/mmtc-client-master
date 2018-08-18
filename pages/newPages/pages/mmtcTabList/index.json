@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "美美天成",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "zan-tab": "../../../../lib/zanui/tab/index",
+    "azm-more": "../../../../lib/components/azm-more/index",
+    "azm-location": "../../../../lib/components/azm-location/index",
+    "azm-image": "../../../../lib/components/azm-image/index",
+    "azm-gotop": "../../../../lib/components/azm-gotop/index"
+  }
+}

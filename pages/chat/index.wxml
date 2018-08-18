@@ -1,0 +1,20 @@
+<view class="content">
+    <view class="chatTime text666">2017-06-01 08:24</view>
+    <view class="chatLeft">
+        <image class="chatPhoto" src="https://app.mmtcapp.com/mmtc/imgs/default.png"></image>
+        <view class="chatContent fz32">
+            晚上吃鱼,好不好,我看你挺会挑刺的
+        </view>
+    </view>
+    <view class="chatRight">
+        <image class="rightPhoto" src="https://app.mmtcapp.com/mmtc/imgs/default.png"></image>
+        <view class="rightContent fz32">
+            晚上吃鱼,好不好,我看你挺会挑刺的
+        </view>
+    </view>
+    <view class="button">
+        <image class="smile" src="https://app.mmtcapp.com/mmtc/imgs/smile.png"></image>
+        <input class="input" placeholder="快来评论吧" type="text" />
+        <view class="send text666">发送</view>
+    </view>
+</view>

@@ -1,0 +1,35 @@
+.title {
+  font-size: 30rpx;
+  color: #999;
+  margin-bottom: 47rpx;
+  margin-top: 6rpx;
+}
+
+.p1 {
+  padding: 46rpx 31rpx;
+  background-color: #fff;
+}
+
+.content {
+  font-size: 30rpx;
+  line-height: 50rpx;
+  color: #282828;
+}
+
+.time {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 97rpx;
+  text-align: right;
+}
+
+.tip {
+  text-align: right;
+  font-size: 30rpx;
+  color: #999;
+  padding-top: 18rpx;
+}
+
+page {
+  background-color: #f4f4f4;
+}

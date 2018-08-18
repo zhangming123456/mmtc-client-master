@@ -1,0 +1,135 @@
+<wxs src="../../utils/common.wxs" module="c"/>
+<wxs module="f">
+    module.exports = {
+    calcWidth:function(num_used,num){
+    if(num > 0){
+    var per = (num_used / num*100).toFixed(2);
+    if(per > 100){
+    per = 100;
+    }
+    return per+'%';
+    }
+    return 0;
+    }
+    };
+</wxs>
+<view class='toobar border-b'>
+    <view class="flex">
+        <view data-id="0" bindtap='toggleType' class='flex-con {{type==0?"active":""}}'>
+
+            全部拼团
+        </view>
+        <view data-id="1" bindtap='toggleType' class='flex-con {{type==1?"active":""}}'>
+
+            拼团成功
+        </view>
+        <view data-id="2" bindtap='toggleType' class='flex-con {{type==2?"active":""}}'>
+
+            待写日记
+        </view>
+    </view>
+</view>
+<view class='hr'></view>
+
+<view class='shop-item' wx:for="{{items}}" wx:key="group_id">
+    <view class='shop-name border-b'>
+        <view class='flex'>
+            <view>
+                <image src='https://app.mmtcapp.com/mmtc/imgs/shop2.png' class='shop-avatar'></image>
+            </view>
+            <navigator class='flex-con one-line' url='/pages/home/index?shop_id={{item.shop_id}}' hover-class='none'>
+                {{item.shop_name}}
+            </navigator>
+            <view>
+                <block wx:if="{{item.status==0 && item.num > item.num_used}}">
+                    已下架
+                </block>
+                <block wx:else>
+                    {{item.is_expired==1?'已过期':(item.num <= item.num_used?(item.is_used==1?'交易完成':'待使用'):'拼团中')}}
+                </block>
+            </view>
+        </view>
+    </view>
+    <view class='p30'>
+        <view class='flex flex-stretch' bindtap="showGoodDetail" data-id="{{item.group_id}}">
+            <view class='item-cover-wrap'>
+                <image class='item-cover' src='{{c.absUrl(item.cover,250)}}'></image>
+                <view class='tuan-num'>{{item.num}}人团</view>
+            </view>
+            <view class='item-info flex-con'>
+                <view class='item-title'>
+                    【{{item.category_title}}】{{item.title}}
+                </view>
+                <view class='item-num'>
+                    <view class='pin-price'>拼团价 ¥{{item.price}}</view>
+                    <view class='orgin-price'>¥{{item.origin_price}}</view>
+                </view>
+                <view class='item-progress' wx:if="{{item.is_expired==0||item.num_used>=item.num}}">
+                    <view class='item-outline'>
+                        <view class='item-innerline' style='width:{{f.calcWidth(item.num_used,item.num)}}'></view>
+                    </view>
+                    <view class='item-text' wx:if="{{item.num>item.num_used}}">
+                        还差
+                        <view class='item-text-num'>{{item.num-item.num_used}}</view>
+                        人成团
+                    </view>
+                    <view wx:else class='item-text item-text-red'>拼团成功</view>
+                </view>
+                <view wx:else>
+                    <block wx:if="{{item.status==0}}">
+                        <view class='item-text-red'>已下架</view>
+                    </block>
+                    <block wx:else>
+                        <view class='item-text-red'>过期未成团</view>
+                        <image src='https://app.mmtcapp.com/mmtc/imgs/outdated.png' class='outtime-img'></image>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class='border-t text-right btns' wx:if="{{!item.is_expired}}">
+        <navigator url='/pages/group/shared?id={{item.group_id}}' hover-class="none" wx:if="{{item.num > item.num_used}}"
+                   class="btn full-red">邀请好友
+        </navigator>
+        <block wx:else>
+            <navigator class='btn btn-red' url='/pages/car/payOrder?item_id={{item.id}}&num=1&group=1'>再来一单</navigator>
+            <view class='btn btn-red' wx:if="{{c.isEmpty(item.is_used)}}" data-item="{{item}}" bindtap='touse'>查看券码
+            </view>
+            <view class='btn btn-red' wx:elif="{{c.isEmpty(item.is_noted)}}" data-item="{{item}}" bindtap='tonote'
+                  data-id="{{item.order_info_id}}">去写日记
+            </view>
+        </block>
+    </view>
+</view>
+
+<view class='empty-area' wx:if="{{isEmpty}}">
+    <image src='https://app.mmtcapp.com/mmtc/imgs/empty@2x.png' class=''></image>
+    <view class='text-center'>
+        ops，这里空空如也，逛逛其他的吧~
+    </view>
+</view>
+
+<view class='qrcode-area' wx:if="{{!qrcode.hidden}}" bindtap='closeQrcode'>
+    <view class='qrcode-dlg' catchtap='noop'>
+        <view class='fz28 text666 order-no'>订单号：{{qrcode.order_no}}</view>
+        <view>
+            <image src='{{qrcode.img}}' class='qrcode'></image>
+        </view>
+        <view class='qrcode-no'>
+            消费码:
+            <view class='num'>{{qrcode.num}}</view>
+        </view>
+        <view class='qrcode-tip'>
+            请您将二维码或着消费码
+            <view class='pt10'> 出示给商家使用~</view>
+        </view>
+        <view class='qrcode-btn border-t' bindtap='closeQrcode'>
+            手滑，下次再说吧
+        </view>
+    </view>
+    <view class='qrcode-close'>
+        <image src='https://app.mmtcapp.com/mmtc/imgs/btnclose.png' bindtap='closeQrcode'></image>
+    </view>
+</view>
+
+<include src="../common/more.wxml"></include>

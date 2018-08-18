@@ -1,0 +1,113 @@
+page {
+    background-color: #f4f4f4
+}
+
+.content .chatTime {
+    font-size: 22rpx;
+    text-align: center;
+    margin-top: 41rpx;
+}
+
+.chatLeft {
+    margin-top: 31rpx;
+    margin-left: 30rpx;
+}
+
+.chatLeft .chatPhoto {
+    width: 98rpx;
+    height: 98rpx;
+    border-radius: 50%;
+}
+
+.chatLeft .chatContent {
+    width: 454rpx;
+    padding: 31rpx;
+    border: 1px solid #eeeeee;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    margin-left: 140rpx;
+    margin-top: -85rpx;
+    position: relative;
+    /* display:inline-block; */
+}
+
+.chatContent::before {
+    content:'';
+    position: absolute;
+    left: -17rpx;
+    width: 0rpx;
+    height: 0rpx;
+    border-top: 14rpx solid transparent;
+    border-right: 19rpx solid #ffffff;
+    border-bottom: 11rpx solid transparent;
+}
+
+.chatRight{
+    position: relative;
+}
+
+.chatRight .rightPhoto{
+    position: absolute;
+    right: 30rpx;
+    top: 32rpx;    
+    width: 98rpx;
+    height: 98rpx;
+    border-radius: 50%;
+}
+
+.chatRight .rightContent{
+    width: 454rpx;
+    padding: 31rpx;
+    border: 1px solid #eeeeee;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    position: absolute;
+    top: 41rpx;
+    right: 164rpx;
+}
+
+.rightContent::before{
+    content:'';
+    position: absolute;
+    right: -17rpx;
+    width: 0rpx;
+    height: 0rpx;
+    border-top: 14rpx solid transparent;
+    border-right: 19rpx solid #ffffff;
+    border-bottom: 11rpx solid transparent;
+    transform: rotateZ(180deg);
+}
+
+.button{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 98rpx;
+    background-color: #ffffff;
+}
+
+.button .smile{
+    width: 44rpx;
+    height: 44rpx;
+    margin-left: 30rpx;
+    margin-top: 27rpx;
+}
+
+.button .input{
+    height: 64rpx;
+    width: 535rpx;
+    background-color: #f5f5f7;
+    position: absolute;
+    left: 99rpx;
+    top: 17rpx;
+    font-size: 24rpx;
+    padding-left: 20rpx;
+    box-sizing: border-box;
+}
+
+.button .send{
+    position: absolute;
+    right: 29rpx;
+    font-size: 32rpx;
+    top: 32rpx; 
+}

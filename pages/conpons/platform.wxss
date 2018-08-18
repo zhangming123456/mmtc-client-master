@@ -1,0 +1,180 @@
+.bg-white {
+  padding-bottom: 1rpx;
+  padding-top: 31rpx;
+}
+
+.item {
+  display: inline-block;
+  text-align: left;
+  width: 718rpx;
+  height: 246rpx;
+  margin-top: 23rpx;
+  color: white;
+  position: relative;
+}
+
+.bg-img {
+  width: 718rpx;
+  height: 246rpx;
+}
+
+page {
+  text-align: center;
+  background-color: #eee;
+}
+
+.item-info-wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+.yuan-area {
+  font-size: 26rpx;
+}
+
+.yuan-area > view {
+  display: inline;
+  white-space: nowrap;
+}
+
+.unit {
+  font-size: 44rpx; 
+}
+
+.item-info {
+  padding-left: 26rpx;
+  position: relative;
+}
+
+.yuan {
+  font-size: 96rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+}
+
+.title {
+  font-size: 28rpx;
+  padding-bottom: 13rpx;
+  padding-top: 13rpx;
+
+}
+.titles{
+  padding-left: 10rpx;
+}
+
+.title2 {
+  font-size: 22rpx;
+}
+
+.time {
+  font-size: 18rpx;
+  padding-top: 23rpx;
+  padding-left: 8rpx;
+}
+
+.touse {
+  width: 140rpx;
+	height: 46rpx;
+  line-height: 46rpx;
+	background-image: linear-gradient(-61deg, 
+		#f6d365 0%, 
+		#f78666 61%, 
+		#ed6d48 100%), 
+	linear-gradient(
+		#ffffff, 
+		#ffffff);
+	background-blend-mode: normal, 
+		normal;
+	border-radius: 19rpx;
+  font-size: 24rpx;
+  color:#fff;
+  display: inline-block;
+  text-align: center;
+  margin-top: 24rpx;
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+.avatar {
+  width: 42rpx;
+  height: 37rpx;
+  margin-right: 5rpx;
+  vertical-align: middle;
+  position: relative;
+  top: 0;
+}
+
+.shop-name {
+  font-size: 28rpx;
+  margin-bottom: 32rpx;
+  white-space: nowrap;
+}
+
+.outdated {
+  width: 127rpx;
+  height: 97rpx;
+}
+
+.shop-avatar image {
+  width: 120rpx;
+  height: 120rpx;
+  margin-right:15rpx;
+  border-radius: 50%;
+  border: solid 4rpx rgba(255, 255, 255, 0.5);
+}
+
+.shop-avatar image.is-mei {
+  height: 60rpx;
+  width: 60rpx;
+  padding: 30rpx;
+  border-color: #fff;
+}
+
+
+.right-btns{
+  width: 185rpx;
+  text-align: center;
+}
+
+.avatar-mei{
+  	width: 20rpx;
+	height: 20rpx;
+  border-radius: 50%;
+  padding: 8rpx;
+  border:2rpx solid #fff;
+  vertical-align: middle;
+}
+
+.progress-txt{
+  	font-size: 20rpx;
+    color: #111111;
+    text-align: center;
+}
+.progress-area{
+  text-align: center;
+  margin-bottom: 14rpx;
+}
+.progress-bar{
+  width: 100rpx;
+	height: 10rpx;
+	background-color: #e6e6e6;
+	border-radius: 4rpx;
+  display: inline-block;
+  overflow: hidden;
+  margin-bottom: 22rpx;
+}
+.progress-bar-inner{
+  background-color: #ed6d48;
+  width:10rpx;
+  height: 10rpx;
+}
+
+.distance{
+  display: inline;
+  font-size:24rpx;
+}

@@ -1,0 +1,79 @@
+<wxs src="../../utils/common.wxs" module="c"/>
+<wxs module="f">
+    module.exports = {
+    num2arr: function(strs) {
+    if (strs) {
+    strs = strs.split(',');
+    if (strs.length > 3) {
+    strs = strs.slice(0, 3);
+    }
+    return strs;
+    }
+    return [];
+    },
+    picCount: function(strs) {
+    if (strs) {
+    strs = strs.split(',');
+    if (strs.length > 3) {
+    return 3;
+    }
+    return strs.length;
+    }
+    return 0;
+    }
+    }
+</wxs>
+<scroll-view scroll-left="{{scrollLeft}}" scroll-x="true" bindscrolltoupper="scrolltoupper"
+             bindscrolltolower="scrolltolower" class='bg-white border-b' scroll-with-animation="true">
+    <view class='categories'>
+        <view wx:for="{{categories}}" id='c{{item.id}}' wx:key="id" bindtap='toggleCategory' data-id="{{item.id}}"
+              class="category-item {{item.id==cid?'active':''}}">
+            {{item.title}}
+        </view>
+    </view>
+</scroll-view>
+<scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}px;"
+             bindscrolltolower="scrolltolower">
+    <view class='hr'></view>
+    <view class='empty-area' wx:if="{{isEmpty}}">
+        <image src='https://app.mmtcapp.com/mmtc/imgs/empty@2x.png' class=''></image>
+        <view class='text-center'>
+            ops，这里空空如也，逛逛其他的吧~
+        </view>
+    </view>
+
+    <view class='box3 bg-white'>
+        <navigator url='/pages/item/detail?id={{item.id}}' hover-class='none' class='box3-item' wx:key="item.id"
+                   wx:for="{{data}}" wx:for-index="index" wx:for-item="item">
+            <view class="box3-group-num" wx:if="{{item.group_num && item.group_num>0}}">{{item.group_num}}人团</view>
+            <image src="{{c.absUrl(item.cover,400)}}" class="cover" background-size="cover"></image>
+            <view class='box3-item-info'>
+                <view class="box3-item-title">{{item.title}}</view>
+                <view class="box3-item-desc">{{item.profile||'专家设计，节假日通用'}}</view>
+                <view class="box3-item-price-info">
+                    <block wx:if="{{item.group_num && item.group_num>0}}">
+                        <view class="price">
+                            <i>拼团价￥</i>
+                            <span>{{item.group_price}}</span>
+                        </view>
+                        <view class='market-price'>
+                            ¥{{item.price}}
+                        </view>
+                    </block>
+                    <block wx:else>
+                        <view class="price">
+                            <i>￥</i>
+                            <span>{{item.price}}</span>
+                        </view>
+                        <view class='market-price'>￥{{item.market_price}}</view>
+                    </block>
+                </view>
+            </view>
+        </navigator>
+    </view>
+    <view class='loading-more'>
+        <view wx:if="{{loadingMore}}">加载更多...</view>
+        <view wx:elif="{{!hasMore}}">没有更多了</view>
+    </view>
+
+</scroll-view>

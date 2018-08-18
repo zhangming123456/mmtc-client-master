@@ -1,0 +1,54 @@
+.userinfo {
+    position: relative;
+    width: 750*1rpx;
+    height: 320*1rpx;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .userinfo-avatar {
+        overflow: hidden;
+        display: block;
+        width: 160*1rpx;
+        height: 160*1rpx;
+        margin: 20*1rpx;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+        .avatar {
+            width: 100%;
+            height: auto;
+            border-radius: 100%;
+        }
+    }
+    .userinfo-nickname {
+        color: #fff;
+        font-size: 28*1rpx;
+    }
+}
+
+.popup__content {
+    opacity: 1;
+    z-index: 1000;
+    image.tipimg {
+        width: 600*1rpx;
+        height: auto;
+    }
+    button.azm-btn {
+        margin-top: 20*1rpx;
+        background-color: #fff;
+        font-size: 26*1rpx;
+        border: none;
+    }
+}
+
+button.azm-activity_rules {
+    position: fixed;
+    right: 35*1rpx;
+    top: 25*1rpx;
+    &.azm-btn {
+        border: none;
+        background-color: rgba(0, 0, 0, .65);
+        color: #fff;
+    }
+}

@@ -1,0 +1,81 @@
+.nav-item{
+  background-color: #fff;
+  margin-bottom: 24rpx;
+}
+.nav-title{
+ padding: 26rpx 0 26rpx 30rpx;
+ 	font-size: 32rpx;
+   	color: #666666;
+}
+image.date-icon{
+  	width: 38rpx;    
+    margin-right:13rpx;
+    height: 36rpx;
+}
+image.op-icon{
+  width: 37rpx;
+	height: 35rpx;
+  margin-right: 30rpx;
+}
+
+page{
+  background-color: #f4f4f4;
+}
+
+
+
+.pic-list3,.pic-list2,.pic-list1{
+  padding-top:31rpx;
+  overflow: hidden;
+}
+.pic-list3 image{
+   	width: 220rpx;
+	  height: 220rpx;
+    float:left;
+    margin-right:15rpx;
+}
+.pic-list2 image,.pic-list1 image{
+    width: 337.5rpx;
+	  height: 337.5rpx;
+    float:left;
+    margin-right:15rpx;
+}
+.pic-list3 image:last-child,.pic-list2 image:last-child,.pic-list1 image:last-child{
+    margin-right:0;
+}
+.nav-content{
+  padding: 0 29rpx;
+}
+
+
+.view-img{
+  width: 30rpx;
+	height: 24rpx;
+}
+
+.zan-img{
+  width: 26rpx;
+	height: 26rpx;
+}
+.comment-img{
+  width: 27rpx;
+	height: 25rpx;
+}
+.toolbar-mini{
+  padding: 24rpx 0;
+  font-size:24rpx;
+}
+.toolbar-mini image{
+   position: relative;
+   top:-1rpx;
+}
+
+.pt20{
+  margin-bottom: 20rpx;
+}
+
+
+.content{
+  padding-top:31rpx;
+  color:#2c2c2c;
+}

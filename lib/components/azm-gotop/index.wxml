@@ -1,0 +1,5 @@
+<view class="{{class}} azm-goToTop">
+    <image wx:if="{{isShow}}" src="https://app.mmtcapp.com/mmtc/imgs/top.png" lazy-load="{{lazyLoad}}"
+           bindtap="_bindAzmGotopTap"
+           mode="{{mode}}"></image>
+</view>

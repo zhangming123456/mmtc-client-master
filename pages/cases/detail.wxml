@@ -1,0 +1,134 @@
+<wxs src="../../utils/common.wxs" module="c" />
+<swiper indicator-dots='true' class='swiper' indicator-active-color='#ff538b' bindtap='prevImg' autoplay="true" circular="true">
+    <block wx:for="{{c.str2attr(note.img_src)}}" wx:key="*this">
+        <swiper-item>
+            <image mode="aspectFill" data-index="{{index}}" src="{{c.absUrl(item,750)}}" class="slide-image" />
+        </swiper-item>
+    </block>
+</swiper>
+<view class="p30 bg-white border-b">
+    <view class="flex">
+        <view>
+            <image mode="aspectFill" src="{{c.absUrl(note.avatar,200)||'https://app.mmtcapp.com/mmtc/imgs/default.png'}}" alt="" class="avatar"></image>
+        </view>
+        <view class="flex-con">
+            <view class="fz32 text666">{{note.nickname}}</view>
+            <view class="fz24 pt19 text999">{{note.time}}</view>
+        </view>
+    </view>
+</view>
+
+<block wx:if="{{type==0 && note.products && note.products.length}}">
+    <view class="p30 bg-white border-b">
+        <view class="fz28 text666">相关商品</view>
+        <navigator wx:key="id" class="pt20" wx:for="{{note.products}}" hover-class='none' wx:for-item="product" url='/pages/item/detail?id={{product.id}}'>
+            <view class="flex">
+                <view>
+                    <image src="{{c.absUrl(product.cover,300)}}" alt="" class="goods-img"></image>
+                </view>
+                <view class="flex-con">
+                    <view class="fz32 text282828 one-line">{{product.title}}</view>
+                    <view class="text999 mt12">喜欢数：{{product.like_count}}人</view>
+                    <view class="flex mt15">
+                        <view class="flex-con">
+                            <span class="unit">￥</span>
+                            <span class="price">{{product.price}}</span>
+                            <span class="old-price">
+                                ￥{{product.market_price}}
+                            </span>
+                        </view>
+                        <view>
+                            <view class="buy-btn fz28">去购买</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </navigator>
+    </view>
+    <view class="hr24"></view>
+</block>
+<import src="../../wxParse/wxParse.wxml" />
+<view class="text666 border-t fz28 content" v-html="">
+    <template is="wxParse" data="{{wxParseData:intro.nodes}}" />
+</view>
+<view class="flex border-t toolbar-mini text666 fz24 text-center bg-white border-b">
+    <view class="flex-con border-r">
+        <image src="https://app.mmtcapp.com/mmtc/imgs/eye@2x.png" alt="" class='view-img'></image>
+        浏览 {{note.viewed_count}}
+    </view>
+    <view class="flex-con border-r {{c.zanedClass(note)}}" catchtap='zan' data-id="{{note.id}}">
+        <image src="https://app.mmtcapp.com/mmtc/imgs/zan{{note.zaned?'1':''}}@2x.png" alt="" class='zan-img'></image>
+        点赞 {{note.zan_count}}
+    </view>
+    <view class="flex-con">
+        <image src="https://app.mmtcapp.com/mmtc/imgs/msg@2x.png" alt="" class='comment-img'></image>
+        评论 {{note.comment_count}}
+    </view>
+</view>
+
+<view class="hr24"></view>
+<view class="p30 bg-white border-b fz28 border-t text666">
+    相关评论
+</view>
+<view wx:if="{{comments && comments.length}}">
+    <view class="p30 bg-white border-b fz28" wx:for="{{comments}}" wx:key="id" wx:for-item="comment">
+        <view class="flex flex-stretch">
+            <view>
+                <image src="{{c.absUrl(comment.avatar,200) || 'https://app.mmtcapp.com/mmtc/imgs/default.png'}}" alt="" class="avatar"></image>
+            </view>
+            <view class="flex-con pt10">
+                <view class="flex">
+                    <view class="flex-con">
+                        <view class="fz32 text666 one-line">
+                            {{comment.nickname}}
+                        </view>
+                        <view class="fz24 text999 time">{{comment.time}}</view>
+                    </view>
+                    <view class='zan-area {{c.zanedClass(comment)}}' catchtap='zanComment' data-id="{{comment.id}}">
+                        <view class="y-btn">
+                            <image src="https://app.mmtcapp.com/mmtc/imgs/zan{{comment.zaned?'1':''}}@2x.png" alt="" class='zan-img'></image>
+                            {{comment.zan_count}}
+                        </view>
+                    </view>
+                    <view>
+                        <view class="y-btn" bindtap='replyComment' data-item="{{comment}}">
+                            <image src="https://app.mmtcapp.com/mmtc/imgs/msg@2x.png" alt="" class='comment-img'></image>
+                            {{comment.comment_count}}
+                        </view>
+                    </view>
+                </view>
+                <view class="pt30 fz32 text282828">
+                    {{comment.content}}
+                    <view class="replies" wx:if="{{comment.replies && comment.replies.length}}">
+                        <view class="reply fz32" wx:for="{{comment.replies}}" wx:key="id" wx:for-item="reply">
+                            <span class="color-main">{{reply.nickname}}</span>： {{reply.content}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <include src="../common/more.wxml"></include>
+</view>
+<view class="p30 bg-white fz28 " wx:else>
+    <view class="text-center text999">
+        没有找到相关评论
+    </view>
+</view>
+<view class="hr24"></view>
+<view class='footer-before'></view>
+<view class='footer border-t'>
+    <view class='tb'>
+        <view class='flex'>
+            <view>
+                <image src='/imgs/pen.png' class='pen'></image>
+            </view>
+            <view class='flex-con'>
+
+                <input cursor-spacing="100" focus="{{focus}}" bindconfirm="sendComment" value="{{currentValue}}" bindblur='bindblurComment'
+                    class='txt-box' placeholder='{{placeholder}}' confirm-type='send'></input>
+
+            </view>
+        </view>
+    </view>
+</view>

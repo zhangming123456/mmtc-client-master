@@ -1,0 +1,102 @@
+.conpons-wrap ,.conpons{
+  width: 675rpx;
+  height: 332rpx;
+  
+}
+.conpons-wrap{
+  margin-top: 32rpx;
+  display: inline-block;
+  position: relative;
+  color: #ffffff;
+  margin-bottom: 177rpx;
+}
+
+page {
+  background-color:#f4f4f4;
+}
+
+.btn {
+  width: 670rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  background-color: #ed6d48;
+  border-radius: 5rpx;
+  
+  display: inline-block;
+  font-size: 32rpx;
+  color: #fff;
+  margin-bottom: 30rpx;
+}
+
+.price{
+  position: absolute;
+  right:26rpx;
+  top:10rpx;
+  font-size: 212rpx;
+  line-height: 155rpx;
+}
+
+.price .unit{
+  font-size: 36rpx;
+  color: #ffffff;
+  display: inline-block;
+}
+
+.cover-info{
+  position: absolute;
+  left:34rpx;
+  bottom:35rpx;
+  font-size: 24rpx;
+  text-align: left;
+}
+.title{
+  font-size: 40rpx;
+  line-height: 37rpx;
+  margin-bottom: 19rpx;
+}
+.discount{
+  display: inline-block;
+  font-size: 28rpx;
+  margin-left:22rpx;
+  vertical-align: baseline;
+}
+.disabled{
+  opacity: 0.5;
+}
+.disabled-tag{
+  position: absolute;
+  top:73rpx;
+  left:146rpx;
+  width: 139rpx;
+	height: 139rpx;
+}
+.disabled-img{
+  width: 139rpx;
+	height: 139rpx;
+}
+.disabled-txt{
+  position: absolute;
+  top:56rpx;
+  left:0;
+  right:0;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 30rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	color: #000000;
+  opacity: 0.5;
+}
+.picked{
+  font-size: 28rpx;
+  color: #999999;
+  position: absolute;
+  left:0;
+  right:0;
+  text-align: center;
+  bottom: 45rpx;
+}
+
+.color-red{
+  color: #ff538b;
+}

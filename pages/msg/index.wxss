@@ -1,0 +1,102 @@
+.zan {
+  width: 29rpx;
+  height: 29rpx;
+}
+
+.comment {
+  width: 29rpx;
+  height: 28rpx;
+}
+
+.notice {
+  width: 23rpx;
+  height: 30rpx;
+}
+
+.toobar {
+  text-align: center;
+  font-size: 31rpx;
+  color: #282828;
+  position: fixed;
+  left:0;
+  background-color:#fff;
+  right:0;
+  padding: 26rpx 0;
+  z-index: 2;
+}
+
+.hr {
+  height: 110rpx;
+  background-color: #f4f4f4;
+}
+ 
+.avatar {
+  width: 98rpx;
+  height: 98rpx;
+  border-radius: 50%;
+}
+
+.content-item {
+  padding: 30rpx;
+}
+
+.item-info {
+  padding-left: 20rpx;
+  padding-top: 10rpx;
+}
+
+.content-detail {
+  margin-top: 30rpx;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 31rpx;
+  font-size: 32rpx;
+  line-height: 45rpx;
+  color: #999;
+}
+
+.username {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.time {
+  color: #999;
+  font-size: 24rpx;
+  text-align: right;
+}
+
+.words {
+  font-size: 32rpx;
+  color: #282828;
+  margin-top: 19rpx;
+}
+
+.border-b:last-child:after {
+  display: none;
+}
+
+.toobar image {
+  vertical-align: middle;
+  position: relative;
+  top: -2rpx;
+  margin-right: 2rpx;
+}
+
+.active {
+  color: #ff538b;
+}
+
+.content0 .item-info, .content2 .item-info {
+  padding-top: 35rpx;
+}
+
+.content0 .content-detail {
+  margin-top: 53rpx;
+}
+.content2 .content-detail {
+  color: #282828;
+  font-size: 32rpx;
+  padding:0;
+  background-color: transparent;
+}

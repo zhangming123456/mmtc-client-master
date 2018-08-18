@@ -1,0 +1,454 @@
+page {
+    background-color: #F0F5F4;
+}
+
+view {
+    line-height: normal;
+}
+
+.t-setCard {
+    background-image: linear-gradient(-47deg, #FE561C 0%, #FFBB01 100%);
+    box-shadow: 0 5rpx 9rpx 0 rgba(254, 90, 26, 0.33);
+    border-radius: 40rpx;
+    width: 692rpx;
+    height: 354rpx;
+    margin: 30rpx;
+    padding: 30rpx 40rpx;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.t-setCard2 {
+    background-color: skyblue;
+    height: 450rpx;
+    position: relative;
+    padding: 30rpx;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.t-setCondition {
+    font-size: 24rpx;
+    color: #FFFFFF;
+    float: right;
+    margin-top: 166rpx;
+}
+
+.t-shopSet {
+    height: 90rpx;
+    width: 100%;
+    border-top: 1px solid #FFFFFF;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    left: 0;
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+    box-sizing: border-box;
+}
+
+.t-setShopName>image {
+    width: 50rpx;
+    height: 50rpx;
+    border-radius: 50%;
+    margin-right: 16rpx;
+}
+
+.t-setShopName>text {
+    font-size: 26rpx;
+    color: #FFFFFF;
+}
+
+.t-record {
+    opacity: 0.2;
+    background: #000000;
+    border-radius: 100rpx;
+    font-size: 24rpx;
+    color: #FFFFFF;
+    text-align: center;
+    width: 138rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+}
+
+.t-shopTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.t-shopTitle>text {
+    font-size: 36rpx;
+    color: #FFFFFF;
+    font-weight: 500;
+}
+
+.t-shopTitle>image {
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.t-shopID {
+    font-size: 26rpx;
+    color: #FFFFFF;
+    margin-top: 10rpx;
+}
+
+.t-shopVIP {
+    font-size: 36rpx;
+    color: #FFFFFF;
+    font-weight: 500;
+    margin-top: 10rpx;
+}
+
+.t-setPrice {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 128rpx;
+}
+
+.t-price {
+    font-size: 48rpx;
+    color: #FFFFFF;
+    font-weight: 500;
+}
+
+.t-yuan {
+    font-size: 28rpx;
+    color: #FFFFFF;
+    margin-right: 20rpx;
+}
+
+.t-beforePrice {
+    font-size: 26rpx;
+    color: #FFFFFF;
+    text-decoration: line-through;
+}
+
+.t-valid {
+    font-size: 26rpx;
+    color: #FFFFFF;
+}
+
+.t-discount {
+    background-image: linear-gradient(90deg, #FFBB01 26%, #FE6718 100%);
+    border-radius: 100rpx;
+    width: 114rpx;
+    height: 50rpx;
+    text-align: center;
+    line-height: 50rpx;
+    font-size: 32rpx;
+    color: #FFFFFF;
+    position: absolute;
+    top: 200rpx;
+    left: -20rpx;
+}
+
+.swiper-tab {
+    width: 100%;
+    border-top: 1px solid #E5E5E5;
+    border-bottom: 1px solid #E5E5E5;
+    text-align: center;
+    height: 90rpx;
+    line-height: 90rpx;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    position: relative;
+    background-color: #FFFFFF;
+}
+
+.swiper-tab-item:first-child {
+    border-right: 1px solid #E5E5E5;
+}
+
+.swiper-tab-item {
+    width: 50%;
+    color: #333333;
+    line-height: 90rpx;
+    font-size: 32rpx;
+}
+
+.active {
+    font-size: 32rpx;
+    color: #FEB702;
+}
+
+.active .titleLine {
+    position: absolute;
+    height: 3rpx;
+    width: 120rpx;
+    bottom: 1rpx;
+    border-radius: 4rpx;
+    background-color: #FEB702;
+    margin-left: -123rpx;
+}
+
+.t-setShop {
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.t-usableShop {
+    margin-bottom: 20rpx;
+    background-color: #FFFFFF;
+}
+
+.t-usableShop:last-child {
+    margin-bottom: 90rpx;
+}
+
+.t-usableTitle {
+    height: 90rpx;
+    display: flex;
+    align-items: center;
+    font-size: 32rpx;
+    color: #4A4A4A;
+    font-weight: 500;
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+    border-bottom: 1px solid #E5E5E5;
+    background-color: #FFFFFF;
+}
+
+.t-sign {
+    background-color: #FEB702;
+    width: 6rpx;
+    height: 28rpx;
+    border-radius: 4rpx;
+    margin-right: 20rpx;
+}
+
+.t-shopPicture {
+    width: 166rpx;
+    height: 166rpx;
+    border-radius: 4rpx;
+}
+
+.t-shopName {
+    font-size: 32rpx;
+    color: #333333;
+    font-weight: 500;
+    display: block;
+}
+
+.t-shopContent:last-child {
+    border: 0;
+}
+
+.t-shopContent {
+    display: flex;
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+    border-bottom: 1px solid #e5e5e5;
+    margin-top: 30rpx;
+    padding-bottom: 30rpx;
+    position: relative;
+}
+
+.t-recommendDetails {
+    margin-left: 30rpx;
+    width: 70%;
+    position: relative;
+}
+
+.t-time {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24rpx;
+    color: #666666;
+    margin-top: 10rpx;
+}
+
+.t-qrCode {
+    text-align: center;
+}
+
+.t-qrCode>image {
+    width: 44rpx;
+    height: 44rpx;
+    margin-bottom: 20rpx;
+}
+
+.t-qrCode>text {
+    font-size: 24rpx;
+    color: #999999;
+    display: block;
+}
+
+.t-condition {
+    position: absolute;
+    top: 55rpx;
+    right: 5rpx;
+}
+
+.t-arrows {
+    width: 15rpx;
+    height: 25rpx;
+}
+
+.t-money {
+    display: flex;
+    align-items: center;
+    margin-top: 30rpx;
+}
+
+.t-icon {
+    font-size: 28rpx;
+    color: #FF6182;
+    font-weight: 500;
+}
+
+.t-shopMoney {
+    font-size: 38rpx;
+    color: #FF6182;
+    font-weight: 500;
+    margin-right: 17rpx;
+}
+
+.t-beforePrice2 {
+    font-size: 24rpx;
+    color: #999999;
+    text-decoration: line-through;
+}
+
+.t-setExplain {
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 20rpx;
+}
+
+.t-explain {
+    background-color: #FFFFFF;
+    font-size: 26rpx;
+    color: #666666;
+    padding: 30rpx;
+}
+
+.t-explain>view {
+    margin-bottom: 15rpx;
+}
+
+.t-explain>view:last-child {
+    margin-bottom: 0;
+}
+
+.t-usableTitle2 {
+    height: 90rpx;
+    display: flex;
+    align-items: center;
+    font-size: 32rpx;
+    color: #4A4A4A;
+    font-weight: 500;
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+    border-bottom: 1px solid #E5E5E5;
+    background-color: #FFFFFF;
+}
+
+.t-sign {
+    background-color: #FEB702;
+    width: 6rpx;
+    height: 28rpx;
+    border-radius: 4rpx;
+    margin-right: 20rpx;
+}
+
+.t-button {
+    height: 90rpx;
+    border-top: 1px solid #e5e5e5;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    background-color: #ffffff;
+    align-items: center;
+}
+
+.t-button>view {
+    width: 33.333333333%;
+}
+
+.t-enterShop {
+    height: 100%;
+    border-right: 1px solid #e5e5e5;
+    display: flex;
+    align-items: center;
+}
+
+.t-enterShop>image {
+    width: 33rpx;
+    height: 33rpx;
+    margin-left: 40rpx;
+    margin-right: 26rpx;
+}
+
+.t-enterShop>text {
+    font-size: 28rpx;
+    color: #666666;
+}
+
+.t-buttonBuy {
+    background-image: linear-gradient(-47deg, #FE561C 0%, #FFBB01 100%);
+    font-size: 32rpx;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 90rpx;
+}
+
+.t-wxParse {
+    padding: 30rpx;
+    background-color: #ffffff;
+}
+
+.t-share {
+    background-image: linear-gradient(-40deg, #FE5163 0%, #FFB503 100%);
+    border-radius: 20rpx;
+    width: 630rpx;
+    height: 690rpx;
+    padding: 30rpx;
+    box-sizing: border-box;
+}
+
+.t-shareShopName {
+    display: flex;
+    align-items: center;
+    font-size: 28rpx;
+    color: #FFFFFF;
+}
+
+.t-shareShopName image {
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+    margin-right: 30rpx;
+}
+
+.t-qrcode {
+    display: flex;
+    justify-content: center;
+    margin-top: 70rpx;
+}
+
+.t-qrcode image {
+    width: 390rpx;
+    height: 390rpx;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.t-download {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28rpx;
+    color: #FFFFFF;
+    margin-top: 70rpx;
+}
+
+.t-download image {
+    width: 34rpx;
+    height: 33rpx;
+    margin-right: 10rpx;
+}

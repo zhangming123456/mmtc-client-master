@@ -1,0 +1,70 @@
+view {
+    line-height: normal;
+}
+
+page {
+    background-color: #F0F5F4;
+}
+
+.t-record {
+    padding: 20rpx 30rpx;
+    background-color: #ffffff;
+    margin-top: 20rpx;
+    position: relative;
+}
+
+.t-recordTime {
+    display: flex;
+    align-items: center;
+}
+
+.t-recordTime>image {
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 30rpx;
+}
+
+.t-recordTime>text {
+    font-size: 24rpx;
+    color: #666666;
+}
+
+.t-time {
+    margin-right: 70rpx;
+}
+
+.t-itemName {
+    font-size: 28rpx;
+    color: #4A4A4A;
+    font-weight: 500;
+    margin-left: 60rpx;
+    margin-top: 10rpx;
+}
+
+.t-remark {
+    background: #FEB702;
+    border-radius: 4rpx;
+    width: 120rpx;
+    height: 60rpx;
+    text-align: center;
+    line-height: 60rpx;
+    position: absolute;
+    right: 30rpx;
+    top: 30rpx;
+    font-size: 24rpx;
+    color: #FFFFFF;
+}
+
+.t-remark2 {
+    border: 1px solid #FEB702;
+    border-radius: 4rpx;
+    width: 120rpx;
+    height: 60rpx;
+    text-align: center;
+    line-height: 60rpx;
+    position: absolute;
+    right: 30rpx;
+    top: 30rpx;
+    font-size: 24rpx;
+    color: #FEB702;
+}

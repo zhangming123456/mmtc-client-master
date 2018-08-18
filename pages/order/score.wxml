@@ -1,0 +1,68 @@
+<wxs module="f">
+  module.exports = {
+    score: function(arr) {
+       var rt = 0;        
+       for(var i=0;i< arr.length;i++){
+          if(arr[i] == 0){
+             break;
+          }
+          rt++;
+       }
+       return rt;
+    }
+  }
+</wxs>
+<view class="panel-no-margin">
+  <view class="fz32 text282828">选择技师</view>
+  <view class="pt02">
+    <view class="tags fz28">
+       <view bindtap='toogleTechnician' data-id="{{item.id}}" class="tag {{item.selected===false?'':'selected'}}" wx:key="id" wx:for="{{technicians}}" data-id="{{item.id}}">{{item.username}}</view>
+    </view>
+  </view>
+</view>
+<view class="hr24"></view>
+<view class="panel-no-margin border-b fz32 text282828">
+  请点击星星进行评分
+</view>
+<view class="fz28 text666 panel-no-margin border-b scores" id="scores">
+  <view class="flex">
+    <view>环境</view>
+    <view class="flex-con starts">        
+      <image data-index="{{index}}" bindtap='setEnsScore' src="{{item?'https://app.mmtcapp.com/mmtc/imgs/start1@2x.png':'https://app.mmtcapp.com/mmtc/imgs/starhalf@2x.png'}}" alt="" wx:for="{{ens}}"/>
+      <span class="pl01">{{f.score(ens)}} 分</span>
+    </view>
+  </view>
+  <view class="flex">
+    <view>专业</view>
+    <view class="flex-con starts">
+      <image data-index="{{index}}"  bindtap='setMajorScore' src="{{item?'https://app.mmtcapp.com/mmtc/imgs/start1@2x.png':'https://app.mmtcapp.com/mmtc/imgs/starhalf@2x.png'}}" alt="" wx:for="{{major}}"/>
+      <span class="pl01">{{f.score(major)}} 分</span>
+    </view>
+  </view>
+  <view class="flex">
+    <view>服务</view>
+    <view class="flex-con starts">
+      <image data-index="{{index}}" bindtap='setServiceScore' src="{{item?'https://app.mmtcapp.com/mmtc/imgs/start1@2x.png':'https://app.mmtcapp.com/mmtc/imgs/starhalf@2x.png'}}" alt="" wx:for="{{service}}"/>
+      <span class="pl01">{{f.score(service)}} 分</span>
+    </view>
+  </view>
+  <view class="flex">
+    <view>效果</view>
+    <view class="flex-con starts">
+      <image data-index="{{index}}" bindtap='setEffectScore' src="{{item?'https://app.mmtcapp.com/mmtc/imgs/start1@2x.png':'https://app.mmtcapp.com/mmtc/imgs/starhalf@2x.png'}}" alt="" wx:for="{{effect}}"/>
+      <span class="pl01">{{f.score(effect)}} 分</span>
+    </view>
+  </view>
+</view>
+<view class="panel-no-margin fz32 text282828">
+  至少选择一个标签
+</view>
+<view class="panel-no-margin" style="padding-top: 0">
+  <view class="fz28">
+     <view bindtap='toogleTags' class="tag {{!item.selected?'':'selected'}}" wx:for="{{tags}}" wx:key="id" data-id="{{item.id}}">{{item.title}}</view>
+  </view>
+</view>
+<view class='footer-before'></view>
+<view class='footer' bindtap='submitData'>
+  确定
+</view>

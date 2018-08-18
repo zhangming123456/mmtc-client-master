@@ -1,0 +1,312 @@
+.toobar-wrap{
+  position: fixed;
+  left:0;
+  background-color:#fff;
+  right:0;
+  z-index: 2;
+}
+.toobar {
+  text-align: center;
+  font-size: 31rpx;
+  color: #282828;
+  padding: 26rpx 0;
+  
+}
+
+.hr {
+  height: 201rpx;
+  background-color: #f4f4f4;
+}
+ .cancel-text {
+  font-size: 32rpx;
+  color: #666;
+  margin-left: 29rpx;
+}
+
+.p1 {
+  padding: 30rpx 30rpx;
+  background-color: #fff;
+}
+
+.search {
+  background-color: rgba(0, 0, 0, 0.08);
+  border-radius: 29rpx;
+  height: 58rpx;
+  line-height: 58rpx;
+  width: 100%;
+  font-size: 24rpx;
+  color: #999;
+  box-sizing: border-box;
+  padding-left: 30rpx;
+}
+
+.search-img {
+  position: absolute;
+  left: 30rpx;
+  top: 19rpx;
+}
+
+.search-input {
+  width: 100%;
+  padding-left: 40rpx;
+  height: 23rpx;
+  line-height: 23rpx;
+  margin-top: 5rpx;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+
+
+.box3 {
+  padding: 30rpx;
+  overflow: hidden;
+}
+
+.box3-item {
+  width: 332rpx;
+  box-shadow: 2px 4px 13px 0px rgba(0, 0, 0, 0.06);
+  margin-bottom: 30rpx;
+  position: relative;
+}
+
+.box3 .box3-item:nth-child(2n+1) {
+  float: left;
+}
+
+.box3 .box3-item:nth-child(2n) {
+  float: right;
+}
+
+
+.box3-item .cover {
+  width: 332rpx;
+  height: 332rpx;
+}
+
+.box3-item-info {
+  padding: 20rpx;
+}
+
+.box3-item-price-info {
+  padding-top: 20rpx;
+}
+
+.box3-item-title {
+  font-size: 30rpx;
+  color: #282828;
+}
+
+.box3-item-desc {
+  font-size: 20rpx;
+  color: #666;
+  padding-top: 11rpx;
+  padding-bottom: 17rpx;
+  border-bottom: 1px dashed #d9d9d9;
+}
+
+.price {
+  color: #ff538b;
+  font-size: 45rpx;
+  display: inline-block;
+}
+
+.price i {
+  font-size: 24rpx;
+}
+
+.market-price {
+  color: #999;
+  font-size: 24rpx;
+  text-decoration: line-through;
+  margin-left: 10rpx;
+  display: inline-block;
+}
+
+.active {
+  color: #ff538b;
+}
+
+
+.list-box-item{
+  padding: 30rpx;
+}
+
+.shop-title{
+  font-size: 32rpx;
+  	color: #282828;
+
+}
+
+.list-box .border-b:last-child:after{
+  display: none;
+}
+
+.topFixed{
+  position: fixed;
+  left:0;
+  top:0;
+  right:0;
+  background-color: #fff;
+  z-index: 100;  
+}
+
+.topFixedBefore{
+  height:78rpx;
+}
+
+#gotoTop{
+  width:90rpx;
+  height:90rpx;
+  position: fixed;
+  right:30rpx;
+  bottom:30rpx;
+}
+
+
+.shop-info{
+  padding-left: 24rpx;
+  position: relative;
+}
+.stars{
+  display: inline-block;
+  margin-right: 4rpx;
+  padding-top: 14rpx;
+}
+.stars image{
+  width: 32rpx;
+	height: 31rpx;
+  margin-right:11rpx;
+}
+.shop-cover{
+  width: 188rpx;
+	height: 188rpx;
+  vertical-align: middle;
+}
+
+.tags{
+  padding-top: 16rpx;
+}
+
+.tag{
+  height: 36rpx;
+  line-height:36rpx;
+  display: inline-block;
+  padding: 0 17rpx;
+  box-sizing: border-box;
+  font-size: 24rpx;
+  color: #999999;
+  text-align: center;
+	background-color: #f0f3f4;
+	border-radius: 3rpx;
+  margin-right: 24rpx;
+}
+
+.distance{
+  font-size: 24rpx;
+  	color: #999999;
+  padding-top: 20rpx;
+}
+
+ 
+.bought-area {
+  font-size: 30rpx;
+  color: #000;
+}
+
+.zk{
+  display: inline;
+  font-size: 60rpx;
+
+  	color: #fd0f5d;
+
+}
+
+
+
+.note-item{
+  background-color:#fff;
+  margin-top:24rpx;
+}
+
+.avatar{
+  width: 80rpx;
+	height: 80rpx;
+  border-radius: 50%;
+  margin-right:33rpx;
+}
+.content{
+  padding-top:31rpx;
+  color:#2c2c2c;
+}
+
+.view-img{
+  width: 30rpx;
+	height: 24rpx;
+}
+
+.zan-img{
+  width: 26rpx;
+	height: 26rpx;
+}
+.comment-img{
+  width: 27rpx;
+	height: 25rpx;
+}
+.toolbar-mini{
+  padding: 18rpx 0;
+  font-size:24rpx;
+}
+.toolbar-mini image{
+   position: relative;
+   top:-1rpx;
+}
+
+.pic-list3,.pic-list2,.pic-list1{
+  padding-top:31rpx;
+  overflow: hidden;
+}
+.pic-list3 image{
+   	width: 220rpx;
+	  height: 220rpx;
+    float:left;
+    margin-right:15rpx;
+}
+.pic-list2 image,.pic-list1 image{
+    width: 337.5rpx;
+	  height: 337.5rpx;
+    float:left;
+    margin-right:15rpx;
+}
+.pic-list3 image:last-child,.pic-list2 image:last-child,.pic-list1 image:last-child{
+    margin-right:0;
+}
+
+
+.discount{
+  padding-top: 20rpx;
+	color: #666666;
+	font-size: 24rpx;
+}
+.discount-icon{
+  width: 32rpx;
+	height: 32rpx;
+  line-height: 32rpx;
+  background-color: #fd0f5d;
+	border-radius: 5rpx;
+  font-size: 24rpx;
+  color: #ffffff;
+  text-align: center;
+  display: inline-block;
+}
+
+.box3-group-num {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 6rpx 8rpx;
+  color: white;
+  border-radius: 0px 0px 5px 0px;
+  background-color: #fd0f5d;
+  font-size: 20rpx;
+}

@@ -1,0 +1,26 @@
+<view class='text-center p30' wx:if="{{status==0}}">
+  {{m}}
+</view>
+<view class='bg-white rel text-center' wx:if="{{status==1}}">
+  <view class='conpons-wrap {{m.is_valid==0?"disabled":""}}'>
+    <image src="https://app.mmtcapp.com/mmtc/imgs/conpons.png" class="conpons"></image>
+    <view class='disabled-tag' wx:if="{{m.is_valid==0}}">
+      <image src='https://app.mmtcapp.com/mmtc/imgs/d1.png' class='disabled-img'></image>
+      <view class='disabled-txt'>{{m.errmsg}}</view>
+    </view>
+    <view class='price'>
+      <view class='ib'>{{m.price}}</view>
+      <view class='unit'>元</view>
+    </view>
+    <view class='cover-info'>
+      <view class='title'>{{m.title}}
+        <view class='discount'>({{m.title2}})</view>
+      </view>
+      <view>有效期：{{m.valid_time}}</view>
+    </view>
+  </view>
+  <view class='btn' bindtap='doPicker' wx:if="{{m.is_valid==1}}">确认领</view>
+  <view class='picked' wx:elif="m.errmsg=='已领取'">
+    已领取，请在<navigator url='/pages/conpons/mine' class='ib color-red'>我的优惠券</navigator>里查看>
+  </view>
+</view>

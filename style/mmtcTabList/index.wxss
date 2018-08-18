@@ -1,0 +1,82 @@
+#azm-mmtcTabList .azm-scroll {
+  position: relative;
+}
+#azm-mmtcTabList .azm-scroll .azm-banner {
+  position: relative;
+  width: 100%;
+}
+#azm-mmtcTabList .azm-scroll .azm-banner image {
+  width: inherit;
+}
+#azm-mmtcTabList .azm-scroll .azm-banner .azm-address {
+  position: absolute;
+  box-sizing: border-box;
+  top: 20rpx;
+  left: 30rpx;
+  width: 327rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  background-color: rgba(0, 0, 0, 0.38);
+  border-radius: 29rpx;
+  padding-left: 52rpx;
+  padding-right: 45rpx;
+  color: #fff;
+}
+#azm-mmtcTabList .azm-scroll .azm-banner .azm-address text {
+  color: #fff;
+  font-size: 28rpx;
+  font-family: PingFang-SC-Medium;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0;
+}
+#azm-mmtcTabList .azm-scroll .azm-banner .azm-address .azm-icon {
+  position: absolute;
+  top: 50%;
+}
+#azm-mmtcTabList .azm-scroll .azm-banner .azm-address .azm-icon.left {
+  left: 26rpx;
+  transform: translate(-50%, -50%);
+}
+#azm-mmtcTabList .azm-scroll .azm-banner .azm-address .azm-icon.right {
+  right: 0;
+  transform: translate(-50%, -50%);
+}
+#azm-mmtcTabList .azm-scroll .azm-content_box {
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+#azm-mmtcTabList .azm-scroll .azm-content image {
+  height: 336rpx;
+}
+#azm-mmtcTabList .azm-scroll .azm-content .azm-col {
+  box-sizing: border-box;
+  font-size: 24rpx;
+  padding-bottom: 40rpx;
+}
+#azm-mmtcTabList .azm-scroll .azm-content .azm-col:nth-child(2n+1) {
+  padding-right: 9rpx;
+}
+#azm-mmtcTabList .azm-scroll .azm-content .azm-col:nth-child(2n) {
+  padding-left: 9rpx;
+}
+#azm-mmtcTabList .azm-scroll .azm-content .azm-col .title {
+  margin-top: 19rpx;
+  font-size: 28rpx;
+  color: #282828;
+}
+#azm-mmtcTabList .azm-scroll .azm-content .azm-col .stores {
+  margin-top: 19rpx;
+  color: #999;
+}
+#azm-mmtcTabList .azm-scroll .azm-content .azm-col .money {
+  margin-top: 34rpx;
+  font-size: 24rpx;
+  color: #ff538b;
+}
+#azm-mmtcTabList .azm-scroll .azm-content .azm-col .money .money-center {
+  font-size: 36rpx;
+}
+#azm-mmtcTabList .azm-scroll .azm-content .azm-col .money .money-right {
+  color: #999;
+}

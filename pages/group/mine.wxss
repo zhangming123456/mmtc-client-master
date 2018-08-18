@@ -1,0 +1,249 @@
+.toobar {
+  text-align: center;
+  font-size: 31rpx;
+  color: #282828;
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.toobar .flex-con {
+  height: 90rpx;
+  background-color: #fff;
+  line-height: 90rpx;
+}
+
+.hr {
+  height: 115rpx;
+  background-color: #f4f4f4;
+}
+
+.active {
+  color: #ff538b;
+  position: relative;
+}
+
+.active::after {
+  width: 126rpx;
+  height: 3px;
+  background-color: #ff538b;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  content: '';
+  margin-left: -63rpx;
+}
+
+.shop-avatar {
+  width: 36rpx;
+  height: 32rpx;
+  vertical-align: middle;
+  margin-right: 14rpx;
+}
+
+.shop-name {
+  padding: 30rpx;
+  font-size: 28rpx;
+  color: #999;
+}
+
+.shop-item {
+  margin-bottom: 25rpx;
+  background-color: #fff;
+}
+
+.item-cover-wrap {
+  width: 188rpx;
+  height: 188rpx;
+  position: relative;
+}
+
+.item-cover {
+  width: 188rpx;
+  height: 188rpx;
+}
+
+.tuan-num {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0 8rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  background-color: #fd0f5d;
+  color: #fff;
+  font-size: 20rpx;
+  text-align: center;
+  border-radius: 0px 0px 5px 0px;
+}
+
+.item-info {
+  padding-left: 30rpx;
+  position: relative;
+}
+
+.item-title {
+  font-size: 30rpx;
+  color: #282828;
+  text-indent: -0.5em;
+}
+
+.item-num {
+  padding: 29rpx 0 39rpx 0;
+  font-size: 26rpx;
+}
+
+.pin-price {
+  color: #ff538b;
+  display: inline;
+}
+
+.orgin-price {
+  color: #999;
+  margin-left: 16rpx;
+  display: inline;
+  text-decoration: line-through;
+}
+
+.item-text {
+  font-size: 28rpx;
+  color: #999;
+  display: inline;
+  vertical-align:middle;
+  margin-left:21rpx;
+}
+
+.item-text-num {
+  display: inline;
+  color: #ff538b;
+}
+
+page {
+  background-color: #f4f4f4;
+}
+
+.btns {
+  padding: 16rpx 30rpx;
+}
+
+.btn {
+  padding: 0 30rpx;
+  height: 56rpx;
+  font-size: 30rpx;
+  line-height: 56rpx;
+  text-align: center;
+  display: inline-block;
+  border-radius: 28rpx;
+  margin-left:30rpx;
+}
+
+.full-red {
+  border: solid 1px #ff538b;
+  color: #ff538b;
+  /* background-color: #ff538b; */
+}
+
+.btn-red {
+  border: solid 1px #ff538b;
+  color: #ff538b;
+}
+
+.item-text-red {
+  color: #ff538b;
+  font-size: 28rpx;
+}
+
+.item-outline {
+  background-color: #ddd;
+  border-radius: 2rpx;
+  width: 200rpx;
+  vertical-align:middle;
+  height: 6rpx;
+  display: inline-block;
+}
+
+.item-innerline {
+  background-color: #ff538b;
+  border-radius: 2rpx;
+  height: 6rpx;
+}
+.outtime-img{
+  width: 173rpx;
+	height: 130rpx;
+  position: absolute;
+  right:34rpx;
+  top:42rpx;
+}
+
+
+.qrcode-area {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.qrcode-dlg {
+  background-color: #fff;
+  width: 590rpx;
+  border-radius: 8px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 151rpx;
+}
+
+.qrcode {
+  width: 280rpx;
+  height: 280rpx;
+  margin-top: 28rpx;
+  margin-bottom: 45rpx;
+}
+
+.qrcode-no {
+  font-size: 36rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 40rpx;
+  color: #666;
+}
+
+.qrcode-no .num {
+  font-size: 48rpx;
+  font-weight: normal;
+  color: #282828;
+  display: inline-block;
+}
+
+.qrcode-tip {
+  font-size: 24rpx;
+  line-height: 30rpx;
+  color: #999;
+  margin-top: 44rpx;
+  margin-bottom: 28rpx;
+}
+
+.qrcode-btn {
+  font-size: 32rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  color: #ff538b;
+  padding: 29rpx 0;
+}
+
+.qrcode-close {
+  margin-top: 85rpx;
+}
+
+.qrcode-close image {
+  width: 35rpx;
+  height: 35rpx;
+}
+
+
+.order-no {
+  padding-top: 50rpx;
+}

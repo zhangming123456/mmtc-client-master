@@ -1,0 +1,52 @@
+<view id="azm-mmtcTabList">
+    <zan-tab fixed="{{isFixed}}"
+             list="{{ tabList.list }}"
+             selected-id="{{ tabList.selectedId }}"
+             scroll="{{ tabList.scroll }}"
+             height="{{ tabList.height }}"
+             bindtabchange="bindtabchange"
+    />
+    <view class="azm-clearfix azm-scroll">
+        <view class="azm-banner">
+            <navigator>
+                <azm-image style="width: 100%" src="{{tabList.list[tabList.selectedId-1].cover}}" lazy-load="true"
+                           binderror="imageError" bindload="imageLoad" mode="widthFix"></azm-image>
+            </navigator>
+            <!--地理位置-->
+            <azm-location bindazmtap="azmLocationTap" bindcallback="getLocationCallback"></azm-location>
+        </view>
+        <view class="azm-content mTop16 azm-content_box">
+            <view class="flexBox flexBox-start">
+                <block wx:for="{{tabListData[tabList.selectedId - 1]}}" wx:for-index="i" wx:for-item="v" wx:key="i">
+                    <block wx:for="{{v}}" wx:for-index="index" wx:for-item="item" wx:key="item.id">
+                        <navigator url="/pages/item/detail?id={{item.item_id}}" class="flexBox-item fb-12 azm-col">
+                            <view class="azm-content">
+                                <view wx:if="{{!!item.group_num}}" class="azm-group-num">{{item.group_num}}人团</view>
+                                <azm-image style="width: 100%;" src="{{item.cover}}" lazy-load="true"
+                                           mode="aspectFill"></azm-image>
+                                <view class="p title zan-ellipsis">{{item.title}}</view>
+                                <view class="p stores zan-ellipsis">{{item.nickname}}</view>
+                                <view class="p stores zan-ellipsis">
+                                    <text decode>{{item.love_count}}人喜欢 &lt;{{c.mToKm(item.distance)}}</text>
+                                </view>
+                                <view class="p money">
+                                    <text decode class="money-left" wx:if="{{item.group_price}}">拼团价&nbsp;</text>
+                                    <text decode class="money-center">¥{{item.group_price || item.price}}&nbsp;</text>
+                                    <text decode class="money-right zan-text-deleted" wx:if="{{item.group_price}}">
+                                        <text>¥{{item.price}}</text>
+                                    </text>
+                                    <text decode class="money-right zan-text-deleted" wx:else>¥{{item.market_price}}
+                                    </text>
+                                </view>
+                            </view>
+                        </navigator>
+                    </block>
+                </block>
+            </view>
+        </view>
+    </view>
+</view>
+<azm-more no-more="{{noMore}}" loading="true"></azm-more>
+<azm-gotop is-show="{{goToTopShow}}"></azm-gotop>
+
+<wxs src="../../../../utils/common.wxs" module="c"/>

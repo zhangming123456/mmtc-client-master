@@ -1,0 +1,15 @@
+<form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="getUserInfoPage">
+        <azm-image class="azm-image" src="https://app.mmtcapp.com/mmtc/imgs/icon/userInfopageicon.png"
+                   type="img"></azm-image>
+        <view class="azm-p">登录后才可以后续操作哦</view>
+        <button wx:if="{{canIUse}}" size="mini" plain open-type="getUserInfo" hover-class="none"
+                bindgetuserinfo="bindGetUserInfo"
+                class='azm-userInfo_btn'>
+            <text>去登录/注册</text>
+        </button>
+        <button wx:else hover-class="none" size="mini" plain bindgetuserinfo="bindGetUserInfo" class='azm-userInfo_btn'>
+            <text>去登录/注册</text>
+        </button>
+    </view>
+</form>

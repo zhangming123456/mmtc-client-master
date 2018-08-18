@@ -1,0 +1,124 @@
+<wxs src="../../utils/common.wxs" module="c" />
+
+<view class='order-item border-t' wx:for="{{data.bills}}" wx:key="id">
+    <view class='flex border-b'>
+        <image src='https://app.mmtcapp.com/mmtc/imgs/shop2.png' class='bill-icon'></image>
+        <view class='flex-con text999 fz28'>
+            {{item.shop_name}}
+        </view>
+        <view class="status">
+            <!-- <view wx:if="{{item.is_cancelled==1}}">交易关闭</view>
+            <view wx:elif="{{item.payed==0}}">待付款</view>
+            <view wx:elif="{{item.used_count==item.items.length}}">已完成</view>
+            <view wx:elif="{{item.used_count>0}}">部分完成</view>
+            <view wx:else>待使用</view> -->
+              <view>{{item.items[0].item_status}}</view>
+        </view>
+    </view>
+    <view class='flex border-b' wx:for="{{item.items}}" wx:key="id" wx:for-item="i" data-id="{{i.item_id}}" bindtap='showItemDetail'>
+        <image class='avatar' mode="aspectFill" src='{{c.absUrl(i.cover,300)}}'></image>
+        <view class='item-info flex-con'>
+            <view class='title'>{{i.title}}</view>
+            <view class='price-area'>
+                <view class='unit'>￥</view>
+                <view class='price'>{{i.price}}</view>
+                <view class='market-price'>门市价 ￥{{i.market_price}}</view>
+            </view>
+            <view class='num'>
+                数量：x{{i.num}}
+            </view>
+            <view wx:if="{{item.payed==1&&i.is_used==0}}" data-item="{{i}}" catchtap='touse' class='touse'>
+                查看券码
+            </view>
+            <block wx:elif="{{item.payed==1&&i.is_used==1}}">
+                <view wx:if="{{i.is_noted==0}}" data-item="{{i}}" catchtap='tonote' class='touse redfullbtn'>
+                    写日记/点评
+                </view>
+                <view wx:else data-item="{{i}}" class='isused'>
+                    再来一单
+                </view>
+            </block>
+        </view>
+    </view>
+</view>
+
+<view class='bg-white'>
+    <view class='p30 border-b fz32 text282828'>
+        具体信息
+    </view>
+    <view class='pm text999 fz28 border-b'>
+        <view class='flex'>
+            <view class='flex-con'>商品总价</view>
+            <view>￥{{data.origin_total}}</view>
+        </view>
+        <view class='flex'>
+            <view class='flex-con'>店铺优惠</view>
+            <view>￥{{data.shop_discount_money||0}}</view>
+        </view>
+        <view class='flex'>
+            <view class='flex-con'>平台优惠</view>
+            <view>￥{{data.discount_money||0}}</view>
+        </view>
+        <view class='flex text282828'>
+            <view class='flex-con'>实付款</view>
+            <view>￥{{data.total}}</view>
+        </view>
+    </view>
+    <view class='pm fz24 border-b'>
+        <view class='flex'>
+            <view class='text999 field-label'>订单号：</view>
+            <view>{{data.order_no}}</view>
+        </view>
+        <view class='flex'>
+            <view class='text999 field-label'>下单时间：</view>
+            <view>{{data.create_time}}</view>
+        </view>
+        <view class='flex'>
+            <view class='text999 field-label'>订单状态：</view>
+            <view>
+                <!-- <view wx:if="{{data.is_cancelled==1}}">交易关闭</view>
+                <view wx:elif="{{data.payed==0}}">待付款</view>
+                <view wx:elif="{{data.used_count==data.count_items}}">已完成</view>
+                <view wx:elif="{{data.used_count>0}}">部分完成</view>
+                <view wx:else>待使用</view> --> 
+                <view>{{data.bills[0].items[0].item_status}}</view>
+                
+            </view>
+        </view>
+        <view class='flex' wx:if="{{data.is_cancelled==1}}">
+            <view class='text999 field-label'>取消时间：</view>
+            <view>{{data.cancelled_time||'--'}}</view>
+        </view>
+    </view>
+</view>
+<view class='footerbtns-before'></view>
+<view class='footerbtns'>
+    <view wx:if="{{data.is_cancelled==1}}" class='btn0 btn' bindtap='rmBill'>删除订单</view>
+    <view class='flex' wx:elif="{{data.payed==0}}">
+        <view class='btn1 btn flex-con' bindtap='cancelBill'>取消订单</view>
+        <view class='btn0 btn flex-con' bindtap='payBill'>去付款</view>
+    </view>
+</view>
+<view class='qrcode-area' wx:if="{{!qrcode.hidden}}"> 
+
+    <view class='qrcode-dlg'>
+        <view class='fz28 text666 order-no'>订单号：{{data.order_no}}</view>
+        <view>
+            <image src='{{qrcode.img}}' class='qrcode'></image>
+        </view>
+        <view class='qrcode-no'>
+            消费码:
+            <view class='num'>{{qrcode.num}}</view>
+        </view>
+        <view class='qrcode-tip'>
+            请您将二维码或着消费码
+            <view class='pt10'> 出示给商家使用~</view>
+        </view>
+        <view class='qrcode-btn border-t' bindtap='closeQrcode'>
+            手滑，下次再说吧
+        </view>
+    </view>
+    <view class='qrcode-close'>
+        <image src='https://app.mmtcapp.com/mmtc/imgs/btnclose.png' bindtap='closeQrcode'></image>
+    </view>
+</view>

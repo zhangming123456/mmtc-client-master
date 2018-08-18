@@ -1,0 +1,158 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.7.3",
+	"appid": "wx0df0e298b3b13290",
+	"projectname": "mmtc-dev-master",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 19,
+			"list": [
+				{
+					"id": 0,
+					"name": "确认订单",
+					"pathName": "pages/car/payOrder",
+					"query": "item_id=12&num=1",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "立即一下",
+					"pathName": "pages/activity/wallet",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "拼团",
+					"pathName": "pages/group/detail",
+					"query": "id=170"
+				},
+				{
+					"id": -1,
+					"name": "美美天成分享",
+					"pathName": "pages/activity/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "分享领券",
+					"pathName": "pages/activity/wallet",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "登入",
+					"pathName": "pages/login/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "121312",
+					"pathName": "pages/mine/aboutus",
+					"query": ""
+				},
+				{
+					"id": 8,
+					"name": "店铺信息",
+					"pathName": "pages/home/detail",
+					"query": "shop_id=767"
+				},
+				{
+					"id": 8,
+					"name": "店铺买单",
+					"pathName": "pages/onlineBuy/index",
+					"query": "shop_id=2399"
+				},
+				{
+					"id": -1,
+					"name": "ddddddd",
+					"pathName": "pages/activity/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "登入",
+					"pathName": "pages/login/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的",
+					"pathName": "pages/mine/index",
+					"query": ""
+				},
+				{
+					"id": 12,
+					"name": "我的卡包",
+					"pathName": "page/cardBag/pages/myCard/index",
+					"query": ""
+				},
+				{
+					"id": 13,
+					"name": "我的首页",
+					"pathName": "page/tabBar/home/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "附近",
+					"pathName": "page/tabBar/near/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "地址定位",
+					"pathName": "page/public/pages/location/index",
+					"query": ""
+				},
+				{
+					"id": 16,
+					"name": "搜索结果 - new",
+					"pathName": "page/home/pages/searchResult/index",
+					"query": "w=美甲&type=1"
+				},
+				{
+					"id": -1,
+					"name": "店铺首页",
+					"pathName": "pages/home/index",
+					"query": "shop_id=69"
+				},
+				{
+					"id": -1,
+					"name": "套卡(购买）",
+					"pathName": "page/cardBag/pages/setDetails/index",
+					"query": "card_id=2"
+				},
+				{
+					"id": -1,
+					"name": "我的订单",
+					"pathName": "pages/order/all",
+					"query": ""
+				}
+			]
+		}
+	}
+}

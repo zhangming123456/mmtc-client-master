@@ -1,0 +1,296 @@
+.checkbox checkbox {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 28rpx;
+}
+
+.edit-btn {
+  font-size: 28rpx;
+}
+
+page {
+  background-color: #f4f4f4;
+}
+
+.nav {
+  background-color: #fff;
+  box-shadow: 2px 4px 12px 0px rgba(0, 0, 0, 0.01);
+}
+
+.shop {
+  margin-top: 24rpx;
+  background-color: #fff;
+}
+
+.shop-name {
+  padding: 28rpx 30rpx;
+  font-size: 32rpx;
+  color: #282828;
+}
+
+.shop-name-cb {
+  margin-right: 18rpx;
+}
+
+.item {
+  padding: 30rpx;
+}
+
+.avatar {
+  width: 188rpx;
+  height: 188rpx;
+  vertical-align: middle;
+}
+
+.item-info {
+  padding-left: 30rpx;
+}
+
+.item .title {
+  font-size: 32rpx;
+  color: #282828;
+}
+
+.price-area {
+  padding-top: 20rpx;
+  padding-bottom: 31rpx;
+}
+
+.price-area > view {
+  display: inline-block;
+}
+
+.unit {
+  font-size: 24rpx;
+  color: #ff538b;
+}
+
+.price {
+  font-size: 45rpx;
+  color: #ff538b;
+}
+
+.market-price {
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  color: #999;
+  text-decoration: line-through;
+  margin-left: 32rpx;
+}
+
+.num {
+  font-size: 26rpx;
+  font-weight: normal;
+  height: 44rpx;
+  font-stretch: normal;
+  color: #666;
+}
+
+.checkbox {
+  padding-right: 30rpx;
+  vertical-align: middle;
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 112rpx;
+  background-color: #fff;
+}
+
+.btn2 {
+  width: 200rpx;
+  color: #fff;
+  height: 112rpx;
+  text-align: center;
+  line-height: 112rpx;
+  font-size: 32rpx;
+  background-color: #ff538b;
+}
+
+.footer-left {
+  padding-top: 32rpx;
+  padding-left: 72rpx;
+}
+
+.footer-left .unit {
+  margin-left: 19rpx;
+}
+
+.footer-left .price {
+  margin-left: 10rpx;
+  font-size: 50rpx;
+}
+
+.cart-items {
+  top: 92rpx;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 112rpx;
+}
+
+.empty-area {
+  text-align: center;
+  padding-top: 162rpx;
+}
+
+.empty-area image {
+  width: 191rpx;
+  height: 191rpx;
+}
+
+.empty-area > view {
+  padding-top: 29rpx;
+  font-size: 28rpx;
+  color: #999;
+}
+
+.empty-area .red {
+  color: #ff7aa5;
+  display: inline-block;
+}
+
+.btn {
+  display: block;
+  height: 112rpx;
+  line-height: 112rpx;
+  text-align: center;
+}
+
+.btn1 {
+  font-size: 32rpx;
+  background-color: #fff;
+  border: solid 1rpx rgba(255, 83, 139, 0.61);
+  border-right: none;
+  color: #ff538b;
+  box-sizing: border-box;
+}
+
+.btn0 {
+  color: white;
+  background-color: #ff538b;
+}
+
+.num-area {
+  overflow: hidden;
+}
+
+.num-area input {
+  font-size: 30rpx;
+  height: 42rpx;
+  padding: 0;
+  margin: 0;
+  line-height: 42rpx;
+  width: 64rpx;
+  float: left;
+  text-align: center;
+  min-height: auto;
+  border-top: solid 1rpx #eee;
+  border-bottom: solid 1rpx #eee;
+}
+
+.num-area view {
+  float: left;
+  text-align: center;
+  height: 42rpx;
+  line-height: 42rpx;
+  width: 42rpx;
+  font-size: 33rpx;
+  color: #282828;
+  border: solid 1rpx #eee;
+}
+
+.masker {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.masker-box {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+}
+
+.close-btn {
+  height: 98rpx;
+  background-color: #16d6c3;
+  text-align: center;
+  color: white;
+  line-height: 98rpx;
+  border-radius: 0;
+}
+
+.p30-inner {
+  padding: 30rpx 0;
+}
+
+.p30-outer {
+  padding-bottom: 0;
+  padding-top: 0;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+
+.coupon-money {
+  font-size: 42rpx;
+  line-height: 28rpx;
+  color: #ff538b;
+  display: inline-block;
+}
+
+.coupon-unit {
+  font-size: 26rpx;
+  color: #ff538b;
+  padding-left: 6rpx;
+  display: inline-block;
+}
+
+.coupon-title {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 28rpx;
+  display: inline-block;
+  padding-left: 49rpx;
+}
+
+.coupon-time {
+  font-size: 24rpx;
+  line-height: 23rpx;
+  color: #999;
+  margin-top: 20rpx;
+}
+
+.pick-btn {
+  width: 158rpx;
+  color: #ff538b;
+  font-size: 28rpx;
+  height: 58rpx;
+  line-height: 58rpx;
+  text-align: center;
+  border-radius: 28px;
+  border: solid 1rpx #ff538b;
+}
+
+.pick-btned {
+  border: solid 1rpx #e5e5e5;
+  color: #999;
+}
+
+.seperate {
+  padding: 0 20rpx;
+}
+
+.pickup-conpon {
+  color: #ff538b;
+  font-size: 28rpx;
+}

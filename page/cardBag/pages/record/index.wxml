@@ -1,0 +1,20 @@
+<wxs src="../../../../utils/common.wxs" module="c" />
+<import src="../../../../wxParse/wxParse.wxml" />
+<i-toast id="toast" />
+<i-message id="message" />
+
+<view>
+    <view class="t-record" wx:for="{{useList}}" wx::key="index" wx:for-item="item" wx:for-idnex="index">
+        <view class="t-recordTime">
+            <image src="https://app.mmtcapp.com/mmtc/imgs/Group.png"></image>
+            <text class="t-time">{{item.used_date_time}}</text>
+            <text>{{item.is_used==1?'使用了':'未使用'}}</text>
+        </view>
+
+        <view class="t-itemName">{{item.title}}</view>
+
+        <view wx:if="{{item.is_noted==0}}" bindtap="gotoNote" data-item="{{item}}" class="t-remark">去点评</view>
+        <view wx:else class="t-remark2"  bindtap="gotoMynotes">查看点评</view>
+
+    </view>
+</view>

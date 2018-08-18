@@ -1,0 +1,26 @@
+.btns{
+  margin-top: 166rpx;
+  padding-left:30rpx;
+  padding-right:30rpx;
+  font-size: 32rpx;
+}
+.btns view{
+  text-align: center;
+}
+.btn-bywx{
+  height: 88rpx;
+  line-height: 88rpx;
+  color:white;
+	background-color: #09bb07;
+	border-radius: 10rpx;
+  	
+	border: solid 1rpx #029400;
+}
+.btn-byphone{
+  margin-top: 30rpx;
+  height: 88rpx;
+	background-color: #fbfafc;
+	border-radius: 10rpx;
+  line-height: 88rpx;
+	border: solid 1rpx #d6d5d6;
+}

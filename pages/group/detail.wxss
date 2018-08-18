@@ -1,0 +1,275 @@
+.masker {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.box1 {
+  position: relative;
+  z-index: 4;
+  text-align: center;
+  background-color: #fff;
+  padding-bottom: 31rpx;
+}
+
+.kt-suc {
+  width: 100rpx;
+  height: 100rpx;
+  margin-right: 31rpx;
+}
+
+.title-tip {
+  padding: 30rpx;
+}
+
+.title {
+  font-size: 30rpx;
+  color: #fd0f5d;
+  padding-bottom: 20rpx;
+}
+
+.desc {
+  font-size: 30rpx;
+  color: #999;
+}
+
+.box1-member image {
+  height: 120rpx;
+  width: 120rpx;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: solid 2rpx #ff538b;
+}
+
+.box1-content {
+  padding-top: 40rpx;
+}
+
+.box1-content-num {
+  display: inline;
+  font-size: 48rpx;
+  color: #fd0f5d;
+}
+
+.time-count-area {
+  color: #fd0f5d;
+}
+
+.tuan-info {
+  text-align: center;
+}
+
+.time-count-area {
+  display: inline;
+}
+
+.time-count {
+  border-radius: 7px;
+  background-color: #fd0f5d;
+  color: #fff;
+  font-size: 26rpx;
+  padding: 9rpx 0;
+  width: 38rpx;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  top: -5rpx;
+}
+
+.box1-members {
+  white-space: nowrap;
+}
+
+.box1-member {
+  display: inline-block;
+  position: relative;
+  margin-left: 27rpx;
+  margin-right: 27rpx;
+}
+
+.box1-member-tz {
+  position: absolute;
+  bottom: -12rpx;
+  left: 50%;
+  margin-left: -27rpx;
+  font-size: 20rpx;
+  height: 24rpx;
+  line-height: 24rpx;
+  text-align: center;
+  border: solid 2px #fff;
+  border-radius: 5px;
+  background-color: #fd0f5d;
+  width: 54rpx;
+  color: #fff;
+}
+
+.invite-friends {
+  border-radius: 5px;
+  width: 670rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 32rpx;
+  color: #fff;
+  margin: 0 auto;
+  background-image: linear-gradient(90deg, #e00049 0%, #e8667f 100%),
+                      linear-gradient(#fd0f5d, #fd0f5d);
+}
+
+.box1-members-wrap {
+  height: 120rpx;
+  width: 100%;
+  margin-bottom: 63rpx;
+  margin-top: 44rpx;
+}
+
+.hr24 {
+  background: #f4f4f4;
+}
+
+.box1-members-wrap movable-view {
+  height: 120rpx;
+  width: auto;
+  min-width: 100%;
+}
+
+.title-area {
+  text-align: center;
+  color: #666;
+  font-size: 26rpx;
+  position: relative;
+  background: #f4f4f4;
+}
+
+.title-area .txt {
+  background: #f4f4f4;
+  height: 88rpx;
+  padding: 0 15rpx;
+  line-height: 88rpx;
+  z-index: 2;
+  position: relative;
+  display: inline-block;
+}
+
+.title-area-line {
+  height: 1px;
+  background-color: #666;
+  width: 360rpx;
+  z-index: 1;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -180rpx;
+}
+
+.p2 {
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.box3-item {
+  float: left;
+  width: 375rpx;
+  position: relative;
+  border-bottom: 1px #eee solid;
+  box-sizing: border-box;
+  padding: 30rpx 13rpx 30rpx 30rpx;
+}
+
+.box3-item:nth-child(2n) {
+  padding-left: 13rpx;
+}
+
+.box3-item:last-child:nth-child(2n+1) {
+  border-bottom: none;
+}
+
+.cover {
+  width: 332rpx;
+  height: 332rpx;
+}
+
+.box3-item-info {
+  padding-top: 19rpx;
+}
+
+.box3-item-title {
+  font-size: 32rpx;
+  color: #282828;
+  padding-bottom: 20rpx;
+}
+
+.box3-item-desc {
+  font-size: 24rpx;
+  color: #999;
+  padding-bottom: 19rpx;
+}
+
+.box3-item-num {
+  font-size: 24rpx;
+  color: #999;
+  padding-bottom: 27rpx;
+}
+
+.price {
+  font-size: 24rpx;
+  color: #ff538b;
+  display: inline;
+}
+
+.price span {
+  font-size: 45rpx;
+}
+
+.market-price {
+  font-size: 24rpx;
+  color: #999;
+  display: inline;
+  text-decoration: line-through;
+  margin-left: 10rpx;
+}
+
+.box3-group-num {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 6rpx 8rpx;
+  color: white;
+  border-radius: 0px 0px 5px 0px;
+  background-color: #fd0f5d;
+  font-size: 20rpx;
+}
+
+.no-border {
+  border: none !important;
+}
+
+.time-out {
+  font-size: 30rpx;
+  color: #999;
+}
+
+.red-color {
+  color: #fd0f5d;
+  display: inline;
+}
+
+
+.disabled{
+  background-image: none;
+  background-color: #999999 !important;
+}
+
+.end-area{
+  color:#999999;
+  font-size: 22rpx;
+  
+}
+.end-area > view:first-child{
+  padding-top: 30rpx;
+  padding-bottom: 19rpx;
+}

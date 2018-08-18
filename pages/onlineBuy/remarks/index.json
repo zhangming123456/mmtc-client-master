@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText":"添加备注",
+    "usingComponents": {
+      "zan-popup": "../../../lib/zanui/popup/index"
+    }
+  }

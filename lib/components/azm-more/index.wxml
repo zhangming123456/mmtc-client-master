@@ -1,0 +1,15 @@
+<view class='loading-more'>
+    <view wx:if="{{!noMore&&loading}}">{{loadingText}}</view>
+    <view wx:elif="{{noMore}}" style="text-align: center;">
+        <view style="display: inline-block;">
+            <view class='flex'>
+                <view>
+                    <image src='https://app.mmtcapp.com/mmtc/imgs/nomore.png' class='nomore-image'></image>
+                </view>
+                <view class='nomore-text'>
+                    <text>{{nomoreText}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

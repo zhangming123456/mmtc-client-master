@@ -1,0 +1,61 @@
+<view>
+    <view class="t-select">
+        <view class="t-selectTcr">
+            选择技师：
+        </view>
+        <checkbox-group bindchange="firstCategoryChange" class="t-selectTeacher">
+            <label bindtap="firstCategoryAll" data-checkall="全部" class="t-all {{isFirstCategoryAll?'t-active':''}}">
+                <text>全部</text>
+            </label>
+            <label wx:for='{{itemList}}' wx:key="itemList_{{index}}" bindtap="itemSelected" data-index="{{index}}">
+                <checkbox value="{{item.name}}" checked="{{item.isSelected}}" hidden='true'></checkbox>
+                <view class="t-all {{item.isSelected?'t-active':''}}">{{item.username}}</view>
+            </label>
+        </checkbox-group>
+
+        <view class="t-selectDemo">
+            <text>选择项目：</text>
+            <view class="t-choice" bindtap="toggleBottomPopup">
+                <text>{{secondCategoryArr.length != '' || isSecondCategoryAll?'已选择':'选择'}}</text>
+                <image src="https://app.mmtcapp.com/mmtc/imgs/gt@2x.png"></image>
+            </view>
+        </view>
+    </view>
+
+    <view class="t-comment">
+        <textarea placeholder="想写其他想说的话" maxlength="{{noteMaxLen}}" bindinput="bindWordLimit" maxlength="120" auto-height bindblur="commitOpinion"
+        />
+        <view>{{currentNoteLen|0}}/{{noteMaxLen}}</view>    
+    </view>
+
+    <view class="t-bottom" bindtap='clickSubmit'>确定</view>
+    <!-- 底部弹出框 -->
+    <zan-popup show="{{ showBottomPopup }}" type="bottom" bindclose="toggleBottomPopup">
+        <view class="pop-example__container pop-example__container--bottom">
+            <view class="zan-btns">
+                <!-- <button class="zan-btn" catchtap="toggleBottomPopup">
+                    关闭 popup
+                </button> -->
+                <scroll-view></scroll-view>
+                <checkbox-group bindchange="secondCategoryChange">
+                    <view class="t-selectTitle">
+                        <label bindtap="secondCategoryAll" data-checkall="全选">
+                            <text>全选</text>
+                        </label>
+                        <button style="color: #16d6c3;" hover-class='none' plain bindtap='clickConfirm'>确定</button>
+                    </view>
+                    <scroll-view class="zan-btns2" scroll-y>
+                        <label wx:for='{{secondCategory}}' wx:key="secondCategory_{{index}}" class="t-selectItem">
+                            <checkbox value="{{item.title}}" checked="{{item.checked}}" hidden='true'></checkbox>
+                            <view class="t-items">
+                                <image src="{{item.checked?'https://app.mmtcapp.com/mmtc/imgs/icon_choice_press.png':'https://app.mmtcapp.com/mmtc/imgs/icon_choice_normal.png'}}"></image>
+                                <text>{{item.title}}</text>
+                            </view>
+                            <view class="t-price">{{item.price}}</view>
+                        </label>
+                    </scroll-view>
+                </checkbox-group>
+            </view>
+        </view>
+    </zan-popup>
+</view>

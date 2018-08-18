@@ -1,0 +1,6 @@
+<wxs src="../../utils/common.wxs" module="c" />
+<navigator class="item" wx:for="{{items}}" url='/pages/other/discount?id={{item.id}}' wx:key="id">
+  <image src='{{c.absUrl(item.cover,400)}}'></image>
+</navigator>
+
+<include src="../common/more.wxml"></include>

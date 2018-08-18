@@ -1,0 +1,133 @@
+<wxs src="../../utils/common.wxs" module="c"/>
+<wxs module="f">
+    module.exports = {
+    num2arr: function(num, attrlen) {
+    attrlen = attrlen || 5;
+    num = parseInt(num);
+    var rt = [];
+    for (var i = 0; i < 5; i++) {
+    if (i < num) {
+    rt.push(1);
+    } else {
+    rt.push(0);
+    }
+    }
+    return rt;
+    },
+    split: function(str) {
+    return str.split(',');
+    }
+    }
+</wxs>
+<scroll-view bindscrolltolower="bindscrolltolower" bindscroll="onPageScroll" scroll-y="{{type==-1}}"
+             style='height:100%;'
+             scroll-top="{{scrollTop}}">
+    <view class='hr24'></view>
+    <view id='toolbar' class='{{(topFixed||type!=-1)?"topFixedBefore":""}}'></view>
+    <view class='border-t border-b toolbar {{(topFixed||type)!=-1?"topFixed":""}}'>
+        <view class='flex'>
+            <view class='flex-con {{type==0?"active":""}}' bindtap='toggleType' data-type="0">{{ctitle||'全部项目'}}</view>
+            <view class='flex-con {{type==1?"active":""}}' bindtap='toggleType' data-type="1">{{atitle||'全部地区'}}</view>
+            <view class='flex-con {{type==2?"active":""}}' bindtap='toggleType' data-type="2">{{stitle||'智能排序'}}</view>
+            <view class='flex-con {{type==3?"active":""}}' bindtap='toggleType' data-type="3">{{ltitle||'筛选'}}</view>
+        </view>
+    </view>
+    <view class='groups' hidden='{{type==-1?true:false}}'>
+        <view class='group category' hidden='{{type!==0}}'>
+            <view class='category-left'>
+                <view class='category-item {{categories[0].selected?"category-active":""}}' data-index="-1"
+                      bindtap='toggleCategory'>
+                    {{categories[0].title}}
+                </view>
+                <view class='category-item {{ci.selected?"category-active":""}}' wx:for="{{categories[0].children}}"
+                      wx:key="id" wx:for-item="ci" bindtap='toggleCategory' data-index="{{index}}">
+                    {{ci.title}}
+                </view>
+            </view>
+            <view class='category-right' wx:if="{{categories[1]}}">
+                <view class='category-item' bindtap='selectCategory' data-index="-1">
+                    全部
+                </view>
+                <view class='category-item' bindtap='selectCategory' data-index="{{ciindex}}" wx:for="{{categories[1]}}"
+                      wx:for-item="ci" wx:key="id" wx:for-index="ciindex">
+                    {{ci.title}}
+                </view>
+            </view>
+        </view>
+        <view class='group' hidden='{{type!==1}}'>
+            <view class='tabs flex'>
+                <view catchtap='toggleAreaType' data-type="0" class='flex-con {{areaType==0?"selected":""}}'>商圈</view>
+                <view catchtap='toggleAreaType' data-type="1" class='flex-con {{areaType==1?"selected":""}}'>地铁</view>
+            </view>
+            <view class='area'>
+                <view class='area-left'>
+                    <view class='area-item {{index==areaIndex[areaType]?"active":""}}' catchtap='toggleTopArea'
+                          data-index="{{index}}" wx:for="{{topAreas}}" wx:for-item="trade" wx:key="id">
+                        {{trade.title}}
+                    </view>
+                </view>
+                <scroll-view class='area-right' scroll-y="true">
+                    <view class='area-item' catchtap='selectArea' data-index="{{index}}"
+                          wx:for="{{topAreas[areaIndex[areaType]].children}}" wx:key="id" wx:for-item="dd">{{dd.title}}
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+        <view class='group' hidden='{{type!==2}}'>
+            <view class='sort-item' data-index="0" catchtap='selectSortType'>智能排序</view>
+            <view class='sort-item' data-index="1" catchtap='selectSortType'>销量最高</view>
+            <view class='sort-item' data-index="2" catchtap='selectSortType'>价格最低</view>
+            <view class='sort-item' data-index="3" catchtap='selectSortType'>案例最多</view>
+            <view class='sort-item' data-index="4" catchtap='selectSortType'>好评优先</view>
+            <view class='sort-item' data-index="5" catchtap='selectSortType'>离我最近</view>
+        </view>
+        <view class='group' hidden='{{type!==3}}'>
+            <view class='sort-item' data-index="0" catchtap='selectFilterType'>全部</view>
+            <view class='sort-item' data-index="1" catchtap='selectFilterType'>拼团特惠</view>
+        </view>
+    </view>
+    <view class='list-box'>
+        <block wx:for="{{shops}}" wx:for-index="i" wx:for-item="val">
+            <block wx:for="{{val}}" wx:key="index">
+                <navigator url='/pages/item/detail?id={{item.id}}' hover-class='none' class='box3-item'
+                           wx:key="item.id">
+                    <view class='rel'>
+                        <view class='box3-group-num' wx:if="{{item.group_num && item.group_num>0}}">{{item.group_num}}人团
+                        </view>
+                        <image src="{{c.absUrl(item.cover,400)}}" class="cover" background-size="cover"></image>
+                        <view class='box3-item-info'>
+                            <view class="box3-item-title one-line">{{item.title}}</view>
+                            <view class="box3-item-desc one-line">{{item.shop_name}}</view>
+                            <view class='box3-item-num'>
+                                {{item.sell_count}}人喜欢 {{item.distance}}
+                            </view>
+                            <view class="box3-item-price-info">
+                                <block wx:if="{{item.group_num && item.group_num>0}}">
+                                    <view class="price">
+                                        <i>拼团价￥</i>
+                                        <span>{{item.group_price}}</span>
+                                    </view>
+                                    <view class='market-price'>
+                                        ¥{{item.price}}
+                                    </view>
+                                </block>
+                                <block wx:else>
+                                    <view class="price">
+                                        <i>¥ </i>
+                                        <span>{{item.price}}</span>
+                                    </view>
+                                    <view class='market-price'>
+                                        ¥{{item.market_price}}
+                                    </view>
+                                </block>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </block>
+        </block>
+    </view>
+    <view class='masker' hidden='{{type==-1}}' catchtap='closeFilter'></view>
+    <image id="gotoTop" hidden='{{!topFixed}}' src='https://app.mmtcapp.com/mmtc/imgs/top.png' bindtap='gotoTop'></image>
+    <include src="../common/more.wxml"></include>
+</scroll-view>

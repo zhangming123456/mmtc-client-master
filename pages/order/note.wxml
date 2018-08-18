@@ -1,0 +1,27 @@
+<wxs src="../../utils/common.wxs" module="c"/>
+<view class='bg-white'>
+    <view class="p1">
+        <view class='flex'>
+            <view class='title flex-con'>
+                <span class="line-blue"></span>晒图日记
+            </view>
+            <block wx:if="{{!editMode}}">
+                <view class='fz24 text999 text-right' bindtap='showScoreWin'>
+                    {{scoreTip||'我要评分'}}
+                </view>
+                <image class='gt' src='https://app.mmtcapp.com/mmtc/imgs/gt@2x.png' class='gt'></image>
+            </block>
+        </view>
+    </view>
+    <view class='p2'>
+        <textarea value='{{item.content}}' bindblur="bindContentChange" placeholder="您觉得还不错的话，就写下评价鼓励一下吧~" auto-height/>
+    </view>
+    <view class='p3'>
+        <image wx:for="{{imgs}}" wx:key="*this" mode='aspectFill' src='{{c.absUrl(item)}}'></image>
+        <image src='https://app.mmtcapp.com/mmtc/addpic@2x.png' bindtap='chooseImage'></image>
+    </view>
+</view>
+
+<view class='footer' bindtap='submitData'>
+    提交
+</view>

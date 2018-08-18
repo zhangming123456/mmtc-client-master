@@ -1,0 +1,259 @@
+.order-item {
+  background-color: #fff;
+  margin-bottom: 24rpx;
+}
+
+.order-items > .flex, .order-item > .flex {
+  padding: 33rpx 32rpx;
+}
+
+.status {
+  font-size: 24rpx;
+  color: #ff538b;
+}
+
+.order-info {
+  font-size: 26rpx;
+  color: #282828;
+}
+
+.item-info .title {
+  font-size: 36rpx;
+  color: #282828;
+}
+
+.bill-icon {
+  width: 36rpx;
+  height: 32rpx;
+  vertical-align: middle;
+  margin-right: 14rpx;
+}
+
+.item {
+  background-color: #fff;
+  padding: 30rpx;
+  margin-top: 24rpx;
+}
+
+.avatar {
+  width: 188rpx;
+  height: 188rpx;
+  vertical-align: middle;
+}
+
+.item-info {
+  padding-left: 30rpx;
+  position: relative;
+}
+
+.item .title {
+  font-size: 32rpx;
+  color: #282828;
+}
+
+.price {
+  font-size: 45rpx;
+  color: #ff538b;
+}
+
+.market-price {
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  color: #999;
+  text-decoration: line-through;
+  margin-left: 32rpx;
+}
+
+.num {
+  font-size: 26rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  color: #666;
+}
+
+.item-info {
+  padding-left: 30rpx;
+  position: relative;
+}
+
+.item .title {
+  font-size: 32rpx;
+  color: #282828;
+}
+
+.price-area {
+  padding-top: 40rpx;
+  padding-bottom: 31rpx;
+}
+
+.price-area > view {
+  display: inline-block;
+}
+
+.unit {
+  font-size: 24rpx;
+  color: #ff538b;
+}
+
+.pm {
+  padding: 23rpx 33rpx;
+}
+
+.pm > .flex {
+  padding-bottom: 23rpx;
+}
+
+.pm > .flex:last-child {
+  padding-bottom: 0;
+}
+
+page {
+  background-color: #f5f5f5;
+}
+
+.field-label {
+  width: 150rpx;
+}
+
+.footerbtns-before {
+  height: 108rpx;
+}
+
+.footerbtns {
+  height: 98rpx;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.btn {
+  display: block;
+  height: 98rpx;
+  font-size: 32rpx;
+  line-height: 98rpx;
+  text-align: center;
+}
+
+.btn1 {
+  font-size: 32rpx;
+  background-color: #fff;
+  border: solid 1rpx rgba(255, 83, 139, 0.61);
+  border-right: none;
+  color: #ff538b;
+  box-sizing: border-box;
+}
+
+.btn0 {
+  color: white;
+  background-color: #ff538b;
+}
+
+.touse {
+  position: absolute;
+  right: 0;
+  bottom: -5rpx;
+  border: solid 1rpx #fc075f;
+  color: #fd0f5d;
+  height: 51rpx;
+  line-height: 51rpx;
+  padding-left: 24rpx;
+  padding-right: 24rpx;
+  border-radius: 24rpx;
+  display: inline-block;
+  font-size: 28rpx;
+  text-align: center;
+}
+
+.qrcode-area {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.qrcode-dlg {
+  background-color: #fff;
+  width: 590rpx;
+  border-radius: 8px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 151rpx;
+}
+
+.qrcode {
+  width: 280rpx;
+  height: 280rpx;
+  margin-top: 28rpx;
+  margin-bottom: 45rpx;
+}
+
+.qrcode-no {
+  font-size: 36rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 40rpx;
+  color: #666;
+}
+
+.qrcode-no .num {
+  font-size: 48rpx;
+  font-weight: normal;
+  color: #282828;
+  display: inline-block;
+}
+
+.qrcode-tip {
+  font-size: 24rpx;
+  line-height: 30rpx;
+  color: #999;
+  margin-top: 44rpx;
+  margin-bottom: 28rpx;
+}
+
+.qrcode-btn {
+  font-size: 32rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  color: #ff538b;
+  padding: 29rpx 0;
+}
+
+.qrcode-close {
+  margin-top: 85rpx;
+}
+
+.qrcode-close image {
+  width: 35rpx;
+  height: 35rpx;
+}
+
+.order-no {
+  padding-top: 50rpx;
+}
+
+.redfullbtn {
+  color: #fff;
+  background-color: #ff538b;
+}
+
+
+.isused {
+  position: absolute;
+  right: 0;
+  bottom: -5rpx;
+  border: solid 1rpx #ff538b;
+  color: #ff538b;
+  height: 51rpx;
+  line-height: 51rpx;
+  border-radius: 24rpx;
+  padding-left: 24rpx;
+  padding-right: 24rpx;
+  display: inline-block;
+  font-size: 28rpx;
+  text-align: center;
+}

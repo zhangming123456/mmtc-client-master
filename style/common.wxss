@@ -1,0 +1,209 @@
+.azm-font-8 {
+  font-size: 8rpx;
+}
+.azm-font-10 {
+  font-size: 10rpx;
+}
+.azm-font-12 {
+  font-size: 12rpx;
+}
+.azm-font-14 {
+  font-size: 14rpx;
+}
+.azm-font-16 {
+  font-size: 16rpx;
+}
+.azm-font-18 {
+  font-size: 18rpx;
+}
+.azm-font-20 {
+  font-size: 20rpx;
+}
+.azm-font-22 {
+  font-size: 22rpx;
+}
+.azm-font-24 {
+  font-size: 24rpx;
+}
+.azm-font-26 {
+  font-size: 26rpx;
+}
+.azm-font-28 {
+  font-size: 28rpx;
+}
+.azm-font-30 {
+  font-size: 30rpx;
+}
+/**********************flex布局start**********************/
+.flexBox {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  width: 100%;
+  /*主轴为水平方向，起点在右端。*/
+  /*主轴为垂直方向，起点在上沿。*/
+  /*主轴为垂直方向，起点在下沿。*/
+}
+.flexBox-start {
+  justify-content: flex-start;
+}
+.flexBox-end {
+  justify-content: flex-end;
+}
+.flexBox-center {
+  justify-content: center;
+}
+.flexBox-between {
+  justify-content: space-between;
+}
+.flexBox-around {
+  justify-content: space-around;
+}
+.flexBox-row {
+  /*主轴为水平方向，起点在左端。*/
+  flex-direction: row;
+}
+.flexBox-row__reverse {
+  flex-direction: row-reverse;
+}
+.flexBox-column {
+  flex-direction: column;
+}
+.flexBox-column__reverse {
+  flex-direction: column-reverse;
+}
+.flexBox .flexBox-item {
+  position: relative;
+  box-sizing: border-box;
+  white-space: normal;
+  min-width: 0;
+  word-break: break-all;
+  height: inherit;
+  line-height: inherit;
+}
+.flexBox .flexBox-item.fb-all {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+}
+.flexBox .flexBox-item.fb-1 {
+  flex-basis: 4.16666667%;
+  width: 4.16666667%;
+}
+.flexBox .flexBox-item.fb-2 {
+  flex-basis: 8.33333333%;
+  width: 8.33333333%;
+}
+.flexBox .flexBox-item.fb-3 {
+  flex-basis: 12.5%;
+  width: 12.5%;
+}
+.flexBox .flexBox-item.fb-4 {
+  flex-basis: 16.66666667%;
+  width: 16.66666667%;
+}
+.flexBox .flexBox-item.fb-5 {
+  flex-basis: 20.83333333%;
+  width: 20.83333333%;
+}
+.flexBox .flexBox-item.fb-6 {
+  flex-basis: 25%;
+  width: 25%;
+}
+.flexBox .flexBox-item.fb-7 {
+  flex-basis: 29.16666667%;
+  width: 29.16666667%;
+}
+.flexBox .flexBox-item.fb-8 {
+  flex-basis: 33.33333333%;
+  width: 33.33333333%;
+}
+.flexBox .flexBox-item.fb-9 {
+  flex-basis: 37.5%;
+  width: 37.5%;
+}
+.flexBox .flexBox-item.fb-10 {
+  flex-basis: 41.66666667%;
+  width: 41.66666667%;
+}
+.flexBox .flexBox-item.fb-11 {
+  flex-basis: 45.83333333%;
+  width: 45.83333333%;
+}
+.flexBox .flexBox-item.fb-12 {
+  flex-basis: 50%;
+  width: 50%;
+}
+.flexBox .flexBox-item.fb-13 {
+  flex-basis: 54.16666667%;
+  width: 54.16666667%;
+}
+.flexBox .flexBox-item.fb-14 {
+  flex-basis: 58.33333333%;
+  width: 58.33333333%;
+}
+.flexBox .flexBox-item.fb-15 {
+  flex-basis: 62.5%;
+  width: 62.5%;
+}
+.flexBox .flexBox-item.fb-16 {
+  flex-basis: 66.66666667%;
+  width: 66.66666667%;
+}
+.flexBox .flexBox-item.fb-17 {
+  flex-basis: 70.83333333%;
+  width: 70.83333333%;
+}
+.flexBox .flexBox-item.fb-18 {
+  flex-basis: 75%;
+  width: 75%;
+}
+.flexBox .flexBox-item.fb-19 {
+  flex-basis: 79.16666667%;
+  width: 79.16666667%;
+}
+.flexBox .flexBox-item.fb-20 {
+  flex-basis: 83.33333333%;
+  width: 83.33333333%;
+}
+.flexBox .flexBox-item.fb-21 {
+  flex-basis: 87.5%;
+  width: 87.5%;
+}
+.flexBox .flexBox-item.fb-22 {
+  flex-basis: 91.66666667%;
+  width: 91.66666667%;
+}
+.flexBox .flexBox-item.fb-23 {
+  flex-basis: 95.83333333%;
+  width: 95.83333333%;
+}
+.flexBox .flexBox-item.fb-24 {
+  flex-basis: 100%;
+  width: 100%;
+}
+/**********************flex布局end**********************/
+.azm-pullDownRefresh--mask-b {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: #f4f4f4;
+  width: 100%;
+  height: 50%;
+  z-index: -1;
+}
+.marTop-12 {
+  display: block;
+  box-sizing: border-box;
+  margin-top: 24rpx;
+}
+page {
+  font-size: 24rpx;
+}
+azm-image {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}

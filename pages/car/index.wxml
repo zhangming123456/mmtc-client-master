@@ -1,0 +1,123 @@
+<wxs src="../../utils/common.wxs" module="c" />
+<block wx:if="{{items.length}}">
+  <view class='p30 fz28 text282828 nav'>
+    <view class='flex'>
+      <checkbox-group bindchange="selectAllChange">
+        <label class="checkbox">
+          <checkbox value='1' checked='{{allChecked}}' /> 全选
+        </label>
+      </checkbox-group>
+      <view class='flex-con text-right'>
+        <view class='edit-btn ib' bindtap='toggleEditMode'>
+          <view wx:if="{{!is_edit_mode}}">编辑</view>
+          <view wx:else>完成</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <scroll-view class='cart-items' scroll-y>
+    <checkbox-group bindchange="changeSelectedShops">
+      <view class="shop" wx:for="{{items}}" wx:key="index" wx:for-item="shop" wx:for-index="sindex">
+        <view class='border-b shop-name'>
+          <view class='flex'>
+            <checkbox value='{{sindex}}' class='shop-name-cb' checked='{{!!shop.checked}}' />
+            <view class='flex-con one-line'>
+              {{shop.shop_name}}
+            </view>
+            <view wx:if="{{shop.coupons && shop.coupons.length}}">
+              <view class='ib'>
+                <view data-coupons="{{shop.coupons}}" class='pickup-conpon ib' bindtap='pickConpon'>
+                  领卷
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <checkbox-group data-index="{{sindex}}" bindchange="changeSelectedItems">
+          <view class='item' wx:for="{{shop.items}}" wx:key="id">
+            <view class='flex'>
+              <view class='checkbox'>
+                <checkbox value='{{index}}' checked='{{!!item.checked}}' />
+              </view>
+              <view>
+                <image class='avatar' src='{{c.absUrl(item.cover,250)}}'></image>
+              </view>
+              <view class='item-info flex-con'>
+                <view class='title one-line'>{{item.title}}</view>
+                <view class='price-area'>
+                  <view class='unit'>￥</view>
+                  <view class='price'>{{item.price}}</view>
+                  <view class='market-price'>门市价￥{{item.market_price}}</view>
+                </view>
+                <view class='num' wx:if="{{!is_edit_mode}}">
+                  数量：x{{item.num}}
+                </view>
+                <view wx:else class='num-area'>
+                  <view class='minus' bindtap='minuNum' data-index="{{sindex+'-'+index}}">-</view>
+                  <input type='number' data-index="{{sindex+'-'+index}}" bindinput="changeNum" value='{{item.num}}' />
+                  <view class='plus' bindtap='plusNum' data-index="{{sindex+'-'+index}}">+</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </checkbox-group>
+      </view>
+    </checkbox-group>
+    <view class='hr24'></view>
+  </scroll-view>
+
+  <view id="footer" class="flex flex-stretch">
+    <block wx:if="{{!is_edit_mode}}">
+      <view class="flex-con text-left border-t border-b">
+        <view class='footer-left'>
+          <span class="fz26 text666">总价</span>
+          <span class="unit fz32">¥</span>
+          <span class="price" id="total_price">{{total_money}}</span>
+        </view>
+      </view>
+      <view class="btn2" bindtap='gobuyNow'>
+        购买
+      </view>
+    </block>
+    <block wx:else>
+      <view class='btn1 btn flex-con' bindtap='collectItem'>移入收藏夹</view>
+      <view class='btn0 btn flex-con' bindtap='rmBillItem'>删除</view>
+    </block>
+  </view>
+</block>
+<block wx:elif="{{loaded}}">
+  <view class='empty-area'>
+    <image src='https://app.mmtcapp.com/mmtc/imgs/emptycar.png'></image>
+    <view>购物车是空的哦，
+      <navigator url='/pages/item/index' class="red">快去逛逛吧></navigator>
+    </view>
+  </view>
+</block>
+<view class='masker' bindtap='closeMasker' hidden='{{hiddenMasker}}'>
+  <view class='masker-box' catchtap='tapMaskerBox'>
+    <view class='p30-outer'>
+      <view class='border-b p30-inner' wx:key="id" wx:for="{{coupons}}" wx:for-item="cc">
+        <view class='flex'>
+          <view class='flex-con'>
+            <view class='coupon-titles'>
+              <view class='coupon-money'>{{cc.price}}</view>
+              <view class='coupon-unit'>元</view>
+              <view class='coupon-title'>{{cc.title}}</view>
+            </view>
+            <view class='coupon-time'>
+              有效期：{{cc.valid_time}}
+            </view>
+          </view>
+          <view class='pick-btn' wx:if="{{cc.picked == 0}}" bindtap='pickCoupon' data-id="{{cc.id}}">
+            马上领取
+          </view>
+          <view wx:else class='pick-btn pick-btned'>
+            {{cc.errmsg||'已领取'}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <button class='close-btn' catchtap='closeMasker'>关闭</button>
+  </view>
+</view>

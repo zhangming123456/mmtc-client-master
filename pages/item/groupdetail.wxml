@@ -1,0 +1,32 @@
+<view class='hr24'></view>
+<view style='padding-top:30rpx;' class='p'>
+  本站商品信息均来自于合作方，其真实性、准确性和合法性由信息拥有者（合作方）负责。本站不提供任何保证，并不承担任何法律责任。
+</view>
+<view>
+  <view class='title'>1. 拼团玩法</view>
+  <image src='https://app.mmtcapp.com/mmtc/imgs/step1.png'></image>
+</view>
+<view>
+  <view class='title'>2. 拼团有效期 </view>
+  <view class='p'>
+    有效期为自开团时刻起的24小时内，但如果期间产品下架，则拼团有效期以平团产品的下架时间为准。
+  </view>
+</view>
+<view>
+  <view class='title'>3. 拼团失败</view>
+  <view>
+    超过成团有效期24小时，未达成相应参团人数的团，则该团失败。在团有效期24小时内，产品已被商家下架，若还未拼团成功，则该团失败。
+  </view>
+  <view class='p'>
+    高峰期间，同时支付的人过多，团人数有限制，美美天成以接收第三方支付信息时间先后为准，超出该团人数限制的部分用户则会拼团失败。
+  </view>
+</view>
+<view>
+    <view class='title'>4.等待成团中如何退款？</view>
+    <view class='p'>
+   超过成团有效期24小时，未达成相应参团人数的要求，则该团失败，系统会自动退款。
+   </view>
+</view>
+<view class='p last-p'>
+  注：拼团产品成功后不能退款。
+</view>

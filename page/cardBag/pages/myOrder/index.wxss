@@ -1,0 +1,195 @@
+.h20 {
+    height: 20rpx;
+    background-color: #F0F5F4;
+}
+
+view {
+    line-height: normal;
+}
+
+.t-shopName {
+    height: 80rpx;
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    display: flex;
+    align-items: center;
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+.t-name>image {
+    width: 36rpx;
+    height: 32rpx;
+    margin-right: 18rpx;
+}
+
+.t-name>text {
+    font-size: 28rpx;
+    color: #333333;
+}
+
+.t-shopName>image {
+    width: 15rpx;
+    height: 25rpx;
+}
+
+.t-cardContent {
+    padding: 30rpx 30rpx 50rpx;
+    background-color: #ffffff;
+    border-bottom: 1xp solid #e5e5e5;
+    display: flex;
+}
+
+.t-stroke {
+    width: 150rpx;
+    height: 150rpx;
+    border-radius: 4rpx;
+}
+
+.t-cardIntro {
+    margin-left: 30rpx;
+    width: 75%;
+}
+
+.t-cardName {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30rpx;
+    justify-content: space-between;
+}
+
+.t-cardName>text {
+    font-size: 32rpx;
+    color: #323232;
+}
+
+.t-cardName>view {
+    background: #04D3AF;
+    border-radius: 4rpx;
+    font-size: 25rpx;
+    color: #FFFFFF;
+    width: 60rpx;
+    height: 30rpx;
+    text-align: center;
+    line-height: 30rpx;
+}
+
+.t-cartPrice>text:last-child {
+    text-decoration: line-through;
+    font-size: 24rpx;
+    color: #666666;
+}
+
+.t-cartPrice>text:first-child {
+    font-size: 28rpx;
+    color: #FF6182;
+    margin-right: 20rpx;
+}
+
+.t-cardTime {
+    font-size: 24rpx;
+    color: #666666;
+}
+
+.t-cardState {
+    padding: 30rpx;
+    border-bottom: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
+    background-color: #ffffff;
+}
+
+.t-cardOrder {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40rpx;
+    justify-content: space-between;
+}
+
+.t-cardOrder>text {
+    font-weight: 500;
+    font-size: 28rpx;
+    color: #4A4A4A;
+}
+
+.t-cardOrder>view {
+    border: 1px solid #F5A623;
+    border-radius: 4rpx;
+    width: 80rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #F5A623;
+}
+
+.t-cardMoney {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 28rpx;
+    color: #4A4A4A;
+    margin-bottom: 10rpx;
+}
+
+.t-cardMoney:last-child {
+    margin-bottom: 0;
+}
+
+.t-order {
+    padding: 30rpx;
+    position: relative;
+    font-size: 28rpx;
+    color: #4A4A4A;
+}
+
+.t-order>view {
+    margin-bottom: 10rpx;
+}
+
+.t-order>view:last-child {
+    position: absolute;
+    border: 1px solid #F5A623;
+    border-radius: 4rpx;
+    width: 80rpx;
+    height: 40rpx;
+    font-size: 28rpx;
+    color: #F5A623;
+    right: 30rpx;
+    top: 40rpx;
+    line-height: 40rpx;
+    text-align: center;
+}
+
+.t-button {
+    display: flex;
+    padding: 30rpx;
+    position: absolute;
+    bottom: 30rpx;
+}
+
+.t-button>view {
+    width: 330rpx;
+    height: 80rpx;
+    border-radius: 8rpx;
+    line-height: 80rpx;
+    text-align: center;
+    margin-right: 30rpx;
+    font-size: 32rpx;
+}
+
+.t-refund {
+    border: 1px solid #FEB702;
+    color: #FEB702;
+}
+
+.t-refund2 {
+    border: 1px solid #999999;
+    color: #999999;
+}
+
+.t-button>view:last-child {
+    background: #FEB702;
+    color: #ffffff;
+}

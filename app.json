@@ -1,0 +1,140 @@
+{
+  "pages": [
+    "page/tabBar/home/index",
+    "page/tabBar/near/index",
+    "pages/index/index",
+    "pages/mine/index",
+    "pages/chat/index",
+    "pages/msg/index",
+    "pages/activity/wallet",
+    "pages/activity/index",
+    "pages/mine/aboutus",
+    "pages/conpons/platform",
+    "pages/order/detail",
+    "pages/cases/detail",
+    "pages/home/detail",
+    "pages/item/detail",
+    "pages/other/discount",
+    "pages/other/discountlist",
+    "pages/item/groupdetail",
+    "pages/advise/index",
+    "pages/mine/mynotes",
+    "pages/group/shared",
+    "pages/index/items",
+    "pages/group/orderdetail",
+    "pages/group/mine",
+    "pages/group/detail",
+    "pages/index/near",
+    "pages/loc/search",
+    "pages/loc/searchResult",
+    "pages/order/all",
+    "pages/car/index",
+    "pages/home/index",
+    "pages/page/index",
+    "pages/conpons/mine",
+    "pages/msg/detail",
+    "pages/loc/search2",
+    "pages/loc/index",
+    "pages/order/buyDetail",
+    "pages/car/payOrder",
+    "pages/conpons/index",
+    "pages/onlineBuy/index",
+    "pages/onlineBuy/step2",
+    "pages/technician/detail",
+    "pages/technician/index",
+    "pages/order/note",
+    "pages/order/score",
+    "pages/mine/footer",
+    "pages/mine/collection",
+    "pages/car/paySuccess",
+    "pages/item/index",
+    "pages/dongtai/index",
+    "pages/cases/index",
+    "pages/order/orderDetails/index",
+    "pages/onlineBuy/remarks/index",
+    "page/login/index"
+  ],
+  "subPackages": [
+    {
+      "root": "pages/newPages",
+      "pages": [
+        "pages/mmtcTabList/index"
+      ]
+    },
+    {
+      "root": "page/cardBag",
+      "pages": [
+        "pages/setDetails/index",
+        "pages/setBuy/index",
+        "pages/myOrder/index",
+        "pages/myCard/index",
+        "pages/cardCode/index",
+        "pages/record/index"
+      ]
+    },
+    {
+      "root": "page/userLogin",
+      "pages": [
+        "pages/getUserInfo/index"
+      ]
+    },
+    {
+      "root": "page/home",
+      "pages": [
+        "pages/search/index",
+        "pages/searchResult/index"
+      ]
+    },
+    {
+      "root": "page/public",
+      "pages": [
+        "pages/location/index",
+        "pages/locSearch/index"
+      ]
+    }
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "美美天成",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#e61b5a",
+    "backgroundColor": "#fffcfc",
+    "position": "bottom",
+    "borderStyle": "black",
+    "list": [
+      {
+        "selectedIconPath": "image/tabBar/home.png",
+        "iconPath": "image/tabBar/home_active.png",
+        "pagePath": "page/tabBar/home/index",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "image/tabBar/near.png",
+        "iconPath": "image/tabBar/near_active.png",
+        "pagePath": "page/tabBar/near/index",
+        "text": "附近"
+      },
+      {
+        "selectedIconPath": "image/tabBar/order.png",
+        "iconPath": "image/tabBar/order_active.png",
+        "pagePath": "pages/order/all",
+        "text": "订单"
+      },
+      {
+        "selectedIconPath": "image/tabBar/mine.png",
+        "iconPath": "image/tabBar/mine_active.png",
+        "pagePath": "pages/mine/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  }
+}

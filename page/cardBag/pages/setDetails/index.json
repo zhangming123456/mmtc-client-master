@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "套卡详情",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "i-message": "../../../../lib/iview/message/index",
+    "i-toast": "../../../../lib/iview/toast/index",
+    "zan-popup": "../../../../lib/zanui/popup/index"
+  }
+}

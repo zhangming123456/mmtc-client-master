@@ -1,0 +1,22 @@
+.star{
+  width: 32rpx;
+	height: 31rpx;
+  margin-right:9rpx;
+  
+}
+.avatar{
+  width: 112rpx;
+	height: 112rpx;
+	border-radius: 55rpx;
+}
+.info{
+  padding-left: 32rpx;
+}
+
+.score-text{
+   position: relative;
+   top:3rpx;
+}
+page{
+   background-color: #f4f4f4; 
+}

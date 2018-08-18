@@ -1,0 +1,89 @@
+@import "../../style/loc/index.wxss";
+
+.p1 {
+  padding: 15rpx 30rpx;
+  background-color: #fff;
+}
+
+.arrow {
+  width: 25rpx;
+  height: 14rpx;
+}
+
+.addr {
+  font-size: 32rpx;
+  color: #282828;
+  white-space: nowrap;
+  padding-right: 29rpx;
+}
+
+.addr image {
+  margin-left: 10rpx;
+}
+
+.search {
+  background-color: rgba(0, 0, 0, 0.08);
+  border-radius: 29rpx;
+  height: 58rpx;
+  line-height: 58rpx;
+  width: 100%;
+  font-size: 24rpx;
+  color: #999;
+  box-sizing: border-box;
+  padding-left: 30rpx;
+}
+
+.addr-item {
+  font-size: 32rpx;
+  color: #282828;
+  padding: 29rpx;
+  background-color: #fff;
+}
+
+.title {
+  height: 64rpx;
+  line-height: 64rpx;
+  font-size: 26rpx;
+  color: #999;
+  text-align: left;
+  padding-left: 29rpx;
+}
+
+.locred {
+  width: 18rpx;
+  vertical-align: middle;
+  margin-right: 13rpx;
+  position: relative;
+  top: -2rpx;
+  height: 24rpx;
+}
+
+.reloc {
+  font-size: 26rpx;
+  color: #ff538b;
+}
+
+page {
+  background-color: #f4f4f4;
+}
+
+.clearBtn {
+  text-align: right;
+  font-size: 26rpx;
+  color: #999;
+  padding-top: 29rpx;
+  padding-right: 30rpx;
+}
+
+
+.loading-img{
+  width: 32rpx;
+  height: 32rpx;
+  vertical-align: middle;
+}
+
+.addr-item-text{
+  height: 32rpx;
+  line-height: 32rpx;
+  font-size:32rpx;
+}

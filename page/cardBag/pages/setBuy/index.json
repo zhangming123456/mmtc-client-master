@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "确认订单",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "i-message": "../../../../lib/iview/message/index",
+    "i-toast": "../../../../lib/iview/toast/index",
+    "wxc-toast": "../../../../lib/minui/wxc-toast/dist/index",
+    "wxc-popup": "../../../../lib/minui/wxc-popup/dist/index",
+    "wxc-counter": "../../../../lib/minui/wxc-counter/dist/index"
+  }
+}

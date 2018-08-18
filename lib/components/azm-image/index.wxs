@@ -1,0 +1,26 @@
+module.exports.absUrl = function (url, imgw) {
+    if (url) {
+        var reg = getRegExp('^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$', 'i'),
+            reg2 = getRegExp('^(wxftp://)', 'i')
+        if (reg.test(url)) {
+            return url;
+        } else if (reg2.test(url)) {
+            return url.replace(reg2, '../../../')
+        }
+        if (imgw) {
+            if (typeof imgw === 'boolean') {
+                if (url.indexOf('?') === -1) {
+                    url += '?'
+                } else {
+                    url += '&'
+                }
+                url += '_t=' + getDate().getTime();
+            } else {
+                url += '!' + imgw + 'x' + imgw;
+            }
+        }
+        return baseUrl + url;
+    } else {
+        return 'https://app.mmtcapp.com/mmtch5/images/imageErr.png';
+    }
+};

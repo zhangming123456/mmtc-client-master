@@ -1,0 +1,105 @@
+.bg-white {
+  padding-bottom: 1rpx;
+  padding-top: 31rpx;
+}
+
+.item {
+  display: inline-block;
+  text-align: left;
+  width: 675rpx;
+  height: 286rpx;
+
+  margin-bottom: 25rpx;
+  color: white;
+  position: relative;
+}
+
+.bg-img {
+  position: absolute;
+  width: 675rpx;
+  height: 286rpx;
+}
+
+page {
+  text-align: center;
+  background-color: #f4f4f4;
+}
+
+.item-info-wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+.yuan-area {
+  font-size: 26rpx;
+  margin-top: 35rpx;
+}
+
+.yuan-area > view {
+  display: inline-block;
+}
+
+.unit {
+  font-size: 28rpx;
+}
+
+.item-info {
+  padding-left: 46rpx;
+  position: relative;
+}
+
+.yuan {
+  font-size: 98rpx;
+}
+.title{
+  	font-size: 25rpx;
+  padding-bottom: 13rpx;
+  padding-top: 13rpx;
+}
+
+.title2{
+  font-size: 24rpx;
+}
+.time{
+  font-size: 25rpx;
+}
+
+
+.touse{
+  width: 210rpx;
+  font-size: 32rpx;
+  text-align: center;
+  height: 280rpx;
+  line-height: 280rpx;
+}
+
+.disabled{
+  opacity: 0.5;
+}
+
+.avatar{
+  width: 42rpx;
+	height: 37rpx;
+  margin-right:5rpx;
+  vertical-align: baseline;
+  position: relative;
+  top:5rpx;
+}
+
+.shop-name{
+  	font-size: 25rpx;    
+    white-space: nowrap;
+}
+
+.outdated{
+  width: 209rpx;
+	height: 157rpx;
+  position: absolute;
+  right:145rpx;
+  top:62rpx;
+  opacity: 0.8;
+
+}

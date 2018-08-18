@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "附近",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "i-message": "../../../lib/iview/message/index",
+    "i-toast": "../../../lib/iview/toast/index",
+    "azm-location": "../../../lib/components/azm-location/index",
+    "azm-more": "../../../lib/components/azm-more/index",
+    "azm-image": "../../../lib/components/azm-image/index",
+    "azm-gotop": "../../../lib/components/azm-gotop/index"
+  }
+}

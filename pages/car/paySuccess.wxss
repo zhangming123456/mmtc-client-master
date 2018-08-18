@@ -1,0 +1,13 @@
+.avatar{
+  	width: 140rpx;
+	  height: 140rpx;
+    margin-bottom: 30rpx;
+}
+
+.panel-no-margin2{
+  padding: 50rpx;
+}
+
+page{
+  background-color:#f4f4f4;
+}

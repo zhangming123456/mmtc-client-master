@@ -1,0 +1,11 @@
+.azm-goToTop {
+  position: fixed;
+  width: 90rpx;
+  height: 90rpx;
+  right: 30rpx;
+  bottom: 30rpx;
+}
+.azm-goToTop image {
+  width: inherit;
+  height: inherit;
+}

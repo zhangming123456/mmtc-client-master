@@ -1,0 +1,34 @@
+@import "../../../../style/cardBag/myCard.wxss";
+.t-card {
+    background: linear-gradient(-47deg, #FE561C 0%, #FFBB01 100%);
+    box-shadow: 0 5rpx 9rpx 0 rgba(0, 0, 0, 0.11);
+    border-radius: 40rpx;
+    width: 690rpx;
+    height: 353rpx;
+    margin: 30rpx;
+    padding: 30rpx 30rpx 0;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+}
+
+.t-card:last-child {
+    margin-bottom: 90rpx;
+}
+
+.t-bottom {
+    width: 100%;
+    background: #FFFFFF;
+    position: fixed;
+    bottom: 0;
+    height: 90rpx;
+    border-top: 1px solid #E5E5E5;
+    font-size: 28rpx;
+    color: #4A4A4A;
+    line-height: 90rpx;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+

@@ -1,0 +1,14 @@
+<view style='padding-top:50rpx;padding-left:41rpx;padding-right:41rpx;line-height: 43rpx;' class='fz28 text999'>
+    您好，请使用手机绑定登录，以便我们为您提供更好发服务~
+</view>
+<view class='btns'>
+    <button class='btn-bywx' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">微信立即登录</button>
+
+    <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取用户信息登入</button>
+    <!--<view class='btn-byphone' bindtap='showPhoneWin'>-->
+    <!--手机验证登录-->
+    <!--</view>-->
+    <!--<view class='btn-byphone' bindtgetUserInfoogin'>-->
+    <!--账号密码登录-->
+    <!--</view>-->
+</view>

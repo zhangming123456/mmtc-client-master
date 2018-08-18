@@ -1,0 +1,37 @@
+<view class='share-canvas' bindlongpress="bindDrawImage" bindtouchend="touchend">
+    <image class="bgImage" src="{{bgImage.path || imagePath}}" mode="widthFix" style="width: 100%;"
+           catchload="imageLoad" data-key="bgImage"></image>
+    <image class="qrcodeImage" src="{{qrCodeImage.path}}" mode="widthFix" catchload="imageLoad"
+           data-key="qrCodeImage"></image>
+    <button size="mini" plain class="azm-btn" hover-class="none" catchtap="bindDrawImage">
+        <text class="iconfont icon-xiazai"></text>
+        <text decode>&nbsp;点击生成分享海报</text>
+    </button>
+</view>
+<view class="canvas_box">
+    <canvas canvas-id='ctx' class="hover_canvas" style="{{ctxStyle}}" disable-scroll="true"
+            bindlongpress="bindDrawImage" binderror="bindCanvasError"></canvas>
+</view>
+<!--toast提示框-->
+<wxc-toast id="azm_wxc_toast" is-show="{{$azmToast.show}}" text="{{$azmToast.text}}" text="{{$azmToast.text}}"
+           icon="{{$azmToast.icon}}" src="{{$azmToast.src}}" icon-color="{{$azmToast.icon_color}}"
+           duration="{{$azmToast.duration}}" bindsuccess="bindWxcToastSuccess"></wxc-toast>
+
+<!--wxc-popup保存海报弹窗-->
+<wxc-popup id="posterPopup" animation-mode="bottom" align="center" status="hide" locked="true">
+    <view class="popup__content">
+        <view style="width: {{winWidth*0.7}}px;">
+            <view class="content">
+                <image src="{{tempFilePath}}" mode="widthFix"
+                       catchtap="openImage"></image>
+            </view>
+            <view class="p">
+                <text>{{posterPopup_text}}</text>
+            </view>
+            <view class="footer">
+                <button size="mini" plain class="azm-btn" hover-class="none" catchtap="binTogglePosterPopup">我知道了
+                </button>
+            </view>
+        </view>
+    </view>
+</wxc-popup>

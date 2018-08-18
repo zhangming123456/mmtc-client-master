@@ -1,0 +1,122 @@
+.big-cover{
+  width: 100%;
+  height:300rpx;
+}
+
+.categories {
+  white-space: nowrap;
+  font-size: 32rpx;
+  color: #282828;
+  background-color: #fff;
+  padding-left: 55rpx;
+  padding-right: 55rpx;
+}
+
+.category-item {
+  display: inline-block;
+  padding: 32rpx 0;
+  background-color: #fff;
+  margin-right: 65rpx;
+}
+
+
+.category-item2 {
+  display: inline-block;
+  padding: 32rpx 0;
+  background-color: #fff;
+  /* margin-right: 65rpx; */
+  width: 50%;
+  text-align: center;
+}
+
+
+.categories .active {
+  color: #ff538b;
+  position: relative;
+}
+
+.categories .active:after {
+  height: 4rpx;
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ff538b;
+}
+
+.box3-item {
+  float: left;
+  width: 375rpx;
+  position: relative;
+  border-bottom: 1px #eee solid;
+  box-sizing: border-box;
+  padding: 30rpx 13rpx 30rpx 30rpx;
+}
+
+.box3-item:nth-child(2n) {
+  padding-left: 13rpx;
+}
+
+.box3-item:last-child:nth-child(2n+1) {
+  border-bottom: none;
+}
+
+.cover {
+  width: 332rpx;
+  height: 332rpx;
+}
+
+.box3-item-info {
+  padding-top: 19rpx;
+}
+
+.box3-item-title {
+  font-size: 32rpx;
+  color: #282828;
+  padding-bottom: 20rpx;
+}
+
+.box3-item-desc {
+  font-size: 24rpx;
+  color: #999;
+  padding-bottom: 19rpx;
+}
+
+.box3-item-num {
+  font-size: 24rpx;
+  color: #999;
+  padding-bottom: 27rpx;
+}
+
+.price {
+  font-size: 24rpx;
+  color: #ff538b;
+  display: inline;
+}
+
+.price span {
+  font-size: 45rpx;
+}
+
+.market-price {
+  font-size: 24rpx;
+  color: #999;
+  display: inline;
+  text-decoration: line-through;
+  margin-left: 10rpx;
+}
+
+.box3-group-num {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 6rpx 8rpx;
+  color: white;
+  border-radius: 0px 0px 5px 0px;
+  background-color: #fd0f5d;
+  font-size: 20rpx;
+}
+
+ 

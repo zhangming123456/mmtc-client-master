@@ -1,0 +1,30 @@
+<wxs src="../../utils/common.wxs" module="c" />
+<view class="data-group" wx:for="{{items}}" wx:key="date" wx:for-item="item">
+  <view class='hr24'></view>
+  <view class="border-b panel-no-margin fz32 text666 bg-white">
+    {{item.date}}
+  </view>
+  <view class="panel-no-margin bg-white border-b" wx:for="{{item.rows}}" wx:key="id" wx:for-item="cc">
+    <view class="flex" data-id="{{cc.id}}" bindtap='showItemDetail'>
+      <view>
+        <image src="{{c.absUrl(cc.cover,250)}}" alt="" class="goods-img2"></image>
+      </view>
+      <view class="flex-con">
+        <view class='pl30'>
+          <view class="fz32 text282828 one-line">{{cc.title}}</view>
+          <view class="fz24 text999 pt20">{{cc.shop_name}}</view>
+          <view class="fz24 text999 pt15">已售:{{cc.sell_count}}</view>
+          <view class="flex mt15">
+            <view class="flex-con">
+              <span class="unit">￥</span>
+              <span class="price">{{cc.price}}</span>
+              <span class="old-price">￥{{cc.market_price}}</span>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<include src="../common/more.wxml"></include>

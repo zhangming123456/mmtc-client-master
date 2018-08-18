@@ -1,0 +1,76 @@
+<wxs src="../../utils/common.wxs" module="c" />
+<wxs module="f">
+  module.exports = {
+    num2arr: function(strs) {
+      if (strs) {
+        strs = strs.split(',');
+        if (strs.length > 3) {
+          strs = strs.slice(0, 3);
+        }
+        return strs;
+      }
+      return [];
+    },
+    picCount: function(strs) {
+      if (strs) {
+        strs = strs.split(',');
+        if (strs.length > 3) {
+          return 3;
+        }
+        return strs.length;
+      }
+      return 0;
+    }
+  }
+</wxs>
+<view class='empty-area' wx:if="{{isEmpty}}">
+  <image src='https://app.mmtcapp.com/mmtc/imgs/empty@2x.png' class=''></image>
+  <view class='text-center'>
+    ops，这里空空如也，逛逛其他的吧~
+  </view>
+</view>
+<view wx:key="id" wx:for="{{data}}" class="note-item">
+    <view class="p30">
+      <view class="flex">
+        <view>
+          <image class="avatar" src="{{c.absUrl(item.avatar,200) || 'https://app.mmtcapp.com/mmtc/imgs/default.png'}}"></image>
+        </view>
+        <view class="flex-con">
+          <view class="fz32 text282828">{{item.nickname}}</view>
+          <view class="text999 fz24 pt10">{{item.create_time}}</view>
+        </view>
+      </view>
+      <navigator url="/pages/cases/detail?id={{item.id}}&type=2" hover-class="none">
+        <block wx:if="{{item.img_src}}">
+          <view class="pic-list{{f.picCount(item.img_src)}}">
+            <image src='{{c.absUrl(pic,400)}}' wx:for="{{f.num2arr(item.img_src)}}" wx:key="*this" wx:for-item="pic"></image>
+          </view>
+        </block>
+        <view class="fz28 content two-line">
+          {{item.content}}
+        </view>
+      </navigator>
+      <view wx:if="{{item.item_id && item.item_id > 0}}" class="pt20">
+        <image src="https://app.mmtcapp.com/mmtc/imgs/clz@2x.png" class="img-sm"></image>
+        <view class="color-red fz26 ib pl10">{{item.item_title}}</view>
+      </view>
+    </view>
+    <view class="flex border-t toolbar-mini text666 fz24 text-center bg-white border-b">
+      <view class="flex-con border-r">
+        <image src="https://app.mmtcapp.com/mmtc/imgs/eye@2x.png" alt="" class='view-img'></image>
+        浏览 {{item.viewed_count}}
+      </view>
+      <view class="flex-con border-r {{c.zanedClass(item)}}" catchtap='zan' data-id="{{item.id}}">
+        <image src="https://app.mmtcapp.com/mmtc/imgs/zan{{item.zaned?'1':''}}@2x.png" alt="" class='zan-img'></image>
+        点赞 {{item.zan_count}}
+      </view>
+      <view class="flex-con" tapmode="hover">
+        <image src="https://app.mmtcapp.com/mmtc/imgs/msg@2x.png" alt="" class='comment-img'></image>
+        评论 {{item.comment_count}}
+      </view>
+    </view>
+  </view>
+  <view class='loading-more'>
+    <view wx:if="{{loadingMore}}">加载更多...</view>
+    <view wx:elif="{{!hasMore}}">没有更多了</view>
+  </view>

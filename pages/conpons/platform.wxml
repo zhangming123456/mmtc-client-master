@@ -1,0 +1,81 @@
+<wxs src="../../utils/common.wxs" module="c" />
+<wxs module="f">
+module.exports = {
+    percent:function(count,used_count,is_used){
+        if(count > 0){            
+           var rt = (count-used_count)/count;
+           if(rt < 0){
+              rt = 0;
+           }
+           is_used = is_used || 0;
+           if(is_used){
+              rt =  1 - rt;
+           }
+           rt = rt*100;
+           return Math.floor(rt);
+        }
+        return 0;        
+    }
+};
+</wxs>
+<view class="item" wx:for="{{items}}" wx:key="id">
+  <image src='https://app.mmtcapp.com/mmtc/imgs/{{item.errmsg?"picked":"notpicked"}}.png' class='bg-img'></image>
+  <view class='flex item-info-wrap'>
+    <view class='flex-con'>
+      <view class='item-info'>
+        <view class='shop-name' bindtap='touse' data-item='{{item}}'>
+          <image wx:if="{{item.shop_id>0}}" src='https://app.mmtcapp.com/mmtc/imgs/shop1.png' class='avatar'></image>
+          <image wx:else src='https://app.mmtcapp.com/mmtc/imgs/mei.png' class='avatar-mei'></image>
+          {{item.shop_name}}
+          <view class='distance' wx:if="{{item.distance}}">({{item.distance}})</view>        
+        </view>
+        <view class='flex'>
+          <view class='shop-avatar' bindtap='touse' data-item='{{item}}'>
+            <image wx:if="{{item.shop_id==0}}" src='https://app.mmtcapp.com/mmtc/imgs/mei.png' class='is-mei'></image>
+            <image wx:else src='{{c.absUrl(item.avatar,150)}}'></image>
+          </view>
+          <view class='flex-con'>
+            <view class='flex'>
+              <view class='yuan-area'>
+                <view class='unit'>￥</view>
+                <view class='yuan'>{{item.price}}</view>
+              </view>
+              <view class='titles'>
+                <view class='title'>
+                  {{item.title}}
+                </view>
+                <view class='title2'>
+                  ({{item.title2}})
+                </view>
+              </view>
+            </view>
+            <view class='time'>
+              有效期限：{{item.valid_time}}
+            </view>
+          </view>
+        </view>
+
+      </view>
+    </view>
+    <view class='right-btns'>
+      <block wx:if="{{!!item.errmsg}}">
+        <image src='https://app.mmtcapp.com/mmtc/imgs/pickedflag.png' class='outdated'></image>
+        <view class='touse' bindtap='touse' data-item='{{item}}'>
+          立即使用
+        </view>
+      </block>
+      <block wx:else>
+        <view class='progress-area'>
+          <view class='progress-bar'>
+            <view class='progress-bar-inner' style='width:{{f.percent(item.count,item.used_count,1)}}%'></view>
+          </view>
+          <view class='progress-txt'>剩余{{f.percent(item.count,item.used_count)}}%</view>
+        </view>
+        <view class='touse' bindtap='topick' data-item='{{item}}'>
+          立即领取
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+<include src="../common/more.wxml"></include>

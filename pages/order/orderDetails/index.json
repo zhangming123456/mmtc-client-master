@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "我的订单",
+  "navigationBarBackgroundColor": "#16d6c3",
+  "usingComponents": {
+    "azm-image": "../../../../lib/components/azm-image/index",
+    "azm-more": "../../../../lib/components/azm-more/index",
+    "azm-gotop": "../../../../lib/components/azm-gotop/index"
+  }
+}

@@ -1,0 +1,33 @@
+<view>
+
+    <!-- 未消费状态 -->
+    <view class="t-cardCode">
+        <view class="t-shopName">
+            <text>{{pwdList.title}}</text>
+            <text>{{pwdList.is_used==0?'待消费':'已消费'}}</text>
+        </view>
+
+        <view class="t-code">
+            <image src="{{qrcode}}"></image>
+        </view>
+        <!-- 已消费状态 -->
+        <view class="t-code" wx:if="{{pwdList.is_used==1}}">
+            <image src="../https://app.mmtcapp.com/mmtc/imgs/Cord2.png"></image>
+        </view>
+
+        <view class="t-xfCode">
+            <text>消费码：</text>
+            <text>{{pwdList.pwd}}</text>
+        </view>
+        <!-- 已消费状态 -->
+        <block class="t-xfCode2" wx:if="{{pwdList.is_used==1}}">
+            消费码：•••• •••• ••••
+        </block>
+        <view class="t-order">订单号：{{pwdList.order_no}}</view>
+
+        <!-- 已消费状态 -->
+        <view wx:if="{{pwdList.is_used==1}}" class="t-order2">订单号：{{pwdList.order_no}}</view>
+    </view>
+
+
+</view>

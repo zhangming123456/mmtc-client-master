@@ -1,0 +1,64 @@
+.user-hold {
+    position: relative;
+    > view.exit-btn {
+        position: absolute;
+        right: 40*1rpx;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 130*1rpx;
+        height: 43*1rpx;
+        line-height: 43*1rpx;
+        border: solid 1*1rpx #999;
+        border-radius: 21*1rpx;
+        font-size: 24*1rpx;
+        text-align: center;
+        color: #999;
+        margin-right: 10*1rpx;
+    }
+    button.azm-userInfo_box::after {
+        border: 0
+    }
+    button.azm-userInfo_box::before {
+        border: 0
+    }
+    .azm-userInfo_box {
+        display: block;
+        background-color: transparent;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        padding-left: 0;
+        padding-right: 0;
+        box-sizing: content-box;
+        text-align: left;
+        text-decoration: none;
+        line-height: 1;
+        border-radius: 0;
+        -webkit-tap-highlight-color: transparent;
+        overflow: hidden;
+        color: inherit;
+        border: none;
+        .nickname {
+            font-size: 25*1rpx;
+            color: #000;
+            margin-top: 27*1rpx;
+        }
+        .nologin {
+            font-size: 28*1rpx;
+            font-weight: normal;
+            font-stretch: normal;
+            line-height: 36*1rpx;
+            letter-spacing: 0px;
+            padding-top: 22*1rpx;
+            color: #999;
+        }
+    }
+}
+
+button.azm-cell__btn {
+    text-align: left;
+    border: none;
+    line-height: 1;
+    border-radius: 0;
+    padding: 0;
+}

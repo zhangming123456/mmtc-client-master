@@ -1,0 +1,39 @@
+.holder-view {
+  padding: 30rpx;
+}
+
+.content {
+  width: 100%;
+  display: block;
+  border-radius: 10rpx;
+  border: solid 1px #eee;
+  padding:30rpx;
+  height: 285rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  color: #999;
+  line-height: 2em;
+}
+
+.input{
+  height: 100%;
+  width: 100%;
+}
+
+.contact {
+  border-radius: 10rpx;
+  border: solid 1px #eee;
+  font-size: 28rpx;
+  color: #999;
+  padding: 29rpx 20rpx;
+  margin: 30rpx 0 60rpx 0;
+}
+
+.sure-btn{
+  height: 82rpx;
+  line-height: 82rpx;
+  color:white;
+  font-size: 32rpx;
+	background-color: #17d6c4;
+	border-radius: 10rpx;
+}

@@ -1,0 +1,75 @@
+.weixin {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.tag {
+  width: 32rpx;
+  height: 32rpx;
+  display: inline-block;
+  border: 1rpx solid #999;
+  border-radius: 50%;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.tag.selected {
+  border-color: #ff538b;
+  position: relative;
+  text-align: center;
+}
+
+.tag.selected:after {
+  background-color: #ff538b;
+  width: 16rpx;
+  height: 16rpx;
+  display: inline-block;
+  content: '';
+  position: absolute;
+  left:8rpx;
+  top:8rpx;
+  box-sizing: border-box;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.bg {
+  height: 374rpx;
+  background-color: #16d6c3;
+  color: white;
+}
+
+#money {
+  font-size: 60rpx;
+}
+
+.money-area {
+  padding-top: 112rpx;
+}
+
+.pt02 {
+  padding-top: 40rpx;
+}
+
+page {
+  background-color: #f4f4f4;
+}
+
+.btn2 {
+  height: 112rpx;
+  background-color: #16d6c3;
+  text-align: center;
+  line-height: 112rpx;
+  font-size: 32rpx;
+  color: #fff;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+
+.tag-img{
+  width: 32rpx;
+  height: 32rpx;
+}

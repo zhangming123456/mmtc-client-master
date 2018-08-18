@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "美美天成",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 200,
+  "usingComponents": {
+    "azm-location": "../../lib/components/azm-location/index",
+    "azm-more": "../../lib/components/azm-more/index",
+    "azm-image": "../../lib/components/azm-image/index",
+    "azm-gotop": "../../lib/components/azm-gotop/index"
+  }
+}

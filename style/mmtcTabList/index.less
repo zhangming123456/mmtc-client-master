@@ -1,0 +1,87 @@
+#azm-mmtcTabList {
+    .azm-scroll {
+        position: relative;
+        .azm-banner {
+            position: relative;
+            width: 100%;
+            image {
+                 width: inherit;
+             }
+            .azm-address {
+                position: absolute;
+                box-sizing: border-box;
+                top: 20*1rpx;
+                left: 30*1rpx;
+                width: 327*1rpx;
+                height: 60*1rpx;
+                line-height: 60*1rpx;
+                background-color: rgba(0, 0, 0, 0.38);
+                border-radius: 29*1rpx;
+                padding-left: 52*1rpx;
+                padding-right: 45*1rpx;
+                color: #fff;
+                text {
+                    color: #fff;
+                    font-size: 28*1rpx;
+                    font-family: PingFang-SC-Medium;
+                    font-weight: normal;
+                    font-stretch: normal;
+                    letter-spacing: 0;
+                }
+                .azm-icon {
+                    position: absolute;
+                    top: 50%;
+                    &.left {
+                        left: 26*1rpx;
+                        transform: translate(-50%, -50%);
+                    }
+                    &.right {
+                        right: 0;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+        }
+        .azm-content_box {
+            padding-left: 30*1rpx;
+            padding-right: 30*1rpx;
+        }
+        .azm-content {
+            image {
+                height: 336*1rpx;
+            }
+            .azm-col {
+                box-sizing: border-box;
+                font-size: 24*1rpx;
+                padding-bottom: 40*1rpx;
+                &:nth-child(2n+1) {
+                    padding-right: 9*1rpx;
+                }
+                &:nth-child(2n) {
+                    padding-left: 9*1rpx;
+                }
+                .title {
+                    margin-top: 19*1rpx;
+                    font-size: 28*1rpx;
+                    color: #282828;
+                }
+                .stores {
+                    margin-top: 19*1rpx;
+                    color: #999;
+                }
+                .money {
+                    margin-top: 34*1rpx;
+                    font-size: 24*1rpx;
+                    color: #ff538b;
+                    .money-center {
+                        font-size: 36*1rpx;
+                    }
+                    .money-right {
+                        color: #999;
+                    }
+                }
+            }
+        }
+    }
+
+}

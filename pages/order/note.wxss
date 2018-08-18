@@ -1,0 +1,72 @@
+.p1 {
+  padding: 36rpx 30rpx;
+}
+
+.gt {
+  width: 9rpx;
+  height: 18rpx;
+}
+
+.title {
+  font-size: 32rpx;
+  color: #666;
+}
+
+.p2 {
+  padding: 29rpx 30rpx;
+}
+
+.p3 image {
+  width: 216rpx;
+  height: 216rpx;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.p3 image:nth-child(3n) {
+  margin-right: 0;
+}
+
+textarea {
+  font-size: 24rpx;
+  height: 49rpx;
+  width: 100%;
+}
+
+.p3 {
+  padding: 0 31rpx 10rpx 31rpx;
+}
+
+page {
+  background-color: #f4f4f4;
+}
+
+.gt {
+  margin-left: 17rpx;
+}
+
+.line-blue {
+  width: 6rpx;
+  height: 30rpx;
+  background-color: #ff538b;
+  border-radius: 3rpx;
+  vertical-align: middle;
+  display: inline-block;
+  position: relative;
+  top: -0.5rpx;
+  margin-right: 16rpx;
+}
+
+.footer {
+  height: 98rpx;
+  line-height: 98rpx;
+  text-align: center;
+  background-color: #ff538b;
+  font-size: 32rpx;
+  color: #fff;
+  position: fixed;
+  left:0;
+  right:0;
+  letter-spacing: 3rpx;
+  bottom:0;
+}

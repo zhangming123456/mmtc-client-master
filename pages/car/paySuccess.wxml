@@ -1,0 +1,15 @@
+<view class="panel-no-margin2 bg-white text-center border-b">
+    <image src="https://app.mmtcapp.com/mmtc/imgs/ok@2x.png" class='avatar' alt=""></image>
+    <view class="text666 fz28">
+        订单支付成功，欢迎下次光临！请前往我的-订单中查看
+    </view>
+</view>
+<!-- <view class="hr24"></view>
+<view class="panel-no-margin bg-white border-b border-t">
+    <view class="flex">
+        <view class="fz32 text282828 flex-con">
+            再逛逛其他项目
+        </view>
+        <view class="icon-next"></view>
+    </view>
+</view> -->
