@@ -2,6 +2,6 @@
 @import "./lib/icons/iconfont.wxss";
 @import "./lib/weui/weui.wxss";
 @import "./lib/zanui/index.wxss";
-/*@import "./wxparse/wxParse.wxss";*/
+/*@import "./wxParse/wxParse.wxss";*/
 @import "./style/common.wxss";
 @import "./style/app.wxss";

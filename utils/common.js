@@ -258,7 +258,7 @@ c.getLocation = function (callback, onFail) {
         success: function (res) {
             callback(res);
         },
-        fail(){
+        fail () {
             onFail && onFail()
         }
     });

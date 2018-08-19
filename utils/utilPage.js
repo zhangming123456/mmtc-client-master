@@ -10,7 +10,7 @@ const app = getApp(),
     config = require('./config'),
     ApiService = require('./ApiService');
 const {$Toast, $Message} = require('../lib/iview/base/index');
-// let wxParse = require('../wxparse/wxParse');
+// let wxParse = require('../wxParse/wxParse');
 
 let __imageUploadKey = 'cover';
 let ImageUploadCount = 0;
@@ -33,7 +33,8 @@ const events = {
                 console.log(res, '+++++++++++++++++++系统信息+++++++++++++++++++');
                 that.data.systemInfo = res;
                 that.setData({
-                    SDKVersion: res.SDKVersion.split('.')
+                    SDKVersion: res.SDKVersion.split('.'),
+                    noteZan: wx.getStorageSync('noteZan')
                 })
             }
         });
@@ -78,10 +79,10 @@ const events = {
                 let authSetting = res.authSetting;
                 wx.setStorageSync('authSetting', authSetting);
             },
-            fail(){
+            fail () {
 
             },
-            complete(){
+            complete () {
                 let authSetting = wx.getStorageSync('authSetting');
                 if (that.route === 'page/me/pages/setting/index') {
                     that.setData({
@@ -341,7 +342,7 @@ const events = {
         wxc_toastHideToast && wxc_toastHideToast();
     },
 
-    querySelector(el){
+    querySelector (el) {
         if (!el) return;
         let node = null;
         return wx.createSelectorQuery().select(el);
@@ -401,7 +402,7 @@ const events = {
                     try {
                         data = JSON.parse(data);
                         let images = that.data[__imageUploadKey];
-                        if (+data.status !== 1)throw {message: data.info};
+                        if (+data.status !== 1) throw {message: data.info};
                         if (count > 1) {
                             if (jude.isArray(images) && images.length) {
                                 setData[__imageUploadKey] = images
@@ -562,7 +563,7 @@ const events = {
     /**
      * 开发中提示框
      */
-    urgentDev(){
+    urgentDev () {
         wx.showModal({
             title: '提示',
             content: '美美正正在加急开发中，敬请期待~',
@@ -587,7 +588,7 @@ const events = {
      * 去产品详情页面
      * @param e
      */
-    toItemDetail(e){
+    toItemDetail (e) {
         console.log(e);
         let id = e.currentTarget.dataset.id;
         if (id) {
@@ -598,7 +599,7 @@ const events = {
      * 去会员订单详情页面
      * @param e
      */
-    toMemberDetail(e){
+    toMemberDetail (e) {
         console.log(e);
         let id = e.currentTarget.dataset.id;
         if (id) {
@@ -609,7 +610,7 @@ const events = {
      * 预览图片
      * @param e
      */
-    previewImage(e){
+    previewImage (e) {
         try {
             let cur = e.target.dataset.src,
                 images = e.target.dataset.images,
@@ -635,13 +636,13 @@ const events = {
      * 拨打电话
      * @param e
      */
-    makePhoneCall(e){
+    makePhoneCall (e) {
         let phoneNumber = e.target.dataset.tel;
         if (util2.trim(phoneNumber)) {
             wx.makePhoneCall({phoneNumber})
         }
     },
-    openSetting(e){
+    openSetting (e) {
         console.log('打开授权按钮', e);
         let that = this;
         if (!this.data.canOpenSetting) {
@@ -652,12 +653,12 @@ const events = {
             })
         }
     },
-    bindopensetting(e){
+    bindopensetting (e) {
         console.log('打开授权按钮回调', e);
         let authSetting = e.authSetting || e.detail.authSetting;
         wx.setStorageSync('authSetting', authSetting);
     },
-    bindBack(){
+    bindBack () {
         this.$route.back();
     }
 };

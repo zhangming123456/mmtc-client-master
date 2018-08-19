@@ -2,8 +2,7 @@
   "navigationBarTitleText": "搜索结果",
   "disableScroll": true,
   "usingComponents": {
-    "i-sticky": "../../../../lib/iview/sticky/index",
-    "i-sticky-item": "../../../../lib/iview/sticky-item/index",
+    "i-panel": "../../../../lib/iview/panel/index",
     "i-tabs": "../../../../lib/iview/tabs/index",
     "i-tab": "../../../../lib/iview/tab/index",
     "i-message": "../../../../lib/iview/message/index",
@@ -11,6 +10,7 @@
     "wxc-rate": "../../../../lib/minui/wxc-rate/dist/index",
     "wxc-label": "../../../../lib/minui/wxc-label/dist/index",
     "wxc-abnor": "../../../../lib/minui/wxc-abnor/dist/index",
+    "wxc-loadmore": "../../../../lib/minui/wxc-loadmore/dist/index",
     "azm-more": "../../../../lib/components/azm-more/index",
     "azm-image": "../../../../lib/components/azm-image/index",
     "azm-gotop": "../../../../lib/components/azm-gotop/index"

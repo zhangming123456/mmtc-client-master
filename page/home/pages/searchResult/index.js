@@ -7,14 +7,17 @@ const app = getApp(),
     utilPage = require("../../../../utils/utilPage"),
     ApiService = require("../../../../utils/ApiService");
 
-let timer0 = null
-let timer1 = null
+let timer0 = null;
+let timer1 = null;
+let timer2 = null;
 const appPage = {
     /**
      * 页面的初始数据
      */
     data: {
-        noMore: false,
+        noMore0: false,
+        noMore1: false,
+        noMore2: false,
         scrollTop: 0,
         scrollTopArr: [50, 50, 50],
         scrollTop0: 50,
@@ -34,6 +37,8 @@ const appPage = {
         shopPage: 1,
         itemList: [],
         itemPage: 1,
+        noteList: [],
+        notePage: 1,
         tabList: [
             {
                 title: '店铺',
@@ -97,13 +102,13 @@ const appPage = {
     onReachBottom (options) {
     },
     //页面滚动执行方式
-    onPageScroll(event){
+    onPageScroll (event) {
 
     },
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage(options) {
+    onShareAppMessage (options) {
 
     }
 }
@@ -116,7 +121,7 @@ const methods = {
         that.querySelector('#azm-header').boundingClientRect(function (rect) {
             that.setData({
                 styleSwiper: `height: ${windowHeight - rect.height}px;`,
-                styleMinH: `min-height: ${windowHeight - rect.height + 50}px;`
+                styleMinH: `min-height: ${windowHeight - rect.height}px;`
             })
         }).exec();
         that.querySelector('.azm-refresh').boundingClientRect(function (rect) {
@@ -134,29 +139,31 @@ const methods = {
         }
         this.setData(setData);
         that.refreshData();
-        console.log(1);
     },
-    onAbnorTap(e){
-        console.log(2);
+    onAbnorTap (e) {
         this.refreshData()
     },
-    async refreshData(){
+    async refreshData () {
         let that = this,
             current = that.data.current;
         await that.getLocation();
         if (current === 2) {
-
+            await that.getNoteSearch(that.data.notePage);
         } else if (current === 1) {
-            await that.getItemSearch();
+            await that.getItemSearch(that.data.itemPage);
         } else {
-            await that.getShopSearchAll();
+            await that.getShopSearchAll(that.data.shopPage);
         }
     },
     // 获取经纬度
-    getLocation(){
+    getLocation () {
         let that = this,
             lat_and_lon = {...app.globalData.lat_and_lon};
+        if (that.isGetLocation) return;
+        that.isGetLocation = true;
+        console.log(0);
         return new Promise((resolve, reject) => {
+            console.log(-1);
             let city_id = null;
             if (!lat_and_lon || !lat_and_lon.lon) {
                 lat_and_lon = that.data.filters;
@@ -170,8 +177,11 @@ const methods = {
                 let lat = lat_and_lon.lat;
                 let lon = lat_and_lon.lon;
                 that.data.filters = {lat, lon, city_id};
+                that.isGetLocation = false;
+                console.log(11);
                 resolve()
             } else {
+                console.log(2);
                 wx.getLocation({
                     type: 'gcj02',
                     success: function (res) {
@@ -184,52 +194,67 @@ const methods = {
                                 let lon = res.lon;
                                 let city_id = util2.getCity({title: res.city}).id;
                                 that.data.filters = {lat, lon, city_id};
+                                that.isGetLocation = false;
+                                console.log(3);
                                 resolve()
                             },
                             rsp => {
+                                that.isGetLocation = false;
+                                console.log(4);
                                 reject()
                             }
                         )
                     },
-                    fail(){
+                    fail () {
+                        that.isGetLocation = false;
+                        console.log(5);
                         reject()
                     }
                 });
             }
         }).catch(err => {
-
+            console.log(6);
+            that.isGetLocation = false;
         })
     },
-    getShopSearchAll(p = 1, setData = {}, bol){
+    /**
+     * 获取店铺搜索
+     * @param p
+     * @param setData
+     * @param bol
+     * @returns {*|Promise<any>}
+     */
+    getShopSearchAll (p = 1, setData = {}, bol) {
         let that = this,
             kw = that.data.search,
             filters = that.data.filters;
-        if (that.isGetShopSearchAll)return;
-        that.setData({noMore: false});
-        that.isGetShopSearchAll = true;
+        if (that.isGetSearch) return;
+        if (!filters.lon || !filters.lat) return;
+        that.isGetSearch = true;
         if (!bol) {
             util2.showLoading();
         } else if (p === 1) {
             wx.vibrateShort({});
         }
         return ApiService.getShopSearchAll({...filters, kw, p}).finally(res => {
-            that.isGetShopSearchAll = false;
+            that.isGetSearch = false;
             util2.hideLoading(true);
             if (res.status === 1) {
                 let info = res.info;
                 if (info.length > 0) {
                     if (p === 1) {
                         setData.shopList = [info];
-                        setData.tab0View = 'tab0';
+                        // setData.tab0View = 'tab0';
                     } else if (res.info) {
                         setData[`shopList[${p - 1}]`] = info
                     }
                     setData.shopPage = p + 1;
+                    setData.noMore0 = info.length !== 10;
                 } else if (info.length === 0) {
                     if (p > 1) {
                         setData.shopPage = p - 1;
                     }
-                    setData.noMore = true;
+                    setData.noMore0 = true;
                 }
                 that.setData(setData);
                 if (bol && p === 1) {
@@ -238,7 +263,14 @@ const methods = {
             }
         })
     },
-    getItemSearch(p = 1, setData = {}, bol){
+    /**
+     * 获取服务搜索
+     * @param p
+     * @param setData
+     * @param bol
+     * @returns {*|Promise<any>}
+     */
+    getItemSearch (p = 1, setData = {}, bol) {
         let that = this,
             kw = that.data.search,
             filters = that.data.filters;
@@ -249,25 +281,26 @@ const methods = {
             that.setData(setData);
             return;
         }
-        if (that.isGetItemSearch)return;
-        that.setData({noMore1: false});
-        that.isGetItemSearch = true;
+        if (that.isGetSearch) return;
+        if (!filters.lon || !filters.lat) return;
+        that.isGetSearch = true;
         if (!bol) {
             util2.showLoading();
         }
         return ApiService.getItemSearch({...filters, kw, p}).finally(res => {
-            that.isGetItemSearch = false;
+            that.isGetSearch = false;
             util2.hideLoading(true);
             if (res.status === 1) {
                 let info = res.info;
                 if (info.length > 0) {
                     if (p === 1) {
                         setData.itemList = [info];
-                        setData.tab1View = 'tab1';
+                        // setData.tab1View = 'tab1';
                     } else if (res.info) {
                         setData[`itemList[${p - 1}]`] = info
                     }
                     setData.itemPage = p + 1;
+                    setData.noMore1 = info.length !== 10;
                 } else if (info.length === 0) {
                     if (p > 1) {
                         setData.itemPage = p - 1;
@@ -282,10 +315,61 @@ const methods = {
         })
     },
     /**
+     * 获取案例搜索
+     * @param p
+     * @param setData
+     * @param bol
+     * @returns {*|Promise<any>}
+     */
+    getNoteSearch (p = 1, setData = {}, bol) {
+        let that = this,
+            kw = that.data.search,
+            filters = that.data.filters;
+        if (bol && p === 1) {
+            wx.vibrateShort({});
+        }
+        if (!kw) {
+            that.setData(setData);
+            return;
+        }
+        if (that.isGetSearch) return;
+        if (!filters.lon || !filters.lat) return;
+        that.isGetSearch = true;
+        if (!bol) {
+            util2.showLoading();
+        }
+        return ApiService.getNoteSearch({...filters, kw, p}).finally(res => {
+            that.isGetSearch = false;
+            util2.hideLoading(true);
+            if (res.status === 1) {
+                let info = res.info;
+                if (info.length > 0) {
+                    if (p === 1) {
+                        setData.noteList = [info];
+                        // setData.tab2View = 'tab2';
+                    } else if (res.info) {
+                        setData[`noteList[${p - 1}]`] = info
+                    }
+                    setData.notePage = p + 1;
+                    setData.noMore2 = info.length !== 10;
+                } else if (info.length === 0) {
+                    if (p > 1) {
+                        setData.notePage = p - 1;
+                    }
+                    setData.noMore2 = true;
+                }
+                that.setData(setData);
+                if (bol && p === 1) {
+                    that.$Message({selector: '#message2', content: '刷新完成'})
+                }
+            }
+        })
+    },
+    /**
      * 轮播图切换
      * @param e
      */
-    bindSwiperChange(e){
+    bindSwiperChange (e) {
         let current = e.detail.current;
         if (current > -1) {
             this.setData({current});
@@ -297,7 +381,7 @@ const methods = {
      * 点击tab切换
      * @param e
      */
-    handleTabChange(e){
+    handleTabChange (e) {
         let key = e.detail.key,
             tabList = this.data.tabList,
             fIndex = tabList.findIndex(v => {
@@ -305,20 +389,18 @@ const methods = {
             });
         if (fIndex > -1) {
             this.setData({current: fIndex});
-            console.log(4);
-            this.refreshData();
         }
     },
-    upper0(e){
+    upper0 (e) {
         console.log(e, 'upper0');
         this.data.tab0TopStatus = true;
     },
-    lower0(e){
+    lower0 (e) {
         let that = this,
             page = that.data.shopPage;
         that.getShopSearchAll(page);
     },
-    bindTabScroll0(e){
+    bindTabScroll0 (e) {
         let that = this,
             scrollTop = e.detail.scrollTop,
             scrollTop0 = this.data.scrollTop0;
@@ -350,18 +432,18 @@ const methods = {
             }
         }, 100);
     },
-    handletouchend0(e){
+    handletouchend0 (e) {
     },
-    upper1(e){
+    upper1 (e) {
         console.log(e, 'upper1');
         this.data.tab1TopStatus = true;
     },
-    lower1(e){
+    lower1 (e) {
         let that = this,
             page = that.data.itemPage;
         that.getItemSearch(page);
     },
-    bindTabScroll1(e){
+    bindTabScroll1 (e) {
         let that = this,
             scrollTop = e.detail.scrollTop,
             scrollTop1 = this.data.scrollTop1;
@@ -393,7 +475,52 @@ const methods = {
             }
         }, 100);
     },
-    bindSearchInput(e){
+    upper2 (e) {
+        console.log(e, 'upper2');
+        this.data.tab2TopStatus = true;
+    },
+    lower2 (e) {
+        let that = this,
+            page = that.data.notePage;
+        that.getNoteSearch(page);
+    },
+    bindTabScroll2 (e) {
+        let that = this,
+            scrollTop = e.detail.scrollTop,
+            scrollTop2 = this.data.scrollTop2;
+        this.data.scrollTopArr[2] = scrollTop;
+        switch (true) {
+            case (scrollTop <= scrollTop2 - 25):
+                this.setData({tab2TopStep: 1});
+                break;
+            case (scrollTop <= scrollTop2):
+                this.setData({tab2TopStep: 0});
+                break;
+            default:
+                this.setData({tab2TopStep: -1});
+        }
+        clearTimeout(timer2);
+        timer2 = setTimeout(function () {
+            if (that.data.tab2TopStatus) {
+                let tab2TopStep = that.data.tab2TopStep,
+                    x = that.data.scrollTopArr[2],
+                    scrollTop2 = that.data.scrollTop2;
+                switch (tab2TopStep) {
+                    case 1:
+                        that.setData({tab2TopStep: 2});
+                        that.getNoteSearch(1, {tab2View: 'tab2', tab2TopStep: -1, tab2TopStatus: false}, true);
+                        break;
+                    default:
+                        that.setData({tab2View: 'tab2', tab2TopStep: -1, tab2TopStatus: false});
+                }
+            }
+        }, 100);
+    },
+    /**
+     * 搜索输入
+     * @param e
+     */
+    bindSearchInput (e) {
         let value = util2.trim(e.detail.value);
         this.setData({search: value});
     },
@@ -422,45 +549,65 @@ const methods = {
         console.log(5);
         this.refreshData();
     },
-    toggleType: function (e) {
-        let id = parseInt(e.currentTarget.dataset.id);
-        this.setData({
-            type: id
-        });
-        if (id == 2) {
-            this.$vm.setOnParseRows(function (rows) {
-                c.wrapZan(rows);
-            });
-        } else {
-            this.$vm.setOnParseRows(null);
-        }
-        this.$vm.setUrl(urls[id]).loadData();
+    /**
+     * 取消搜索
+     */
+    bindSearchCancel () {
+        this.$route.back();
     },
-    cancelSearch(){
-        wx.navigateBack({});
-    },
-    showShopDetail: function (e) {
+    toShopDetail: function (e) {
         let id = e.currentTarget.dataset.id;
-        wx.navigateTo({
-            url: '/pages/home/index?shop_id=' + id,
-        })
+        if (id) {
+            this.$route.push({path: "/pages/home/index", query: {shop_id: id}});
+        }
+    },
+    toItemDetail: function (e) {
+        let id = e.currentTarget.dataset.id;
+        if (id) {
+            this.$route.push({path: "/pages/item/detail", query: {id: id}});
+        }
+    },
+    toNoteDetail: function (e) {
+        let id = e.currentTarget.dataset.id;
+        if (id) {
+            this.$route.push({path: "/pages/cases/detail", query: {id: id}});
+        }
     },
     zan (e) {
-        var id = e.currentTarget.dataset.id;
-        var that = this;
-        c.zan(id, function () {
-            that.data.items.every(function (el) {
-                if (el.id == id) {
-                    el.zaned = true;
-                    el.zan_count++;
-                    that.setData({
-                        items: that.data.items
-                    });
-                    return false;
-                }
-                return true;
-            });
+        let item = e.currentTarget.dataset.item;
+        let page = e.currentTarget.dataset.page;
+        let index = e.currentTarget.dataset.index;
+        let that = this;
+        let noteZan = wx.getStorageSync('noteZan');
+        if (!util2.jude.isArray(noteZan)) {
+            noteZan = []
+        }
+        let fIndex = noteZan.findIndex(v => {
+            return +v === +item.id
         });
+        if (that.isZan) return;
+        if (item && item.id && fIndex === -1) {
+            that.isZan = true;
+            util2.showLoading();
+            ApiService.noteIncZan({nid: item.id}).finally(res => {
+                util2.hideLoading(true);
+                that.isZan = false;
+                if (res.status === 1) {
+                    util2.showToast('点赞成功');
+                    if (!util2.jude.isArray(noteZan)) {
+                        noteZan = []
+                    }
+                    noteZan.push(item.id);
+                    that.setData({
+                        noteZan,
+                        [`noteList[${page}][${index}].zan_count`]: parseInt(item.zan_count) + 1
+                    });
+                    wx.setStorageSync('noteZan', noteZan);
+                } else {
+                    util2.showToast('点赞失败')
+                }
+            });
+        }
     }
 }
 

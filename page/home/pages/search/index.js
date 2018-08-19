@@ -99,7 +99,7 @@ const methods = {
             }
             this.setData({histories: histories});
             wx.setStorageSync('histories', histories);
-            this.$route.push({path: "/pages/loc/searchResult", query: {w: value}});
+            this.$route.push({path: "/page/home/pages/searchResult/index", query: {w: value}});
         }
     },
     cancelSearch() {
@@ -114,7 +114,7 @@ const methods = {
         if (item && item.link) {
             this.$route.push({path: "/pages/page/index", query: {token: item.link}});
         } else {
-            this.$route.push({path: "/pages/loc/searchResult", query: {w: item.title}});
+            this.$route.push({path: "/page/home/pages/searchResult/index", query: {w: item.title}});
         }
     }
 }

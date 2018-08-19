@@ -42,6 +42,13 @@ module.exports.zanedClass = function (item) {
     }
     return '';
 };
+module.exports.zanClass = function (item, noteZan) {
+    console.log(noteZan, 'noteZan');
+    if (item && item.id && noteZan && "Array" === noteZan.constructor) {
+        return noteZan.indexOf(item.id) > -1 ? 'azm-zan' : '';
+    }
+    return '';
+};
 module.exports.parseInt = function (v) {
     return parseInt(v);
 };

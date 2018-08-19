@@ -3,6 +3,7 @@ import {
     HttpRequest
 } from "./ajax/http"
     ;
+
 const $http = new HttpRequest();
 
 class OldApi {
@@ -938,6 +939,24 @@ class ApiService extends OldApi {
 
 
     /**
+     * 搜索案例
+     * @param kw
+     * @param city_id
+     * @param lon
+     * @param lat
+     * @param p
+     * @return
+     */
+    getNoteSearch ({kw = "", city_id = 0, lon = 0, lat = 0, p = 1}) {
+        let that = this,
+            data = {kw, city_id, lon, lat, p};
+        const api = '/note/search';
+        const http = $http.get(that.api + api, data);
+        return http;
+    }
+
+
+    /**
      * 立即支付（套卡）
      * @param card_id
      * @param num
@@ -1003,11 +1022,26 @@ class ApiService extends OldApi {
      * @param reject
      * @returns {*}
      */
-    showShopQrcodeOp ({page,op,param}, resole, reject) {
+    showShopQrcodeOp ({page, op, param}, resole, reject) {
         let that = this,
-            data = {page,op,param};
+            data = {page, op, param};
         const api = `/shop/shopQrcodeOp`;
         const http = $http.downImage(that.shopApi + api, data, resole, reject);
+        return http;
+    }
+
+    /**
+     * 点赞
+     * @param nid
+     * @param resole
+     * @param reject
+     * @returns {*}
+     */
+    noteIncZan ({nid = 0}, resole, reject) {
+        let that = this,
+            data = {nid};
+        const api = `/note/incZan`;
+        const http = $http.get(that.api + api, data);
         return http;
     }
 }

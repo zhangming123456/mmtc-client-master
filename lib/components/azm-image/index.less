@@ -1,9 +1,16 @@
 @import "../../icons/iconfont";
 
-view.azm-image-box {
+view.c-azm-image-box {
     width: 100%;
     height: 100%;
     display: inline-block;
+    position: relative;
+    .azm-image-load-mask {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
     .azm-image {
         width: inherit;
         height: inherit;

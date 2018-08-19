@@ -75,7 +75,7 @@ const appPage = {
             p
         })
     },
-    onPageScroll(options){
+    onPageScroll (options) {
         this._onPageScroll(options)
     }
 };
@@ -83,7 +83,7 @@ const appPage = {
  * 方法类
  */
 const methods = {
-    loadCb() {
+    loadCb () {
         var that = this,
             options = that.data.options;
         c.showLoading();
@@ -111,7 +111,7 @@ const methods = {
         }).exec();
     },
 
-    getLocationCallback(e){
+    getLocationCallback (e) {
         let dataset = e.detail.dataset,
             that = this;
         this.setData({
@@ -134,7 +134,7 @@ const methods = {
      * @param p
      * @returns {Promise.<TResult>}
      */
-    getShopFilterData({lon = 0, lat = 0, p = 1, size = 10}){
+    getShopFilterData ({lon = 0, lat = 0, p = 1, size = 10}) {
         let that = this,
             filters = that.data.filters;
         let _setData = {
@@ -163,7 +163,7 @@ const methods = {
             }
         );
     },
-    selectSortType(e) {
+    selectSortType (e) {
         let type = parseInt(e.currentTarget.dataset.index);
         this.setData({
             stitle: stypes[type],
@@ -171,7 +171,7 @@ const methods = {
         });
         this.addFilter('sort', type).doFilter();
     },
-    selectFilterType(e) {
+    selectFilterType (e) {
         let type = parseInt(e.currentTarget.dataset.index);
         this.setData({
             ltitle: ltypes[type],
@@ -179,7 +179,7 @@ const methods = {
         });
         this.addFilter('type_id', type).doFilter();
     },
-    toggleType(e) {
+    toggleType (e) {
         let type = parseInt(e.currentTarget.dataset.type);
         let that = this;
         if (type == this.data.type) {
@@ -197,7 +197,7 @@ const methods = {
             that._toggleType(type);
         }
     },
-    _toggleType(type) {
+    _toggleType (type) {
         this.setData({
             type: type,
             scrollTop: this.toolbarTop
@@ -205,7 +205,7 @@ const methods = {
     },
     pickArea () {
         wx.navigateTo({
-            url: '/pages/loc/index',
+            url: '/page/public/pages/location/index',
         });
     },
     doSearch () {
@@ -213,7 +213,7 @@ const methods = {
             url: '/page/home/pages/search/index',
         });
     },
-    loadTypeData() {
+    loadTypeData () {
         let that = this,
             data = {},
             p = ApiService.getCategoryDataList(),
@@ -246,11 +246,11 @@ const methods = {
             }
         )
     },
-    addFilter(fieldName, fieldValue) {
+    addFilter (fieldName, fieldValue) {
         this.data.filters[fieldName] = fieldValue;
         return this;
     },
-    doFilter() {
+    doFilter () {
         let that = this,
             location = that.data.location;
         c.showLoading();
@@ -265,7 +265,7 @@ const methods = {
             lat: location.lat
         });
     },
-    toggleAreaType(e) {
+    toggleAreaType (e) {
         let type = parseInt(e.currentTarget.dataset.type);
         if (type == this.data.areaType) {
             return;
@@ -275,7 +275,7 @@ const methods = {
             topAreas: type == 0 ? this.area.trading : this.area.metro
         });
     },
-    selectArea(e) {
+    selectArea (e) {
         let index = parseInt(e.target.dataset.index);
         let data = this.data.areaType == 0 ? this.area.trading : this.area.metro;
         let item = data[this.data.areaIndex[this.data.areaType]].children[index];
@@ -287,7 +287,7 @@ const methods = {
         });
         this.addFilter('near_type', aid).doFilter();
     },
-    toggleTopArea(e) {
+    toggleTopArea (e) {
         let index = parseInt(e.target.dataset.index);
         if (index == this.data.areaIndex[this.data.areaType]) {
             return;
@@ -303,7 +303,7 @@ const methods = {
             url: '/pages/home/index?shop_id=' + id,
         })
     },
-    toggleCategory(e) {
+    toggleCategory (e) {
         let index = parseInt(e.currentTarget.dataset.index);
         if (this.prevCategoryIndex != index) {
             if (index != -1) {
@@ -325,7 +325,7 @@ const methods = {
             });
         }
     },
-    selectCategory(e) {
+    selectCategory (e) {
         let index = parseInt(e.currentTarget.dataset.index);
         let cid = 0, ctitle;
         if (index == -1) { // 选择全部
@@ -357,7 +357,7 @@ const methods = {
             scrollTop: 0
         })
     },
-    closeFilter() {
+    closeFilter () {
         this.setData({
             type: -1
         });
