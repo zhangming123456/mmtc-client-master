@@ -14,7 +14,9 @@
             消费总额：
         </view>
         <view class="flex-con inputControl" bindtap="onKeyUpBlur">
-            <text class="color-gray  text-right" id="totalMoney"> {{totalMoney == '' ||totalMoney == 0 ?'':'￥'}}{{totalMoney || 0 }}</text>
+            <text class="color-gray  text-right" id="totalMoney"> {{totalMoney == '' ||totalMoney == 0
+                ?'':'￥'}}{{totalMoney || 0 }}
+            </text>
         </view>
     </view>
 </view>
@@ -24,7 +26,7 @@
         输入不参与优惠金额
     </span>
     <view class="t-remark" bindtap="gotoRemarks">
-        添加备注
+        {{isRemark?'修改备注':'添加备注'}}
     </view>
 </view>
 <view class="t-noJoin" id="discount_area" hidden='{{!hasDiscount}}'>
@@ -36,8 +38,10 @@
             <!-- <input type="digit" class="color-gray input-control text-right tcolor" placeholder="询问商家后输入" id="noDiscountMoney" bindinput='noDiscountMoneyInput'
                 maxlength="8" bindfocus='onKeyUpFocus' style="width: 0; height: 0; opacity: 0;" hidden value='{{noDiscountMoney}}'></input>
             <text id="noDiscountMoney" class="color-gray input-control text-right tcolor">{{noDiscountMoney}}</text> -->
-            <input bindconfirm="onKeyUpBlur" bindblur="onKeyUpBlur" bindfocus="onKeyUpBlur2" type="digit" class="color-gray input-control text-right tcolor"
-                placeholder="询问商家后输入" id="noDiscountMoney" bindinput='noDiscountMoneyInput' maxlength="8" value="{{noDiscountMoney}}"></input>
+            <input bindconfirm="onKeyUpBlur" bindblur="onKeyUpBlur" bindfocus="onKeyUpBlur2" type="digit"
+                   class="color-gray input-control text-right tcolor"
+                   placeholder="询问商家后输入" id="noDiscountMoney" bindinput='noDiscountMoneyInput' maxlength="8"
+                   value="{{noDiscountMoney}}"></input>
         </view>
     </view>
 </view>
@@ -54,16 +58,12 @@
             </view>
         </view>
         <view class="t-howDiscount">
-            <view>
-                优惠券：
-            </view>
-            <view class="flex-con text-right text-gray">
-                暂无可用券
-            </view>
+            <view>优惠券：</view>
+            <view class="flex-con text-right text-gray">暂无可用券</view>
             <image src='https://app.mmtcapp.com/mmtc/imgs/gt@2x.png' class="gt"></image>
         </view>
         <view class="t-payment">
-            <text>实付金额 </text>
+            <text>实付金额</text>
             <text id="actMoney"> {{hasDiscount ||totalMoney == '' ||totalMoney == 0 ?'':'￥'}} {{actMoney || '￥'+0}}
             </text>
         </view>

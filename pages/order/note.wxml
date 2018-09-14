@@ -18,7 +18,7 @@
     </view>
     <view class='p3'>
         <image wx:for="{{imgs}}" wx:key="*this" mode='aspectFill' src='{{c.absUrl(item)}}'></image>
-        <image src='https://app.mmtcapp.com/mmtc/addpic@2x.png' bindtap='chooseImage'></image>
+        <image src='https://app.mmtcapp.com/mmtc/imgs/addpic@2x.png' bindtap='chooseImage'></image>
     </view>
 </view>
 

@@ -3,9 +3,12 @@
  */
 "use strict";
 const app = getApp(),
+    util2 = app.util2,
     regeneratorRuntime = app.util2.regeneratorRuntime,
     router = app.util2.router,
     jude = app.util2.jude,
+    queryString = app.util2.queryString,
+    onfire = require('./onfire.min'),
     authorize = require('./azm/authorize'),
     config = require('./config'),
     ApiService = require('./ApiService');
@@ -22,6 +25,7 @@ const events = {
     $route: router,
     $Toast,
     $Message,
+    $Onfire: onfire,
     // $wxParse: wxParse,
     /**
      * 生命周期函数--监听页面加载
@@ -34,7 +38,8 @@ const events = {
                 that.data.systemInfo = res;
                 that.setData({
                     SDKVersion: res.SDKVersion.split('.'),
-                    noteZan: wx.getStorageSync('noteZan')
+                    noteZan: wx.getStorageSync('noteZan'),
+                    canOnTabItemTap: util2.compareVersion(res.SDKVersion, '1.9.0')
                 })
             }
         });
@@ -174,6 +179,19 @@ const events = {
         let that = this;
         if (this.__page.onShareAppMessage) {
             return this.__page.onShareAppMessage.call(this, options)
+        } else {
+
+        }
+    },
+
+    /**
+     * 点击 tab 时触发
+     */
+    onTabItemTap (options) {
+        console.warn(`点击 tab 时触发${this.data.text}`, options, 'onTabItemTap');
+        let that = this;
+        if (this.__page.onTabItemTap) {
+            return this.__page.onTabItemTap.call(this, options)
         } else {
 
         }
@@ -516,8 +534,8 @@ const events = {
             })
         }
     },
-    stopTap () {
-
+    // 空操作
+    noop(){
     },
     scanCodeVerify () {
         wx.scanCode({
@@ -634,12 +652,49 @@ const events = {
     },
     /**
      * 拨打电话
-     * @param e
+     * @param currentTarget
      */
-    makePhoneCall (e) {
-        let phoneNumber = e.target.dataset.tel;
-        if (util2.trim(phoneNumber)) {
+    makePhoneCall ({currentTarget}) {
+        let phoneNumber = currentTarget.dataset.tel;
+        if (phoneNumber && util2.trim(phoneNumber)) {
             wx.makePhoneCall({phoneNumber})
+        } else {
+            util2.failToast('没有服务电话')
+        }
+    },
+    /**
+     * 去店铺首页
+     * @param shop_id
+     */
+    toShopHome(shop_id){
+        if (!shop_id)return;
+        let page = this.$route.getCurrentPage(1);
+        if (page && page.route === "page/shop/pages/home/index") {
+            this.$route.back();
+        } else {
+            this.$route.push({path: "/page/shop/pages/home/index", query: {shop_id}});
+        }
+    },
+    getUserInfo(e){
+        console.log('打开获取用户信息按钮', e);
+        let that = this;
+        if (!this.data.canIUse) {
+            util2.getUserInfo({withCredentials: true}).finally(err => {
+                that.getUserInfoCallback(err)
+            })
+        }
+    },
+    getUserInfoCallback(e){
+        console.log('打开获取用户信息按钮回调', e);
+        let that = this;
+        let detail = e.detail || e,
+            errMsg = e.errMsg || e.detail.errMsg;
+        if ('getUserInfo:fail auth deny' === errMsg) {
+            e.errMsg && that.$route.push('/page/public/pages/authorization/index');
+            app.globalData.userInfo_start = 1;
+        } else if ('getUserInfo:ok' === errMsg) {
+            app.globalData.userInfo_start = 2;
+            that.onLogin && that.onLogin(detail)
         }
     },
     openSetting (e) {
@@ -657,9 +712,87 @@ const events = {
         console.log('打开授权按钮回调', e);
         let authSetting = e.authSetting || e.detail.authSetting;
         wx.setStorageSync('authSetting', authSetting);
+        if (this.data.redirect_url) {
+            this.$route.replace(this.data.redirect_url)
+        } else {
+            this.$route.back();
+        }
+        this.onOpensettingCall && this.onOpensettingCall(e)
     },
     bindBack () {
         this.$route.back();
+    },
+    /**
+     * 退出登入
+     * @param e
+     */
+    logoff(e){
+        let that = this;
+        wx.showModal({
+            title: '提示',
+            content: '确定退出当前账号吗?',
+            success: function (res) {
+                if (res.confirm) {
+                    ApiService.wx2logoff();
+                    wx.removeStorageSync('_userInfo_');
+                    wx.removeStorageSync('sid');
+                    wx.removeStorageSync('_login_time');
+                    app.globalData.userInfo = {};
+                    that.setData({userInfo: {}, isLogin: false});
+                } else if (res.cancel) {
+
+                }
+            }
+        });
+    },
+    /**
+     * 点赞
+     * @param e
+     * @param key
+     * @param countStr
+     */
+    $giveALike (e, key = 'noteList', countStr = 'zan_count') {
+        let item = e.currentTarget.dataset.item;
+        let page = e.currentTarget.dataset.page;
+        let index = e.currentTarget.dataset.index;
+        let that = this;
+        let noteZan = wx.getStorageSync('noteZan');
+        if (!util2.jude.isArray(noteZan)) {
+            noteZan = []
+        }
+        let fIndex = noteZan.findIndex(v => {
+            return +v === +item.id
+        });
+        if (that.isZan) return;
+        if (item && item.id && fIndex === -1) {
+            that.isZan = true;
+            util2.showLoading();
+            ApiService.noteIncZan({nid: item.id}).finally(res => {
+                util2.hideLoading(true);
+                that.isZan = false;
+                let setData = {}
+                if (res.status === 1) {
+                    util2.showToast('点赞成功');
+                    if (!util2.jude.isArray(noteZan)) {
+                        noteZan = []
+                    }
+                    noteZan.push(item.id);
+                    setData.noteZan = noteZan;
+                    if (index !== undefined) {
+                        setData[`${key}[${page}][${index}].${countStr}`] = parseInt(item[countStr]) + 1;
+                    } else {
+                        setData[`${key}[${page}].${countStr}`] = parseInt(item[countStr]) + 1;
+                    }
+                    that.setData(setData);
+                    wx.setStorageSync('noteZan', noteZan);
+                } else {
+                    util2.showToast('点赞失败')
+                }
+            });
+        }
+    },
+    $setFromValue(e){
+        console.log(e);
     }
 };
 
@@ -679,6 +812,7 @@ class Page {
             canIUse: wx.canIUse('button.open-type.getUserInfo'),
             canFeedback: wx.canIUse('button.open-type.feedback'),
             canOpenSetting: wx.canIUse('button.open-type.openSetting'),
+            canOnTabItemTap: false,
             imageUrl: config.imageUrl,
             $azmToast: {
                 show: false,

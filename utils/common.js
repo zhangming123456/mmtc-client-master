@@ -103,7 +103,7 @@ c.ajax = (opts) => {
             console.log(1);
             getApp().globalData._ajax_callback = c.ajax.bind(c, opts);
             c.rmUserInfo();
-            if (c.getCurrentPage().route != 'pages/mine/index') {
+            if (c.getCurrentPage().route != 'page/tabBar/mine/index') {
                 wx.navigateTo({
                     url: '/page/userLogin/pages/getUserInfo/index',
                 });

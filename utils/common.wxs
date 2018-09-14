@@ -1,5 +1,4 @@
 var baseUrl = "https://app.mmtcapp.com";
-var c = {};
 module.exports.absUrl = function (url, imgw) {
     if (url) {
         var reg = getRegExp('^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$', 'i'),
@@ -26,6 +25,51 @@ module.exports.absUrl = function (url, imgw) {
         return 'https://app.mmtcapp.com/mmtch5/images/imageErr.png';
     }
 };
+function number_format (number, decimals, dec_point, thousands_sep) {
+    /*
+     * 参数说明：
+     * number：要格式化的数字
+     * decimals：保留几位小数
+     * dec_point：小数点符号
+     * thousands_sep：千分位符号
+     * */
+    decimals = decimals || 2;
+    var _str = (number + '').replace(getRegExp("[^\d\.]", "g"), '');
+    if (!_str) {
+        _str = '0'
+    }
+    number = _str.replace(getRegExp("[^0-9+-Ee.]", "g"), '');
+    var n = !isFinite(+number) ? 0 : +number,
+        prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+        sep = (typeof thousands_sep === 'undefined') ? '' : thousands_sep,
+        dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+        s = '',
+        toFixedFix = function (n, prec) {
+            var k = Math.pow(10, prec);
+            return '' + Math.round(n * k) / k
+        };
+    s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+    var re = getRegExp("(-?\d+)(\d{3})", "");
+    while (re.test(s[0]) && sep) {
+        s[0] = s[0].replace(re, '$1' + sep + '$2')
+    }
+    // if ((s[1] || '').length < prec) {
+    //     s[1] = s[1] || '';
+    //     s[1] += [prec - (s[1].length + 1)].join('0')
+    // }
+    return s.join(dec)
+}
+module.exports.number_format = number_format;
+
+module.exports.money_format = function (number, decimals) {
+    var money = number_format(number);
+    console.log(money, "奥会计法哈咖啡");
+    if (decimals) {
+        return money
+    } else {
+        return parseFloat(money)
+    }
+};
 module.exports.isEmpty = function (v) {
     return !v || v == 0;
 };
@@ -43,7 +87,6 @@ module.exports.zanedClass = function (item) {
     return '';
 };
 module.exports.zanClass = function (item, noteZan) {
-    console.log(noteZan, 'noteZan');
     if (item && item.id && noteZan && "Array" === noteZan.constructor) {
         return noteZan.indexOf(item.id) > -1 ? 'azm-zan' : '';
     }
@@ -65,7 +108,6 @@ module.exports.mToKm = function (v, obj) {
         return v + 'm'
     }
 };
-
 module.exports.orderNumber = function (obj, type) {
     // A:未支付 - 0  B:已支付 { 全部未使用：1，部分完成（含部分退款、部分已经写好日记与未使用）：2，全部使用：3，完成退款：4}
     var status = 0,
@@ -97,7 +139,6 @@ module.exports.orderNumber = function (obj, type) {
         flag: flag
     };
 };
-
 // 计算项目详情服务总时间
 module.exports.numAbs = function (item) {
     var num = 0;
@@ -106,7 +147,6 @@ module.exports.numAbs = function (item) {
     }
     return num;
 }
-
 // 计算商品详情使用商品
 module.exports.item_brand_cf = function (item) {
     var arr = [],
@@ -121,31 +161,30 @@ module.exports.item_brand_cf = function (item) {
     }
     return arr;
 }
-
-module.exports.num2arr = function num2arr (num, attrlen) {
-    attrlen = attrlen || 5;
-    num = parseInt(num);
-    var rt = [];
-    for (var i = 0; i < 5; i++) {
-        if (i < num) {
-            rt.push(1);
-        } else {
-            rt.push(0);
-        }
-    }
-    return rt;
-}
 module.exports.discount = function discount (v) {
     return v.split(':')[1] || '';
 }
-module.exports.split = function split (str) {
-    var rt = str.split(',');
-    if (rt.length > 2) {
-        return rt.slice(0, 2);
+module.exports.discount2 = function (item) {
+    if (+item.group_num > 0) {
+        var discout = number_format((+item.group_price / +item.price * 10), 1);
+        console.log(+item.group_price / +item.price * 10, ',4545454545,' + discout);
+        return parseFloat(discout);
+    } else if (+item.market_price > 0) {
+        var discout = number_format(+item.price / +item.market_price * 10, 1);
+        return parseFloat(discout);
     }
-    return rt;
+    return 10;
 }
-
+module.exports.split = function split (rows, num) {
+    num = num || 2;
+    if (rows.constructor === 'String') {
+        rows = rows.split(',');
+    }
+    if (rows && rows.length > num) {
+        return rows.slice(0, num);
+    }
+    return rows;
+}
 module.exports.num2score = function num2score (num, attrlen) {
     attrlen = attrlen || 5;
     num = parseInt(num);
@@ -159,7 +198,6 @@ module.exports.num2score = function num2score (num, attrlen) {
     }
     return rt;
 };
-
 module.exports.picCount = function picCount (strs) {
     if (strs) {
         strs = strs.split(',');
@@ -170,7 +208,17 @@ module.exports.picCount = function picCount (strs) {
     }
     return 0;
 }
-
+module.exports.str2arr = function str2arr (strs, num) {
+    num = num || 3;
+    if (strs && "String" === strs.constructor) {
+        strs = strs.split(',');
+        if (strs.length > num) {
+            strs = strs.slice(0, num);
+        }
+        return strs;
+    }
+    return [];
+}
 module.exports.shopLabel = function (arr) {
     if (arr && "Array" === arr.constructor) {
         var len = arr.length;
@@ -180,7 +228,6 @@ module.exports.shopLabel = function (arr) {
         return ''
     }
 }
-
 module.exports.itemArrSplit = function (arr) {
     if (arr && "Array" === arr.constructor) {
         var arr2 = [], j = 0;
@@ -192,5 +239,15 @@ module.exports.itemArrSplit = function (arr) {
         return []
     }
 }
-
+module.exports.orderTabs = function (current) {
+    // ['allList', 'unpaidList', 'unusedList', 'noteList', 'refundList']
+    var arr = [];
+    if (current > -1) {
+        arr = arguments[current + 1] || [];
+    }
+    return arr;
+}
+module.exports.min = function (a, b) {
+    return a < b ? a : b;
+}
 

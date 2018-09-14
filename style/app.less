@@ -1,5 +1,32 @@
+// outExt: .wxss, compress:false, sourceMap:false
 /**app.wxss**/
 @import "index";
+@import "theme";
+
+page {
+    line-height: 1;
+}
+
+//点赞
+.azm-zan {
+    text {
+        color: @text-primary-color;
+        &.azm-icon {
+            color: @text-primary-color;
+        }
+    }
+}
+
+//没有更多数据
+.azm-not-more {
+    > view {
+        padding-bottom: 50%;
+    }
+    image {
+        width: 100*2rpx;
+        height: 100*2rpx;
+    }
+}
 
 navigator {
     width: inherit;

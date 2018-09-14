@@ -53,10 +53,15 @@ class RegExpUtil {
         //验证身份证
         this.IDcard = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
         this.code = /(^\d{4}$|^\d{6}$)/
+        this.urlPath = /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$/i;
     }
 
     isPath (text) {
         return this.pathReg.test(text);
+    }
+
+    isUrlPath (url) {
+        return this.urlPath.test(url)
     }
 
     isTelephone (text) {
@@ -379,7 +384,7 @@ class ROUTER {
     }
 
     /**
-     *
+     * 下一个页面
      * @param path
      * @param query
      * @return {Promise}
@@ -404,8 +409,15 @@ class ROUTER {
             //     }
             // });
             that.isGoRouter = true;
+            let url = `${path}?${stringify}`;
+            if (/\?/i.test(path)) {
+                url = `${path}&${stringify}`
+                if (!stringify) {
+                    url = path
+                }
+            }
             wx.navigateTo({
-                url: `${path}?${stringify}`,
+                url: url,
                 success () {
                     resolve({msg: `跳转成功`, status: 1})
                 },
@@ -429,6 +441,11 @@ class ROUTER {
         return P;
     }
 
+    /**
+     * 关闭当前，打开到应用内的某个页面
+     * @param {*} path
+     * @param {*} query
+     */
     replace ({path = '', query = {}}) {
         let _arg = arguments[0];
         let that = this, stringify = '';
@@ -454,13 +471,30 @@ class ROUTER {
             //     reject({msg: '路径不匹配', status: 0})
             // }
             that.isGoRouter = true;
+            let url = `${path}?${stringify}`;
+            if (/\?/i.test(path)) {
+                url = `${path}&${stringify}`
+                if (!stringify) {
+                    url = path
+                }
+            }
             wx.redirectTo({
-                url: `${path}?${stringify}`,
+                url: url,
                 success () {
-                    resolve({msg: `跳转成功`, status: 1})
+                    resolve({
+                        msg: `
+                    跳转成功`, status: 1
+                    })
                 },
                 fail (err) {
-                    reject({msg: `失败${err.errMsg}`, status: 0})
+                    reject({
+                        msg: `
+                    失败$
+                    {
+                        err.errMsg
+                    }
+                    `, status: 0
+                    })
                 },
                 complete () {
                     that.isGoRouter = false;
@@ -486,7 +520,10 @@ class ROUTER {
         if (!path) return;
         const P = new Promise((resolve, reject) => {
             if (that.isGoRouter) {
-                reject({msg: `不可重复跳转`, status: 0});
+                reject({
+                    msg: `
+                    不可重复跳转`, status: 0
+                });
                 return;
             }
             // let flagIndex = that.tabbar.findIndex((value, index, arr) => {
@@ -500,13 +537,30 @@ class ROUTER {
             //     reject({msg: '路径不匹配', status: 0})
             // }
             that.isGoRouter = true;
+            let url = `${path}?${stringify}`;
+            if (/\?/i.test(path)) {
+                url = `${path}&${stringify}`
+                if (!stringify) {
+                    url = path
+                }
+            }
             wx.reLaunch({
-                url: `${path}`,
+                url: url,
                 success () {
-                    resolve({msg: `跳转成功`, status: 1})
+                    resolve({
+                        msg: `
+                    跳转成功`, status: 1
+                    })
                 },
                 fail (err) {
-                    reject({msg: `失败${err.errMsg}`, status: 0})
+                    reject({
+                        msg: `
+                    失败$
+                    {
+                        err.errMsg
+                    }
+                    `, status: 0
+                    })
                 },
                 complete () {
                     that.isGoRouter = false;
@@ -516,6 +570,13 @@ class ROUTER {
         return P;
     }
 
+    /**
+     * 跳tab页面
+     * @param path
+     * @param query
+     * @param redirectedFrom
+     * @return {Promise}
+     */
     tab ({path = '', query = {}, redirectedFrom = undefined}) {
         let _arg = arguments[0];
         let that = this, stringify = '';
@@ -527,7 +588,10 @@ class ROUTER {
         if (!path) return;
         const P = new Promise((resolve, reject) => {
             if (that.isGoRouter) {
-                reject({msg: `不可重复跳转`, status: 0});
+                reject({
+                    msg: `
+                    不可重复跳转`, status: 0
+                });
                 return;
             }
             // let flagIndex = that.tabbar.findIndex((value, index, arr) => {
@@ -542,10 +606,20 @@ class ROUTER {
             //     reject({msg: '路径不匹配', status: 0})
             // }
             that.isGoRouter = true;
+            let url = `${path}?${stringify}`;
+            if (/\?/i.test(path)) {
+                url = `${path}&${stringify}`
+                if (!stringify) {
+                    url = path
+                }
+            }
             wx.switchTab({
-                url: path,
+                url: url,
                 success () {
-                    resolve({msg: `跳转成功`, status: 1, redirectedFrom});
+                    resolve({
+                        msg: `
+                    跳转成功`, status: 1, redirectedFrom
+                    });
                     if (redirectedFrom && trim(redirectedFrom)) {
                         setTimeout(function () {
                             that.push({path: redirectedFrom, query})
@@ -553,7 +627,14 @@ class ROUTER {
                     }
                 },
                 fail (err) {
-                    reject({msg: `失败${err.errMsg}`, status: 0})
+                    reject({
+                        msg: `
+                    失败$
+                    {
+                        err.errMsg
+                    }
+                    `, status: 0
+                    })
                 },
                 complete () {
                     that.isGoRouter = false;
@@ -626,8 +707,10 @@ class QueryString {
     }
 
     parse (url) {
-        if (!this.queryString(url))
-            return;
+        if (!regExpUtil.isPath(url)) {
+            url = `${config.host}?${url}`
+        }
+        if (!this.queryString(url))return;
         const reg = /([^\?\=\&]+)\=([^\?\=\&]*)/g;
         let obj = {};
         while (reg.exec(this.location.search)) {
@@ -935,7 +1018,8 @@ function chooseLocation ({type = 'gcj02', success, fail, complete}) {
                     reject({info: res, status: 0, message: '未获取权限'});
                     wx.showModal({
                         title: '',
-                        content: `"美美天成商家端"要获取你的地理位置，请前往我的 》设置 》权限 》使用我的地理位置开启权限`,
+                        content: `"美美天成商家端"
+                    要获取你的地理位置，请前往我的 》设置 》权限 》使用我的地理位置开启权限`,
                         cancelText: '取消',
                         cancelColor: '#000000',
                         confirmText: '去开启',
@@ -954,6 +1038,46 @@ function chooseLocation ({type = 'gcj02', success, fail, complete}) {
             }
         })
     }).catch(res => {
+    })
+}
+
+/**
+ * 获取经纬度 （微信再封装）
+ * @param type
+ * @return {Promise}
+ */
+function getLocation ({type = 'gcj02'} = {}) {
+    let that = this;
+    return new Promise(function (resolve, reject) {
+        wx.getLocation({
+            type, //返回可以用于wx.openLocation的经纬度
+            success: function (res) {
+                resolve({info: res, status: 1, message: '成功'});
+            },
+            fail(res){
+                if (res.errMsg === 'chooseLocation:fail cancel') {
+                    reject({info: res, status: 0, message: '取消'});
+                } else {
+                    reject({info: res, status: 0, message: '未获取权限'});
+                    wx.showModal({
+                        title: '',
+                        content: `"美美天成商家端"
+                    要获取你的地理位置，请前往我的 》设置 》权限 》使用我的地理位置开启权限`,
+                        cancelText: '取消',
+                        cancelColor: '#000000',
+                        confirmText: '去开启',
+                        confirmColor: '#3CC51F',
+                        success: function (res) {
+                            if (res.confirm) {
+                                that.$route.push('/page/me/pages/setting/index')
+                            }
+                        }
+                    })
+                }
+            }
+        })
+    }).catch(res => {
+
     })
 }
 
@@ -981,7 +1105,9 @@ function saveImageToPhotosAlbum ({filePath, success, fail, complete}) {
                     reject({info: res, status: 0, message: '未获取权限'});
                     wx.showModal({
                         title: '',
-                        content: `"美美天成商家端"要保存图片或视频到你的相册，请前往我的 》设置 》权限 》保存到相册开启权限`,
+                        content: `
+                    "美美天成商家端"
+                    要保存图片或视频到你的相册，请前往我的 》设置 》权限 》保存到相册开启权限`,
                         cancelText: '取消',
                         cancelColor: '#000000',
                         confirmText: '去开启',
@@ -1004,6 +1130,70 @@ function saveImageToPhotosAlbum ({filePath, success, fail, complete}) {
     })
 }
 
+function login (bol) {
+    return new Promise((resolve, reject) => {
+        function login () {
+            wx.login({
+                success (res) {
+                    resolve(res)
+                },
+                fail () {
+                    reject()
+                }
+            })
+        }
+
+        if (bol) {
+            login();
+        } else {
+            wx.checkSession({
+                success: function () {
+                    //session_key 未过期，并且在本生命周期一直有效
+                    resolve();
+                },
+                fail: function () {
+                    // session_key 已经失效，需要重新执行登录流程
+                    login()
+                }
+            });
+        }
+    })
+}
+
+function getUserInfo ({lang = 'en', withCredentials = false, timeout = null, isCode = false} = {}) {
+    return new Promise((resolve, reject) => {
+        let code = null,
+            options = {
+                lang,
+                withCredentials,
+                complete (res) {
+                    if (code) {
+                        res.code = code
+                    }
+                    resolve(res)
+                }
+            };
+        if (timeout) {
+            options.timeout = timeout
+        }
+        if (withCredentials) {
+            login(isCode).finally(res => {
+                    if (jude.isEmptyObject(res)) {
+                        code = res.code;
+                    }
+                    wx.getUserInfo(options);
+                }
+            );
+        } else {
+            wx.getUserInfo(options);
+        }
+    });
+}
+
+function logoff () {
+    wx.removeStorageSync('')
+}
+
 /**
  * 跳转路径
  * @param a{String|Number} 页面路径地址
@@ -1022,7 +1212,7 @@ function go (a, options = {}) {
                 delta: -a
             })
         } else {
-            go('/pages/index/index', {type: 'tab'})
+            go('/page/tabBar/home/index', {type: 'tab'})
         }
     } else if (jude.isString(a) && regExpUtil.isPath(a)) {
         if (/\?/.test(a)) {
@@ -1137,6 +1327,32 @@ function go (a, options = {}) {
         }
     }
 }
+
+
+function absUrl (url, imgw) {
+    if (url) {
+        if (regExpUtil.isUrlPath(url)) {
+            return url;
+        } else if (/^wxftp:/i.test(url)) {
+            return url.replace(/^wxftp:/, '')
+        }
+        if (imgw) {
+            if (typeof imgw === 'boolean') {
+                if (url.indexOf('?') === -1) {
+                    url += '?'
+                } else {
+                    url += '&'
+                }
+                url += '_t=' + new Date().getTime();
+            } else {
+                url += '!' + imgw + 'x' + imgw;
+            }
+        }
+        return config.imageUrl + url;
+    } else {
+        return "";
+    }
+};
 
 /**
  * 对象与数组的复制 第一个值为Boolean并为true时为深度复制
@@ -1338,6 +1554,30 @@ function querySelector (el) {
     return wx.createSelectorQuery().select(el);
 }
 
+
+function pagingArrRefactor (data, id, {key = 'id', num = 10} = {}) {
+    let arr = [], fIndex = -1, arr2 = [];
+    if (id !== undefined && jude.isArray(data)) {
+        for (let v of data) {
+            if (jude.isArray(v)) {
+                arr = arr.concat(v)
+            }
+        }
+        fIndex = arr.findIndex(v => {
+            return v[key] === id
+        });
+        if (fIndex > -1) {
+            arr.splice(fIndex, 1)
+        }
+        for (let i = 0; arr.length / num > i; i++) {
+            arr2.push(arr.slice(i * num, (i + 1) * num))
+        }
+        return arr2
+    } else {
+        return data;
+    }
+}
+
 /*********************utils***************************/
 
 /*********************倒计时***************************/
@@ -1394,11 +1634,22 @@ class Countdown {
         this.startUp(that);
         if (this.module) {
             that.setData({
-                [`${this.module}Data.azm_${this.text}`]: this
+                [`
+                    ${this.module}
+                    Data.azm_$
+                    {
+                        this.text
+                    }
+                    `]: this
             })
         } else {
             that.setData({
-                [`azm_${this.text}`]: this
+                [`
+                    azm_$
+                    {
+                        this.text
+                    }
+                    `]: this
             })
         }
     }
@@ -1415,14 +1666,46 @@ class Countdown {
         _this.clear();
         if (this.module) {
             that.setData({
-                [`${this.module}Data.azm_${this.text}`]: this,
-                [`${this.module}Data.azm_${this.text}.countdownTime`]: countdownTime,
-                [`${this.module}Data.azm_${this.text}.time`]: _this.time,
+                [`
+                    ${this.module}
+                    Data.azm_$
+                    {
+                        this.text
+                    }
+                    `]: this,
+                [`
+                    ${this.module}
+                    Data.azm_$
+                    {
+                        this.text
+                    }
+                .
+                    countdownTime`]: countdownTime,
+                [`
+                    ${this.module}
+                    Data.azm_$
+                    {
+                        this.text
+                    }
+                .
+                    time`]: _this.time,
             })
         } else {
             that.setData({
-                [`azm_${_this.text}.countdownTime`]: countdownTime,
-                [`azm_${_this.text}.time`]: _this.time,
+                [`
+                    azm_$
+                    {
+                        _this.text
+                    }
+                .
+                    countdownTime`]: countdownTime,
+                [`
+                    azm_$
+                    {
+                        _this.text
+                    }
+                .
+                    time`]: _this.time,
             });
         }
         if (_this.time <= 0) {
@@ -1467,15 +1750,13 @@ class MAP {
                     },
                     fail: function (info) {
                         //失败回调
+                        console.log(info, '高德地图失败');
                         reject && reject()
                     }
                 });
             } else {
                 Qmap.reverseGeocoder({
-                    location: {
-                        latitude: location.lat,
-                        longitude: location.lon
-                    },
+                    location: {latitude: location.lat, longitude: location.lon},
                     get_poi: 1,
                     poi_options: 'address_format=short',
                     success: function (res) {
@@ -1492,6 +1773,7 @@ class MAP {
                     },
                     fail: function (info) {
                         //失败回调
+                        console.log(info, '腾讯地图失败');
                         reject && reject();
                     }
                 });
@@ -1597,6 +1879,32 @@ class updateManager {
     }
 }
 
+function compareVersion (v1, v2) {
+    v1 = v1.split('.')
+    v2 = v2.split('.')
+    var len = Math.max(v1.length, v2.length)
+
+    while (v1.length < len) {
+        v1.push('0')
+    }
+    while (v2.length < len) {
+        v2.push('0')
+    }
+
+    for (var i = 0; i < len; i++) {
+        var num1 = parseInt(v1[i])
+        var num2 = parseInt(v2[i])
+
+        if (num1 > num2) {
+            return 1
+        } else if (num1 < num2) {
+            return -1
+        }
+    }
+
+    return 0
+}
+
 module.exports = {
     formatTime: formatTime,
     regeneratorRuntime,
@@ -1608,13 +1916,18 @@ module.exports = {
     querySelector,
     trim,
     unique,
+    pagingArrRefactor,
     hideToast,
     hideLoading,
     failToast,
     showToast,
     showLoading,
+    getUserInfo,
+    login,
+    compareVersion,
     saveImageToPhotosAlbum,
     extend,
+    absUrl,
     requestParametersMerge,
     mergeKeyValue,
     requestUrlMerge,
@@ -1622,6 +1935,7 @@ module.exports = {
     moneyToFloat,
     moneyFloor,
     chooseLocation,
+    getLocation,
     Countdown,
     pageScrollTo,
     getCity,

@@ -1,10 +1,10 @@
-// pages/onlineBuy/index.js
 const app = getApp(),
-    ApiService = require('../../../utils/ApiService');
-Page({
-    /**
-     * 页面的初始数据
-     */
+    util2 = app.util2,
+    config = require('../../../utils/config'),
+    utilPage = require('../../../utils/utilPage'),
+    ApiService = require('../../../utils/ApiService'),
+    qrcode = require("../../../utils/qrcode.js");
+const appPage = {
     data: {
         show: false,
 
@@ -46,8 +46,126 @@ Page({
         firstCategoryArr: [], //保存选中的选择技师
         secondCategoryArr: [], //保存选中的选择项目
         option: '', //textarea 文本框内容
-        Shoptechnician: {}
+        Shoptechnician: {},
+        isRemark: false
+
     },
+    onLoad: function (options) {
+        let that = this;
+        that.loadCb();
+    },
+    /**
+     * 进入页面
+     */
+    onShow: function (options) {
+
+
+    },
+    /**
+     * 生命周期函数--监听页面隐藏
+     */
+    onHide: function () {
+
+    },
+    /**
+     * 生命周期函数--监听页面卸载
+     */
+    onUnload: function () {
+
+    },
+    /**
+     * 页面渲染完成
+     */
+    onReady: function () {
+
+    },
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function () {
+        let that = this;
+        that.getOrderCardCheckPwd();
+        wx.stopPullDownRefresh();
+    },
+    /**
+     * 上拉触底
+     */
+    onReachBottom() {
+
+    },
+
+};
+/**
+ * 方法类
+ */
+const methods = {
+    loadCb() {
+        let that = this;
+        let options = that.data.options;
+        let shop_id = options.shop_id;
+        let data = wx.getStorageSync('remark');
+
+
+
+        ApiService.getShoptechnician({
+            shop_id
+        }).then(res => {
+            console.log(res, 1111111111111111111111);
+
+            if (res.status == 1) {
+
+                let info = res.info;
+                let itemList = data.firstCategoryArr || [],
+                    arr = [],
+                    flag = 0;
+                let secondCategory = data.secondCategoryArr || [],
+                    arr2 = [],
+                    flag2 = 0;
+                let option = data.option;
+
+
+                for (let v of itemList) {
+                    if (v.isSelected) {
+                        arr.push(v.id)
+                    }
+                }
+
+                for (let val of info.technician) {
+                    if (arr.indexOf(val.id) !== -1) {
+                        val.isSelected = true
+                        flag++
+                    }
+                }
+
+
+                for (let a of secondCategory) {
+                    if (a.checked) {
+                        arr2.push(a.id)
+                    }
+                }
+
+                for (let val2 of info.item) {
+                    if (arr2.indexOf(val2.id) !== -1) {
+                        val2.checked = true
+                        flag2++
+                    }
+                }
+
+                that.setData({
+                    Shoptechnician: info,
+                    itemList: info.technician,
+                    isFirstCategoryAll: info.technician && info.technician.length === flag ? true : false,
+                    isSecondCategoryAll: info.item && info.item.length === flag2 ? true : false,
+                    option: option,
+                    secondCategory: info.item
+                })
+            }
+        });
+    },
+    loadData() {
+
+    },
+
     // 选择技师项目下的 全选按钮
     firstCategoryAll(e) {
         console.log(e)
@@ -73,33 +191,7 @@ Page({
             isFirstCategoryAll: true
         })
     },
-    // 选择技师下的 项目选项
-    firstCategoryChange(e) {
-        console.log('发生change事件，携带value值为：', e)
-        var that = this
-        that.data.firstCategoryArr = []
-        var items = that.data.itemList
-        var checkArr = e.detail.value
-        var isCheck = false
-        for (var i = 0; i < items.length; i++) {
-            if (checkArr.indexOf(items[i].username) != -1) {
-                items[i].isSelected = true
-            } else {
-                items[i].isSelected = false
-            }
-        }
-        var isFirstCategoryAll = true
-        for (var i = 0; i < items.length; i++) {
-            if (!items[i].isSelected) {
-                isFirstCategoryAll = false
-            }
-        }
-        that.setData({
-            itemList: items,
-            firstCategoryArr: checkArr,
-            isFirstCategoryAll: isFirstCategoryAll
-        })
-    },
+
     // 选择项目下的 全选按钮
     secondCategoryAll(e) {
         console.log(e)
@@ -191,78 +283,6 @@ Page({
         })
     },
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-        let that = this;
-        let shop_id = options.shop_id;
-        ApiService.getShoptechnician({
-            shop_id
-        }).then(res => {
-            console.log(res, 1111111111111111111111);
-
-            if (res.status == 1) {
-
-                let info = res.info;
-                that.setData({
-                    Shoptechnician: info,
-                    itemList: info.technician,
-                    secondCategory: info.item
-                })
-            }
-        });
-    },
-
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
-    },
 
     togglePopup() {
         console.log("444444444444");
@@ -314,5 +334,5 @@ Page({
     }
 
 
-
-})
+};
+Page(new utilPage(appPage, methods));

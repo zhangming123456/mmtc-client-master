@@ -1,9 +1,13 @@
 "use strict";
 const app = getApp(),
-    util = app.util, regeneratorRuntime = util.regeneratorRuntime,
+    util = app.util,
+    util2 = app.util2,
+    jude = app.util2.jude,
+    router = app.util2.router,
+    queryString = app.util2.queryString,
+    regeneratorRuntime = util.regeneratorRuntime,
     Fly = require('./fly.min'),
     ContentType = "Content-Type";
-import { jude, router, queryString } from '../util'
 let retryNum = 0
 function failCallback (res) {
     retryNum++;
@@ -107,7 +111,9 @@ function getFly (params = {}) {
                     path = page[page.length - 1].route;
                 // path !== 'page/tabBar/me/index'
                 if (res.data.status === 202 && (path !== 'pages/login/getUserInfo/index' || path !== 'pages/login/index')) {
-                    router.push('/page/userLogin/pages/getUserInfo/index');
+                    if (str !== 'checkSession') {
+                        router.push('/page/userLogin/pages/getUserInfo/index');
+                    }
                     return {
                         info: null,
                         message: '未登入',
@@ -222,6 +228,13 @@ class HttpRequest {
                     params.data = {};
                 }
                 params.data['_f'] = 1;
+                let city = app.globalData.city;
+                if (city && city.id) {
+
+                } else {
+                    city = util2.getCity()
+                }
+                params.data['_c'] = city.title;
                 let _contentType = 'application/x-www-form-urlencoded',
                     _data = queryString.stringify(params.data);
                 if (params.method && params.method.toLocaleLowerCase() === 'post') {
@@ -296,7 +309,6 @@ class HttpRequest {
         let qrCodePath = `${url}?${queryString.stringify(data)}`;
         let cookie = util.getSessionId();
         console.log(qrCodePath);
-        
         return new Promise((resolve, reject) => {
             wx.downloadFile({
                 url: qrCodePath,

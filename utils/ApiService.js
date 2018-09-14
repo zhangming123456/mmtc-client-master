@@ -1,8 +1,5 @@
 const config = require('./config');
-import {
-    HttpRequest
-} from "./ajax/http"
-    ;
+import { HttpRequest } from "./ajax/http";
 
 const $http = new HttpRequest();
 
@@ -131,38 +128,6 @@ class OldApi {
             };
         const api = '/wx2/login_new';
         const http = $http.get(that.api + api, data, resole, reject);
-        return http;
-    }
-
-    /**
-     * 登入(测试)
-     * @param code
-     * @param invite_id
-     * @param encryptedData
-     * @param userInfo
-     * @param iv
-     * @param resole
-     * @param reject
-     * @returns {*}
-     */
-    login2wxLogin ({
-                       code = '',
-                       invite_id,
-                       iv,
-                       encryptedData,
-                       userInfo
-                   }, resole, reject) {
-        let that = this,
-            data = {
-                code,
-                invite_id,
-                _t: 'mmtc',
-                iv,
-                encryptedData,
-                userInfo
-            };
-        const api = '/login2/wxLogin';
-        const http = $http.post2(that.shopApi + api, data, resole, reject);
         return http;
     }
 
@@ -385,7 +350,7 @@ class ApiService extends OldApi {
     getAppSpecialItem ({lon, lat}, resole, reject) {
         let that = this, data = {lon, lat};
         const api = '/special/special_item';
-        const http = $http.post(that.appApi + api, data, resole, reject);
+        const http = $http.get(that.appApi + api, data, resole, reject);
         return http;
     }
 
@@ -464,11 +429,7 @@ class ApiService extends OldApi {
      * @param reject
      * @returns {*}
      */
-    getItemBuyInfo ({
-                        item_id = 0,
-                        item_num = 1,
-                        is_group = 1
-                    } = {}, resole, reject) {
+    getItemBuyInfo ({item_id = 0, item_num = 1, is_group = 1} = {}, resole, reject) {
         let that = this,
             data = {
                 item_id,
@@ -488,9 +449,7 @@ class ApiService extends OldApi {
      * @param reject
      * @returns {*}
      */
-    saveFormIds ({
-                     form_id = 0
-                 } = {}, resole, reject) {
+    saveFormIds ({form_id = 0} = {}, resole, reject) {
         let that = this,
             data = {
                 form_id
@@ -557,16 +516,14 @@ class ApiService extends OldApi {
 
     /**
      * 优惠卷
-     * refund/refund_info?id=1
-     * @param data
+     * @param shop_id
      * @param resole
      * @param reject
      * @returns {*}
      */
-    getCouponInfo (data = {
-        shop_id: 0
-    }, resole, reject) {
+    getCouponInfo ({shop_id = 0}, resole, reject) {
         let that = this;
+        let data = {shop_id}
         const api = '/wx2/coupon';
         const http = $http.get(that.api + api, data, resole, reject);
         return http;
@@ -599,12 +556,9 @@ class ApiService extends OldApi {
      */
     wx_shopShowQrcode ({page = '', shop_id = 0}) {
         let that = this,
-            data = {
-                page,
-                shop_id
-            };
+            data = {page, shop_id};
         const api = '/wx_shop/showQrcode';
-        const http = $http.downloadFile(that.api + api, data, 'image');
+        const http = $http.downImage(that.api + api, data, 'image');
         return http;
     }
 
@@ -614,13 +568,9 @@ class ApiService extends OldApi {
      * @param id
      * @returns {*}
      */
-    getShopBuyInfo ({
-                        id = 0
-                    }) {
+    getShopBuyInfo_new ({id = 0}) {
         let that = this,
-            data = {
-                id
-            };
+            data = {id};
         const api = '/shop/getShopBuyInfo_new';
         const http = $http.get(that.api + api, data);
         return http;
@@ -628,17 +578,27 @@ class ApiService extends OldApi {
 
 
     /**
-     *
+     * 查看店铺买单信息
+     * @param shop_id
+     * @returns {*}
+     */
+    getShopBuyInfo ({shop_id = 0}) {
+        let that = this,
+            data = {shop_id};
+        const api = '/shop/getShopBuyInfo';
+        const http = $http.get(that.api + api, data);
+        return http;
+    }
+
+
+    /**
+     * 商品浏览记录
      * @param id
      * @returns {*}
      */
-    getPutFootPlace ({
-                         id = 0
-                     }) {
+    getPutFootPlace ({id = 0}) {
         let that = this,
-            data = {
-                id
-            };
+            data = {id};
         const api = '/mmg/putFootPlace';
         const http = $http.get(that.api + api, data);
         return http;
@@ -646,12 +606,10 @@ class ApiService extends OldApi {
 
     /**
      * 项目详情日记
-     * @param id
+     * @param item_id
      * @returns {*}
      */
-    getNotesOfItem ({
-                        item_id = 0
-                    }) {
+    getNotesOfItem ({item_id = 0}) {
         let that = this,
             data = {
                 item_id
@@ -663,20 +621,16 @@ class ApiService extends OldApi {
 
     /**
      * 项目详情其他推荐
-     * @param id
+     * @param shop_id
+     * @param item_id
+     * @param p
+     * @param lat
+     * @param lon
      * @returns {*}
      */
-    getItemsOfShop ({
-                        shop_id = 1,
-                        item_id = 1,
-                        p = 1
-                    }) {
+    getItemsOfShop ({shop_id, item_id, p = 1, lat, lon}) {
         let that = this,
-            data = {
-                shop_id,
-                item_id,
-                p
-            };
+            data = {shop_id, item_id, p, lat, lon};
         const api = '/wx2/getItemsOfShop';
         const http = $http.get(that.api + api, data);
         return http;
@@ -687,11 +641,7 @@ class ApiService extends OldApi {
      * @param id
      * @returns {*}
      */
-    getGroupgetItemV3 ({
-                           id = 0,
-                           lat = 0,
-                           lon = 0
-                       }) {
+    getGroupgetItemV3 ({id = 0, lat = 0, lon = 0}) {
         let that = this,
             data = {
                 id,
@@ -708,9 +658,7 @@ class ApiService extends OldApi {
      * @param id
      * @returns {*}
      */
-    getSaveFormIds ({
-                        form_id = 0
-                    }) {
+    getSaveFormIds ({form_id = 0}) {
         let that = this,
             data = {
                 form_id
@@ -725,33 +673,22 @@ class ApiService extends OldApi {
      * @param id
      * @returns {*}
      */
-    getMakeCollection ({
-                           item_id = 0,
-                           cancel = 0
-                       }) {
+    getMakeCollection ({item_id = 0, cancel = 0}) {
         let that = this,
-            data = {
-                item_id,
-                cancel
-            };
+            data = {item_id, cancel};
         const api = '/mmg/makeCollection';
         const http = $http.get(that.api + api, data);
         return http;
     }
 
     /**
-     *
-     * @param id
+     * 团购信息
+     * @param item_id
      * @returns {*}
      */
-    getOtherGroups ({
-                        item_id = 0
-                    }) {
+    getOtherGroups ({item_id = 0}) {
         let that = this,
-            data = {
-                item_id,
-            };
-
+            data = {item_id};
         const api = '/group/getOtherGroups';
         const http = $http.get(that.api + api, data);
         return http;
@@ -763,9 +700,7 @@ class ApiService extends OldApi {
      * @param id
      * @returns {*}
      */
-    getGroupMsgg ({
-                      item_id = 0
-                  }) {
+    getGroupMsgg ({item_id = 0}) {
         let that = this,
             data = {
                 item_id,
@@ -777,17 +712,15 @@ class ApiService extends OldApi {
 
     /**
      * 店铺主页
-     * @param id
+     * @param p
+     * @param shop_id
+     * @param lat
+     * @param lon
      * @returns {*}
      */
-    getHomeIndex ({shop_id = 0, lat = 0, lon = 0}) {
+    getHomeIndex ({p = 1, shop_id = 0, lat, lon}) {
         let that = this,
-            data = {
-                shop_id,
-                lat,
-                lon
-            };
-
+            data = {shop_id, lat, lon, p};
         const api = '/wx2/index';
         const http = $http.get(that.api + api, data);
         return http;
@@ -849,7 +782,7 @@ class ApiService extends OldApi {
      * @return
      * @return
      */
-    getOrderCardShopcard ({shop_id = ''} = {}) {
+    getOrderCardShopcard ({shop_id = 0} = {}) {
         let that = this,
             data = {shop_id};
         const api = '/order_card/shop_card';
@@ -960,11 +893,12 @@ class ApiService extends OldApi {
      * 立即支付（套卡）
      * @param card_id
      * @param num
+     * @param invite_id
      * @return
      */
-    orderCardGetPayInfoOfBuyNow ({card_id, num = 1}) {
+    orderCardGetPayInfoOfBuyNow ({card_id, num = 1, invite_id = 0}) {
         let that = this,
-            data = {card_id, num};
+            data = {card_id, num, invite_id};
         const api = '/order_card/getPayInfoOfBuyNow';
         const http = $http.post2(that.api + api, data);
         return http;
@@ -995,9 +929,9 @@ class ApiService extends OldApi {
      * 查看卷码
      * @return {*}
      */
-    getOrderCardCheckPwd ({pwd = ''} = {}) {
+    getOrderCardCheckPwd ({bill_id = '', card_item_id = ''} = {}) {
         let that = this,
-            data = {pwd};
+            data = {bill_id, card_item_id};
         const api = '/order_card/check_pwd';
         const http = $http.get(that.api + api, data);
         return http;
@@ -1007,10 +941,10 @@ class ApiService extends OldApi {
      * 卡订单详情
      * @return {*}
      */
-    getOrderGetBillDetail ({bill_id = '3253'} = {}) {
+    getOrderGetBillDetail ({bill_id = ''} = {}) {
         let that = this,
             data = {bill_id};
-        const api = '/order_card/getBillDetail';
+        const api = '/order_card/getBillDetail1';
         const http = $http.get(that.api + api, data);
         return http;
     }
@@ -1018,14 +952,15 @@ class ApiService extends OldApi {
     /**
      * 获取二维码(小程序码)
      * @param page
+     * @param scene
      * @param resole
      * @param reject
      * @returns {*}
      */
-    showShopQrcodeOp ({page, op, param}, resole, reject) {
+    showShopQrcodeOp ({page, scene}, resole, reject) {
         let that = this,
-            data = {page, op, param};
-        const api = `/shop/shopQrcodeOp`;
+            data = {page, scene};
+        const api = `/shop/shopQrcodeApi`;
         const http = $http.downImage(that.shopApi + api, data, resole, reject);
         return http;
     }
@@ -1042,6 +977,237 @@ class ApiService extends OldApi {
             data = {nid};
         const api = `/note/incZan`;
         const http = $http.get(that.api + api, data);
+        return http;
+    }
+
+    /**
+     * 取消订单
+     * @param id
+     * @param resole
+     * @param reject
+     * @returns {*}
+     */
+    cancelOrder ({id = 0}, resole, reject) {
+        let that = this,
+            data = {id};
+        const api = `/order/cancelOrder`;
+        const http = $http.get(that.api + api, data);
+        return http;
+    }
+
+    /**
+     * 登入(测试)
+     * @param code
+     * @param invite_id
+     * @param encryptedData
+     * @param userInfo
+     * @param iv
+     * @param resole
+     * @param reject
+     * @returns {*}
+     */
+    login2wxLogin ({code = '', invite_id, iv, encryptedData, userInfo}, resole, reject) {
+        let that = this,
+            data = {code, invite_id, _t: 'mmtc', iv, encryptedData, userInfo};
+        const api = '/login2/wxLogin';
+        const http = $http.post2(that.shopApi + api, data, resole, reject);
+        return http;
+    }
+
+    /**
+     * 绑定手机号验证码接口(测试)
+     * @param telephone
+     * @param resole
+     * @param reject
+     * @returns {*}
+     */
+    login2bindSMS ({telephone}, resole, reject) {
+        let that = this,
+            data = {telephone};
+        const api = '/login2/bindSMS';
+        const http = $http.post2(that.shopApi + api, data, resole, reject);
+        return http;
+    }
+
+    /**
+     * 绑定手机号验证码接口(测试)
+     * @param telephone
+     * @param code
+     * @param resole
+     * @param reject
+     * @returns {*}
+     */
+    login2bindPhone ({telephone, code}, resole, reject) {
+        let that = this,
+            data = {telephone, code};
+        const api = '/login2/bindPhone';
+        const http = $http.post2(that.shopApi + api, data, resole, reject);
+        return http;
+    }
+
+    /**
+     * 删除订单
+     * @param id
+     * @param resole
+     * @param reject
+     * @returns {*}
+     */
+    deleteOrder ({id = 0}, resole, reject) {
+        let that = this,
+            data = {id};
+        const api = '/order/rmOrder';
+        const http = $http.get(that.api + api, data, resole, reject);
+        return http;
+    }
+
+    /**
+     * 再支付
+     * @param billId
+     * @param resole
+     * @param reject
+     * @returns {*}
+     */
+    wx2getPayInfoOfOrder ({billId = 0}, resole, reject) {
+        let that = this,
+            data = {billId};
+        const api = '/wx2/getPayInfoOfOrder';
+        const http = $http.get(that.api + api, data, resole, reject);
+        return http;
+    }
+
+    /**
+     * 退出登入
+     * @param resole
+     * @param reject
+     * @returns {*}
+     */
+    wx2logoff ({} = {}, resole, reject) {
+        let that = this,
+            data = {};
+        const api = '/wx2/logoff';
+        const http = $http.get(that.api + api, data, resole, reject);
+        return http;
+    }
+
+    /**
+     * 我的收藏list
+     * @param p
+     * @param resole
+     * @param reject
+     * @returns {*}
+     */
+    getCollectionItems ({p = 1}, resole, reject) {
+        let that = this,
+            data = {p};
+        const api = '/collection/items';
+        const http = $http.get(that.api + api, data, resole, reject);
+        return http;
+    }
+
+    /**
+     * 我的优惠券
+     * @param p
+     * @param resole
+     * @param reject
+     * @returns {*}
+     */
+    getCouponGetCouponsOfMine ({p = 1}, resole, reject) {
+        let that = this,
+            data = {p};
+        const api = '/coupon/getCouponsOfMine';
+        const http = $http.get(that.api + api, data, resole, reject);
+        return http;
+    }
+
+    /**
+     * 我的日记
+     * @param p
+     * @param resole
+     * @param reject
+     * @returns {*}
+     */
+    getNoteMyNote ({p = 1}, resole, reject) {
+        let that = this,
+            data = {p};
+        const api = '/note/mynote';
+        const http = $http.get(that.api + api, data, resole, reject);
+        return http;
+    }
+
+    /**
+     * 我的日记
+     * @param p
+     * @param resole
+     * @param reject
+     * @returns {*}
+     */
+    getMemberFootPlace ({p = 1}, resole, reject) {
+        let that = this,
+            data = {p};
+        const api = '/member/footPlace';
+        const http = $http.get(that.api + api, data, resole, reject);
+        return http;
+    }
+
+    /**
+     * 删除日记
+     * @param id
+     * @param resole
+     * @param reject
+     * @returns {*}
+     */
+    deleteNote ({id = 0}, resole, reject) {
+        let that = this,
+            data = {id};
+        const api = '/note/deleteNote';
+        const http = $http.post2(that.api + api, data, resole, reject);
+        return http;
+    }
+
+    /**
+     * 意见反馈
+     * @param contact
+     * @param content
+     * @param resole
+     * @param reject
+     * @returns {*}
+     */
+    setMemberFeedback ({contact = '', content = ''}, resole, reject) {
+        let that = this,
+            data = {contact, content};
+        const api = '/member/feedback';
+        const http = $http.post2(that.api + api, data, resole, reject);
+        return http;
+    }
+
+    /**
+     * 领取优惠券
+     * @param id
+     * @param resole
+     * @param reject
+     * @returns {*}
+     */
+    couponDoPicker ({id = 0}) {
+        let that = this,
+            data = {id};
+        const api = '/coupon/doPicker';
+        const http = $http.get(that.api + api, data);
+        return http;
+    }
+
+    /**
+     * 添加商品到购物车
+     * @param item_id
+     * @param num
+     * @param resole
+     * @param reject
+     * @returns {*}
+     */
+    cartAddToCart ({item_id = 0, num = 1}) {
+        let that = this,
+            data = {item_id, num};
+        const api = '/cart/addToCart';
+        const http = $http.post(that.api + api, data);
         return http;
     }
 }

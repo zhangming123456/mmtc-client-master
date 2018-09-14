@@ -92,7 +92,7 @@ page {
     font-size: 72rpx;
     width: 100%;
     color: #333333;
-    height: 62rpx;
+    /* height: 62rpx; */
     text-align: right;
 }
 
@@ -149,7 +149,7 @@ page {
 .shopPay {
     height: 90rpx;
     font-size: 28rpx;
-    color: #999999;
+    color: #333333;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -164,11 +164,14 @@ page {
 }
 
 .t-expend {
-    padding:  30rpx;
+    padding-left: 30rpx;
+    padding-right: 30rpx;
     background-color: #ffffff;
     box-sizing: border-box;
     font-size: 30rpx;
     color: #333333;
+    height: 100rpx;
+    line-height: 100rpx;
 }
 
 .t-noJoin {

@@ -473,7 +473,7 @@ function failToast (option) {
     let data = {
         title: option,
         icon: 'fail',
-        image: '/imgs/icon/fail.png',
+        image: '/image/icon/fail.png',
         mask: true,
         duration: 2000
     };
@@ -685,7 +685,7 @@ function _go (a, options = {}) {
                 delta: -a
             })
         } else {
-            go('/pages/index/index', {type: 'tab'})
+            go('/page/tabBar/home/index', {type: 'tab'})
         }
     } else if (jude.isString(a) && regExpUtil.isPath(a)) {
         if (/\?/.test(a)) {

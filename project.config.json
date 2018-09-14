@@ -5,12 +5,13 @@
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"nodeModules": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.7.3",
 	"appid": "wx0df0e298b3b13290",
-	"projectname": "mmtc-client-master2",
+	"projectname": "mmtc-client-master",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -29,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 16,
+			"current": 30,
 			"list": [
 				{
 					"id": 0,
@@ -151,6 +152,72 @@
 					"name": "我的订单",
 					"pathName": "pages/order/all",
 					"query": ""
+				},
+				{
+					"id": 20,
+					"name": "套卡详情",
+					"pathName": "page/cardBag/pages/setDetails/index",
+					"query": "card_id=5"
+				},
+				{
+					"id": 21,
+					"name": "套卡购买",
+					"pathName": "page/cardBag/pages/setBuy/index",
+					"query": "nickname=%E8%89%BE%E9%9D%92%E7%BE%8E%E5%AE%B9%E5%BA%97&card_name=123456789&card_no=123456789&price=30&effective=13&market_price=566&cover=%2Fstatic%2Fupload%2Fimage%2F20180817%2F20180817113631_34928.png&card_id=5&service_phone=07558400081&telephone=13597331346&intro=%3Cimg%20src%3D%22https%3A%2F%2Fapp.mmtcapp.com%2Fstatic%2Fupload%2Fimage%2F20180817%2F20180817095530_78609.png%22%20alt%3D%22%22%3E123456677&shop_id=8710"
+				},
+				{
+					"id": -1,
+					"name": "全部订单",
+					"pathName": "page/tabBar/order/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "授权",
+					"pathName": "page/public/pages/authorization/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的（new）",
+					"pathName": "page/tabBar/mine/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的日记（new）",
+					"pathName": "page/mine/pages/mynotes/index",
+					"query": ""
+				},
+				{
+					"id": 26,
+					"name": "我的足迹（new）",
+					"pathName": "page/mine/pages/footprint/index",
+					"query": "scene=%7bid%3a10%2cyu%3a10%7d"
+				},
+				{
+					"id": -1,
+					"name": "意见反馈（new）",
+					"pathName": "page/mine/pages/feedback/index",
+					"query": ""
+				},
+				{
+					"id": 28,
+					"name": "店铺首页(new)",
+					"pathName": "page/shop/pages/home/index",
+					"query": "shop_id=8710"
+				},
+				{
+					"id": 29,
+					"name": "店铺详情(new)",
+					"pathName": "page/shop/pages/detail/index",
+					"query": "shop_id=69"
+				},
+				{
+					"id": 30,
+					"name": "项目详情(new)",
+					"pathName": "page/shop/pages/goods/index",
+					"query": "id=10114"
 				}
 			]
 		}

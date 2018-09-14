@@ -3,7 +3,7 @@
         <view class="t-selectTcr">
             选择技师：
         </view>
-        <checkbox-group bindchange="firstCategoryChange" class="t-selectTeacher">
+        <checkbox-group  class="t-selectTeacher">
             <label bindtap="firstCategoryAll" data-checkall="全部" class="t-all {{isFirstCategoryAll?'t-active':''}}">
                 <text>全部</text>
             </label>
@@ -23,8 +23,7 @@
     </view>
 
     <view class="t-comment">
-        <textarea placeholder="想写其他想说的话" maxlength="{{noteMaxLen}}" bindinput="bindWordLimit" maxlength="120" auto-height bindblur="commitOpinion"
-        />
+        <textarea placeholder="想写其他想说的话" value="{{option}}" maxlength="{{noteMaxLen}}" bindinput="bindWordLimit" maxlength="120" auto-height bindblur="commitOpinion"/>
         <view>{{currentNoteLen|0}}/{{noteMaxLen}}</view>    
     </view>
 
