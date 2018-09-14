@@ -1,0 +1,596 @@
+<wxs src="../../../../utils/common.wxs" module="c"/>
+<import src="../../../../wxParse/wxParse.wxml"/>
+<i-toast id="toast"/>
+<i-message id="message"/>
+
+<view class='msgitem' hidden='{{!groupData||!groupData.msg}}'>
+    <view class='flex'>
+        <image class='msgitem-avatar' src='{{c.absUrl(groupData.avatar,200)}}'></image>
+        <view class='flex-con'>{{groupData.msg}}</view>
+    </view>
+</view>
+<scroll-view id="content" bindscroll="onscroll" scroll-top="{{scrollTop}}" scroll-y bindscrolltolower="onReachBottom">
+    <view class='group-rule' wx:if="{{goods.group_num>0}}" catchtap='toGo' data-type="group_rule">拼团规则</view>
+    <swiper autoplay circular class="rel cover-wrap">
+        <swiper-item>
+            <azm-image class="cover" src="{{goods.cover}}" mode="aspectFill"></azm-image>
+        </swiper-item>
+    </swiper>
+    <view class=" toolbar bg-white">
+        <view class='flex'>
+            <view class='flex-con'>
+                <view class='ib unit'>{{goods.group_num?'拼团价':''}}￥</view>
+                <view class='ib price'>{{goods.group_num?goods.group_price:goods.price}}</view>
+                <view class='ib market-price'>
+                    <view class='text-left'>
+                        <view class='discount'>{{c.discount2(goods)}} 折</view>
+                    </view>
+                    <view class='money'>￥{{goods.group_num?goods.price:goods.market_price}}</view>
+                </view>
+            </view>
+            <view class='sell_count'>{{goods.loved_count}}人喜欢</view>
+        </view>
+        <view class='title-profile border-t'>
+            <view class='flex title'>
+                <view class='group-num' wx:if="{{goods.group_num && goods.group_num>0}}">{{goods.group_num}}人团</view>
+                <view>{{goods.title}}</view>
+            </view>
+            <view class='profile' wx:if="{{goods.profile}}">{{goods.profile}}</view>
+
+            <view class="t-welfare-box" wx:if="{{goods.item_label&&goods.item_label.length>0}}">
+                <view class="t-welfare" wx:for="{{goods.item_label}}" wx:key="{{index}}">
+                    <text>{{item}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 首单 -->
+    <view class="t-itmeCategory" style="display:none">
+        <view class="t-title">首单</view>
+        <view class="t-describe">美美天成新人专享券，每人仅且可享1次</view>
+        <view class="t-prize">去领劵</view>
+        <image class="t-arrows" src="https://app.mmtcapp.com/mmtc/imgs/gt@2x.png"></image>
+    </view>
+
+    <!-- 店铺优惠券 -->
+    <view class="t-itmecategory" bindtap='showeDiscount' wx:if="{{couponData&&couponData.length>0}}">
+        <view class="t-title">优惠券</view>
+        <view class="t-describe">
+            <text>{{goods.shop_coupon}}</text>
+        </view>
+        <view>
+            <text class="t-prize">去领劵</text>
+            <image class="t-arrows" src="https://app.mmtcapp.com/mmtc/imgs/gt@2x.png"></image>
+        </view>
+    </view>
+
+
+    <view class='tip-list border-b border-t' bindtap='showMasker'>
+        <view class='flex'>
+            <view class='flex-con t-flex'>
+                <image class='realnote-icon' src='https://app.mmtcapp.com/mmtc/imgs/book.png'></image>
+                <text>真实日记</text>
+            </view>
+            <view class='flex-con t-flex'>
+                <image class="t-tui" src="https://app.mmtcapp.com/mmtc/imgs/tui.png"></image>
+                <text>随时退</text>
+            </view>
+            <view class='flex-con t-flex'>
+                <image class='safe-icon' src='https://app.mmtcapp.com/mmtc/imgs/fanghu.png'></image>
+                <text>消费保障</text>
+            </view>
+            <view class='last-gt-col'>
+                <image class='gt-icon' src='https://app.mmtcapp.com/mmtc/imgs/gt@2x.png'></image>
+            </view>
+        </view>
+    </view>
+
+    <!-- 点评 -->
+    <view class="t-remark" bindtap="toGo" data-type="review" style="display: none">
+        <view class="t-no">暂无点评</view>
+        <view class="t-how">0篇点评</view>
+        <image class='t-gt-icon' src='https://app.mmtcapp.com/mmtc/imgs/gt@2x.png'></image>
+    </view>
+
+    <!-- 拼团的状态 -->
+    <block wx:if="{{groupData.count>0}}">
+        <view class='hr'></view>
+        <view class='group-buy-area'>
+            <view class='group-buy-title border-b border-t' bindtap='showBuyListArea'>
+                <view class='flex'>
+                    <view class='flex-con'> 已有{{groupData.count}}位小伙伴开团，可直接参与</view>
+                    <image class='gt-icon' wx:if="{{groupData.count>3}}"
+                           src='https://app.mmtcapp.com/mmtc/imgs/gt@2x.png'></image>
+                </view>
+            </view>
+            <form bindsubmit='reportSubmit' report-submit="true">
+                <view class='group-buy-list border-b'>
+                    <view class='border-b flex' wx:for="{{c.split(groupData.rows)}}" wx:key="{{index}}">
+                        <view>
+                            <image class='member-avatar'
+                                   src='{{c.absUrl(item.avatar,120)||"https://app.mmtcapp.com/mmtc/imgs/default.png"}}'></image>
+                        </view>
+                        <view class='flex-con group-buy-name'>{{item.nickname}}</view>
+                        <view>
+                            <view class='group-buy-num'>
+                                <text>还差{{item.left_num}}人成团</text>
+                            </view>
+                            <view class='group-buy-lefttime'>
+                                <text>剩余{{item.left_time}}</text>
+                            </view>
+                        </view>
+                        <view>
+                            <button data-id="{{item.id}}" form-type='submit' bindtap='toGo' data-type="group_buy"
+                                    class='join-btn'>参团
+                            </button>
+                        </view>
+                    </view>
+                </view>
+            </form>
+        </view>
+    </block>
+    <view class='hr'></view>
+    <view class="box bg-white  border-b">
+        <view class="flex">
+            <view class='flex-con title-area' bindtap='toGo' data-type="shop_home">
+                <view class="shop-title-area">
+                    <view class='flex'>
+                        <view class='shop-name one-line text-left'>{{shop.shop_name}}</view>
+                        <image class="t-renzhen" src='https://app.mmtcapp.com/mmtc/imgs/renzhen.png'></image>
+                    </view>
+                    <view class="t-border-r"></view>
+                    <view class='address one-line text-left'>
+                        <image class='t-gps' src='https://app.mmtcapp.com/mmtc/imgs/dingwei.png'></image>
+                        <view class="t-address">{{shop.address}}</view>
+                        <view class='distance'>{{'< '}} {{shop.distance}}</view>
+                    </view>
+                    <view class="t-welfareBox" wx:if="{{goods.shop_tag&&goods.shop_tag.length>0}}">
+                        <view class="t-welfare" wx:for="{{goods.shop_tag}}" wx:key="{{i}}" wx:for-item='v'
+                              wx:for-index='i'>{{v}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="text-center loc-area" bindtap='makePhoneCall' data-tel="{{shop.service_phone}}">
+                <image class='loc' src='https://app.mmtcapp.com/mmtc/imgs/dianhua.png'></image>
+            </view>
+        </view>
+    </view>
+
+    <!-- 技师 -->
+    <view class="t-technician" wx:if="{{technicianData&&technicianData.length>0}}">
+        <view class="t-title-technician">
+            <view class="t-num">技师 ({{technicianData.length}})</view>
+            <view class="t-examine" bindtap="toGo" data-type="technician">
+                <text>查看全部</text>
+                <image class='t-gt-icon' src='https://app.mmtcapp.com/mmtc/imgs/gt@2x.png'></image>
+            </view>
+        </view>
+        <view class="t-technician-box">
+            <scroll-view class="t-introBox" scroll-x class="t-scroll">
+                <view class="t-intro" wx:for='{{technicianData}}' wx:key="{{index}}">
+                    <azm-image class="t-head" type="img" lazy-load mode="aspectFill" ratio="1" round
+                               src="http://img07.tooopen.com/images/20170316/tooopen_sy_201956178977.jpg"></azm-image>
+                    <view class="t-name">{{item.username}}</view>
+                    <veiw class="t-occupation">{{item.type_name}}</veiw>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+
+    <!-- tab栏切换 -->
+    <i-tabs current="tab{{ currentTab }}" color="#ff538b" bindchange="clickTab">
+        <i-tab wx:for="{{tabList}}" wx:key="{{index}}" key="{{item.key}}" title="{{item.title}}"></i-tab>
+    </i-tabs>
+    <!--<view class="swiper-tab">-->
+    <!--<view class="swiper-tab-item {{currentTab==0?'active ':' '}}" data-current="0" catchtap="clickTab">项目详情</view>-->
+    <!--<view class="swiper-tab-item {{currentTab==1?'active ':' '}}" data-current="1" catchtap="clickTab">购买须知</view>-->
+    <!--<view class="swiper-tab-item {{currentTab==2?'active ':' '}}" data-current="2" catchtap="clickTab">美丽日记</view>-->
+    <!--</view>-->
+
+    <!-- 项目详情 -->
+    <view class="t-swiper" wx:if="{{currentTab === 0}}">
+        <block wx:if="{{goods.service_char || goods.intro || goods.item_brand&&goods.item_brand.length>0}}">
+            <block wx:if="{{goods.service_char}}">
+                <view class="t-shopIntro">
+                    <view class="t-shop-intro fz28">
+                        <view class="title3">{{goods.title}}</view>
+                        <view class="t-timeBox2">
+                            <text class="text666">总耗时:</text>
+                            <text>{{c.numAbs(goods.item_servic)}}分钟</text>
+                        </view>
+                    </view>
+
+                    <view class="t-shop-content">
+                        <view class="shopContent">服务内容</view>
+                        <view class="t-shop-items">{{goods.service}}</view>
+                    </view>
+                    <view class="t-shop-content2">
+                        <view class="shopContent">服务功效</view>
+                        <view class="t-shop-items">{{goods.service_char}}</view>
+                    </view>
+
+                    <view class="serviceFlow">
+                        <view class="service-flow">服务流程</view>
+                        <veiw class="serviceBox">
+                            <view class="t-service" wx:for="{{goods.item_servic}}" wx:key="{{i}}" wx:for-item='v'
+                                  wx:for-index='i'>
+                                <view>
+                                    <view class="serviceNum">{{i+1}}</view>
+                                    <view class="serviceContent">{{v.name}}</view>
+                                </view>
+                                <view class="quantities">{{v.times}}次</view>
+                                <view class="serviceTime">{{v.time}}分钟</view>
+                            </view>
+                        </veiw>
+                    </view>
+                    <view class='flex-con market-price2'>
+                        <view class="t-right">
+                            <view class='ib market-price3'>
+                                <view class='money'>￥{{goods.group_num?goods.price:goods.market_price}}</view>
+                            </view>
+                            <view class='ib unit'>{{goods.group_num?'拼团价':''}}</view>
+                            <view class='ib price'>
+                                <text>￥</text>
+                                {{goods.group_num?goods.group_price:goods.price}}
+                            </view>
+                        </view>
+                    </view>
+                    <!-- <view class="t-time">
+                        <view class="t-timeBox">
+                            <image class="t-waituse" src="https://app.mmtcapp.com/mmtc/imgs/waituse@2x.png"></image>
+                            <text>总耗时</text>
+                        </view>
+                        <view>{{c.numAbs(goods.item_servic)}}分钟</view>
+                    </view> -->
+                </view>
+                <view class="mt20"></view>
+            </block>
+            <!-- 图文详情 -->
+            <view class="t-text" wx:if="{{goods.intro}}">
+                <view class="textDetail azm-1px-t azm-1px-b">
+                    <view class="shuxian"></view>
+                    <view>图文详情</view>
+                </view>
+                <view class='item-content' wx:if="{{type == 0}}">
+                    <template is="wxParse" data="{{wxParseData:intro.nodes}}"/>
+                </view>
+            </view>
+            <!-- 使用商品 -->
+            <swiper indicator-active-color="#ff7aa5" indicator-dots="true" class="t-useshop"
+                    wx:if="{{goods.item_brand&&goods.item_brand.length>0}}">
+                <view class="t-useText">使用商品</view>
+                <swiper-item class="t-shopContent" wx:for="{{c.item_brand_cf(goods.item_brand)}}" wx:key="{{i}}}"
+                             wx:for-item="v" wx:for-index='i'>
+                    <view class="t-commodity" wx:for="{{v}}" wx:key="{{index}}">
+                        <image class="t-shopPhoto" mode="aspectFill" src="{{imageUrl + item.cover}}"></image>
+                        <view class="fz28 t-shopName">{{item.title}}</view>
+                        <text class="fz24 text666 t-shopTrademark">品牌：{{item.brand}}</text>
+                    </view>
+                </swiper-item>
+            </swiper>
+        </block>
+        <wxc-abnor wx:else class="azm-not-more" type="NOT_MORE"></wxc-abnor>
+    </view>
+
+    <!-- 购买须知 -->
+    <view class="t-notice" wx:if="{{currentTab === 1}}">
+        <block wx:if="{{goods.other}}">
+            <view class="t-shopNotice">
+                <view class="fz32">购买须知</view>
+                <view class="t-period">
+                    <view>有效期：</view>
+                    <view class="text666 t-from">{{goods.start_date}}至{{goods.end_date}}</view>
+                    <view class="text666  fz24">（周末、法定节假日通用）</view>
+                </view>
+                <view class="t-period">
+                    <view>使用时间：</view>
+                    <view class="text666">{{goods.start_time}}-{{goods.end_time}}</view>
+                </view>
+                <view class="t-period">
+                    <view>禁忌人群：</view>
+                    <view class="text666">{{goods.taboo}}</view>
+                </view>
+                <view class="t-period">
+                    <view class="otherHelp">其他说明:</view>
+                    <view class="text666  otherContent">{{goods.other}}</view>
+                </view>
+            </view>
+        </block>
+        <view class="t-howTobuy">
+            <veiw class="t-howText">【如何购买】</veiw>
+            <view class="text666  t-fz27">用户可以通过美美天成APP和小程序两个渠道浏览项目、消费体验。</view>
+        </view>
+        <view class="t-howTobuy">
+            <veiw class="t-howText">【消费流程】</veiw>
+            <view class="text666  t-fz27">平台下单——线下消费——二维码/消费码验证订单——交易完成。(为了您的权益，请在体验完项目之后再验证订单)。</view>
+        </view>
+        <view class="t-howTobuy">
+            <veiw class="t-howText">【如有问题】</veiw>
+            <view class="text666  t-fz27">客服电话为
+                <text class="t-telephone">400-184-8008</text>
+                ，也可以在美美天成公众号：mmtcapp回复咨询。
+            </view>
+        </view>
+    </view>
+
+    <!-- 日记 -->
+    <view class="t-beautyDiary" wx:if="{{currentTab === 2}}">
+        <block wx:if="{{cases&&cases.length>0}}">
+            <viwe>
+                <view mode="aspectFill" class="t-diary" wx:key="{{index}}" wx:for="{{cases}}">
+                    <image class="t-default"
+                           src="{{c.absUrl(item.avatar,100) || 'https://app.mmtcapp.com/mmtc/imgs/default.png '}}"></image>
+                    <view class="t-nameDiary">{{item.nickname}}</view>
+                    <view class="t-timeDiary">{{item.create_time}}</view>
+                    <!-- <view class="t-attention">+ 关注</view> -->
+                    <navigator class="t-diaryPhoto" url="/pages/cases/detail?id={{item.id}}" hover-class="none">
+                        <block wx:if="{{item.img_src}}">
+                            <view class="pic-list{{c.picCount(item.img_src)}}">
+                                <image mode="aspectFill" src='{{c.absUrl(pic,400)}}'
+                                       wx:for="{{c.str2arr(item.img_src)}}" wx:key="{{index}}"
+                                       wx:for-item="pic"></image>
+                            </view>
+                        </block>
+                    </navigator>
+                    <view class="t-evaluate">{{item.content}}</view>
+                    <view class="t-labelicon">
+                        <image class="t-label" src="https://app.mmtcapp.com/mmtc/imgs/icon_label_4.png"></image>
+                        {{item.item_title}}
+                    </view>
+                    <view class="t-condition">
+                        <view class="t-Condition border-r text-center">
+                            <image class="t-eye" src="https://app.mmtcapp.com/mmtc/imgs/eye@2x.png"></image>
+                            <text>浏览 {{item.viewed_count}}</text>
+                        </view>
+                        <view class="t-ConDition border-r text-center {{c.zanClass(item,noteZan)}}" catchtap="zan"
+                              data-item="{{item}}" data-page="{{index}}">
+                            <text class="iconfont icon-iconfontzhizuobiaozhun023148 azm-icon"></text>
+                            <text>点赞 {{item.zan_count}}</text>
+                        </view>
+                        <view class="t-conDition text-center">
+                            <image class="t-Eye" src="https://app.mmtcapp.com/mmtc/imgs/msg@2x.png"></image>
+                            <text>评论 {{item.comment_count}}</text>
+                        </view>
+                    </view>
+                </view>
+            </viwe>
+            <!--<view class="t-more">查看全部日记 ></view>-->
+        </block>
+        <wxc-abnor class="azm-not-more" wx:else type="NOT_MORE"></wxc-abnor>
+    </view>
+
+
+    <!-- 广告 -->
+    <view class="t-Journal" wx:if="{{currentTab !== 2}}">
+        <image bindtap='showBannerLink' mode="aspectFill" data-link="{{goods.banner.link}}" class="t-journal"
+               src="{{imageUrl + goods.banner.cover}}"></image>
+    </view>
+
+    <!-- 其他推荐 -->
+    <view class="marTop-12">
+        <view class='title-area t-title-area'>
+            <view class='txt'>其他推荐</view>
+            <view class='title-area-line'></view>
+        </view>
+        <block class='recommends'>
+            <view class='box3 bg-white'>
+                <block wx:for="{{recommends}}" wx:for-item="list" wx:for-index="i" wx:key="{{i}}">
+                    <navigator url='/page/shop/pages/goods/index?id={{item.id}}' hover-class='none' class='box3-item'
+                               wx:for="{{list}}" wx:key="{{index}}" open-type='redirect'>
+                        <azm-image ratio="1" src="{{item.cover}}" class="azm-image-box" type="img"
+                                   lazy-load mode="aspectFill"></azm-image>
+                        <view class='box3-item-info'>
+                            <view class="box3-item-title one-line">{{item.title}}</view>
+                            <view class="box3-item-desc one-line">{{item.shop_name}}</view>
+                            <view class="t-link">
+                                <view>{{item.viewed_count}}人喜欢</view>
+                                <view>{{'< '}} {{shop.distance}}</view>
+                            </view>
+                            <view class="box3-item-price-info">
+                                <view class="price">
+                                    <i>￥</i>
+                                    <span>{{item.price}}</span>
+                                </view>
+                                <view class='market-price'>￥{{item.market_price}}</view>
+                            </view>
+                        </view>
+                    </navigator>
+                </block>
+            </view>
+        </block>
+        <wxc-loadmore is-end="{{noMore}}" icon="随机/loading"></wxc-loadmore>
+    </view>
+</scroll-view>
+
+<!-- 底部按钮 -->
+<form bindsubmit='reportSubmit' report-submit="true">
+    <view id="footer" class="flex flex-stretch">
+        <view class="flex-con border-r border-t" bindtap="toGo" data-type="home">
+            <image src="https://app.mmtcapp.com/mmtc/imgs/homebig.png" alt=""
+                   style="width: 43rpx;height: 40rpx;"></image>
+            <view class='btn-txt '>首页</view>
+        </view>
+        <!-- <view class="flex-con border-r border-t" wx:if="{{!goods.group_num}}" bindtap="toGo" data-type="car">
+            <image src="https://app.mmtcapp.com/mmtc/imgs/car0.png" alt="" style="width: 43rpx;height: 40rpx;"></image>
+            <view class='btn-txt'>
+                购物车
+            </view>
+        </view> -->
+        <view class="flex-con border-r border-t" bindtap='makeCall'>
+            <image src="https://app.mmtcapp.com/mmtc/imgs/makecall3.png" alt=""
+                   style="width: 43rpx;height: 42rpx;"></image>
+            <view class='btn-txt '>电话</view>
+        </view>
+        <view class="flex-con border-t" bindtap="makeCollect">
+            <block wx:if="{{goods.collection}}">
+                <image src="https://app.mmtcapp.com/mmtc/imgs/collected.png" id="collectImage" alt=""
+                       style="width: 42rpx;height:42rpx"></image>
+            </block>
+            <block wx:else>
+                <image src="https://app.mmtcapp.com/mmtc/imgs/collect@2x.png" id="collectImage" alt=""
+                       style="width: 42rpx;height:42rpx"></image>
+            </block>
+            <view class='btn-txt'>收藏</view>
+        </view>
+        <block wx:if="{{!goods.group_num}}">
+            <!-- <button class="btn1" bindtap='addToCart' form-type='submit'>
+                加入购物车
+            </button> -->
+            <button class="{{goods.group_price?'btn2':'btn3'}}" catchtap='toGo' data-type="buy" form-type='submit'>
+                立即抢购
+            </button>
+        </block>
+        <block wx:else>
+            <button class="btn1 group-btn" catchtap='toGo' data-type="buy" form-type='submit'>
+                <view class='btn-price'>¥{{c.money_format(goods.price)}}</view>
+                <view class='text-center'>直接购买</view>
+            </button>
+            <button class="btn2 group-btn" bindtap='toGo' form-type='submit' data-type="group_buy">
+                <view class='btn-price'>¥{{goods.group_price}}</view>
+                <view class='text-center'>一键开团</view>
+            </button>
+        </block>
+    </view>
+</form>
+
+
+<view class='masker' bindtap='closeGoodsMasker' hidden='{{goodsHidden}}'>
+    <view class="buy-area" catchtap='noop'>
+        <view class='buy-area-inner'>
+            <view class='goods'>
+                <view class='flex flex-stretch'>
+                    <azm-image class='goods-img' src='{{goods.cover}}'></azm-image>
+                    <view class='flex-con'>
+                        <view class='goods-title'>{{goods.title}}</view>
+                        <view class='goods-price'>
+                            <view class='goods-price-uinit'>￥</view>
+                            <view class='goods-price-price'>{{goods.price}}</view>
+                            <view class='goods-market-price'>{{goods.market_price}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class='goods-num'>
+                <view class='flex'>
+                    <view class='flex-con'>数量</view>
+                    <view>
+                        <view class='numplus'>
+                            <view class='numreduce' bindtap='reduceNum'>-</view>
+                            <input class='num' bindinput='changeNum' type='number' value='{{goods.num}}'></input>
+                            <view class='numadd' bindtap='addNum'>+</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class='text-right total-price'>
+                总价: ￥{{c.number_format(goods.num*goods.price)}}
+            </view>
+        </view>
+        <view class='sure-btn' bindtap='doAddToCart'>确定</view>
+    </view>
+</view>
+
+<!-- 弹出的服务承诺 -->
+<view class='tip-box-masker' hidden='{{!IsshowMasker}}' bindtap='closeMasker'>
+    <view class='tip-box' catchtap='goodsInnerTap'>
+        <view class='tip-title'>服务承诺</view>
+        <view class='tip-content'>
+            <view class='tip-row flex flex-stretch'>
+                <view>
+                    <image class='realnote-icon' src='https://app.mmtcapp.com/mmtc/imgs/realnote.png'></image>
+                </view>
+                <view class='flex-con border-b'>
+                    <view class='tip-row-title'>真实日记</view>
+                    <view class='tip-row-content'>
+                        商家承诺项目案例由用户真实分享
+                    </view>
+                </view>
+            </view>
+            <view class='tip-row flex flex-stretch'>
+                <view>
+                    <image class='reback-icon' src='https://app.mmtcapp.com/mmtc/imgs/reback.png'></image>
+                </view>
+                <view class='flex-con border-b'>
+                    <view class='tip-row-title'>随时退</view>
+                    <view class='tip-row-content'>未消费、过期未消费承诺过期退款</view>
+                </view>
+            </view>
+            <view class='tip-row flex flex-stretch'>
+                <view>
+                    <image class='safe-icon ' src='https://app.mmtcapp.com/mmtc/imgs/safe.png'></image>
+                </view>
+                <view class='flex-con border-b'>
+                    <view class='tip-row-title'>消费保障</view>
+                    <view class='tip-row-content'>项目服务与价格描述如实承诺服务保障</view>
+                </view>
+            </view>
+        </view>
+        <view class='tip-btn' catchtap='closeMasker'>关闭</view>
+    </view>
+</view>
+
+<!-- 拼团转态 -->
+<view class='tip-box-masker tip-box-buy-list' bindtap='closeBuyListMasker' hidden='{{!isShowingByList}}'>
+    <view class='tip-box-buy-list-inner'>
+        <view class='tip-box-inner' catchtap='noop'>
+            <image class='tip-box-close-btn' src='https://app.mmtcapp.com/mmtc/imgs/closebtn@2x.png'
+                   bindtap='closeBuyListMasker'></image>
+            <view class='tip-box-title border-b'>拼团进行时</view>
+            <scroll-view scroll-y style='height:640rpx;'>
+                <form bindsubmit='reportSubmit' report-submit="true">
+                    <view class='group-buy-list border-b'>
+                        <view class='border-b flex' wx:for="{{groupData.rows}}" wx:key="{{index}}">
+                            <view>
+                                <image class='member-avatar'
+                                       src='{{c.absUrl(item.avatar,120)|| "https://app.mmtcapp.com/mmtc/imgs/default.png"}}'></image>
+                            </view>
+                            <view class='flex-con text-left pl20'>
+                                <view class='group-buy-num'>
+                                    <text>还差{{item.left_num}}人成团</text>
+                                </view>
+                                <view class='group-buy-lefttime'>
+                                    <text>剩余{{item.left_time}}</text>
+                                </view>
+                            </view>
+                            <view>
+                                <button data-id="{{item.id}}" form-type='submit' bindtap='toGo' data-type="group_buy"
+                                        class='join-btn'>参团
+                                </button>
+                            </view>
+                        </view>
+                    </view>
+                </form>
+            </scroll-view>
+            <view class='tip-box-bottom'>
+                仅显示{{c.min(groupData.rows.length,groupData.count)}}个正在开团的人
+            </view>
+        </view>
+    </view>
+</view>
+
+<!--弹出的优惠券 -->
+<view class='t-tip-box-masker' hidden='{{!IsshowDiscount}}' bindtap='closeDiscount' style="z-index: 100;">
+    <view class='t-tip-box' catchtap='goodsInnerTap'>
+        <view>
+            <view class="t-discountTitle">{{shop.shop_name}}</view>
+            <scroll-view scroll-y="true" class="t-coupons">
+                <view class="t-discountBack" wx:for="{{couponData}}" wx:key="{{index}}"
+                      style="background: url('{{imageUrl + item.cover}}');background-size: 680rpx 240rpx;">
+                    <view class="t-discountPrize">
+                        <text class="t-symbol">¥</text>
+                        <text class="t-money">{{item.price}}</text>
+                        <view class="t-newbie">{{item.title}}</view>
+                        <view class="t-threshold">（{{item.title2}}）</view>
+                    </view>
+                    <view class="t-get" bindtap='doPicker' data-item="{{item}}">马上领取</view>
+                    <view class="t-deadline {{colorData[item.type].color||'purple'}}">期限：{{item.valid_time}}</view>
+                </view>
+            </scroll-view>
+        </view>
+        <view class="t-ture" catchtap='closeDiscount'>完成</view>
+    </view>
+</view>
+
+<image id="gotoTop" hidden='{{!showGotoTop}}' src='https://app.mmtcapp.com/mmtc/imgs/top.png' bindtap='gotoTop'></image>

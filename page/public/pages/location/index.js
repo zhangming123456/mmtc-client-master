@@ -12,6 +12,7 @@ const appPage = {
         location: {},
         cityName: '',
         loading: false,
+        loadingError: false,//定位失败
         histories: []
     },
     /**
@@ -47,7 +48,7 @@ const methods = {
         app.globalData.city = city;
         this.setData({
             cityName: city.title,
-            location: app.globalData.lat_and_lon,
+            location: {...app.globalData.lat_and_lon},
             histories: data
         });
     },
@@ -71,21 +72,25 @@ const methods = {
      */
     relocAddr(){
         if (this.data.loading)return;
-        this.setData({loading: true});
+        this.setData({loading: true, loadingError: false});
         let that = this;
         wx.getLocation({
             type: 'gcj02',
             success(res) {
-                map.getMap({lat: res.latitude, lon: res.longitude}, res => {
+                map.getMap({lat: res.latitude, lon: res.longitude},
+                    res => {
                         let city = res.city;
                         app.globalData.lat_and_lon = res;
                         app.globalData.city = util2.getCity({title: city});
                         that.$route.back();
+                    },
+                    rsp => {
+                        that.setData({loading: false, loadingError: true})
                     }
                 )
             },
             fail(){
-                that.setData({loading: false});
+                that.setData({loading: false, loadingError: true});
             }
         });
     },

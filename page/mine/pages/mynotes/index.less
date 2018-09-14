@@ -1,0 +1,113 @@
+// outExt: .wxss, compress:false, sourceMap:false
+@import "../../../../style/theme";
+
+.nav-item {
+    background-color: #fff;
+    margin-bottom: 24*1rpx;
+    line-height: 1;
+}
+
+.nav-title {
+    padding: 26*1rpx 0 26*1rpx 30*1rpx;
+    font-size: 32*1rpx;
+    color: #666666;
+}
+
+image.date-icon {
+    width: 38*1rpx;
+    margin-right: 13*1rpx;
+    height: 36*1rpx;
+}
+
+image.op-icon {
+    width: 37*1rpx;
+    height: 35*1rpx;
+    margin-right: 30*1rpx;
+}
+
+page {
+    background-color: #f4f4f4;
+}
+
+.pic-list3, .pic-list2, .pic-list1 {
+    padding-top: 31*1rpx;
+    overflow: hidden;
+}
+
+.pic-list3 image {
+    width: 220*1rpx;
+    height: 220*1rpx;
+    float: left;
+    margin-right: 15*1rpx;
+}
+
+.pic-list2 image, .pic-list1 image {
+    width: 337.5*1rpx;
+    height: 337.5*1rpx;
+    float: left;
+    margin-right: 15*1rpx;
+}
+
+.pic-list3 image:last-child, .pic-list2 image:last-child, .pic-list1 image:last-child {
+    margin-right: 0;
+}
+
+.nav-content {
+    padding: 0 29*1rpx;
+}
+
+.view-img {
+    width: 30*1rpx;
+    height: 24*1rpx;
+}
+
+.zan-img {
+    width: 26*1rpx;
+    height: 26*1rpx;
+}
+
+.comment-img {
+    width: 27*1rpx;
+    height: 25*1rpx;
+}
+
+.toolbar-mini {
+    padding: 24*1rpx 0;
+    font-size: 24*1rpx;
+}
+
+.toolbar-mini image {
+    position: relative;
+    top: -1*1rpx;
+}
+
+.pt20 {
+    margin-bottom: 20*1rpx;
+}
+
+.content {
+    padding-top: 31*1rpx;
+    color: #2c2c2c;
+}
+
+.azm-note-footer {
+    box-sizing: border-box;
+    padding: 12*2rpx 15*2rpx;
+    text-align: center;
+    line-height: 1;
+    text {
+        font-size: 12*2rpx;
+        &.azm-icon {
+            color: @text-disabled-color;
+            font-size: 12*2rpx;
+        }
+    }
+    .azm-zan {
+        text {
+            color: @text-primary-color;
+            &.azm-icon {
+                color: @text-primary-color;
+            }
+        }
+    }
+}

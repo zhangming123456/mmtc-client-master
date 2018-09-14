@@ -1,1 +1,34 @@
-@import "../../../../style/cardBag/setBuy.wxss";
+page {
+  background-color: #f4f4f4;
+}
+.azm-cardBag-pay .azm-header .azm-header-img {
+  width: 150rpx;
+  height: 150rpx;
+}
+.azm-cardBag-pay .azm-header .azm-header-nickname {
+  box-sizing: border-box;
+  padding-left: 30rpx;
+}
+.azm-cardBag-pay .azm-wx-pay .azm-wx-pay-pitch {
+  width: 25rpx;
+  height: 25rpx;
+}
+.azm-cardBag-pay .azm-text-price {
+  font-size: 28rpx;
+  color: #FF6182;
+}
+.azm-cardBag-pay .azm-wx-pay .azm-icon {
+  color: #41b035;
+}
+.t-button {
+  background-image: linear-gradient(-50deg, #FE5163 0%, #FF8C73 100%);
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  color: #FFFFFF;
+  width: 689rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  margin-top: 40rpx;
+  margin-left: 30rpx;
+}

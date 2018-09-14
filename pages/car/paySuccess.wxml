@@ -1,7 +1,7 @@
 <view class="panel-no-margin2 bg-white text-center border-b">
     <image src="https://app.mmtcapp.com/mmtc/imgs/ok@2x.png" class='avatar' alt=""></image>
     <view class="text666 fz28">
-        订单支付成功，欢迎下次光临！请前往我的-订单中查看
+        订单支付成功，欢迎下次光临！
     </view>
 </view>
 <!-- <view class="hr24"></view>

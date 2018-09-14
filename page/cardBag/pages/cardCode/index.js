@@ -11,7 +11,7 @@ const appPage = {
     loadingMore: true,
     noMore: false,
     pwdList: {},
-    qrcode:''
+    qrcode: ''
   },
   onLoad: function (options) {
     let that = this;
@@ -21,7 +21,9 @@ const appPage = {
    * 进入页面
    */
   onShow: function (options) {
-
+    if (this.data.isShow) {
+      this.getOrderCardCheckPwd();
+    }
   },
   /**
    * 生命周期函数--监听页面隐藏
@@ -46,6 +48,8 @@ const appPage = {
    */
   onPullDownRefresh: function () {
     let that = this;
+    that.getOrderCardCheckPwd();
+    wx.stopPullDownRefresh();
   },
   /**
    * 上拉触底
@@ -72,16 +76,27 @@ const methods = {
 
   getOrderCardCheckPwd() {
     let that = this;
-    var pwd = this.data.options.pwd;
+    var bill_id = this.data.options.bill_id;
+    var card_item_id = this.data.options.card_item_id;
+
+
+
     ApiService.getOrderCardCheckPwd({
-      pwd
+      bill_id,
+      card_item_id
     }).finally(res => {
       if (res.status === 1) {
+
+        for (let v of res.info) {
+          if (v.pwd) {
+            v.qrcode = qrcode.createQrCodeImg('https://app.mmtcapp.com/mmtc/?pwd=' + v.pwd, {
+              'size': 300
+            })
+          }
+        }
+
         that.setData({
-          pwdList: res.info,
-          qrcode: qrcode.createQrCodeImg('https://app.mmtcapp.com/mmtc/?pwd=' + res.info.pwd, {
-            'size': 300
-          })
+          pwdList: res.info
         })
       }
     })

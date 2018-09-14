@@ -4,47 +4,61 @@
 <i-message id="message" />
 
 <view>
-    <block wx:if="{{type=='可用套卡'}}">
-        <view class="t-cardBox">
-            <view class="t-card" style="background: url('{{imageUrl + item.bj}}') no-repeat center center;" wx:for="{{cardList}}" wx:key="{{index}}"
-                bindtap="gotoCardDetails" data-item="{{item}}">
-                <view class="t-cardTitle">
-                    <text>{{ item.card_name }}</text>
-                    <!-- <image src="../../../../image/cardBag/Fill1Copy.png"></image> -->
-                </view>
-                <view class="t-cardId">ID:{{ item.card_no }}</view>
-                <view class="t-cardTime">还剩 128 天有效</view>
-                <view class="t-shopName azm-1px-t">
-                    <image mode="aspectFill" src="{{ c.absUrl(item.cover) }}"></image>
-                    <text>{{ item.nickname }}</text>
+
+
+    <block wx:if="{{cardList.length>=1 || myCardList.length>=1}}">
+
+        <block wx:if="{{type=='可用套卡'}}">
+            <view class="t-cardBox">
+                <view class="t-card" style="background: url('{{imageUrl + item.bj}}') no-repeat center center;" wx:for="{{cardList}}" wx:key="{{index}}"
+                    bindtap="gotoCardDetails" data-item="{{item}}">
+                    <view class="t-cardTitle">
+                        <text>{{ item.card_name }}</text>
+                        <!-- <image src="../../../../image/cardBag/Fill1Copy.png"></image> -->
+                    </view>
+                    <view class="t-cardId">ID:{{ item.card_no }}</view>
+                    <view class="t-cardTime">还剩 {{item.enf_days}} 天有效</view>
+                    <view class="t-shopName azm-1px-t">
+                        <image mode="aspectFill" src="{{ c.absUrl(item.cover) }}"></image>
+                        <text>{{ item.nickname }}</text>
+                    </view>
                 </view>
             </view>
+        </block>
+
+        <block wx:if="{{type=='不可用卡'}}">
+            <view class="t-cardBox">
+                <view class="t-card" wx:for="{{myCardList}}" style="background: url('{{imageUrl + item.bj}}') no-repeat center center;" wx:key="{{index}}"
+                    bindtap="gotoCardDetails" data-item="{{item}}">
+                    <view class="t-cardTitle">
+                        <text>{{ item.card_name }}</text>
+                        <!-- <image src="../../../../image/cardBag/Fill1Copy.png"></image> -->
+                    </view>
+                    <view class="t-cardId">ID:{{ item.card_no }}</view>
+                    <view class="t-shopName azm-1px-t">
+                        <image mode="aspectFill" src="{{ c.absUrl(item.cover) }}"></image>
+                        <text>{{ item.nickname }}</text>
+                    </view>
+                    <image wx:if="{{item.status=='已退款'}}" class="t-valid" src="../../../../image/cardBag/refunded.png"></image>
+                    <image wx:if="{{item.status=='已完成'}}" class="t-valid" src="../../../../image/cardBag/complete.png"></image>
+                    <image wx:if="{{item.status=='已过期'}}" class="t-valid" src="../../../../image/cardBag/expired.png"></image>
+                </view>
+            </view>
+        </block>
+    </block>
+
+
+    <block wx:else>
+        <view class='t-empty-area'>
+            <image src='https://app.mmtcapp.com/mmtc/imgs/empty.png'></image>
+            <view>您还没有相关的订单</view>
         </view>
     </block>
 
-    <block wx:if="{{type=='不可用卡'}}">
-        <view class="t-cardBox">
-            <view class="t-card" wx:for="{{myCardList}}" style="background: url('{{imageUrl + item.bj}}') no-repeat center center;" wx:key="{{index}}"
-                bindtap="gotoCardDetails" data-item="{{item}}">
-                <view class="t-cardTitle">
-                    <text>{{ item.card_name }}</text>
-                    <!-- <image src="../../../../image/cardBag/Fill1Copy.png"></image> -->
-                </view>
-                <view class="t-cardId">ID:{{ item.card_no }}</view>
-                <view class="t-shopName azm-1px-t">
-                    <image mode="aspectFill" src="{{ c.absUrl(item.cover) }}"></image>
-                    <text>{{ item.nickname }}</text>
-                </view>
-                <image wx:if="{{item.status=='已退款'}}" class="t-valid" src="../../../../image/cardBag/refunded.png"></image>
-                <image wx:if="{{item.status=='已完成'}}" class="t-valid" src="../../../../image/cardBag/complete.png"></image>
-                <image wx:if="{{item.status=='已过期'}}" class="t-valid" src="../../../../image/cardBag/expired.png"></image>
-            </view>
-        </view>
-    </block>
     <view class="t-bottom" bindtap="toggle">
         {{type === '可用套卡' ? '不可用卡' : '可用套卡'}}
     </view>
 
 
-    
+
 </view>

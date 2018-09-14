@@ -209,7 +209,7 @@
                                         </view>
                                     </view>
                                     <view class="azm-note-content">{{item.content}}</view>
-                                    <view class="flexBox azm-note-footer azm-1px-b azm-1px-t" catchtap="stopTap">
+                                    <view class="flexBox azm-note-footer azm-1px-b azm-1px-t" catchtap="noop">
                                         <view class="flexBox-item fb-8 azm-1px-r">
                                             <text class="iconfont icon-liulan azm-icon"></text>
                                             <text class="azm-text" decode>&nbsp;浏览&nbsp;</text>

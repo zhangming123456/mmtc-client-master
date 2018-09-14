@@ -65,16 +65,19 @@ const methods = {
             options = that.data.options,
             isShow = that.data.isShow,
             id = options.id;
-        that.getOrderGetBillDetail()
+        that.getOrderGetBillDetail(options.bill_id)
 
     },
     loadData() {
 
     },
 
-    getOrderGetBillDetail() {
+    getOrderGetBillDetail(bill_id) {
         let that = this;
-        ApiService.getOrderGetBillDetail({}).finally(res => {
+
+        ApiService.getOrderGetBillDetail({
+            bill_id
+        }).finally(res => {
             if (res.status === 1) {
                 that.setData({
                     billDetail: res.info,
@@ -86,6 +89,38 @@ const methods = {
     gotoMycard() {
         this.$route.push({
             path: '/page/cardBag/pages/myCard/index'
+        })
+    },
+
+    makeCall() {
+        let that = this;
+
+        wx.makePhoneCall({
+            phoneNumber: '4001848008' //仅为示例，并非真实的电话号码
+        });
+
+    },
+
+    copyBtn(e) {
+        var that = this;
+        wx.setClipboardData({
+            data: that.data.billDetail.order_no,
+            success: function (res) {
+                wx.getClipboardData({
+                    success: function (res) {
+                        console.log(res.data) // data
+                    }
+                })
+            }
+        })
+    },
+    gotoShop(){
+        var item = this.data.billDetail.shop_id;
+        this.$route.push({
+            path: '/page/shop/pages/home/index',
+            query: {
+                shop_id: item
+            }
         })
     }
 

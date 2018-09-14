@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "我的足迹",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "i-message": "../../../../lib/iview/message/index",
+    "i-toast": "../../../../lib/iview/toast/index",
+    "azm-image": "../../../../lib/components/azm-image/index",
+    "azm-gotop": "../../../../lib/components/azm-gotop/index",
+    "i-cell-group": "../../../../lib/iview/cell-group/index",
+    "i-cell": "../../../../lib/iview/cell/index",
+    "i-panel": "../../../../lib/iview/panel/index",
+    "wxc-label": "../../../../lib/minui/wxc-label/dist/index",
+    "wxc-loadmore": "../../../../lib/minui/wxc-loadmore/dist/index"
+  }
+}

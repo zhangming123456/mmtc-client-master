@@ -37,7 +37,7 @@
             <view>
                 <image src='https://app.mmtcapp.com/mmtc/imgs/shop2.png' class='shop-avatar'></image>
             </view>
-            <navigator class='flex-con one-line' url='/pages/home/index?shop_id={{item.shop_id}}' hover-class='none'>
+            <navigator class='flex-con one-line' url='/page/shop/pages/home/index?shop_id={{item.shop_id}}' hover-class='none'>
                 {{item.shop_name}}
             </navigator>
             <view>

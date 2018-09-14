@@ -3,8 +3,7 @@
 </view>
 <view class='btns'>
     <button class='btn-bywx' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">微信立即登录</button>
-
-    <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取用户信息登入</button>
+    <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo" wx:if="{{false}}">获取用户信息登入</button>
     <!--<view class='btn-byphone' bindtap='showPhoneWin'>-->
     <!--手机验证登录-->
     <!--</view>-->
@@ -12,3 +11,10 @@
     <!--账号密码登录-->
     <!--</view>-->
 </view>
+
+<form bindsubmit="formSubmit" bindreset="formReset" wx:if="{{isBindTelephone}}">
+    <input name="telephone" placeholder="输入手机号码" type="number" maxlength="11" bindinput="inputTelephone"/>
+    <button bindtap="getCode">获取验证码</button>
+    <input name="code" placeholder="输入验证码" type="number" maxlength="6"/>
+    <button formType="submit">Submit</button>
+</form>

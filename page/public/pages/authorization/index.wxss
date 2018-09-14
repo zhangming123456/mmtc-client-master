@@ -1,0 +1,23 @@
+page {
+    background: #fff;
+}
+.azm-auth image{
+    width: 150rpx;
+    height: 150rpx;
+}
+button.azm-btn{
+    position: absolute;
+    top: 540rpx;
+    left: 50%;
+    transform: translate(-50%, 0);
+    min-width:228rpx;
+    padding:0 30rpx;
+    background-color:#ff5777;
+    border:0 none;
+    border-radius:2rpx;
+    color:#fff;
+    font-size:28rpx;
+    text-align:center;
+    overflow:hidden;
+    line-height:66rpx;
+}

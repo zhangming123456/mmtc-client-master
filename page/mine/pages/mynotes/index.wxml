@@ -1,0 +1,59 @@
+<wxs src="../../../../utils/common.wxs" module="c"/>
+<i-toast id="toast"/>
+<i-message id="message"/>
+
+<block wx:for="{{notes}}" wx:for-item="val" wx:for-index="i" wx:key="{{i}}">
+    <view class='nav-item' wx:for="{{val}}" wx:key="{{index}}">
+        <view class='nav-title border-b'>
+            <view class="flex">
+                <image src='https://app.mmtcapp.com/mmtc/imgs/date.png' class='date-icon'></image>
+                <view class='flex-con'>
+                    {{item.create_time}}
+                </view>
+                <view data-id="{{item.id}}" bindtap='showActions'>
+                    <image src='https://app.mmtcapp.com/mmtc/imgs/op.png' class='op-icon'></image>
+                </view>
+            </view>
+        </view>
+        <view class='nav-content'>
+            <navigator url="/pages/cases/detail?id={{item.id}}" hover-class="none">
+                <block wx:if="{{item.img_src}}">
+                    <view class="pic-list{{c.picCount(item.img_src)}}">
+                        <image src='{{c.absUrl(pic,400)}}' wx:for="{{c.str2arr(item.img_src)}}" wx:key="*this"
+                               wx:for-item="pic" mode="aspectFill"></image>
+                    </view>
+                </block>
+                <view class="fz28 content two-line">
+                    {{item.content}}
+                </view>
+            </navigator>
+            <view wx:if="{{item.item_id && item.item_id > 0}}" class="pt20">
+                <image src="https://app.mmtcapp.com/mmtc/imgs/clz@2x.png" class="img-sm"></image>
+                <view class="color-red fz26 ib pl10" bindtap='showItemDetail' data-id="{{item.item_id}}">
+                    {{item.item_title}}
+                </view>
+            </view>
+        </view>
+        <view class="flexBox azm-note-footer azm-1px-b azm-1px-t" catchtap="noop">
+            <view class="flexBox-item fb-8 azm-1px-r">
+                <text class="iconfont icon-liulan azm-icon"></text>
+                <text class="azm-text" decode>&nbsp;浏览&nbsp;</text>
+                <text class="azm-num">{{item.viewed_count}}</text>
+            </view>
+            <view class="flexBox-item fb-8 azm-1px-r {{c.zanClass(item,noteZan)}}"
+                  catchtap="zan" data-item="{{item}}" data-page="{{i}}"
+                  data-index="{{index}}">
+                <text class="iconfont icon-iconfontzhizuobiaozhun023148 azm-icon"></text>
+                <text class="azm-text" decode>&nbsp;点赞&nbsp;</text>
+                <text class="azm-num">{{item.zan_count}}</text>
+            </view>
+            <view class="flexBox-item fb-8">
+                <text class="iconfont icon-pinglun azm-icon"></text>
+                <text class="azm-text" decode>&nbsp;评论&nbsp;</text>
+                <text class="azm-num">{{item.comment_count}}</text>
+            </view>
+        </view>
+    </view>
+</block>
+
+<wxc-loadmore is-end="{{noMore}}" icon="随机/loading"></wxc-loadmore>

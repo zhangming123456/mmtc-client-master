@@ -1,0 +1,204 @@
+<wxs src="../../../utils/common.wxs" module="c"/>
+<import src="../../../wxParse/wxParse.wxml"/>
+<i-toast id="toast"/>
+<i-message id="message"/>
+
+<view class="navbar border-b">
+    <view class='flex'>
+        <view class="nav-item border-r {{type==0?'active':''}}" data-type="0" bindtap='setType'>全部</view>
+        <view class="nav-item border-r {{type==1?'active':''}}" data-type="1" bindtap='setType'>待付款</view>
+        <view class="nav-item border-r {{type==2?'active':''}}" data-type="2" bindtap='setType'>待服务</view>
+        <view class="flex-con border-r {{type==3?'active':''}}" data-type="3" bindtap='setType'>待写日记/点评</view>
+        <view class="nav-item {{type==4?'active':''}}" data-type="4" bindtap='setType'>退款</view>
+    </view>
+</view>
+<view class='content'>
+    <block wx:if="{{items[type].length}}">
+        <view class="hr24"></view>
+        <block wx:for="{{items[type]}}" wx:for-index="i" wx:for-item="v" wx:key="{{i}}">
+            <block wx:for="{{v}}" wx:key="{{v.id}}" wx:for-item="bill">
+                <!--完全退款-->
+                <block wx:if="{{c.orderNumber(bill,type).status == 4 || bill.is_refund == 1}}">
+                    <block wx:for="{{bill.items}}" wx:key="{{val.id}}" wx:for-item="val" wx:for-index="j">
+                        <view class='order-item border-t' style="margin-bottom: 16rpx">
+                            <view class='flex border-b'>
+                                <image src='https://app.mmtcapp.com/mmtc/imgs/shop2.png' class='bill-icon'></image>
+                                <view class='flex-con text999 fz28'>
+                                    {{bill.shop_name}}
+                                </view>
+                                <view class="status">
+                                    <view>完成退款</view>
+                                </view>
+                            </view>
+                            <view hover-class='none' class="order-items" bindtap="goOrderDetail" data-item="{{val}}">
+                                <view class='flex border-b'>
+                                    <image class='avatar' src='{{c.absUrl(val.cover,300)}}'></image>
+                                    <view class='item-info flex-con'>
+                                        <view class='title'>{{val.title}}</view>
+                                        <view class='price-area'>
+                                            <view class='unit'>￥</view>
+                                            <view class='price'>{{val.price}}</view>
+                                            <view class='market-price'>门市价 ￥{{val.market_price}}</view>
+                                        </view>
+                                        <view class='num'>
+                                            数量：x{{val.num}}
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                </block>
+                <block wx:else>
+                    <view class='order-item azm-1px-b' style="margin-bottom: 16rpx">
+                        <view wx:if="{{bill.order_type!=3}}" class='flex border-b'>
+                            <image src='https://app.mmtcapp.com/mmtc/imgs/shop2.png' class='bill-icon'></image>
+                            <view class='flex-con text999 fz28'>
+                                <text>{{bill.shop_name}}</text>
+                            </view>
+                            <view class="status">
+                                <!--<text>{{c.orderNumber(bill,type).status}}</text>-->
+                                <!-- <view wx:if="{{bill.is_cancelled==1}}">交易关闭</view> -->
+                                <view>{{bill.items[0].item_status}}</view>
+                                <!-- <view wx:elif="{{bill.payed==0}}">待付款</view>
+                                <view wx:elif="{{c.orderNumber(bill,type).status == 4 || bill.is_refund == 1}}">完成退款
+                                </view>
+                                <view wx:elif="{{c.orderNumber(bill,type).status == 3}}">已完成</view>
+                                <view wx:elif="{{c.orderNumber(bill,type).status == 2}}">部分完成</view>
+                                <view wx:else>待使用</view> -->
+                            </view>
+                        </view>
+                        <view wx:if="{{bill.order_type==1}}" bindtap='showBuyOrderDetail' data-id="{{bill.id}}"
+                              class='order-type1-area' style='{{bill.payed==0?"padding-bottom:0;":""}}'>
+                            <view class='order-price-unit'>￥</view>
+                            <view class='order-price'>{{bill.total}}</view>
+                            <view class='order-type1'>买单订单</view>
+                        </view>
+                        <block wx:if="{{bill.order_type==3}}" bindtap='showBuyOrderDetail'>
+                            <i-cell-group>
+                                <i-cell title="{{bill.shop_name}}" is-link
+                                        url="/page/shop/pages/home/index?shop_id={{bill.shop_id}}">
+                                    <text class="iconfont icon-shop" slot="icon"></text>
+                                </i-cell>
+                                <i-cell bind:click="toCardDetail" data-item="{{bill}}">
+                                    <view class="flexBox flexBox-start azm-card-bag">
+                                        <view class="flexBox-item azm-card-bag-l">
+                                            <azm-image ratio="1" src="wxftp://image/icon-bitmap.png"
+                                                       class="azm-image-box" type="img"
+                                                       lazy-load="true" mode="aspectFill"></azm-image>
+                                        </view>
+                                        <view class="flexBox-item azm-card-bag-r">
+                                            <wxc-label class="azm-label" type="corner"
+                                                       text="套卡" type-color="#04D3AF" text-color="#fff"></wxc-label>
+                                            <view class="azm-card-bag-title zan-ellipsis">
+                                                <text>{{bill.card_name}}</text>
+                                            </view>
+                                            <view class="azm-card-bag-price zan-ellipsis">
+                                                <text class="azm-price">￥{{bill.price}}</text>
+                                                <text class="azm-m-price" decode>&nbsp;￥{{bill.market_price}}</text>
+                                            </view>
+                                            <view class="azm-card-bag-time zan-ellipsis">
+                                                <text>下单时间：{{bill.create_time}}</text>
+                                            </view>
+                                        </view>
+                                    </view>
+                                </i-cell>
+                            </i-cell-group>
+                        </block>
+                        <block wx:else>
+                            <block wx:if="c.orderNumber(bill,type).flag">
+                                <view hover-class='none' class="order-items" bindtap="goOrderDetail"
+                                      data-item="{{bill}}">
+                                    <view class='flex border-b' wx:for="{{bill.items}}" wx:key="id" wx:for-item="v">
+                                        <image mode="aspectFill" class='avatar' src='{{c.absUrl(v.cover,300)}}'></image>
+                                        <view class='item-info flex-con'>
+                                            <view class='title'>{{v.title}}</view>
+                                            <view class='price-area'>
+                                                <view class='unit'>￥</view>
+                                                <view class='price'>{{v.price}}</view>
+                                                <view class='market-price'>门市价 ￥{{v.market_price}}</view>
+                                            </view>
+                                            <view class='num'>数量：x{{v.num}}</view>
+                                            <view wx:if="{{bill.payed == 1&&v.is_used == 0&&v.is_refund == 0}}"
+                                                  data-item="{{v}}"
+                                                  catchtap='touse' data-order_no="{{bill.order_no}}" class='touse'>
+                                                <text>查看券码</text>
+                                            </view>
+                                            <block wx:elif="{{bill.payed==1&&v.is_used==1}}">
+                                                <view wx:if="{{v.is_noted==0}}" data-item="{{v}}" catchtap='tonote'
+                                                      class='touse redfullbtn'>
+                                                    <text>写日记/点评</text>
+                                                </view>
+                                                <view wx:else data-item="{{v}}" catchtap='buyagain' class='isused'>
+                                                    <text>再来一单</text>
+                                                </view>
+                                            </block>
+                                        </view>
+                                    </view>
+                                </view>
+                                <view class='flex border-b' wx:if="{{bill.is_cancelled==1}}">
+                                    <view class='flex-con text-right'>
+                                        <view class='btn0' data-id="{{bill.id}}" data-page="{{i+','+index}}"
+                                              bindtap='rmBill'>
+                                            <text>删除订单</text>
+                                        </view>
+                                    </view>
+                                </view>
+                                <view class='flex border-b' wx:elif="{{bill.payed==0}}">
+                                    <view class='flex-con order-info' wx:if="{{bill.order_type==0}}">
+                                        <text>{{bill.discount_money>0?'优惠:-¥'+bill.discount_money+' ':''}}</text>
+                                        <text>合计:￥{{bill.total}}元</text>
+                                    </view>
+                                    <view class='text-right {{bill.order_type==1?"flex-con":""}}'>
+                                        <view class='btn0' data-id="{{bill.id}}" data-page="{{i+','+index}}"
+                                              bindtap='cancelBill'>
+                                            <text>取消订单</text>
+                                        </view>
+                                        <view class='btn1' data-id="{{bill.id}}" data-page="{{i+','+index}}"
+                                              bindtap='payBill'>
+                                            <text>去付款</text>
+                                        </view>
+                                    </view>
+                                </view>
+                            </block>
+                        </block>
+                    </view>
+                </block>
+            </block>
+        </block>
+        <wxc-loadmore is-end="{{noMore}}" icon="随机/loading"></wxc-loadmore>
+    </block>
+    <block wx:else>
+        <view class='empty-area'>
+            <image src='https://app.mmtcapp.com/mmtc/imgs/empty.png'></image>
+            <view>您还没有相关的订单</view>
+        </view>
+    </block>
+</view>
+
+
+<view class='qrcode-area' wx:if="{{!qrcode.hidden}}">
+    <view class='qrcode-dlg'>
+        <view class='fz28 text666 order-no'>订单号：{{qrcode.order_no}}</view>
+        <view>
+            <image src='{{qrcode.img}}' class='qrcode'></image>
+        </view>
+        <view class='qrcode-no'>
+            消费码:
+            <view class='num'>{{qrcode.num}}</view>
+        </view>
+        <view class='qrcode-tip'>
+            请您将二维码或着消费码
+            <view class='pt10'> 出示给商家使用~</view>
+        </view>
+        <view class='qrcode-btn border-t' bindtap='closeQrcode'>
+            手滑，下次再说吧
+        </view>
+    </view>
+    <view class='qrcode-close'>
+        <image src='https://app.mmtcapp.com/mmtc/imgs/btnclose.png' bindtap='closeQrcode'></image>
+    </view>
+</view>
+
+<image id="gotoTop" hidden='{{!showGotoTop}}' src='https://app.mmtcapp.com/mmtc/imgs/top.png' bindtap='gotoTop'></image>
+<azm-gotop is-show="{{goToTopShow}}"></azm-gotop>

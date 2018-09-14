@@ -102,7 +102,7 @@ const methods = {
                             }
                         })
                     } else {
-                        util.go('/pages/index/index', {type: 'tab'})
+                        util.go('/page/tabBar/home/index', {type: 'tab'})
                     }
                 }
             });

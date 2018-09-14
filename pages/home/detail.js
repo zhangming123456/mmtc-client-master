@@ -1,9 +1,10 @@
 // pages/home/detail.js
 const app = getApp(),
+    util2 = app.util2,
+    util = app.util,
     utilPage = require('../../utils/utilPage'),
     ApiService = require('../../utils/ApiService'),
     config = require('../../utils/config'),
-    util = require('../../utils/azm/util'),
     c = require("../../utils/common.js");
 const appPage = {
     /**
@@ -44,16 +45,18 @@ const methods = {
     },
     showQrcode() {
         let that = this,
-            setData = {
-                showMasker: true
-            };
+            shop_id = this.data.shop_id,
+            setData = {showMasker: true};
         if (!this.data.qrcode) {
-            util.showLoading();
-            ApiService.wx_shopShowQrcode({page: 'pages/onlineBuy/index', shop_id: this.data.shop_id}).then(res => {
-                setData.qrcode = res.info;
-            }).finally(res => {
+            util2.showLoading();
+            ApiService.wx_shopShowQrcode({page: 'pages/onlineBuy/index', shop_id}).finally(res => {
+                util2.hideLoading(true);
+                if (res.status === 1 && res.info.path) {
+                    setData.qrcode = res.info.path;
+                } else {
+                    util2.failToast(res.message)
+                }
                 that.setData(setData);
-                util.hideLoading();
             });
         } else {
             that.setData(setData)
@@ -71,15 +74,21 @@ const methods = {
 
     },
     saveImage(){
-        if (this.data.qrcode) {
-            let tempFilePath = this.data.qrcode;
+        let that = this,
+            tempFilePath = this.data.qrcode;
+        if (tempFilePath) {
             wx.saveImageToPhotosAlbum({
                 filePath: tempFilePath,
-                success(res) {
-                    util.showToast('成功保存到相册');
-                },
-                fail(res){
-                    util.failToast('图片保存失败');
+                complete(res){
+                    if (res.errMsg === 'saveImageToPhotosAlbum:fail cancel') {
+                        util2.failToast('取消保存')
+                    } else if (res.errMsg === 'saveImageToPhotosAlbum:ok') {
+                        util2.showToast('保存成功');
+                    } else if (res.errMsg === 'saveImageToPhotosAlbum:fail auth deny') {
+                        that.$route.push('/page/public/pages/authorization/index')
+                    } else {
+                        util2.failToast('保存失败')
+                    }
                 }
             })
         }

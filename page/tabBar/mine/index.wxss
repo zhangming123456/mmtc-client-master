@@ -1,0 +1,89 @@
+page {
+  background-color: #f4f4f4;
+}
+.azm-userInfo-login-btn {
+  display: none;
+}
+.azm-mine .azm-userInfo-avatar {
+  width: 170rpx;
+  height: 170rpx;
+  border-radius: 100%;
+  overflow: hidden;
+}
+.azm-mine .azm-userInfo {
+  box-sizing: border-box;
+  padding-left: 30rpx;
+}
+.azm-mine .azm-userInfo .azm-userInfo-text {
+  font-size: 25rpx;
+  color: #000;
+}
+.azm-mine .azm-userInfo .azm-userInfo-nickName {
+  padding-top: 12rpx;
+  font-size: 28rpx;
+  color: #999;
+}
+.azm-mine .azm-exit-btn {
+  width: 130rpx;
+  line-height: 43rpx;
+  padding: 0;
+  border-radius: 43rpx;
+  font-size: 24rpx;
+  border-color: #999;
+  color: #999;
+}
+.azm-mine .azm-mine-info .azm-mine-info-title,
+.azm-mine .azm-mine-info .azm-mine-info-box {
+  position: relative;
+  box-sizing: border-box;
+  padding: 24rpx 30rpx;
+}
+.azm-mine .azm-mine-info .azm-mine-info-title {
+  font-size: 32rpx;
+  color: #282828;
+  padding-left: 54rpx;
+}
+.azm-mine .azm-mine-info .azm-mine-info-title:before {
+  content: ' ';
+  position: absolute;
+  top: 50%;
+  left: 30rpx;
+  transform: translate(0, -50%);
+  width: 6rpx;
+  height: 24rpx;
+  background-color: #fd0f5d;
+}
+.azm-mine .azm-mine-info .azm-mine-info-box {
+  text-align: center;
+}
+.azm-mine .azm-mine-info .azm-mine-info-box text {
+  font-size: 28rpx;
+  color: #666;
+}
+.azm-mine .azm-mine-info .azm-mine-info-box .azm-icon {
+  padding-bottom: 10rpx;
+}
+.azm-mine .azm-mine-info .azm-mine-info-box .azm-icon text {
+  font-size: 38rpx;
+  color: #999;
+}
+.azm-mine .azm-cell-icon {
+  width: 44rpx;
+  height: 38rpx;
+  margin-right: 20rpx;
+  vertical-align: text-bottom;
+}
+.azm-mine i-cell view {
+  font-size: 26rpx;
+  color: #282828;
+}
+.azm-mine .azm-footer {
+  font-size: 24rpx;
+  text-align: center;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 36rpx;
+  color: #999;
+  padding-top: 33rpx;
+  padding-bottom: 20rpx;
+}

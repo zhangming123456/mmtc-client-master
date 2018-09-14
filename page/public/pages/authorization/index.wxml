@@ -1,0 +1,6 @@
+<wxc-abnor class="azm-auth" type="ERROR_AUTHORIZATION" tip="" button="{{canOpenSetting?'':'设置'}}"
+           bind:abnortap="openSetting">
+</wxc-abnor>
+<button class="azm-btn" size="mini" plain open-type="openSetting" bindopensetting="bindopensetting"
+        wx:if="{{canOpenSetting}}">设置
+</button>

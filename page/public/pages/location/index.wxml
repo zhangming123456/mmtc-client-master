@@ -18,6 +18,7 @@
             <view wx:if="{{loading}}">
                 <image src='https://app.mmtcapp.com/mmtc/imgs/loading_more.gif' class='loading-img'></image>
             </view>
+            <view wx:elif="{{loadingError}}">定位失败</view>
             <view wx:else>{{location.address}}</view>
         </view>
         <view class='reloc' bindtap='relocAddr'>

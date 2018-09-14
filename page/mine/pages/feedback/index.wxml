@@ -1,0 +1,8 @@
+<view class="holder-view">
+    <view class='content'>
+        <textarea class='input' bindinput="$setFromValue" maxlength="-1" data-key="contact"
+                  placeholder='多亏您的建议和支持，一直是我们前进的动力~'></textarea>
+    </view>
+    <input class='contact' data-key="contact" bindinput='$setFromValue' placeholder='手机/QQ/邮箱'/>
+    <button class='sure-btn' bindtap='doSure'>确定</button>
+</view>

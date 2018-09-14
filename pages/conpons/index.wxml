@@ -21,6 +21,6 @@
   </view>
   <view class='btn' bindtap='doPicker' wx:if="{{m.is_valid==1}}">确认领</view>
   <view class='picked' wx:elif="m.errmsg=='已领取'">
-    已领取，请在<navigator url='/pages/conpons/mine' class='ib color-red'>我的优惠券</navigator>里查看>
+    已领取，请在<navigator url='/page/mine/pages/coupons/index' class='ib color-red'>我的优惠券</navigator>里查看>
   </view>
 </view>

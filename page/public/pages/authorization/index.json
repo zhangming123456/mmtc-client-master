@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "授权",
+  "disableScroll": true,
+  "usingComponents": {
+    "wxc-abnor": "../../../../lib/minui/wxc-abnor/dist/index"
+  }
+}

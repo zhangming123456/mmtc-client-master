@@ -1,6 +1,6 @@
 <view>
     <view class="h20"></view>
-    <view class="t-shopName">
+    <view class="t-shopName" bindtap="gotoShop">
         <view class="t-name">
             <image src="https://app.mmtcapp.com/mmtc/imgs/shop2.png"></image>
             <text>{{billDetail.shop_name}}</text>
@@ -24,7 +24,7 @@
     <view class="t-cardState">
         <view class="t-cardOrder">
             <text>订单详情</text>
-            <view>投诉</view>
+            <view bindtap="makeCall">投诉</view>
         </view>
         <view class="t-cardMoney">
             <text>项目总价</text>
@@ -40,21 +40,21 @@
         </view>
     </view>
     <view class="t-order">
-        <view>订单号：{{billDetail.card_no}}</view>
+        <view>订单号：{{billDetail.order_no}}</view>
         <view>购卡时间： {{billDetail.create_time}}</view>
         <view>购卡手机： {{billDetail.telephone}}</view>
-        <view>有效期至：{{billDetail.effective }}</view>
+        <view>有效期至：{{billDetail.end_day }}</view>
         <view>购卡状态：{{billDetail.status_c}}</view>
         <view>消费次数：{{billDetail.use_count }}</view>
-        <view>复制</view>
+        <view bindtap="copyBtn">复制</view>
     </view>
 
 
     <view class="t-button">
         <!-- 可退款 -->
-        <view class="t-refund" wx:if="{{is_user==0}}">退款</view>
+        <view class="t-refund" wx:if="{{billDetail.is_refund ==0}}" bindtap="makeCall">退款</view>
         <!-- 不可退款 -->
-        <view class="t-refund2" wx:if="{{is_user==1}}">退款</view>
+        <view class="t-refund2" wx:if="{{billDetail.is_refund==1}}">退款</view>
         <view bindtap="gotoMycard">前往卡包</view>
     </view>
 </view>

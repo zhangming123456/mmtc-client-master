@@ -8,7 +8,9 @@
     <view class="t-setCard" wx:if="{{cardList.info}}" style="background: url('{{imageUrl + cardList.bj.bj1}}') no-repeat center center;">
         <view class="t-shopTitle">
             <text>{{cardList.info.nickname}}</text>
-            <image src="https://app.mmtcapp.com/mmtc/imgs/Fill1Copy.png"></image>
+            <view bindtap="togglePopup">
+                <image src="https://app.mmtcapp.com/mmtc/imgs/Fill1Copy.png"></image>
+            </view>
         </view>
         <view class="t-shopVIP">{{cardList.info.card_name}}</view>
 
@@ -16,22 +18,24 @@
             <view>
                 <text class="t-price">{{cardList.info.price}}</text>
                 <text class="t-yuan">元</text>
-                <text class="t-beforePrice">{{cardList.info.market_price}}</text>
+                <text class="t-beforePrice">{{cardList.info.market_price}}元</text>
             </view>
             <view class="t-valid">有效期: {{cardList.info.effective}} 天</view>
         </view>
-        <!-- <view class="t-discount">4.9折</view> -->
+        <view class="t-discount">{{cardList.info.coun}}折</view>
     </view>
     <!-- 体验完成 -->
     <view class="t-setCard2" wx:if="{{buyCardList.info}}" style="background: url('{{imageUrl + buyCardList.bj}}') no-repeat center center;">
         <view class="t-shopTitle">
             <text>{{buyCardList.info.card_name}}</text>
         </view>
-        <view class="t-shopID">ID:{{buyCardList.info.order_no}}</view>
+        <view class="t-shopID">ID:{{buyCardList.info.card_no}}</view>
 
         <view wx:if="{{buyCardList.info.status=='已完成'}}" class="t-setCondition">已完成</view>
-        <view wx:if="{{buyCardList.info.status=='已退款'}}" class="t-setCondition">已退款</view>
-        <view wx:if="{{buyCardList.info.status=='已过期'}}" class="t-setCondition">已过期</view>
+        <view wx:elif="{{buyCardList.info.status=='已退款'}}" class="t-setCondition">已退款</view>
+        <view wx:elif="{{buyCardList.info.status=='已过期'}}" class="t-setCondition">已过期</view>
+        <view class="t-setCondition" wx:elif="{{buyCardList.info.enf_days>=1}}"> 还剩 {{buyCardList.info.enf_days}} 天有效
+        </view>
 
         <view class="t-shopSet">
             <view class="t-setShopName">
@@ -45,7 +49,7 @@
     <!-- 套卡tab切换 -->
     <view class="swiper-tab">
         <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">
-            清单详情
+            项目清单
             <text class='titleLine'></text>
         </view>
         <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">
@@ -62,11 +66,12 @@
                     <view>可用项目</view>
                 </view>
                 <view wx:for="{{cardList.item0 ||buyCardList.item0}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}" class="t-shopContent"
-                    bindtap="gotoShopDetails" data-item="{{item}}">
+                catchtap="gotoShopDetails" data-item="{{item}}">
                     <image src="{{imageUrl+item.cover}}" class="t-shopPicture" background-size="cover" mode="aspectFill"></image>
                     <view class="t-recommendDetails">
                         <view class="t-shopName">{{item.title}}</view>
-                        <view class="t-time">{{item.num}} 次</view>
+                        <view class="t-time" wx:if="{{cardList.item2}}">{{item.num}}次</view>
+                        <view class="t-time" wx:if="{{buyCardList.item0}}">{{item.use_count}}/{{item.num}}</view>
                         <view class="t-money">
                             <text class="t-icon">￥</text>
                             <text class="t-shopMoney">{{item.price}}</text>
@@ -78,13 +83,18 @@
                                 <image class="t-arrows" src="https://app.mmtcapp.com/mmtc/imgs/gt@2x.png"></image>
                             </block>
                             <block wx:if="{{bill_id}}">
-                                <view class="t-qrCode" catchtap="gotoLookCard" data-item="{{item}}" wx:if="{{item.is_used==0}}">
-                                    <image src="https://app.mmtcapp.com/mmtc/imgs/GroupCopy.png"></image>
-                                    <text>查看券码</text>
-                                </view>
-                                <view class="t-qrCode" wx:elif="{{item.is_used==1}}">
+                                <view class="t-qrCode" data-item="{{item}}" wx:if="{{item.status=='已消费'}}">
                                     <image src="../../../../image/inon-finish.png"></image>
                                     <text>已消费</text>
+                                </view>
+                                <view class="t-qrCode" wx:elif="{{item.status=='已失效'}}">
+                                    <image src="../../../../image/icon-lose.png"></image>
+                                    <text>已失效</text>
+                                </view>
+
+                                <view class="t-qrCode" wx:else catchtap="gotoLookCard" data-item="{{item}}">
+                                    <image src="https://app.mmtcapp.com/mmtc/imgs/GroupCopy.png"></image>
+                                    <text>查看券码</text>
                                 </view>
                             </block>
                         </view>
@@ -98,36 +108,49 @@
                     <view class="t-sign"></view>
                     <view>可选项目（{{cardList.item1.length || buyCardList.item1.length}}选1）</view>
                 </view>
-                <view bindtap="gotoShopDetails" data-item="{{item}}" wx:for="{{cardList.item1 ||buyCardList.item1}}" wx:for-item="item" wx:for-index="index"
+                <view catchtap="gotoShopDetails" data-item="{{item}}" wx:for="{{cardList.item1 ||buyCardList.item1}}" wx:for-item="item" wx:for-index="index"
                     class="t-shopContent" wx:key="{{index}}">
                     <image src="{{imageUrl+item.cover}}" class="t-shopPicture" background-size="cover" mode="aspectFill"></image>
                     <view class="t-recommendDetails">
                         <view class="t-shopName">{{item.title}}</view>
-                        <view class="t-time">{{item.num}} 次</view>
+                        <view class="t-time" wx:if="{{cardList.item2}}">{{item.num}}次</view>
+                        <view class="t-time" wx:if="{{buyCardList.item1}}">{{item.use_count}}/{{item.num}}</view>
+
                         <view class="t-money">
                             <text class="t-icon">￥</text>
                             <text class="t-shopMoney">{{item.price}}</text>
                             <text class="t-beforePrice2">￥{{item.market_price}}</text>
                         </view>
-
                         <view class="t-condition">
                             <block wx:if="{{card_id}}">
                                 <image class="t-arrows" src="https://app.mmtcapp.com/mmtc/imgs/gt@2x.png"></image>
                             </block>
                             <block wx:if="{{bill_id}}">
-                                <view catchtap="gotoLookCard" data-item="{{item}}" class="t-qrCode" wx:if="{{item.pwd && item.is_used==0}}">
-                                    <image src="https://app.mmtcapp.com/mmtc/imgs/GroupCopy.png"></image>
-                                    <text>查看券码</text>
-                                </view>
-                                <view class="t-qrCode" wx:elif="{{item.is_used==1 }}">
-                                    <image src="../../../../image/icon-lose.png"></image>
-                                    <text>已失效</text>
-                                </view>
-                                <view class="t-qrCode" wx:else>
+                                <!-- <view class="t-qrCode" wx:if="{{item.is_used==1}}">
                                     <image src="../../../../image/inon-finish.png"></image>
                                     <text>已消费</text>
                                 </view>
+                                <view class="t-qrCode" wx:elif="{{item.is_invalid==1}}">
+                                    <image src="../../../../image/icon-lose.png"></image>
+                                    <text>已失效</text>
+                                </view>
+                                <view catchtap="gotoLookCard" data-item="{{item}}" class="t-qrCode" wx:if="{{item.is_used==0 && item.is_invalid==0}}">
+                                    <image src="https://app.mmtcapp.com/mmtc/imgs/GroupCopy.png"></image>
+                                    <text>查看券码</text>
+                                </view> -->
+                                <view class="t-qrCode" wx:if="{{item.status=='已消费'}}">
+                                    <image src="../../../../image/inon-finish.png"></image>
+                                    <text>已消费</text>
+                                </view>
+                                <view class="t-qrCode" wx:elif="{{item.status=='已失效'}}">
+                                    <image src="../../../../image/icon-lose.png"></image>
+                                    <text>已失效</text>
+                                </view>
 
+                                <view class="t-qrCode" wx:else catchtap="gotoLookCard" data-item="{{item}}">
+                                    <image src="https://app.mmtcapp.com/mmtc/imgs/GroupCopy.png"></image>
+                                    <text>查看券码</text>
+                                </view>
                             </block>
                         </view>
                     </view>
@@ -138,12 +161,13 @@
                     <view class="t-sign"></view>
                     <view>赠送项目</view>
                 </view>
-                <view bindtap="gotoShopDetails" data-item="{{item}}" wx:for="{{cardList.item2 ||buyCardList.item2}}" wx:for-item="item" wx:for-index="index"
+                <view catchtap="gotoShopDetails" data-item="{{item}}" wx:for="{{cardList.item2 ||buyCardList.item2}}" wx:for-item="item" wx:for-index="index"
                     class="t-shopContent" wx:key="{{index}}">
                     <image src="{{imageUrl+item.cover}}" class="t-shopPicture" background-size="cover" mode="aspectFill"></image>
                     <view class="t-recommendDetails">
                         <view class="t-shopName">{{item.title}}</view>
-                        <view class="t-time">{{item.num}} 次</view>
+                        <view class="t-time" wx:if="{{cardList.item2}}">{{item.num}}次</view>
+                        <view class="t-time" wx:if="{{buyCardList.item2}}">{{item.use_count}}/{{item.num}}</view>
                         <view class="t-money">
                             <text class="t-icon">￥</text>
                             <text class="t-shopMoney">{{item.price}}</text>
@@ -155,13 +179,18 @@
                                 <image class="t-arrows" src="https://app.mmtcapp.com/mmtc/imgs/gt@2x.png"></image>
                             </block>
                             <block wx:if="{{bill_id}}">
-                                <view catchtap="gotoLookCard" data-item="{{item}}" class="t-qrCode" wx:if="{{item.is_used==0}}">
+                                <view class="t-qrCode" wx:if="{{item.status=='已消费'}}">
+                                    <image src="../../../../image/inon-finish.png"></image>
+                                    <text>已消费</text>
+                                </view>
+                                <view class="t-qrCode" wx:elif="{{item.status=='已失效'}}">
+                                    <image src="../../../../image/icon-lose.png"></image>
+                                    <text>已失效</text>
+                                </view>
+
+                                <view class="t-qrCode" wx:else catchtap="gotoLookCard" data-item="{{item}}">
                                     <image src="https://app.mmtcapp.com/mmtc/imgs/GroupCopy.png"></image>
                                     <text>查看券码</text>
-                                </view>
-                                <view class="t-qrCode" wx:elif="{{item.is_used==1}}">
-                                    <image src="../../../../image/icon-finish.png"></image>
-                                    <text>已消费</text>
                                 </view>
                             </block>
                         </view>
@@ -189,11 +218,13 @@
 
             <view class="">
                 <view class="t-usableTitle2">
-                    <view class="t-sign"></view>
-                    <view>图文详情</view>
+                    <view class="t-image-text">
+                        <view class="t-sign"></view>
+                        <view>图文详情</view>
+                    </view>
+                    <view class="t-complaint" catchtap='gotoMakeCall'>投诉</view>
                 </view>
                 <view class="t-wxParse">
-
                     <template is="wxParse" data="{{wxParseData:intro.nodes}}" />
                 </view>
             </view>
@@ -201,7 +232,7 @@
     </view>
     <!-- 底部 -->
     <view class="t-button">
-        <view class="t-enterShop" bindtap="gotoShop">
+        <view class="t-enterShop" catchtap="gotoShop">
             <image src="https://app.mmtcapp.com/mmtc/imgs/icon-shop.png"></image>
             <text>进入店铺</text>
         </view>
@@ -211,31 +242,30 @@
         </view>
 
         <block wx:if="{{card_id}}">
-            <view class="t-buttonBuy" bindtap="bindbuy">立即购买</view>
+            <view class="t-buttonBuy" catchtap="bindbuy">立即购买</view>
         </block>
 
         <block wx:elif="{{bill_id}}">
-            <view bindtap="gotoNavShop" class="t-buttonBuy">导航到店</view>
+            <view catchtap="gotoNavShop" class="t-buttonBuy">导航到店</view>
         </block>
     </view>
 
 
     <!-- 底部弹出框 -->
-    <!-- <zan-popup show="{{ isShow }}" bindclose="togglePopup">
+    <zan-popup show="{{ isShowT }}" catchtap="togglePopup" wx:if="{{cardList.info}}">
         <view class="t-share">
             <view class="t-shareShopName">
-                <image mode="aspectFill" src="http://img.hb.aicdn.com/40220c183e3af6c07a63dbbbd60153be30a0d34b4200d-oanV9q_fw658"></image>
-                <text>莎蔓莉莎美容院文体中心店</text>
+                <image mode="aspectFill" src="{{imageUrl + cardList.info.cover}}"></image>
+                <text>{{cardList.info.nickname}}</text>
             </view>
 
             <view class="t-qrcode">
-                <image mode="aspectFill" src="http://img.hb.aicdn.com/40220c183e3af6c07a63dbbbd60153be30a0d34b4200d-oanV9q_fw658"></image>
+                <image mode="aspectFill" src="{{qrCode}}"></image>
             </view>
-
-            <view class="t-download">
+            <view class="t-download" catchtap="downloadImage">
                 <image src="../../../../image/icon-ownload.png"></image>
                 <text>下载二维码分享朋友圈</text>
             </view>
         </view>
-    </zan-popup> -->
+    </zan-popup>
 </view>

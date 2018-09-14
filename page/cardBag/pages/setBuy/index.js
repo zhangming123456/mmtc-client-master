@@ -14,7 +14,8 @@ const appPage = {
         num: 1,
         // 使用data数据对象设置样式名
         minusStatus: 'disabled',
-        info: {}
+        info: {},
+        invite_id: ''
     },
     onLoad: function (options) {
         let that = this;
@@ -66,7 +67,8 @@ const methods = {
         let that = this,
             options = that.data.options,
             isShow = that.data.isShow,
-            id = options.id;
+            id = options.id,
+            invite_id = options.invite_id;
         that.setData({
             info: {
                 nickname: options.nickname,
@@ -74,7 +76,8 @@ const methods = {
                 card_id: options.card_id,
                 price: options.price,
                 market_price: options.market_price
-            }
+            },
+            invite_id
         })
     },
     loadData() {
@@ -112,15 +115,16 @@ const methods = {
         });
     },
 
-    bindpay(){
+    bindpay() {
         let that = this,
+            invite_id = that.data.invite_id,
             info = that.data.info,
             card_id = info.card_id,
             num = that.data.num;
         if (num > 0 && card_id && !that.isBindPay) {
             that.isBindPay = true;
             util2.showLoading('支付中。。。');
-            ApiService.orderCardGetPayInfoOfBuyNow({card_id, num}).finally(res => {
+            ApiService.orderCardGetPayInfoOfBuyNow({card_id, num, invite_id}).finally(res => {
                 if (res.status === 1) {
                     let info = res.info;
                     try {
@@ -131,21 +135,26 @@ const methods = {
                             that.isBindPay = false;
                             util2.hideLoading(true);
                             if (res.errMsg === 'requestPayment:ok') {
+                                that.$route.replace({
+                                    path: '/page/public/pages/paySucceed/index',
 
+                                })
+                            } else if (res.errMsg === 'requestPayment:fail cancel') {
+                                util2.failToast('取消支付');
                             } else {
-
+                                util2.failToast(res.message || '支付失败');
                             }
                         };
                         wx.requestPayment(payInfo);
                     } catch (err) {
                         that.isBindPay = false;
                         util2.hideLoading(true);
-                        that.$Toast({content: res.message || '支付失败'})
+                        util2.failToast(res.message || '支付失败')
                     }
                 } else {
                     that.isBindPay = false;
                     util2.hideLoading(true);
-                    that.$Toast({content: res.message || '支付失败'})
+                    util2.failToast(res.message || '支付失败')
                 }
             })
         }

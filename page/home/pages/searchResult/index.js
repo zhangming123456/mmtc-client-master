@@ -1,5 +1,3 @@
-const c = require("../../../../utils/common.js");
-let urls = ['/api/item/search', '/api/shop/searchAll', '/api/note/search'];
 const app = getApp(),
     util2 = app.util2,
     map = new util2.MAP(),
@@ -32,13 +30,13 @@ const appPage = {
         tab0TopStep: -1,
         tab1TopStep: -1,
         tab2TopStep: -1,
-        current: 0,
         shopList: [],
         shopPage: 1,
         itemList: [],
         itemPage: 1,
         noteList: [],
         notePage: 1,
+        current: 0,
         tabList: [
             {
                 title: '店铺',
@@ -55,8 +53,8 @@ const appPage = {
         ],
         styleSwiper: '',
         styleMinH: '',
-        search: '',
-        filters: {}
+        search: '',//搜索关键字
+        filters: {},//筛选条件
     },
     /**
      * 生命周期函数--监听页面加载
@@ -140,6 +138,10 @@ const methods = {
         this.setData(setData);
         that.refreshData();
     },
+    /**
+     * 立即刷新按钮
+     * @param e
+     */
     onAbnorTap (e) {
         this.refreshData()
     },
@@ -161,9 +163,7 @@ const methods = {
             lat_and_lon = {...app.globalData.lat_and_lon};
         if (that.isGetLocation) return;
         that.isGetLocation = true;
-        console.log(0);
         return new Promise((resolve, reject) => {
-            console.log(-1);
             let city_id = null;
             if (!lat_and_lon || !lat_and_lon.lon) {
                 lat_and_lon = that.data.filters;
@@ -181,7 +181,6 @@ const methods = {
                 console.log(11);
                 resolve()
             } else {
-                console.log(2);
                 wx.getLocation({
                     type: 'gcj02',
                     success: function (res) {
@@ -558,7 +557,7 @@ const methods = {
     toShopDetail: function (e) {
         let id = e.currentTarget.dataset.id;
         if (id) {
-            this.$route.push({path: "/pages/home/index", query: {shop_id: id}});
+            this.$route.push({path: "/page/shop/pages/home/index", query: {shop_id: id}});
         }
     },
     toItemDetail: function (e) {
@@ -573,41 +572,8 @@ const methods = {
             this.$route.push({path: "/pages/cases/detail", query: {id: id}});
         }
     },
-    zan (e) {
-        let item = e.currentTarget.dataset.item;
-        let page = e.currentTarget.dataset.page;
-        let index = e.currentTarget.dataset.index;
-        let that = this;
-        let noteZan = wx.getStorageSync('noteZan');
-        if (!util2.jude.isArray(noteZan)) {
-            noteZan = []
-        }
-        let fIndex = noteZan.findIndex(v => {
-            return +v === +item.id
-        });
-        if (that.isZan) return;
-        if (item && item.id && fIndex === -1) {
-            that.isZan = true;
-            util2.showLoading();
-            ApiService.noteIncZan({nid: item.id}).finally(res => {
-                util2.hideLoading(true);
-                that.isZan = false;
-                if (res.status === 1) {
-                    util2.showToast('点赞成功');
-                    if (!util2.jude.isArray(noteZan)) {
-                        noteZan = []
-                    }
-                    noteZan.push(item.id);
-                    that.setData({
-                        noteZan,
-                        [`noteList[${page}][${index}].zan_count`]: parseInt(item.zan_count) + 1
-                    });
-                    wx.setStorageSync('noteZan', noteZan);
-                } else {
-                    util2.showToast('点赞失败')
-                }
-            });
-        }
+    zan(e){
+        this.$giveALike(e);
     }
 }
 

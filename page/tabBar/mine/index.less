@@ -1,0 +1,99 @@
+// outExt: .wxss, compress:false, sourceMap:false
+@import "../../../style/theme";
+
+page {
+    background-color: @default-bg-color;
+}
+
+.azm-userInfo-login-btn {
+    display: none;
+}
+
+.azm-mine {
+    .azm-userInfo-avatar {
+        width: 85*2rpx;
+        height: 85*2rpx;
+        border-radius: 100%;
+        overflow: hidden;
+    }
+    .azm-userInfo {
+        box-sizing: border-box;
+        padding-left: 15*2rpx;
+        .azm-userInfo-text {
+            font-size: 25*1rpx;
+            color: #000;
+        }
+        .azm-userInfo-nickName {
+            padding-top: 12*1rpx;
+            font-size: 28*1rpx;
+            color: #999;
+        }
+    }
+    .azm-exit-btn {
+        width: 130*1rpx;
+        line-height: 43*1rpx;
+        padding: 0;
+        border-radius: 43*1rpx;
+        font-size: 12*2rpx;
+        border-color: #999;
+        color: #999;
+    }
+    .azm-mine-info {
+        .azm-mine-info-title, .azm-mine-info-box {
+            position: relative;
+            box-sizing: border-box;
+            padding: 12*2rpx 15*2rpx;
+        }
+        .azm-mine-info-title {
+            font-size: 32*1rpx;
+            color: #282828;
+            padding-left: 27*2rpx;
+            &:before {
+                content: ' ';
+                position: absolute;
+                top: 50%;
+                left: 15*2rpx;
+                transform: translate(0, -50%);
+                width: 3*2rpx;
+                height: 12*2rpx;
+                background-color: #fd0f5d;
+            }
+        }
+        .azm-mine-info-box {
+            text-align: center;
+            text {
+                font-size: 28*1rpx;
+                color: #666;
+            }
+            .azm-icon {
+                padding-bottom: 5*2rpx;
+                text {
+                    font-size: 19*2rpx;
+                    color: #999;
+                }
+            }
+        }
+    }
+    .azm-cell-icon {
+        width: 22*2rpx;
+        height: 19*2rpx;
+        margin-right: 20*1rpx;
+        vertical-align: text-bottom;
+    }
+    i-cell {
+        view {
+            font-size: 26*1rpx;
+            color: #282828;
+        }
+    }
+    .azm-footer {
+        font-size: 24*1rpx;
+        text-align: center;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 36*1rpx;
+        color: #999;
+        padding-top: 33*1rpx;
+        padding-bottom: 10*2rpx;
+    }
+}

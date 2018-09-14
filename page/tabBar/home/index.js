@@ -115,7 +115,7 @@ const methods = {
         let that = this;
         ApiService.getSpecialList().then(
             res => {
-                if (res.status == 1) {
+                if (res.status === 1) {
                     let data = [
                         '美丽不OUT',
                         '美丽蜕变，只需一点',
@@ -131,9 +131,7 @@ const methods = {
                     //     res.info[i].title_name = data[i];
                     //     that.getSpecialItem({id: res.info[i].id})
                     // }
-                    that.setData({
-                        [`tabList`]: res.info
-                    });
+                    that.setData({[`tabList`]: res.info});
                     // console.log(data);
                     // that.setData(data);
                 }

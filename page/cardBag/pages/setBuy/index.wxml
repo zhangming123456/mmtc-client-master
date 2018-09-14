@@ -1,67 +1,30 @@
 <wxs src="../../../../utils/common.wxs" module="c"/>
 <i-toast id="toast"/>
 <i-message id="message"/>
-
-<view>
-    <view class="t-buyTitle">
-        <image class="t-stroke" src="../../../../image/icon-bitmap.png"></image>
-        <view class="t-buyName">{{info.nickname}}</view>
-    </view>
-    <view>
-        <view class="t-buyNumber">
-            <view class="t-num">数量</view>
-            <view class="stepper">
-                <!-- 减号 -->
-                <image src="https://app.mmtcapp.com/mmtc/imgs/subtract.png" class="{{minusStatus}}"
-                       bindtap="bindMinus"></image>
-                <!-- 数值 -->
-                <input type="number" bindchange="bindManual" value="{{num}}"/>
-                <!-- 加号 -->
-                <image src="https://app.mmtcapp.com/mmtc/imgs/plus.png" class="normal" bindtap="bindPlus"></image>
-            </view>
-        </view>
-        <view class="t-buyNumber">
-            <view class="t-num">小计</view>
-            <view class="t-price">￥{{info.price * num}}</view>
-        </view>
-    </view>
-
-
-    <view wx:if="{{false}}">
-        <view class="t-buyNumber">
-            <view class="t-num">店铺优惠</view>
-            <view class="t-discounts">
-                <text>省</text>
-                <text class="t-pink">¥58</text>
-                <text>新人专享券</text>
-                <image src="https://app.mmtcapp.com/mmtc/imgs/gt@2x.png"></image>
-            </view>
-        </view>
-        <view class="t-buyNumber">
-            <view class="t-num">平台优惠</view>
-            <view class="t-discounts">
-                <text>省</text>
-                <text class="t-pink">¥58</text>
-                <text>新人专享券</text>
-                <image src="https://app.mmtcapp.com/mmtc/imgs/gt@2x.png"></image>
-            </view>
-        </view>
-    </view>
-    <view>
-        <view class="t-buyNumber">
-            <view class="t-num">支付方式</view>
-        </view>
-        <view class="t-buyNumber">
-            <view class="t-payment">
-                <image src="https://app.mmtcapp.com/mmtc/imgs/weixin@2x.png"></image>
-                <text>微信支付</text>
-            </view>
-            <image class="t-pitch" src="https://app.mmtcapp.com/mmtc/imgs/pitch.png">平台优惠</image>
-        </view>
-    </view>
-    <view class="t-buyNumber2">
-        <view class="t-num">实付金额</view>
-        <view class="t-price">￥{{info.price * num}}</view>
-    </view>
+<view class="azm-cardBag-pay">
+    <i-cell-group class="marTop-12">
+        <i-cell class="azm-header">
+            <image class="azm-header-img" slot="icon" mode="widthFix" src="../../../../image/icon-bitmap.png"></image>
+            <view class="azm-header-nickname">{{info.nickname}}</view>
+        </i-cell>
+    </i-cell-group>
+    <i-cell-group class="marTop-12">
+        <i-cell title="小计" class="azm-unit-price">
+            <text slot="footer" class="azm-text-price">￥{{info.price}}</text>
+        </i-cell>
+    </i-cell-group>
+    <i-cell-group class="marTop-12">
+        <i-cell title="支付方式"></i-cell>
+        <i-cell title="微信支付" class="azm-wx-pay">
+            <text slot="icon" class="iconfont icon-weixinzhifu azm-icon"></text>
+            <image slot="footer" class="azm-wx-pay-pitch" mode="widthFix"
+                   src="https://app.mmtcapp.com/mmtc/imgs/pitch.png"></image>
+        </i-cell>
+    </i-cell-group>
+    <i-cell-group class="marTop-12">
+        <i-cell title="实付金额" class="azm-actual-amount">
+            <text class="azm-text-price" slot="footer">￥{{info.price}}</text>
+        </i-cell>
+    </i-cell-group>
     <view class="t-button" bindtap="bindpay">￥{{info.price * num}} 立即付款</view>
 </view>

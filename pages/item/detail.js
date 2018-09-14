@@ -327,7 +327,7 @@ const methods = {
             item = that.data.item;
         clearTimeout(timerGroup);
         if (item && item.group_num > 0) {
-            ApiService.getMakeCollection({item_id: item_id}).then(res => {
+            ApiService.getOtherGroups({item_id: item_id}).then(res => {
                 if (res.status === 1 && res.info.time != that.prevTime) {
                     that.prevTime = res.info.time;
                     that.setData({msgitem: res.info});
@@ -442,7 +442,7 @@ const methods = {
     gotoShopIndex() {
         if (shop_id) {
             wx.navigateTo({
-                url: '/pages/home/index?shop_id=' + shop_id,
+                url: '/page/shop/pages/home/index?shop_id=' + shop_id,
             })
         }
     },
@@ -627,7 +627,7 @@ const methods = {
     },
     gotoHomePage() {
         wx.switchTab({
-            url: '/pages/index/index',
+            url: '/page/tabBar/home/index',
         })
     },
     onscroll(e) {

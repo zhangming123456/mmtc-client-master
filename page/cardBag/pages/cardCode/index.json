@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "查看券码",
-  "enablePullDownRefresh": false,
+  "enablePullDownRefresh": true,
   "usingComponents": {
 
   }

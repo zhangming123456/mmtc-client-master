@@ -18,6 +18,10 @@ view {
     box-sizing: border-box;
     justify-content: space-between;
 }
+.t-name{
+    display: flex;
+    align-items: center;
+}
 
 .t-name>image {
     width: 36rpx;

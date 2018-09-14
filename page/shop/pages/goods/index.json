@@ -1,0 +1,16 @@
+{
+  "navigationBarTitleText": "项目详情",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "zan-tab": "../../../../lib/zanui/tab/index",
+    "i-message": "../../../../lib/iview/message/index",
+    "i-toast": "../../../../lib/iview/toast/index",
+    "i-tabs": "../../../../lib/iview/tabs/index",
+    "i-tab": "../../../../lib/iview/tab/index",
+    "azm-more": "../../../../lib/components/azm-more/index",
+    "azm-gotop": "../../../../lib/components/azm-gotop/index",
+    "azm-image": "../../../../lib/components/azm-image/index",
+    "wxc-loadmore": "../../../../lib/minui/wxc-loadmore/dist/index",
+    "wxc-abnor": "../../../../lib/minui/wxc-abnor/dist/index"
+  }
+}

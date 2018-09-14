@@ -1,0 +1,6 @@
+<view class="panel-no-margin2 bg-white text-center border-b">
+    <image src="https://app.mmtcapp.com/mmtc/imgs/ok@2x.png" class='avatar' alt=""></image>
+    <view class="text666 fz28"  bindtap="gotoMycard">
+        订单支付成功，请前往我的-卡包中查看
+    </view>
+</view>

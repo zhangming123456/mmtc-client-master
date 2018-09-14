@@ -75,7 +75,7 @@ Page({
     let item = e.currentTarget.dataset.item;
     if (item.shop_id > 0) {
       wx.navigateTo({
-        url: '/pages/home/index?shop_id=' + item.shop_id
+        url: '/page/shop/pages/home/index?shop_id=' + item.shop_id
       });
     } else {
       wx.navigateTo({

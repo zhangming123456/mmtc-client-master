@@ -43,6 +43,10 @@ const appPage = {
      */
     onPullDownRefresh: function () {
         let that = this;
+
+        that.getOrderCardMyCard();
+        that.getOrderCardMyCardUseless();
+        wx.stopPullDownRefresh();
     },
     /**
      * 上拉触底
@@ -117,7 +121,7 @@ const methods = {
     },
 
 
-   
+
 
     toggle(e) {
         var that = this;

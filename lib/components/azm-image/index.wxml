@@ -3,15 +3,15 @@
 <view class="c-azm-image-box">
     <image class="azm-image {{nolClass}}" src="{{c.absUrl(newSrc)}}" lazy-load="{{lazyLoad}}"
            binderror="_bindAzmImageError" bindload="_bindAzmImageLoad"
-           mode="{{mode}}" style="{{height}}"></image>
+           mode="{{mode}}" style="{{height}}{{borderRadius}}"></image>
     <block wx:if="{{type === 'img'}}">
         <image class="azm-image azm-image-load-mask {{nolClass}}"
                src="https://app.mmtcapp.com/mmtch5/images/imageLoading.png"
-               wx:if="{{!isLoad}}" mode="{{mode}}" style="{{height}}"></image>
+               wx:if="{{!isLoad}}" mode="{{mode}}" style="{{height}}{{borderRadius}}"></image>
     </block>
     <block wx:else>
         <image class="azm-image azm-image-load-mask {{nolClass}}" src="{{c.absUrl(defineImage)}}" wx:if="{{!isLoad}}"
-               mode="{{mode}}" style="{{height}}"></image>
+               mode="{{mode}}" style="{{height}}{{borderRadius}}"></image>
     </block>
 </view>
 

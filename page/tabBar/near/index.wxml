@@ -96,7 +96,7 @@
                             <view>
                                 <view class='shop-title one-line'>{{item.shop_name}}</view>
                                 <view class='stars'>
-                                    <block wx:for="{{c.num2arr(item.score)}}" wx:for-item="i" wx:key="index">
+                                    <block wx:for="{{c.num2score(item.score)}}" wx:for-item="i" wx:key="index">
                                         <image src="{{'https://app.mmtcapp.com/mmtc/imgs/start'+(i?1:2)+'@2x.png'}}"></image>
                                     </block>
                                 </view>

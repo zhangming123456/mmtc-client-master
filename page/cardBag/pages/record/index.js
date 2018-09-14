@@ -87,14 +87,11 @@ const methods = {
         }
 
 
-
     },
 
     // 跳转到我的点评
     gotoMynotes() {
-        this.$route.push({
-            path: '/pages/mine/mynotes'
-        })
+        this.$route.push({path: '/page/mine/pages/mynotes/index'})
     },
 
     getOrderCardUserecord() {

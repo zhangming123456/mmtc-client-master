@@ -14,6 +14,7 @@ const appPage = {
         isLogin: true,
         userInfo: {},
         invite_id: '',//邀请码
+        telephone: ''
     },
     /**
      * 生命周期函数--监听页面加载
@@ -40,7 +41,7 @@ const appPage = {
      * 生命周期函数--监听页面卸载
      */
     onUnload () {
-
+        app.judgeLogin(true);
     },
     /**
      * 页面渲染完成
@@ -117,7 +118,7 @@ const methods = {
                                 nickName: res.info.nickname
                             };
                         }
-                        that.setUserInfo(e)
+                        that.setUserInfo(e);
                     } else if (res.status === 202) {
                         c.logoff();
                         that.wxLogon(e);
@@ -248,7 +249,7 @@ const methods = {
         if (util.getCurrentPages().length > 1) {
             app.util.go(-1)
         } else {
-            app.util.go('/pages/mine/index', {type: 'tab'})
+            app.util.go('/page/tabBar/mine/index', {type: 'tab'})
         }
     },
 
@@ -258,10 +259,33 @@ const methods = {
             userInfo = e.detail.userInfo;
         this.__login(true).finally(res => {
             console.log(res, e);
+            this.setData({isBindTelephone: false});
             if (res.errMsg === 'login:ok') {
-                ApiService.login2wxLogin({code: res.code, encryptedData, iv, userInfo})
+                ApiService.login2wxLogin({code: res.code, encryptedData, iv, userInfo}).finally(res => {
+                    if (res.status === 1) {
+
+                    } else if (res.status === 0) {
+                        this.setData({isBindTelephone: true})
+                    }
+                })
             }
         })
+    },
+    inputTelephone(e){
+        console.log(e);
+        let value = e.detail.value;
+        this.setData({telephone: value})
+    },
+    getCode(){
+        if (this.data.telephone) {
+            ApiService.login2bindSMS({telephone: this.data.telephone})
+        }
+    },
+    formSubmit(e){
+        let value = e.detail.value;
+        if (value.telephone && value.code) {
+            ApiService.login2bindPhone({telephone: value.telephone, code: value.code})
+        }
     }
 };
 

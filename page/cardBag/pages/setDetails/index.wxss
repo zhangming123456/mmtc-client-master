@@ -85,7 +85,7 @@ view {
     font-weight: 500;
 }
 
-.t-shopTitle>image {
+.t-shopTitle view>image {
     width: 40rpx;
     height: 40rpx;
 }
@@ -338,6 +338,7 @@ view {
     height: 90rpx;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     font-size: 32rpx;
     color: #4A4A4A;
     font-weight: 500;
@@ -345,6 +346,22 @@ view {
     padding-right: 30rpx;
     border-bottom: 1px solid #E5E5E5;
     background-color: #FFFFFF;
+}
+
+.t-complaint {
+    border: 1px solid #F5A623;
+    border-radius: 4rpx;
+    width: 80rpx;
+    height: 40rpx;
+    color: #F5A623;
+    text-align: center;
+    line-height: 40rpx;
+    font-size: 28rpx;
+}
+
+.t-image-text {
+    display: flex;
+    align-items: center;
 }
 
 .t-sign {

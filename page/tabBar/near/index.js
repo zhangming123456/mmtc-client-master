@@ -295,7 +295,7 @@ const methods = {
     showShopDetail (e) {
         let id = e.currentTarget.dataset.id;
         wx.navigateTo({
-            url: '/pages/home/index?shop_id=' + id,
+            url: '/page/shop/pages/home/index?shop_id=' + id,
         })
     },
     toggleCategory(e) {

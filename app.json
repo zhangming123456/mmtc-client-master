@@ -2,8 +2,8 @@
   "pages": [
     "page/tabBar/home/index",
     "page/tabBar/near/index",
-    "pages/index/index",
-    "pages/mine/index",
+    "page/tabBar/order/index",
+    "page/tabBar/mine/index",
     "pages/chat/index",
     "pages/msg/index",
     "pages/activity/wallet",
@@ -18,18 +18,14 @@
     "pages/other/discountlist",
     "pages/item/groupdetail",
     "pages/advise/index",
-    "pages/mine/mynotes",
     "pages/group/shared",
     "pages/index/items",
     "pages/group/orderdetail",
     "pages/group/mine",
     "pages/group/detail",
     "pages/index/near",
-    "pages/order/all",
     "pages/car/index",
-    "pages/home/index",
     "pages/page/index",
-    "pages/conpons/mine",
     "pages/msg/detail",
     "pages/order/buyDetail",
     "pages/car/payOrder",
@@ -40,8 +36,6 @@
     "pages/technician/index",
     "pages/order/note",
     "pages/order/score",
-    "pages/mine/footer",
-    "pages/mine/collection",
     "pages/car/paySuccess",
     "pages/item/index",
     "pages/dongtai/index",
@@ -82,10 +76,30 @@
       ]
     },
     {
+      "root": "page/shop",
+      "pages": [
+        "pages/home/index",
+        "pages/detail/index",
+        "pages/goods/index"
+      ]
+    },
+    {
+      "root": "page/mine",
+      "pages": [
+        "pages/collection/index",
+        "pages/coupons/index",
+        "pages/mynotes/index",
+        "pages/footprint/index",
+        "pages/feedback/index"
+      ]
+    },
+    {
       "root": "page/public",
       "pages": [
         "pages/location/index",
-        "pages/locSearch/index"
+        "pages/locSearch/index",
+        "pages/paySucceed/index",
+        "pages/authorization/index"
       ]
     }
   ],
@@ -118,13 +132,13 @@
       {
         "selectedIconPath": "image/tabBar/order.png",
         "iconPath": "image/tabBar/order_active.png",
-        "pagePath": "pages/order/all",
+        "pagePath": "page/tabBar/order/index",
         "text": "订单"
       },
       {
         "selectedIconPath": "image/tabBar/mine.png",
         "iconPath": "image/tabBar/mine_active.png",
-        "pagePath": "pages/mine/index",
+        "pagePath": "page/tabBar/mine/index",
         "text": "我的"
       }
     ]
