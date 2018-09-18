@@ -21,7 +21,7 @@
 <block wx:if="{{type==0 && note.products && note.products.length}}">
     <view class="p30 bg-white border-b">
         <view class="fz28 text666">相关商品</view>
-        <navigator wx:key="id" class="pt20" wx:for="{{note.products}}" hover-class='none' wx:for-item="product" url='/pages/item/detail?id={{product.id}}'>
+        <navigator wx:key="id" class="pt20" wx:for="{{note.products}}" hover-class='none' wx:for-item="product" url='/page/shop/pages/goods/index?id={{product.id}}'>
             <view class="flex">
                 <view>
                     <image src="{{c.absUrl(product.cover,300)}}" alt="" class="goods-img"></image>

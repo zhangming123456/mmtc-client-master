@@ -170,8 +170,9 @@ const methods = {
                 let shop = info.shop;
                 let intro = info.intro;
                 info.num = 1;
-                $wxParse.wxParse('intro', 'html', intro, that);
-                let label = []
+                let intro2 = $wxParse.wxParse('intro', 'html', intro, that);
+                console.log(intro2, "jsdhfkjahfkjahfkjahfkjahfkjahfkjh");
+                let label = [];
                 for (let v of info.item_label) {
                     if (v.title) {
                         label.push(v.title)
@@ -406,17 +407,17 @@ const methods = {
         if (that.isMakeCollect)return;
         that.isMakeCollect = true;
         util2.showLoading();
-        let cancel = !goods.collection ? 1 : 0;
+        let cancel = !!goods.collection ? 1 : 0;
         ApiService.getMakeCollection({item_id: goods.id, cancel}).finally(res => {
             that.isMakeCollect = false;
             util2.hideLoading(true);
             if (res.status === 1) {
                 if (cancel === 1) {
-                    util2.showToast("添加收藏成功")
+                    util2.showToast("取消收藏成功");
                 } else if (cancel === 0) {
-                    util2.showToast("取消收藏成功")
+                    util2.showToast("添加收藏成功");
                 }
-                that.setData({[`goods.collection`]: cancel});
+                that.setData({[`goods.collection`]: cancel ? 0 : 1});
             } else {
                 util2.failToast(res.message || "收藏操作失败")
             }

@@ -35,7 +35,10 @@ const appPage = {
      * 生命周期函数--监听页面显示
      */
     onShow (options) {
-
+        let that = this, location = that.data.location;
+        if (!that.data.isShow && location.lat && this.data.canOnTabItemTap === -1) {
+            this.selectComponent('#azmLocation')._onRefresh()
+        }
     },
     /**
      * 生命周期函数--监听页面隐藏
@@ -77,6 +80,12 @@ const appPage = {
     },
     onPageScroll(options){
         this._onPageScroll(options)
+    },
+    onTabItemTap(options){
+        let that = this, location = that.data.location;
+        if (this.data.canOnTabItemTap > -1 && !this.data.isShow && location.lat) {
+            this.selectComponent('#azmLocation')._onRefresh()
+        }
     }
 };
 /**
@@ -108,7 +117,7 @@ const methods = {
     async getLocationCallback(e){
         let dataset = e.detail.dataset,
             that = this;
-        that.setData({location: dataset, address: dataset.address || ''});
+        that.setData({location: {...dataset}, address: dataset.address || ''});
         await that.getCategoryDataList();
         await that.getTradingGetData();
         if (e.detail.isUpdate) {

@@ -98,6 +98,7 @@ const methods = {
      * 打开选择城市选项
      */
     bindSelectCity(){
+        return;
         let that = this;
         if (that.data.isOpenCitySelect) {
             that.setData({

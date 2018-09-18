@@ -1,6 +1,6 @@
 <view class="p1 border-b">
-    <view class='flex'>
-        <view class='addr' bindtap='bindSelectCity'>
+    <view class="flex">
+        <view class='addr' wx:if="{{false}}" bindtap='bindSelectCity'>
             <view class='ib'>
                 <text decode>{{cityName}}</text>
             </view>

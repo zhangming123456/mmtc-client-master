@@ -1,0 +1,16 @@
+<view class="azm-city-select">
+    <view class="azm-header azm-1px-b azm-1px-t flexBox flexBox-start" catchtap="reLocate">
+        <view class="flexBox-item">{{cityName}}（当前定位）</view>
+        <view class="flexBox-item azm-right">
+            <text class="iconfont icon-dingwei"></text>
+            <text decode>&nbsp;&nbsp;重新定位</text>
+        </view>
+    </view>
+
+    <view class="azm-cities marTop-12">
+        <view class="azm-cities-title">可选城市</view>
+        <block wx:for="{{cities}}" wx:key="{{index}}">
+            <view class="azm-cities-item" catchtap="selectCity" data-item="{{item}}">{{item.title}}</view>
+        </block>
+    </view>
+</view>

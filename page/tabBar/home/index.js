@@ -1,9 +1,9 @@
 const app = getApp(),
+    util2 = app.util2,
     regeneratorRuntime = app.util2.regeneratorRuntime,
     ApiService = require('../../../utils/ApiService'),
     config = require('../../../utils/config'),
-    utilPage = require('../../../utils/utilPage'),
-    c = require("../../../utils/common");
+    utilPage = require('../../../utils/utilPage');
 const appPage = {
     /**
      * 页面的初始数据
@@ -12,12 +12,14 @@ const appPage = {
         text: 'Page home',
         isShow: false,
         options: {},
+        cityName: "",
         imageUrl: config.imageUrl,
         isShowLocation: true,
         page: 1,
         shops: [],
         tabListData: [],
-        specialBanner: []
+        specialBanner: [],
+        gridList: []
     },
     /**
      * 生命周期函数--监听页面加载
@@ -87,19 +89,17 @@ const methods = {
     loadCb(callback){
         let that = this;
         app.globalData.pages.indexPage = this;
-        ApiService.getBanners().then(
-            res => {
+        ApiService.getBanners().finally(res => {
                 callback && callback();
-                if (res.status == 1) {
+                if (res.status === 1) {
                     that.setData({
                         banners: res.info
                     });
                 }
             }
         );
-        ApiService.getSpecialBanner().then(
-            res => {
-                if (res.status == 1) {
+        ApiService.getSpecialBanner().finally(res => {
+                if (res.status === 1) {
                     let data = {};
                     that.setData({
                         [`specialBanner`]: res.info
@@ -113,27 +113,9 @@ const methods = {
      */
     getSpecialList(){
         let that = this;
-        ApiService.getSpecialList().then(
-            res => {
+        ApiService.getSpecialList().finally(res => {
                 if (res.status === 1) {
-                    let data = [
-                        '美丽不OUT',
-                        '美丽蜕变，只需一点',
-                        '改变从头，愉悦在心',
-                        '美丽，由新而生',
-                        '指尖新时尚，秀出大不同',
-                        '美于形，靓于型',
-                        '装扮您的心灵的窗户',
-                        '百变美丽，时尚有型',
-                        '用心打造你的美',
-                    ];
-                    // for (let i = 0; res.info.length > i; i++) {
-                    //     res.info[i].title_name = data[i];
-                    //     that.getSpecialItem({id: res.info[i].id})
-                    // }
                     that.setData({[`tabList`]: res.info});
-                    // console.log(data);
-                    // that.setData(data);
                 }
             }
         );
@@ -145,17 +127,23 @@ const methods = {
     getLocationCallback(e){
         let that = this,
             value = e.detail;
+        let city = app.globalData.city;
+        that.setData({cityName: city.title});
         if (value.isUpdate) {
             that.getAppSpecialItem();
             if (!this.data.isPullDownRefresh) {
-                c.showLoading()
+                util2.showLoading()
             }
             this.getSpecialItemNear({page: 1}).finally(res => {
                 that.stopPullDownRefresh();
-                c.hideLoading();
+                util2.hideLoading(true);
             });
         }
     },
+    /**
+     * 获取专题list
+     * @return {*}
+     */
     getAppSpecialItem(){
         let that = this,
             azmLocationData = this.data.azmLocationData,
@@ -173,21 +161,16 @@ const methods = {
     getSpecialItemNear({page = 1, num = 10} = {}, callback){
         let that = this,
             pageData = that.data,
-            azmLocationData = this.data.azmLocationData;
+            {lon, lat} = this.data.azmLocationData;
         if (pageData.noMore) {
-            that.setData({
-                noMore: false
-            });
+            that.setData({noMore: false});
         }
-        return ApiService.getSpecialItemNear(
-            {
-                p: page,
-                num,
-                lon: azmLocationData.lon || 0,
-                lat: azmLocationData.lat || 0
-            }
-        ).then(
-            res => {
+        return ApiService.getSpecialItemNear({
+            p: page,
+            num,
+            lon: lon || 0,
+            lat: lat || 0
+        }).finally(res => {
                 if (res.status === 1 && res.info && res.info.length > 0) {
                     if (page === 1) {
                         that.setData({
@@ -201,42 +184,20 @@ const methods = {
                     }
                     that.data.page = page;
                 } else {
-                    that.setData({
-                        noMore: true
-                    });
+                    that.setData({noMore: true});
                 }
                 callback && callback();
             }
         )
     },
-    onLoadIcon(e){
-        let index = e.currentTarget.dataset.index
-        let key = 'iconSize' + index
-        let value = 'height:' + parseInt(e.detail.height * this.rate) + 'px;width:' + parseInt(e.detail.width * this.rate) + 'px'
-        this.setData({
-            [key]: value
-        })
-    },
-    showPickUp(){
-        c.hasLogin(function () {
-            wx.navigateTo({
-                url: '/pages/conpons/platform'
-            })
-        });
-    },
     showBannerLink(e){
         let link = e.currentTarget.dataset.link;
         if (link) {
             try {
-                if (link.indexOf('://') !== -1) { // if for http url
-                    link = encodeURIComponent(link);
-                    wx.navigateTo({
-                        url: '/pages/page/index?token=' + link,
-                    })
-                } else {
-                    wx.navigateTo({
-                        url: link,
-                    })
+                if (util2.regExpUtil.isUrlPath(link)) {
+                    this.$route.push({path: "/pages/page/index", query: {token: link}});
+                } else if (/^\/pages?/.test(link)) {
+                    this.$route.push(link);
                 }
             } catch (e) {
 
@@ -244,9 +205,10 @@ const methods = {
         }
     },
     doSearch () {
-        wx.navigateTo({
-            url: '/page/home/pages/search/index',
-        });
+        this.$route.push("/page/home/pages/search/index");
+    },
+    doCitySelect () {
+        this.$route.push("/page/public/pages/city/index");
     },
     gotoTop () {
         wx.pageScrollTo({

@@ -7,7 +7,7 @@
     <view class="flexBox">
         <view class='flexBox-item fb-all' style="flex-grow: 1">
             <!--地理位置-->
-            <azm-location position="pr" isShow="{{isShowLocation}}" is-tap="true"
+            <azm-location id="azmLocation" position="pr" isShow="{{isShowLocation}}" is-tap="true"
                           bindcallback="getLocationCallback"></azm-location>
         </view>
         <view class="flexBox-item fb-all" style="flex-grow: 2;box-sizing: border-box;padding-left: 20rpx;">

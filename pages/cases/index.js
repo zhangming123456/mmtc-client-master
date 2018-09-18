@@ -18,7 +18,7 @@ Page({
   },
   showItemDetail:function(e){
     wx.navigateTo({
-      url: '/pages/item/detail?id='+e.currentTarget.dataset.id,
+      url: '/page/shop/pages/goods/index?id='+e.currentTarget.dataset.id,
     })
   },
 

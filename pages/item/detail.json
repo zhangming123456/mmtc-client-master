@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "项目详情",
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "zan-tab": "../../lib/zanui/tab/index",
-    "azm-gotop": "../../lib/components/azm-gotop/index"
-  }
-}

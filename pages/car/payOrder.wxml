@@ -12,7 +12,7 @@
             <block wx:for="{{shop.items}}" wx:key="{{index}}">
                 <view class="flexBox azm-item__box">
                     <view class="flexBox-item left" catchtap="azmRoute"
-                          data-path="/pages/item/detail?id={{item.item_id}}">
+                          data-path="/page/shop/pages/goods/index?id={{item.item_id}}">
                         <view wx:if="{{!!item.group_num}}" class="azm-group-num">{{item.group_num}}人团</view>
                         <image class='azm-image' src='{{c.absUrl(item.cover)}}' mode="aspectFill"></image>
                     </view>

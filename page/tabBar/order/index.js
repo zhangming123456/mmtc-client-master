@@ -342,7 +342,7 @@ const methods = {
     buyagain: function (e) {
         let item = e.currentTarget.dataset.item;
         if (!item)return;
-        this.$route.push({path: '/pages/item/detail', query: {id: item.id}});
+        this.$route.push({path: '/page/shop/pages/goods/index', query: {id: item.id}});
     },
     gotoTop: function () {
         wx.pageScrollTo({scrollTop: 0});

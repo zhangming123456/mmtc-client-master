@@ -563,7 +563,7 @@ const methods = {
     toItemDetail: function (e) {
         let id = e.currentTarget.dataset.id;
         if (id) {
-            this.$route.push({path: "/pages/item/detail", query: {id: id}});
+            this.$route.push({path: "/page/shop/pages/goods/index", query: {id: id}});
         }
     },
     toNoteDetail: function (e) {

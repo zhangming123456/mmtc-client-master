@@ -12,8 +12,6 @@
     "pages/conpons/platform",
     "pages/order/detail",
     "pages/cases/detail",
-    "pages/home/detail",
-    "pages/item/detail",
     "pages/other/discount",
     "pages/other/discountlist",
     "pages/item/groupdetail",
@@ -96,6 +94,7 @@
     {
       "root": "page/public",
       "pages": [
+        "pages/city/index",
         "pages/location/index",
         "pages/locSearch/index",
         "pages/paySucceed/index",

@@ -57,7 +57,7 @@ const methods = {
                 that.setData(setData);
             });
         } else {
-            setData.showMasker = true
+            setData.showMasker = true;
             that.setData(setData)
         }
     },

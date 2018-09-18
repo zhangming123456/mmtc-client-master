@@ -124,7 +124,7 @@ const methods = {
         var item = e.currentTarget.dataset.item
         if (item && item.id) {
             this.$route.push({
-                path: '/pages/item/detail',
+                path: '/page/shop/pages/goods/index',
                 query: {
                     id: item.id
                 }
@@ -268,7 +268,8 @@ const methods = {
         if (!card_id) return;
         this.$route.push({
             path: '/page/cardBag/pages/setBuy/index',
-            query: { ...cardList.info,
+            query: {
+                ...cardList.info,
                 invite_id
             }
         })
@@ -323,9 +324,6 @@ const methods = {
             }
         })
     },
-
-
-   
 
 
     togglePopup() {

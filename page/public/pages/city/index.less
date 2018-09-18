@@ -1,0 +1,44 @@
+// outExt: .wxss, compress:false, sourceMap:false
+@import "../../../../style/theme";
+
+page {
+    background-color: @default-bg-color;
+}
+
+.azm-city-select {
+    .azm-header {
+        background-color: #fff;
+        box-sizing: border-box;
+        padding: 12*2rpx 15*2rpx;
+        font-size: 32*1rpx;
+        color: #333;
+        .flexBox-item {
+            flex: 1 1 auto;
+        }
+        .azm-right {
+            text-align: right;
+            font-size: 28*1rpx;
+            color: #04d3af;
+        }
+    }
+    .azm-cities {
+        margin-bottom: 50*2rpx;
+        .azm-cities-title {
+            box-sizing: border-box;
+            padding: 12*2rpx 15*2rpx;
+            font-size: 28*1rpx;
+            color: #666;
+        }
+        .azm-cities-item {
+            box-sizing: border-box;
+            padding: 12*2rpx 15*2rpx;
+            background-color: #fff;
+            font-size: 32*1rpx;
+            color: #333;
+            border-bottom: 1px solid #e5e5e5;
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+}

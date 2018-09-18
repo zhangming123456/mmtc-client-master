@@ -72,7 +72,7 @@ const methods = {
     showItemDetail: function (e) {
         let id = e.currentTarget.dataset.id;
         if (id) {
-            this.$route.push({path: '/pages/item/detail', query: {id}})
+            this.$route.push({path: '/page/shop/pages/goods/index', query: {id}})
         }
     }
 };
