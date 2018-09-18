@@ -134,7 +134,7 @@ Page({
         var id = e.currentTarget.dataset.id;
         if (id) {
             wx.navigateTo({
-                url: '/pages/item/detail?id=' + id
+                url: '/page/shop/pages/goods/index?id=' + id
             });
         }
     },

@@ -19,7 +19,7 @@
             <view class="flexBox flexBox-start">
                 <block wx:for="{{tabListData[tabList.selectedId - 1]}}" wx:for-index="i" wx:for-item="v" wx:key="i">
                     <block wx:for="{{v}}" wx:for-index="index" wx:for-item="item" wx:key="item.id">
-                        <navigator url="/pages/item/detail?id={{item.item_id}}" class="flexBox-item fb-12 azm-col">
+                        <navigator url="/page/shop/pages/goods/index?id={{item.item_id}}" class="flexBox-item fb-12 azm-col">
                             <view class="azm-content">
                                 <view wx:if="{{!!item.group_num}}" class="azm-group-num">{{item.group_num}}人团</view>
                                 <azm-image style="width: 100%;" src="{{item.cover}}" lazy-load="true"

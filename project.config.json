@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 30,
+			"current": 6,
 			"list": [
 				{
 					"id": 0,
@@ -70,10 +70,10 @@
 					"query": ""
 				},
 				{
-					"id": -1,
-					"name": "121312",
-					"pathName": "pages/mine/aboutus",
-					"query": ""
+					"id": 6,
+					"name": "店铺项目",
+					"pathName": "pages/item/index",
+					"query": "id=10114"
 				},
 				{
 					"id": 8,
@@ -218,6 +218,12 @@
 					"name": "项目详情(new)",
 					"pathName": "page/shop/pages/goods/index",
 					"query": "id=10114"
+				},
+				{
+					"id": -1,
+					"name": "选择城市（new）",
+					"pathName": "page/public/pages/city/index",
+					"query": ""
 				}
 			]
 		}

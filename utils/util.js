@@ -1018,8 +1018,7 @@ function chooseLocation ({type = 'gcj02', success, fail, complete}) {
                     reject({info: res, status: 0, message: '未获取权限'});
                     wx.showModal({
                         title: '',
-                        content: `"美美天成商家端"
-                    要获取你的地理位置，请前往我的 》设置 》权限 》使用我的地理位置开启权限`,
+                        content: `"美美天成商家端"要获取你的地理位置，请前往我的 -> 设置 -> 权限 -> 使用我的地理位置开启权限`,
                         cancelText: '取消',
                         cancelColor: '#000000',
                         confirmText: '去开启',
@@ -1061,8 +1060,7 @@ function getLocation ({type = 'gcj02'} = {}) {
                     reject({info: res, status: 0, message: '未获取权限'});
                     wx.showModal({
                         title: '',
-                        content: `"美美天成商家端"
-                    要获取你的地理位置，请前往我的 》设置 》权限 》使用我的地理位置开启权限`,
+                        content: `"美美天成商家端"要获取你的地理位置，请前往我的 -> 设置 -> 权限 -> 使用我的地理位置开启权限`,
                         cancelText: '取消',
                         cancelColor: '#000000',
                         confirmText: '去开启',

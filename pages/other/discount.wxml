@@ -12,7 +12,7 @@
 
 
 <view class='list-box'>
-    <navigator url='/pages/item/detail?id={{item.id}}' hover-class='none' class='box3-item' wx:key="item.id" wx:for="{{items}}" wx:for-index="index" wx:for-item="item">
+    <navigator url='/page/shop/pages/goods/index?id={{item.id}}' hover-class='none' class='box3-item' wx:key="item.id" wx:for="{{items}}" wx:for-index="index" wx:for-item="item">
       <view class='rel'>
         <view class='box3-group-num' wx:if="{{item.group_num && item.group_num>0}}">{{item.group_num}}人团</view>
         <image src="{{c.absUrl(item.cover,400)}}" class="cover" background-size="cover"></image>

@@ -285,6 +285,7 @@
   font-size: 28rpx;
   color: #666;
   position: relative;
+  min-height:300px;
 }
 
 .area-left {
