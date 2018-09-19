@@ -8,7 +8,6 @@
     "pages/msg/index",
     "pages/activity/wallet",
     "pages/activity/index",
-    "pages/mine/aboutus",
     "pages/conpons/platform",
     "pages/order/detail",
     "pages/cases/detail",
@@ -35,7 +34,6 @@
     "pages/order/note",
     "pages/order/score",
     "pages/car/paySuccess",
-    "pages/item/index",
     "pages/dongtai/index",
     "pages/cases/index",
     "pages/order/orderDetails/index",
@@ -78,12 +76,14 @@
       "pages": [
         "pages/home/index",
         "pages/detail/index",
-        "pages/goods/index"
+        "pages/goods/index",
+        "pages/projects/index"
       ]
     },
     {
       "root": "page/mine",
       "pages": [
+        "pages/aboutus/index",
         "pages/collection/index",
         "pages/coupons/index",
         "pages/mynotes/index",
