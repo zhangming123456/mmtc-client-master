@@ -36,7 +36,7 @@ const appPage = {
      */
     onShow (options) {
         let that = this, location = that.data.location;
-        if (!that.data.isShow && location.lat && this.data.canOnTabItemTap === -1) {
+        if (!that.data.isShow && location.lat) {
             this.selectComponent('#azmLocation')._onRefresh()
         }
     },

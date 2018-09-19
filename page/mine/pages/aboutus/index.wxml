@@ -1,25 +1,15 @@
-<view class='top-box'>
-    <image class='avatar' binderror='imgLoadedErr' bindload='imgLoaded' src="{{img_src}}"></image>
-    <view class='txt' bindtap='downImg'>
-        下载二维码分享朋友圈>
-    </view>
-</view>
-<view class='bg-white bar-item border-b' bindtap='showAgreement'>
-    <view class='flex'>
-        <image class='icon' src='https://app.mmtcapp.com/mmtc/imgs/agreement@2x.png' style='width: 36rpx;height: 36rpx;'></image>
-        <view class='flex-con'>
-            用户协议
-        </view>
-        <image class='gt' src='https://app.mmtcapp.com/mmtc/imgs/gt@2x.png' class='gt'></image>
-    </view>
+<view class="top-box">
+    <azm-image class="avatar" src="{{qrcode}}" mode="aspectFill" type="img"></azm-image>
+    <view class="txt" bindtap="downImg">下载二维码分享朋友圈></view>
 </view>
 
-<view class='bg-white bar-item border-b' bindtap='showActivity'>
-    <view class='flex'>
-        <image class='icon' src='https://app.mmtcapp.com/mmtc/imgs/shared.png' style='width: 39rpx;height: 41rpx;'></image>
-        <view class='flex-con'>
-            分享
-        </view>
-        <image class='gt' src='https://app.mmtcapp.com/mmtc/imgs/gt@2x.png' class='gt'></image>
-    </view>
-</view>
+<i-cell-group class="marTop-12">
+    <i-cell title="用户协议" is-link url="/pages/page/index?token=agreement">
+        <image class="azm-cell-icon" slot="icon" src="https://app.mmtcapp.com/mmtc/imgs/agreement@2x.png"
+               mode="widthFix"></image>
+    </i-cell>
+    <i-cell title="分享" is-link data-url="/pages/activity/index" catchtap="$router" data-is-verify>
+        <image class="azm-cell-icon" slot="icon" src="https://app.mmtcapp.com/mmtc/imgs/shared.png"
+               mode="widthFix"></image>
+    </i-cell>
+</i-cell-group>

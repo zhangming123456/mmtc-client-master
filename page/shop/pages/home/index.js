@@ -1,11 +1,9 @@
-// pages/home/index.js
 const app = getApp(),
     util2 = app.util2,
     regeneratorRuntime = util2.regeneratorRuntime,
     config = require('../../../../utils/config'),
     utilPage = require('../../../../utils/utilPage'),
     ApiService = require('../../../../utils/ApiService');
-var page = 1;
 const appPage = {
     data: {
         text: "page shop home",
@@ -85,7 +83,7 @@ const methods = {
             }
         }
         if (shop_id) {
-            this.data.shop_id = shop_id;
+            that.setData({shop_id});
             that.getHomeIndex();
             that.getOrderCardShopcard();
         } else {

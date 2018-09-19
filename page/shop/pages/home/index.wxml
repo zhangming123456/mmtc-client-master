@@ -23,23 +23,22 @@
     </view>
 </view>
 
-
 <view class='box2 '>
-    <view class='flex '>
-        <navigator url='/pages/item/index?shop_id={{shop.id}} ' hover-class='none '>
+    <view class="flex">
+        <navigator url="/page/shop/pages/projects/index?shop_id={{shop_id}}" hover-class="none">
             <image src='https://app.mmtcapp.com/mmtc/imgs/service.png '></image>
             <view class='icon-text '>项目</view>
         </navigator>
-        <navigator url='/pages/cases/index?shop_id={{shop.id}} ' hover-class='none '>
+        <navigator url="/pages/cases/index?shop_id={{shop_id}}" hover-class="none">
             <image src='https://app.mmtcapp.com/mmtc/imgs/notebook.png '></image>
             <view class='icon-text '>案例</view>
         </navigator>
-        <navigator url='/pages/technician/index?shop_id={{shop.id}} ' hover-class='none '>
+        <navigator url="/pages/technician/index?shop_id={{shop_id}}" hover-class="none">
             <image src='https://app.mmtcapp.com/mmtc/imgs/shop.png '></image>
             <view class='icon-text '>技师</view>
         </navigator>
-        <navigator url='/pages/dongtai/index?shop_id={{shop.id}} ' hover-class='none '>
-            <image src='https://app.mmtcapp.com/mmtc/imgs/zt.png '></image>
+        <navigator url="/pages/dongtai/index?shop_id={{shop_id}}" hover-class="none">
+            <image src="https://app.mmtcapp.com/mmtc/imgs/zt.png"></image>
             <view class='icon-text '>动态</view>
         </navigator>
     </view>

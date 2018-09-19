@@ -1,154 +1,157 @@
 // pages/cases/index.js
-const c = require("../../utils/common.js");
-var page = 0;
-var scrollLeft = 0;
-Page({
+const app = getApp(),
+    util2 = app.util2,
+    regeneratorRuntime = util2.regeneratorRuntime,
+    config = require('../../../../utils/config'),
+    utilPage = require('../../../../utils/utilPage'),
+    ApiService = require('../../../../utils/ApiService');
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    data: [],
-    categories: [],
-    cid: 0,
-    scrollLeft: 0,
-    scrollHeight: 0,
-    loadingMore: false,
-    hasMore: true
-  },
+const appPage = {
+    data: {
+        text: "page shop projects",
+        projects: [],
+        page: [],
+        noMore: false,
+        categories: [],
+        cid: 0,
+        _scrollLeft: 0,
+        scrollLeft: 0,
+        scrollHeight: 0,
+        loadingMore: false,
+        hasMore: true
+    },
+    onLoad: function () {
+        let that = this;
+        that.loadCb();
+    },
+    /**
+     * 进入页面
+     */
+    onShow: function (options) {
+        let that = this;
+    },
+    /**
+     * 生命周期函数--监听页面隐藏
+     */
+    onHide: function () {
 
+    },
+    /**
+     * 生命周期函数--监听页面卸载
+     */
+    onUnload: function () {
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    page = 0;
-    this.shop_id = options.shop_id;
-    var that = this;
-    wx.getSystemInfo({
-      success: function (res) {
-        scrollLeft = parseInt(res.windowWidth / 3);
-        that.setData({
-          scrollHeight: res.windowHeight - res.windowWidth/750 * 96
-        });
-        c.showLoading();
-        that.loadData(function(){
-          c.hideLoading();
-        });
-      }
-    });
-  },
-  loadData: function (callback, isAppend) {
-    if (!this.data.hasMore) {
-      return;
+    },
+    /**
+     * 页面渲染完成
+     */
+    onReady: function () {
+    },
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function () {
+        let that = this;
+    },
+    /**
+     * 上拉触底
+     */
+    onReachBottom() {
+    },
+    /**
+     * 页面滚动
+     * @param scrollTop //页面在垂直方向已滚动的距离（单位px）
+     */
+    onPageScroll(options) {
+
     }
-    if (!this.loadingMore) {
-      page++;
-      var that = this;
-      this.data.loadingMore = 1;
-      if (isAppend){
-        this.setData({
-          loadingMore: 1
-        });
-      }      
-      c.get("/api/wx2/items", { shop_id: this.shop_id, p: page, category_id: this.data.cid }, function (res) {
-        that.data.loadingMore = 0;
-        let setData = {
-          loadingMore: 0
-        };
-        if (res.status == 1) {
-          if (res.info.rows.length < c.getPageSize()) {
-            that.data.hasMore = 0;            
-            if (res.info.rows.length==0){
-               setData.isEmpty = true;
-            }else{
-              setData.hasMore = 0;
+};
+const methods = {
+    loadCb(){
+        let that = this;
+        let options = that.data.options;
+        that.data.shop_id = options.shop_id;
+        that.getShopProjects()
+    },
+    getShopProjects({p = 1, category_id = 0} = {}){
+        let that = this;
+        let shop_id = that.data.shop_id;
+        if (!shop_id)return;
+        ApiService.getShopProjects({p, category_id, shop_id}).finally(res => {
+            if (res.status === 1) {
+                let setData = {};
+                let categories = res.info.categories;
+                if (categories && categories.length > 0) {
+                    setData.categories = categories;
+                }
+                let info = res.info.rows;
+                if (info.length > 0) {
+                    if (p === 1) {
+                        setData[`projects`] = [info]
+                    } else {
+                        setData[`projects[${p - 1}]`] = info
+                    }
+                    setData[`page`] = p + 1;
+                    setData.noMore = info.length !== 10;
+                } else if (info.length === 0) {
+                    if (p > 1) {
+                        setData[`page`] = p - 1;
+                    } else {
+                        setData[`projects`] = []
+                    }
+                    setData.noMore = true;
+                }
+                that.setData(setData, function () {
+                    if (categories && categories.length > 0) {
+                        that.setHeight();
+                    }
+                });
+            } else {
+                util2.failToast(res.message || '加载失败')
             }
-          }
-          if (isAppend) {
-            that.data.data = that.data.data.concat(res.info.rows);
-          } else {
-            that.data.data = res.info.rows;
-          }
-          setData.data = that.data.data;
-          if (page == 1 && that.data.cid == 0) { //first page and category_id = 0          
-            that.data.categories = setData.categories = res.info.categories;
-          }
+        })
+    },
+    setHeight(){
+        let that = this;
+        let dom = that.querySelector("#navTab");
+        dom.boundingClientRect(function (rect) {
+            let windowHeight = that.data.systemInfo.windowHeight,
+                H = rect.height;
+            that.setData({scrollHeight: windowHeight - H});
+        }).exec();
+    },
+    toggleCategory ({currentTarget, target}) {
+        let that = this;
+        let windowWidth = that.data.systemInfo.windowWidth
+        let scrollLeft = this.data._scrollLeft;
+        let category_id = this.data.cid;
+        let left = currentTarget.offsetLeft - windowWidth / 2;
+        let page = this.data.page;
+        if (left < 0) {
+            left = 0;
         }
-        callback && callback();
-        that.setData(setData);
-      });
+        let cid = currentTarget.dataset.id;
+        if (cid <= -1)return;
+        if (category_id !== cid) {
+            page = 1;
+        }
+        this.setData({cid, scrollLeft: left});
+        this.getShopProjects({category_id: cid, p: page});
+    },
+    scrolltolower(){
+        let category_id = this.data.cid;
+        let p = this.data.page;
+        this.getShopProjects({category_id, p})
+    },
+    scroll({detail}){
+        this.data._scrollLeft = detail.scrollLeft
+    },
+    onViewScroll({detail}){
+        this.selectComponent('#azmGoTop').scroll(detail)
+    },
+    azmtap(e){
+        console.log(e);
+        this.setData({scrollTop: 0})
     }
-  },
-  toggleCategory: function (e) {
-    this.data.hasMore = 1;
-    page = 0;
-    var left = e.currentTarget.offsetLeft - scrollLeft;
-    if (left < 0) {
-      left = 0;
-    }
-    this.data.scrollLeft = left;
-    this.data.cid = e.target.dataset.id;
-    this.setData({
-      cid: this.data.cid,
-      scrollLeft: this.data.scrollLeft
-    });
-    c.showLoading();
-    this.loadData(function(){
-      c.hideLoading();
-    });
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
-  scrolltolower: function (e) {
-    this.loadData(null, 1);
-  }
-})
+};
+Page(new utilPage(appPage, methods));

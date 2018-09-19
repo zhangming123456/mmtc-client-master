@@ -94,7 +94,7 @@
                        mode="widthFix"></image>
             </i-cell>
         </label>
-        <i-cell title="关于我们" is-link url="/pages/mine/aboutus">
+        <i-cell title="关于我们" is-link url="/page/mine/pages/aboutus/index">
             <image class="azm-cell-icon" slot="icon" src="https://app.mmtcapp.com/mmtc/imgs/aboutus.png"
                    mode="widthFix"></image>
         </i-cell>

@@ -2,6 +2,12 @@
 page {
   line-height: 1;
 }
+.azm-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
 .azm-zan text {
   color: #ff538b;
 }

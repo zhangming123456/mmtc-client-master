@@ -6,16 +6,17 @@
 <view id="azm-index">
     <view class="p1">
         <view class="flexBox">
-            <view class='flexBox-item fb-all' style="flex-grow: 1">
+            <view class='flexBox-item'>
                 <!--地理位置-->
                 <azm-location style="display: none;" bindazmtap="azmLocationTap" position="pr"
                               bindcallback="getLocationCallback"></azm-location>
-                <div class="azm-city" catchtap="doCitySelect">
+                <view class="azm-city azm-ellipsis" catchtap="doCitySelect">
                     <text class="iconfont icon-address azm-icon"></text>
                     <text>{{cityName}}</text>
-                </div>
+                    <text class="iconfont icon-jiantou azm-icon right"></text>
+                </view>
             </view>
-            <view class="flexBox-item fb-all" style="flex-grow: 2;box-sizing: border-box;padding-left: 20rpx;">
+            <view class="flexBox-item" style="flex: 3;box-sizing: border-box;padding-left: 20rpx;">
                 <view class='azm-search' bindtap='doSearch'>
                     <image src='https://app.mmtcapp.com/mmtc/imgs/search@2x.png'
                            style='width: 24rpx;	height: 24rpx'></image>
@@ -135,7 +136,8 @@
             <view class="weui-flex azm-content">
                 <block wx:for="{{ item.info }}" wx:key="{{item.item_id}}" wx:for-index="i" wx:for-item="v"
                        wx:if="{{ i<3 }}">
-                    <navigator url="/page/shop/pages/goods/index?id={{v.item_id}}" class="weui-flex__item azm-col-8 azm-col">
+                    <navigator url="/page/shop/pages/goods/index?id={{v.item_id}}"
+                               class="weui-flex__item azm-col-8 azm-col">
                         <view class="azm-content">
                             <view wx:if="{{!!v.group_num}}" class="azm-group-num">{{v.group_num}}人团</view>
                             <azm-image src="{{v.cover}}" lazy-load="true" mode="aspectFill"></azm-image>

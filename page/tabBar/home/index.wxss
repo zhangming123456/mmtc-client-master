@@ -182,7 +182,8 @@ page {
 #azm-index .azm-city {
   position: relative;
   box-sizing: border-box;
-  max-width: 276rpx;
+  min-width: 180rpx;
+  max-width: 230rpx;
   height: 60rpx;
   line-height: 60rpx;
   background-color: rgba(0, 0, 0, 0.38);
@@ -190,18 +191,20 @@ page {
   padding-left: 52rpx;
   padding-right: 45rpx;
   color: #fff;
-  font-size: 24rpx;
-  display: inline-block;
+  font-size: 26rpx;
 }
 #azm-index .azm-city .azm-icon {
   position: absolute;
   top: 50%;
-  left: 26rpx;
   transform: translate(-50%, -50%);
-}
-#azm-index .azm-city text {
   color: #fff;
-  font-size: 28rpx;
+  font-size: 24rpx;
+}
+#azm-index .azm-city .azm-icon.icon-address {
+  left: 26rpx;
+}
+#azm-index .azm-city .azm-icon.right {
+  right: 0;
 }
 .p1 {
   padding: 24rpx 30rpx;

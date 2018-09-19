@@ -197,25 +197,28 @@ page {
     .azm-city {
         position: relative;
         box-sizing: border-box;
-        max-width: 276*1rpx;
-        height: 60*1rpx;
-        line-height: 60*1rpx;
+        min-width: 90*2rpx;
+        max-width: 230*1rpx;
+        height: 30*2rpx;
+        line-height: 30*2rpx;
         background-color: rgba(0, 0, 0, 0.38);
         border-radius: 29*1rpx;
         padding-left: 52*1rpx;
         padding-right: 45*1rpx;
         color: #fff;
-        font-size: 24*1rpx;
-        display: inline-block;
+        font-size: 26*1rpx;
         .azm-icon {
             position: absolute;
             top: 50%;
-            left: 26*1rpx;
             transform: translate(-50%, -50%);
-        }
-        text {
             color: #fff;
-            font-size: 28*1rpx;
+            font-size: 24*1rpx;
+            &.icon-address {
+                left: 26*1rpx;
+            }
+            &.right {
+                right: 0;
+            }
         }
     }
 }

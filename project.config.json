@@ -9,7 +9,7 @@
 		"nodeModules": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.7.3",
+	"libVersion": "2.3.0",
 	"appid": "wx0df0e298b3b13290",
 	"projectname": "mmtc-client-master",
 	"condition": {
@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 6,
+			"current": 32,
 			"list": [
 				{
 					"id": 0,
@@ -223,6 +223,12 @@
 					"id": -1,
 					"name": "选择城市（new）",
 					"pathName": "page/public/pages/city/index",
+					"query": ""
+				},
+				{
+					"id": 32,
+					"name": "关于我们（new）",
+					"pathName": "page/mine/pages/aboutus/index",
 					"query": ""
 				}
 			]

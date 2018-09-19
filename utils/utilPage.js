@@ -284,7 +284,6 @@ const events = {
     // 保存formId
     saveFormIds (e) {
         let formId = e.detail.formId;
-        console.log(formId);
         if (formId !== 'the formId is a mock one') {
             ApiService.saveFormIds({form_id: formId});
         }
@@ -359,13 +358,15 @@ const events = {
         console.log('toast结束');
         wxc_toastHideToast && wxc_toastHideToast();
     },
-
+    /**
+     * dom选择器
+     * @param el
+     */
     querySelector (el) {
         if (!el) return;
         let node = null;
         return wx.createSelectorQuery().select(el);
     },
-
     getEleScrollOffset (el) {
         if (!el) return;
         let node = null;
@@ -381,7 +382,6 @@ const events = {
         });
         return p;
     },
-
     bindSetClipboardData (e) {
         let dataset = e.currentTarget.dataset || e.target.dataset;
         wx.setClipboardData({
@@ -394,8 +394,6 @@ const events = {
             }
         })
     },
-
-
     /**
      * 函数描述：作为上传文件时递归上传的函数体体；
      * 参数描述：
@@ -457,7 +455,6 @@ const events = {
             },
         });
     },
-
     /**
      * 图片上传
      * @param count
@@ -503,9 +500,8 @@ const events = {
         });
         return p;
     },
-
     /**
-     * 使用剪切
+     * 使用剪贴板
      **/
     __Clipboard (e) {
         console.log(e);
@@ -537,6 +533,9 @@ const events = {
     // 空操作
     noop(){
     },
+    /**
+     * 扫描二维码验证（消费码）
+     */
     scanCodeVerify () {
         wx.scanCode({
             scanType: ['qrCode', 'barCode'],
@@ -719,6 +718,9 @@ const events = {
         }
         this.onOpensettingCall && this.onOpensettingCall(e)
     },
+    /**
+     * 返回
+     */
     bindBack () {
         this.$route.back();
     },
@@ -793,6 +795,22 @@ const events = {
     },
     $setFromValue(e){
         console.log(e);
+    },
+    $router({currentTarget}){
+        let that = this;
+        let dataset = currentTarget.dataset;
+        let path = dataset.url;
+        let query = dataset.query;
+        let isVerify = dataset.isVerify;
+        if (!path)return;
+        if (isVerify) {
+            util2.hasLogin(function () {
+                that.$route.push({path, query})
+            })
+        } else {
+            that.$route.push({path, query})
+        }
+
     }
 };
 

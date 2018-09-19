@@ -176,6 +176,21 @@ class HttpRequest {
         this.requestTask = []
     }
 
+    data_filter (data) {
+        for (let k in  data) {
+            if (data[k] === undefined || data[k] === null) {
+                delete data[k]
+            } else if (!util2.jude.isEmptyObject(data[k])) {
+                delete data[k]
+            } else if (util2.jude.isArray(data[k]) && data[k].length > 0) {
+                delete data[k]
+            } else if (util2.jude.isString(data[k]) && util2.trim(data[k]) === '') {
+                delete data[k]
+            }
+        }
+        return data
+    }
+
     request ({url = '', data = {}, contentType = 'application/json', method = 'GET'}, resolve) {
         let params = {url, data, contentType, method},
             retryNum = 0,
@@ -204,13 +219,7 @@ class HttpRequest {
             delete params.data.options;
         }
 
-        for (let k in params.data) {
-            if (params.data[k] === undefined || params.data[k] === null) {
-                delete params.data[k];
-            } else if (util.trim(params.data[k]) === '') {
-                params.data[k] = ''
-            }
-        }
+        params.data = this.data_filter(params.data);
 
         if (isLoading) {
             util.showLoading('加载中');
@@ -306,9 +315,9 @@ class HttpRequest {
     };
 
     downImage (url, data) {
+        data = this.data_filter(data);
         let qrCodePath = `${url}?${queryString.stringify(data)}`;
         let cookie = util.getSessionId();
-        console.log(qrCodePath);
         return new Promise((resolve, reject) => {
             wx.downloadFile({
                 url: qrCodePath,

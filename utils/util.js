@@ -1018,14 +1018,14 @@ function chooseLocation ({type = 'gcj02', success, fail, complete}) {
                     reject({info: res, status: 0, message: '未获取权限'});
                     wx.showModal({
                         title: '',
-                        content: `"美美天成商家端"要获取你的地理位置，请前往我的 -> 设置 -> 权限 -> 使用我的地理位置开启权限`,
+                        content: `"美美天成商家端"要获取你的地理位置，请前往我的 -> 关于我的 -> 权限 -> 使用我的地理位置开启权限`,
                         cancelText: '取消',
                         cancelColor: '#000000',
                         confirmText: '去开启',
                         confirmColor: '#3CC51F',
                         success: function (res) {
                             if (res.confirm) {
-                                that.$route.push('/page/me/pages/setting/index')
+                                that.$route.push('/page/public/pages/authorization/index')
                             }
                         }
                     })
@@ -1060,14 +1060,14 @@ function getLocation ({type = 'gcj02'} = {}) {
                     reject({info: res, status: 0, message: '未获取权限'});
                     wx.showModal({
                         title: '',
-                        content: `"美美天成商家端"要获取你的地理位置，请前往我的 -> 设置 -> 权限 -> 使用我的地理位置开启权限`,
+                        content: `"美美天成商家端"要获取你的地理位置，请前往我的 > 关于我的 > 权限 > 使用我的地理位置开启权限`,
                         cancelText: '取消',
                         cancelColor: '#000000',
                         confirmText: '去开启',
                         confirmColor: '#3CC51F',
                         success: function (res) {
                             if (res.confirm) {
-                                that.$route.push('/page/me/pages/setting/index')
+                                that.$route.push('/page/public/pages/authorization/index')
                             }
                         }
                     })
@@ -1096,23 +1096,20 @@ function saveImageToPhotosAlbum ({filePath, success, fail, complete}) {
                 success && success(res);
             },
             fail: res => {
-                console.log(res);
                 if (res.errMsg === 'saveImageToPhotosAlbum:fail cancel') {
                     resolve({info: res, status: 0, message: '取消保存'});
                 } else {
                     reject({info: res, status: 0, message: '未获取权限'});
                     wx.showModal({
                         title: '',
-                        content: `
-                    "美美天成商家端"
-                    要保存图片或视频到你的相册，请前往我的 》设置 》权限 》保存到相册开启权限`,
+                        content: `"美美天成商家端"要保存图片或视频到你的相册，请前往我的 > 关于我的 > 权限 > 保存到相册开启权限`,
                         cancelText: '取消',
                         cancelColor: '#000000',
                         confirmText: '去开启',
                         confirmColor: '#3CC51F',
                         success: function (res) {
                             if (res.confirm) {
-                                that.$route.push('/page/me/pages/setting/index')
+                                that.$route.push('/page/public/pages/authorization/index')
                             }
                         }
                     })
@@ -1156,6 +1153,20 @@ function login (bol) {
             });
         }
     })
+}
+
+/**
+ * 判断是否登入
+ * @param callback
+ */
+function hasLogin (callback = () => {
+}) {
+    let status = wx.getStorageSync('_loginStatus_') || 0;
+    if (status > 0) {
+        callback && callback()
+    } else {
+        router.push("/page/userLogin/pages/getUserInfo/index");
+    }
 }
 
 function getUserInfo ({lang = 'en', withCredentials = false, timeout = null, isCode = false} = {}) {
@@ -1922,6 +1933,7 @@ module.exports = {
     showLoading,
     getUserInfo,
     login,
+    hasLogin,
     compareVersion,
     saveImageToPhotosAlbum,
     extend,

@@ -1,112 +1,97 @@
-const c = require("../../utils/common.js");
-Page({
+const c = require("../../../../utils/common.js");
+const app = getApp(),
+    util2 = app.util2,
+    utilPage = require("../../../../utils/utilPage"),
+    config = require('../../../../utils/config'),
+    ApiService = require('../../../../utils/ApiService');
 
+const appPage = {
     /**
      * 页面的初始数据
      */
     data: {
-        img_src: ''
-    },
-    imgLoadedErr(e){
-        c.alert('下载失败,请检查您的网络');
-        c.hideLoading();
-    },
-    imgLoaded(){
-        c.hideLoading();
+        text: 'Page mine aboutus',
+        qrcode: ''
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        c.showLoading();
-        
-        wx.downloadFile({
-            url: c.absUrl('/api/wx_shop/showInviteQrcode'),
-            header: {
-                cookie: c.getSessionId()
-            },
-            success: (res) => {
-                c.hideLoading();
-                this.setData({
-                    img_src: res.tempFilePath
-                });
-            }
-        });
+        this.loadCb();
     },
-    downImg: function () {
-        if (!this.data.img_src) {
-            return;
-        }
-        c.showLoading()
-        wx.saveImageToPhotosAlbum({
-            filePath: this.data.img_src,
-            complete() {
-                c.hideLoading();
-            },
-            success(res) {
-                c.toast('成功保存在相册');
-            },
-            fail() {
-                c.alert('您取消了下载');
-            }
-        })
-    },
-    showAgreement(e) {
-        wx.navigateTo({
-            url: '/pages/page/index?token=agreement',
-        })
-    },
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function (options) {
 
     },
-
     /**
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
 
     },
-
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
 
     },
+    /**
+     * 页面渲染完成
+     */
+    onReady: function () {
 
+    },
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
-
+    onPullDownRefresh () {
+        let that = this;
     },
-
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
-
+    onReachBottom (options) {
+        let that = this
     },
-
+    /**
+     * 页面滚动
+     * @param options
+     */
+    onPageScroll(options){
+    },
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage(options) {
 
-    },
-    showActivity(){
-        wx.navigateTo({
-            url: '/pages/activity/index',
-        })
     }
-})
+};
+const methods = {
+    loadCb(){
+        let that = this, setData = {};
+        ApiService.wx_shopShowQrcode().finally(res => {
+            if (res.status === 1 && res.info.path) {
+                setData.qrcode = res.info.path;
+            } else {
+                util2.failToast(res.message)
+            }
+            that.setData(setData);
+        })
+    },
+    downImg: function () {
+        let qrcode = this.data.qrcode;
+        if (!qrcode) return;
+        util2.showLoading();
+        util2.saveImageToPhotosAlbum({filePath: qrcode}).finally(res => {
+            util2.hideLoading(true);
+            if (res.status === 1) {
+                util2.showToast(res.message)
+            } else {
+                util2.failToast(res.message)
+            }
+        })
+    },
+};
+Page(new utilPage(appPage, methods));

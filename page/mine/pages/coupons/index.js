@@ -74,7 +74,7 @@ const methods = {
         if (item.shop_id == 0) {
             this.$route.push('/pages/index/items');
         } else if (!item.errmsg) {
-            this.$route.push({path: '/pages/item/index', query: {shop_id: item.shop_id}});
+            this.$route.push({path: 'page/shop/pages/projects/index', query: {shop_id: item.shop_id}});
         }
     }
 };

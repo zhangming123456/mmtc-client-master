@@ -1,0 +1,26 @@
+page {
+  background-color: #f4f4f4;
+}
+.azm-cell-icon {
+  width: 44rpx;
+  height: 38rpx;
+  margin-right: 20rpx;
+  vertical-align: text-bottom;
+}
+.top-box {
+  background-color: #fff;
+  margin-bottom: 24rpx;
+  padding-bottom: 84rpx;
+  padding-top: 84rpx;
+  text-align: center;
+}
+.top-box .avatar {
+  width: 280rpx;
+  height: 280rpx;
+  margin-bottom: 68rpx;
+}
+.top-box .txt {
+  text-align: center;
+  color: #ff538b;
+  font-size: 32rpx;
+}

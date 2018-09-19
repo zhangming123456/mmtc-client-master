@@ -548,23 +548,6 @@ class ApiService extends OldApi {
 
     /**
      * 查看店铺买单二维码
-     * @param page
-     * @param shop_id
-     * @param resole
-     * @param reject
-     * @returns {*}
-     */
-    wx_shopShowQrcode ({page = '', shop_id = 0}) {
-        let that = this,
-            data = {page, shop_id};
-        const api = '/wx_shop/showQrcode';
-        const http = $http.downImage(that.api + api, data, 'image');
-        return http;
-    }
-
-
-    /**
-     * 查看店铺买单二维码
      * @param id
      * @returns {*}
      */
@@ -722,6 +705,21 @@ class ApiService extends OldApi {
         let that = this,
             data = {shop_id, lat, lon, p};
         const api = '/wx2/index';
+        const http = $http.get(that.api + api, data);
+        return http;
+    }
+
+    /**
+     * 店铺下项目
+     * @param p
+     * @param shop_id
+     * @param category_id
+     * @returns {*}
+     */
+    getShopProjects ({p = 1, shop_id = 0, category_id = 0}) {
+        let that = this,
+            data = {shop_id, category_id, p};
+        const api = '/wx2/items';
         const http = $http.get(that.api + api, data);
         return http;
     }
@@ -950,7 +948,7 @@ class ApiService extends OldApi {
     }
 
     /**
-     * 获取二维码(小程序码)
+     * 获取二维码(小程序码)（用于商家端）
      * @param page
      * @param scene
      * @param resole
@@ -962,6 +960,20 @@ class ApiService extends OldApi {
             data = {page, scene};
         const api = `/shop/shopQrcodeApi`;
         const http = $http.downImage(that.shopApi + api, data, resole, reject);
+        return http;
+    }
+
+    /**
+     * 获取二维码(小程序码)(不用登入)
+     * @param page （默认首页）
+     * @param shop_id
+     * @returns {*}
+     */
+    wx_shopShowQrcode ({page = 'page/tabBar/home/index', shop_id} = {}) {
+        let that = this,
+            data = {page, shop_id};
+        const api = '/wx_shop/showQrcode';
+        const http = $http.downImage(that.api + api, data, 'image');
         return http;
     }
 
