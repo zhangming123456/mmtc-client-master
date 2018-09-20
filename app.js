@@ -1,7 +1,6 @@
 //app.js
 const config = require('./utils/config'),
     util = require('./utils/azm/util');
-
 const util2 = require('./utils/util');
 let isUpdate = true;
 let isLogin = true;
@@ -119,6 +118,18 @@ App({
      * @param options
      */
     onPageNotFound (options) {
+        for (let k in options.query) {
+            options.query[k] = decodeURIComponent(options.query[k])
+        }
+        let query = options.query;
         console.warn('不存在页面监听', options);
+        if (query.scene && /^shop_id:[0-9]+$/.test(query.scene)) {
+            let scene = query.scene.split(":");
+            if (scene[1]) {
+                util2.router.reLaunch({path: '/pages/onlineBuy/index', query: {shop_id: scene[1]}})
+            }
+        } else {
+            util2.router.tab('/page/tabBar/home/index')
+        }
     }
 })

@@ -180,12 +180,12 @@ class HttpRequest {
         for (let k in  data) {
             if (data[k] === undefined || data[k] === null) {
                 delete data[k]
-            } else if (!util2.jude.isEmptyObject(data[k])) {
+            } else if (util2.jude.isObject(data[k]) && !util2.jude.isEmptyObject(data[k])) {
                 delete data[k]
             } else if (util2.jude.isArray(data[k]) && data[k].length > 0) {
                 delete data[k]
             } else if (util2.jude.isString(data[k]) && util2.trim(data[k]) === '') {
-                delete data[k]
+                data[k] = ""
             }
         }
         return data

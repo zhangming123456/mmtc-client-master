@@ -171,7 +171,7 @@
             <scroll-view class="t-introBox" scroll-x class="t-scroll">
                 <view class="t-intro" wx:for='{{technicianData}}' wx:key="{{index}}">
                     <azm-image class="t-head" type="img" lazy-load mode="aspectFill" ratio="1" round
-                               src="http://img07.tooopen.com/images/20170316/tooopen_sy_201956178977.jpg"></azm-image>
+                               src="{{item.avatar}}"></azm-image>
                     <view class="t-name">{{item.username}}</view>
                     <veiw class="t-occupation">{{item.type_name}}</veiw>
                 </view>

@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 32,
+			"current": 33,
 			"list": [
 				{
 					"id": 0,
@@ -229,6 +229,12 @@
 					"id": 32,
 					"name": "关于我们（new）",
 					"pathName": "page/mine/pages/aboutus/index",
+					"query": ""
+				},
+				{
+					"id": 33,
+					"name": "过渡页面",
+					"pathName": "pages/home/index",
 					"query": ""
 				}
 			]

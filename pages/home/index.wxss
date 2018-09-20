@@ -1,0 +1,9 @@
+page {
+  background-color: #f4f4f4;
+  height: 100%;
+  width: 100%;
+}
+.azm-image-box {
+  height: 100%;
+  width: 100%;
+}

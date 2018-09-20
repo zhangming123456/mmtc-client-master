@@ -4,7 +4,7 @@
     <span id="position_name">{{position_name}}</span>
 </view> -->
 
-<view class="shopPay">
+<view class="shopPay" catchtap="toHome">
     <image mode="aspectFill" src="{{imageUrl+cover}}"></image>
     <text>{{nickname}}</text>
 </view>

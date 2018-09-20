@@ -1340,7 +1340,12 @@ function go (a, options = {}) {
 
 function absUrl (url, imgw) {
     if (url) {
-        if (regExpUtil.isUrlPath(url)) {
+        var reg = /^https?:\/\//ig;
+        var reg1 = /^wxfile:\/\//ig;
+        var reg2 = /^wxftp:\/\//ig;
+        var reg3 = /^data:image\/jpg;base64,/ig;
+
+        if (reg.test(url) || reg1.test(url) || reg3.test(url)) {
             return url;
         } else if (/^wxftp:/i.test(url)) {
             return url.replace(/^wxftp:/, '')

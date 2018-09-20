@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "美美天成",
+  "enablePullDownRefresh": false,
+  "disableScroll": true,
+  "usingComponents": {
+    "azm-image": "../../lib/components/azm-image/index"
+  }
+}

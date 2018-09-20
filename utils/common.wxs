@@ -3,8 +3,9 @@ module.exports.absUrl = function (url, imgw) {
     if (url) {
         var reg = getRegExp('^https?:\/\/', 'ig'),
             reg1 = getRegExp('^wxfile:\/\/', 'ig'),
-            reg2 = getRegExp('^wxftp:\/\/', 'ig');
-        if (reg.test(url) || reg1.test(url)) {
+            reg2 = getRegExp('^wxftp:\/\/', 'ig'),
+            reg3 = getRegExp('^data:image\/jpg;base64,', 'ig');
+        if (reg.test(url) || reg1.test(url) || reg3.test(url)) {
             return url;
         } else if (reg2.test(url)) {
             return url.replace(reg2, '')

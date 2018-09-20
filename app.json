@@ -4,6 +4,7 @@
     "page/tabBar/near/index",
     "page/tabBar/order/index",
     "page/tabBar/mine/index",
+    "pages/home/index",
     "pages/chat/index",
     "pages/msg/index",
     "pages/activity/wallet",

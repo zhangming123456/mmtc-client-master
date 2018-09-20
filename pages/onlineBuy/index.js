@@ -291,7 +291,7 @@ const methods = {
                 // noDiscountMoney: 0
             })
         }
-        this.calMoney();    
+        this.calMoney();
         return v
     },
     submitOrder: function (e) {
@@ -327,7 +327,12 @@ const methods = {
                 }
             });
         }
-    }
+    },
 
+
+    toHome(e){
+        let shop_id = this.data.shop_id;
+        this.toShopHome(shop_id)
+    }
 };
 Page(new utilPage(appPage, methods));
