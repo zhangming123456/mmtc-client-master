@@ -1,8 +1,0 @@
-{
-  "backgroundColor": "#feece1",
-  "usingComponents": {
-    "azm-location": "../../lib/components/azm-location/index",
-    "wxc-popup": "../../lib/minui/wxc-popup/dist/index",
-    "wxc-dialog": "../../lib/minui/wxc-dialog/dist/index"
-  }
-}

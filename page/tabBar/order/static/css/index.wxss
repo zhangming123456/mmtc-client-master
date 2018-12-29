@@ -1,0 +1,158 @@
+.h20 {
+  height: 20rpx;
+  border-top: 1px solid #EEEEEE;
+  border-bottom: 1px solid #EEEEEE;
+  background: #F5F8F7;
+}
+.meOrder {
+  height: 90rpx;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 37rpx;
+  padding-right: 37rpx;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+.orderTitle {
+  font-size: 32rpx;
+  color: #000000;
+  font-weight: 500;
+}
+.orderMore {
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  color: #999999;
+  font-weight: 500;
+}
+.orderMore image {
+  width: 25rpx;
+  height: 25rpx;
+  margin-left: 17rpx;
+}
+.orderState {
+  padding-top: 36rpx;
+  padding-bottom: 26rpx;
+  box-sizing: border-box;
+  border-top: 1px solid #EEEEEE;
+  display: flex;
+}
+.orderMenu {
+  width: 25%;
+  text-align: center;
+  font-size: 26rpx;
+  color: #999999;
+  position: relative;
+}
+.orderMenu image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-bottom: 15rpx;
+}
+.recentlyTitle {
+  height: 90rpx;
+  padding-left: 37rpx;
+  padding-right: 37rpx;
+  line-height: 90rpx;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid #EEEEEE;
+}
+.recentlyTitle text:first-child {
+  font-size: 32rpx;
+  color: #000000;
+  font-weight: 500;
+  margin-right: 32rpx;
+}
+.recentlyTitle text:last-child {
+  font-size: 26rpx;
+  color: #999999;
+}
+.recentlyOrder {
+  padding-left: 37rpx;
+  padding-right: 37rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+.orderItem {
+  display: flex;
+  box-sizing: border-box;
+  border-bottom: 1px solid #EEEEEE;
+  padding: 30rpx 0rpx;
+}
+.itemPicture {
+  width: 115rpx;
+  height: 115rpx;
+  border-radius: 10rpx;
+  margin-right: 30rpx;
+}
+.itemContent {
+  flex: 1;
+}
+.itemTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 26rpx;
+  color: #333333;
+}
+.itemTitle view:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 400rpx;
+}
+.itemTitle view:last-child {
+  color: #FF931E;
+}
+.itemTime {
+  font-size: 24rpx;
+  color: #999999;
+  margin-top: 15rpx;
+}
+.itemPirce {
+  display: flex;
+  align-items: center;
+  margin-top: 15rpx;
+  justify-content: space-between;
+}
+.pirce span {
+  font-size: 28rpx;
+  color: #FA5151;
+}
+.pirce span i {
+  font-size: 20rpx;
+}
+.pirce text {
+  font-size: 24rpx;
+  text-decoration: line-through;
+  color: #999999;
+  margin-left: 16rpx;
+}
+.itemButton {
+  border: 1px solid #FA5151;
+  border-radius: 20rpx;
+  color: #FA5151;
+  font-size: 26rpx;
+  width: 134rpx;
+  height: 40rpx;
+  text-align: center;
+  line-height: 40rpx;
+}
+.lookAll {
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 26rpx;
+  color: #999999;
+  align-items: center;
+  display: flex;
+  border-bottom: 1px solid #EEEEEE;
+  justify-content: center;
+}
+.lookAll image {
+  width: 25rpx;
+  height: 25rpx;
+  margin-left: 17rpx;
+}
+/*# sourceMappingURL=index.wxss.map */

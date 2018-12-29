@@ -1,0 +1,6 @@
+<view class="shopAlbum">
+    <view class="albumBox" wx:for="{{img}}" bindtap="previewImage" wx:key="{{index}}">
+        <image data-src="{{item.img_src}}" src="{{c.absUrl(item.img_src)}} "></image>
+    </view>
+
+</view>

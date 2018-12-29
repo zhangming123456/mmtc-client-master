@@ -94,7 +94,7 @@
                     <view class='rel'>
                         <view class='box3-group-num' wx:if="{{item.group_num && item.group_num>0}}">{{item.group_num}}人团
                         </view>
-                        <image src="{{c.absUrl(item.cover,400)}}" class="cover" background-size="cover"></image>
+                        <image src="{{c.absUrl(item.cover)}}" class="cover" background-size="cover"></image>
                         <view class='box3-item-info'>
                             <view class="box3-item-title one-line">{{item.title}}</view>
                             <view class="box3-item-desc one-line">{{item.shop_name}}</view>

@@ -1,0 +1,749 @@
+@import "../../../../../../style/theme";
+
+.azm-payOrder {
+    .azm-money {
+        .flexBox-item {
+            &.left {
+                line-height: 60*1rpx;
+            }
+
+            &.right {
+                text-align: right;
+
+                .azm-stepper-box {
+                    display: inline-block;
+                    line-height: 50*1rpx;
+                }
+            }
+        }
+    }
+}
+
+.azm-item__box {
+    box-sizing: border-box;
+    padding: 30*1rpx 20*1rpx;
+    border-bottom: 1px solid #eeeeee;
+
+    > view {
+        position: relative;
+    }
+
+    > .left {
+        flex-basis: 218*1rpx;
+
+        .azm-image {
+            width: 188*1rpx;
+            height: 188*1rpx;
+            vertical-align: middle;
+            border-radius: 10*1rpx;
+        }
+    }
+
+    > .right {
+        padding-bottom: 50*1rpx;
+
+        .azm-title {
+            font-size: 32*1rpx;
+            color: #282828;
+            margin-bottom: 24*1rpx;
+        }
+
+        .azm-label {
+            .azm-icon {
+                color: #ff7aa5;
+                padding-right: 10*1rpx;
+            }
+        }
+
+        .azm-money {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+
+            .azm-unit {
+                font-size: 24*1rpx;
+            }
+
+            //.azm-stepper {
+            //    position: absolute;
+            //    bottom: 0;
+            //    right: 0;
+            //    width: 111*1rpx;
+            //    box-sizing: border-box;
+            //    border: 1px solid #999;
+            //    border-radius: 4*1rpx;
+            //    > view {
+            //        height: 30*1rpx;
+            //        line-height: 30*1rpx;
+            //        text-align: center;
+            //        font-size: 24*1rpx;
+            //        color: #282828;
+            //    }
+            //    .left, .right {
+            //        flex-basis: 30*1rpx;
+            //        height: inherit;
+            //        text-align: center;
+            //        &.azm-stepper--disabled {
+            //            color: #999;
+            //        }
+            //    }
+            //    .left {
+            //        border-right: 1px solid #999;
+            //    }
+            //    .right {
+            //        border-left: 1px solid #999;
+            //    }
+            //}
+        }
+    }
+}
+
+.azm-platform__coupon {
+    padding: 24*1rpx 0;
+    font-size: 28*1rpx;
+
+    .azm-icon {
+        font-size: 23*1rpx;
+        color: #999;
+        margin-left: 21*1rpx;
+    }
+}
+
+.azm-payOrder {
+    margin-bottom: 24*1rpx;
+
+    .azm-shop__item {
+        background-color: #fff;
+        box-sizing: border-box;
+        padding-left: 30*1rpx;
+        padding-right: 30*1rpx;
+
+        .azm-shop_name {
+            padding-top: 26*1rpx;
+            box-sizing: border-box;
+            font-size: 24*1rpx;
+            color: #282828;
+
+            text {
+                font-size: 24*1rpx;
+                color: #282828;
+            }
+
+            .azm-icon__left {
+                margin-right: 16*1rpx;
+                font-size: 32*1rpx;
+            }
+
+            .azm-icon__right {
+
+            }
+        }
+
+        .azm-cell__group {
+            .azm-text__color {
+                color: #282828;
+            }
+
+            .flexBox-item {
+                box-sizing: border-box;
+            }
+
+            .azm-cell__ft {
+                width: 262*2rpx;
+                flex-basis: 262*2rpx;
+            }
+
+            .azm-cell {
+                padding-right: 0;
+                padding-left: 0;
+            }
+        }
+    }
+}
+
+.azm-cells_notice {
+    .azm-color_16d6c3 {
+        color: #16d6c3;
+        font-size: 26*1rpx;
+    }
+}
+
+.msg-box-footer {
+    margin-top: 45*1rpx;
+
+    .azm-icon {
+        font-size: 35*1rpx;
+        color: #fff;
+    }
+}
+
+.azm-unavailable {
+    text {
+        color: #999999 !important;
+    }
+}
+
+.item {
+    background-color: #fff;
+    padding-top: 30*1rpx;
+    padding-right: 30*1rpx;
+    margin: 0 30*1rpx;
+    margin-right: 0;
+    padding-right: 30*1rpx;
+}
+
+.avatar {
+    width: 188*1rpx;
+    height: 188*1rpx;
+    vertical-align: middle;
+    border-radius: 10*1rpx;
+}
+
+.item-info {
+    padding-left: 30*1rpx;
+    margin-top: -80*1rpx;
+}
+
+.item .title {
+    font-size: 32*1rpx;
+    color: #282828;
+    margin-bottom: 24*1rpx;
+}
+
+.price-area {
+    padding-top: 20*1rpx;
+    padding-bottom: 31*1rpx;
+    display: inline-block;
+}
+
+.price-area > view {
+    display: inline-block;
+}
+
+.unit {
+    font-size: 30*1rpx;
+}
+
+.price {
+    font-size: 30*1rpx;
+}
+
+.market-price {
+    font-size: 24*1rpx;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #999;
+    text-decoration: line-through;
+    margin-left: 32*1rpx;
+}
+
+.num {
+    font-size: 24*1rpx;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #999;
+}
+
+.checkbox {
+    padding-right: 32*1rpx;
+    vertical-align: middle;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 112*1rpx;
+    background-color: #fff;
+}
+
+.btn2::after,
+.close-btn::after {
+    border: none;
+}
+
+.btn2 {
+    width: 200*1rpx;
+    color: #fff;
+    height: 112*1rpx;
+    border-radius: 0;
+    border: none;
+    text-align: center;
+    line-height: 112*1rpx;
+    font-size: 32*1rpx;
+    background-color: #ff538b;
+}
+
+.footer-left {
+    padding-top: 42*1rpx;
+    padding-left: 300*1rpx;
+}
+
+.footer-left .unit {
+    color: #ff538b;
+    margin-left: 19*1rpx;
+}
+
+.footer-left .price {
+    color: #ff538b;
+    margin-left: 10*1rpx;
+}
+
+.cart-items {
+    top: 92*1rpx;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 112*1rpx;
+}
+
+page {
+    background-color: #f4f4f4;
+}
+
+.weixin {
+    width: 60*1rpx;
+    height: 60*1rpx;
+}
+
+.tag {
+    width: 32*1rpx;
+    height: 32*1rpx;
+    display: inline-block;
+    border: 1*1rpx solid #999;
+    border-radius: 50%;
+    vertical-align: middle;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.tag.selected {
+    border-color: #ff538b;
+    position: relative;
+}
+
+.tag.selected .after {
+    background-color: #ff538b;
+    border: 1*1rpx solid #ff538b;
+    width: 16*1rpx;
+    box-sizing: border-box;
+    height: 16*1rpx;
+    border-radius: 50%;
+    line-height: 16*1rpx;
+    vertical-align: top;
+    display: inline-block;
+    margin-top: 7*1rpx;
+}
+
+.payments {
+    margin-bottom: 136*1rpx;
+}
+
+.coupons {
+    padding: 29*1rpx 30*1rpx;
+    margin-bottom: 24*1rpx;
+    background-color: #fff;
+}
+
+.coupon-price {
+    font-size: 28*1rpx;
+    color: #ff538b;
+    display: inline;
+    vertical-align: middle;
+}
+
+.coupon-name {
+    vertical-align: middle;
+    font-size: 28*1rpx;
+    color: #666;
+    display: inline;
+    margin-left: 17*1rpx;
+}
+
+.gt {
+    width: 9*1rpx;
+    height: 18*1rpx;
+    vertical-align: middle;
+    margin-left: 21*1rpx;
+    position: relative;
+    top: 3*1rpx;
+}
+
+.masker {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 999;
+}
+
+.masker-box {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+}
+
+.close-btn {
+    height: 98*1rpx;
+    background-color: #16d6c3;
+    text-align: center;
+    color: white;
+    line-height: 98*1rpx;
+    border-radius: 0;
+}
+
+.p30-inner {
+    padding: 30*1rpx 0;
+}
+
+.p30-outer {
+    padding-bottom: 0;
+    padding-top: 0;
+    padding-left: 30*1rpx;
+    padding-right: 30*1rpx;
+}
+
+.coupon-money {
+    font-size: 30*1rpx;
+    line-height: 28*1rpx;
+    color: #ff538b;
+    display: inline-block;
+}
+
+.coupon-money .cm {
+    font-size: 42*1rpx;
+    display: inline;
+}
+
+.coupon-unit {
+    font-size: 26*1rpx;
+    color: #ff538b;
+    padding-left: 6*1rpx;
+    display: inline-block;
+}
+
+.coupon-title {
+    font-size: 28*1rpx;
+    color: #666;
+    line-height: 28*1rpx;
+    display: inline-block;
+    padding-left: 49*1rpx;
+}
+
+.coupon-time {
+    font-size: 24*1rpx;
+    line-height: 23*1rpx;
+    color: #999;
+    margin-top: 20*1rpx;
+}
+
+.pick-btn {
+    width: 158*1rpx;
+    color: #ff538b;
+    font-size: 28*1rpx;
+    height: 58*1rpx;
+    line-height: 58*1rpx;
+    text-align: center;
+    border-radius: 28px;
+    border: solid 1*1rpx #ff538b;
+}
+
+.pick-btned {
+    border: solid 1*1rpx #e5e5e5;
+    color: #999;
+}
+
+.checkbtn {
+    width: 32*1rpx;
+    height: 32*1rpx;
+}
+
+.title2 {
+    font-size: 24*1rpx;
+    color: #999;
+    display: inline;
+}
+
+.p55-inner {
+    padding: 55*1rpx 0;
+}
+
+.shop-avatar {
+    width: 36*1rpx;
+    height: 32*1rpx;
+    vertical-align: middle;
+    margin-right: 10*1rpx;
+}
+
+.shop-name {
+    padding-left: 30*1rpx;
+    padding-top: 24*1rpx;
+    font-size: 32*1rpx;
+    color: #282828;
+}
+
+.shop-item {
+    margin-bottom: 24*1rpx;
+}
+
+.group-tip {
+    color: #16d6c3;
+    font-size: 26*1rpx;
+    line-height: 1em;
+}
+
+.msg-box-wrap {
+    width: 590*1rpx;
+    position: fixed;
+    left: 50%;
+    margin-left: -295*1rpx;
+}
+
+.msg-box {
+    width: 590*1rpx;
+    margin-top: 340*1rpx;
+    padding: 49*1rpx 0 74*1rpx 0;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.msg-box-title {
+    font-size: 32*1rpx;
+    color: #282828;
+    text-align: center;
+    padding-bottom: 33*1rpx;
+    border-bottom: 1px solid #dedede;
+}
+
+.msg-box-content {
+    color: #999;
+    font-size: 24*1rpx;
+    line-height: 35*1rpx;
+    padding: 28*1rpx 66*1rpx 0 54*1rpx;
+}
+
+.msg-box-content view {
+    line-height: 35*1rpx;
+    padding-bottom: 5*1rpx;
+}
+
+.msg-box-content view:last-child {
+    padding-bottom: 0;
+}
+
+.close-btn {
+    height: 90*1rpx;
+    line-height: 90*1rpx;
+    font-size: 30*1rpx;
+    text-align: center;
+}
+
+.msg-box-close-btn {
+    width: 35*1rpx;
+    height: 35*1rpx;
+    margin-top: 45*1rpx;
+}
+
+.group-price {
+    color: #fd0f5d;
+    font-size: 26*1rpx;
+}
+
+.origin-price {
+    font-size: 26*1rpx;
+    color: #999;
+}
+
+.avatar-wrap {
+    width: 188*1rpx;
+    position: relative;
+}
+
+.group-num {
+    line-height: 30*1rpx;
+    height: 30*1rpx;
+    left: 0;
+    top: 0;
+    padding: 0 8*1rpx;
+    position: absolute;
+    font-size: 20*1rpx;
+    color: #fff;
+    text-align: center;
+    background-color: #fd0f5d;
+    border-radius: 0px 0px 5px 0px;
+}
+
+.item-info-desc {
+    font-size: 26*1rpx;
+    color: #fd0f5d;
+    padding-top: 30*1rpx;
+}
+
+.origin-price {
+    margin-left: 15*1rpx;
+    text-decoration: line-through;
+}
+
+.tag-img {
+    width: 32*1rpx;
+    height: 32*1rpx;
+}
+
+.t-tui {
+    width: 30*1rpx;
+    height: 30*1rpx;
+    margin-right: 18*1rpx;
+}
+
+.t-text {
+    margin-right: 28*1rpx;
+}
+
+.t-price {
+    display: flex;
+    position: relative;
+    top: 83*1rpx;
+    left: -317*1rpx;
+}
+
+.t-unit {
+    /* position: absolute;
+    top: 20*1rpx;
+    left: 20*1rpx; */
+    font-size: 24*1rpx;
+    position: absolute;
+    top: 8*1rpx;
+    left: -25*1rpx;
+}
+
+/*全局样式*/
+
+
+/*主容器*/
+
+.stepper {
+    width: 116*1rpx;
+    height: 30*1rpx;
+    /*给主容器设一个边框*/
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    position: absolute;
+    margin-top: 86*1rpx;
+    right: 49*1rpx;
+}
+
+/*加号和减号*/
+
+.stepper text {
+    width: 30*1rpx;
+    line-height: 30*1rpx;
+    text-align: center;
+    float: left;
+    font-size: 30*1rpx;
+}
+
+/*数值*/
+
+.stepper input {
+    width: 50*1rpx;
+    height: 30*1rpx;
+    line-height: 30*1rpx;
+    float: left;
+    /* margin: 0 auto; */
+    text-align: center;
+    font-size: 24*1rpx;
+    /*给中间的input设置左右边框即可*/
+    border-left: 1*1rpx solid #ccc;
+    border-right: 1*1rpx solid #ccc;
+    min-height: 0;
+}
+
+/*普通样式*/
+
+.stepper .normal {
+    color: black;
+}
+
+/*禁用样式*/
+
+.stepper .disabled {
+    color: #ccc;
+}
+
+/* 店铺优惠 */
+.t-shopDiscounts {
+    border-top: 1*1rpx solid #eeeeee;
+    height: 74*1rpx;
+    margin-top: 30*1rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.t-gt {
+    width: 11*1rpx;
+    height: 20*1rpx;
+}
+
+.t-discounts {
+    margin-right: 21*1rpx;
+}
+
+.t-discountsMoney {
+    color: #ff538b;
+}
+
+
+.t-platform {
+    height: 149*1rpx;
+    background-color: #ffffff;
+    margin-bottom: 30*1rpx;
+}
+
+
+.t-platformDiscounts {
+    display: flex;
+    margin-left: 30*1rpx;
+    margin-right: 30*1rpx;
+    border-bottom: 1*1rpx solid #eeeeee;
+    height: 74*1rpx;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.t-Platform {
+    margin-right: 21*1rpx;
+}
+
+.t-platformMoney {
+    color: #ff538b;
+}
+
+.t-payments {
+    height: 74*1rpx;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 30*1rpx;
+    padding-right: 60*1rpx;
+    box-sizing: border-box;
+    margin-bottom: 30*1rpx;
+}
+
+
+.t-login {
+    height: 74*1rpx;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 30*1rpx;
+    padding-right: 30*1rpx;
+    box-sizing: border-box;
+}

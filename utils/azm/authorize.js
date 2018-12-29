@@ -11,7 +11,7 @@ let scope = {
 
 module.exports = {
     authSetting: null,
-    open(resolve, reject) {
+    open (resolve, reject) {
         let _this = this;
         this.getSetting().then(() => {
             let all = {
@@ -31,17 +31,18 @@ module.exports = {
             }
         })
     },
-    getSetting() {
+    getSetting () {
         let _this = this;
         return new Promise(function (resolve, reject) {
             let flag = false;
             wx.getSetting({
-                success(res) {
+                success (res) {
                     // console.log(res.authSetting, 'authSetting');
                     _this.authSetting = res.authSetting;
+                    wx.setStorageSync('authSetting', res.authSetting);
                     flag = true;
                 },
-                complete() {
+                complete () {
                     if (flag) {
                         resolve();
                     } else {
@@ -51,17 +52,17 @@ module.exports = {
             })
         });
     },
-    openSetting(scopeStr) {
+    openSetting (scopeStr) {
         return new Promise(function (resolve, reject) {
             let content = '当前操作需要您的用户权限';
             if (scopeStr === scope.userInfo) {
                 content = '当前操作需要您的用户信息';
                 wx.getUserInfo({
-                    success(res){
+                    success (res) {
                         wx.setStorageSync('isGetUserInfoErrMsg', res.errMsg);
                         resolve(res)
                     },
-                    fail(rsp){
+                    fail (rsp) {
                         if (rsp.errMsg !== 'getUserInfo:fail scope unauthorized') {
                             openModal(content)
                         } else {
@@ -91,6 +92,7 @@ module.exports = {
             } else {
                 reject();
             }
+
             function openModal (content) {
                 let flag = false;
                 wx.showModal({
@@ -101,10 +103,10 @@ module.exports = {
                     success: function (res) {
                         if (res.confirm) {
                             wx.openSetting({
-                                success(res) {
+                                success (res) {
                                     flag = res.authSetting[scopeStr];
                                 },
-                                complete() {
+                                complete () {
                                     if (flag) {
                                         resolve();
                                     } else {
@@ -121,27 +123,29 @@ module.exports = {
             }
         });
     },
-    setPromise(scopeStr, isOpen) {
+    setPromise (scopeStr, isOpen) {
         let _this = this;
         return new Promise(function (resolve, reject) {
             _this.getSetting().then(function () {
                 if (!_this.authSetting[scopeStr]) {
                     wx.authorize({
                         scope: scopeStr,
-                        complete(res) {
-                            _this.getSetting().then(() => {
-                                if (_this.authSetting[scopeStr]) {
-                                    resolve();
-                                } else if (isOpen) {
-                                    _this.openSetting(scopeStr).then(function () {
-                                        resolve();
-                                    }, function () {
+                        complete (res) {
+                            _this.getSetting()
+                                .then(() => {
+                                    if (_this.authSetting[scopeStr]) {
+                                        resolve(true);
+                                    } else if (isOpen) {
+                                        _this.openSetting(scopeStr)
+                                            .then(function () {
+                                                resolve(true);
+                                            }, function () {
+                                                reject();
+                                            })
+                                    } else {
                                         reject();
-                                    })
-                                } else {
-                                    reject();
-                                }
-                            });
+                                    }
+                                });
                         }
                     })
                 } else {
@@ -152,31 +156,31 @@ module.exports = {
             });
         });
     },
-    userLocation(isOpen) {
+    userLocation (isOpen) {
         let scopeStr = scope.userLocation;
         return this.setPromise(scopeStr, isOpen);
     },
-    userInfo(isOpen) {
+    userInfo (isOpen) {
         let scopeStr = scope.userInfo;
         return this.setPromise(scopeStr, isOpen);
     },
-    address(isOpen) {
+    address (isOpen) {
         let scopeStr = scope.address;
         return this.setPromise(scopeStr, isOpen);
     },
-    invoiceTitle(isOpen) {
+    invoiceTitle (isOpen) {
         let scopeStr = scope.invoiceTitle;
         return this.setPromise(scopeStr, isOpen);
     },
-    werun(isOpen) {
+    werun (isOpen) {
         let scopeStr = scope.werun;
         return this.setPromise(scopeStr, isOpen);
     },
-    record(isOpen) {
+    record (isOpen) {
         let scopeStr = scope.record;
         return this.setPromise(scopeStr, isOpen);
     },
-    writePhotosAlbum(isOpen) {
+    writePhotosAlbum (isOpen) {
         let scopeStr = scope.writePhotosAlbum;
         return this.setPromise(scopeStr, isOpen);
     }

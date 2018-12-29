@@ -275,7 +275,7 @@ Page({
       return;
     }
     wx.navigateTo({
-      url: '/pages/car/payOrder?item_ids=' + ids.join(',')
+      url: '/page/payment/pages/itemPay/index?item_ids=' + ids.join(',')
     });
   },
   minuNum: function (e) {
@@ -283,7 +283,7 @@ Page({
     let sindex = index.split('-');
     let item = this.data.items[parseInt(sindex[0])].items[parseInt(sindex[1])];
     item.num--;
-    this.changeItemNum(item.id, item.num);  
+    this.changeItemNum(item.id, item.num);
     this.setData({
       total_money: this.calcTotalMoney(),
       items: this.data.items

@@ -1,36 +1,36 @@
 <wxs src="../../utils/common.wxs" module="c" />
 <wxs module="f">
   module.exports = {
-    num2arr: function(num, attrlen) {
-      attrlen = attrlen || 5;
-      num = parseInt(num);
-      var rt = [];
-      for (var i = 0; i < 5; i++) {
-        if (i < num) {
-          rt.push(1);
-        } else {
-          rt.push(0);
-        }
-      }
-      return rt;
-    }
-  }
-</wxs>
-<view wx:for="{{items}}" class='p30 border-b bg-white' wx:key="item.id">
-  <view class="flex" bindtap='showDetail' data-id="{{item.id}}">
-    <image class="avatar" src='{{c.absUrl(item.avatar)}}' background-size="cover"></image>
-    <view class="info">
-      <view class='fz32 ib text282828'>{{item.username}}</view>    
-      <view class='fz24 ib text666 pl19'>{{item.type_name}}</view>
-      <view class='fz24 text666 pt20'>擅长项目：{{item.categories}}</view>
-      <view class="pt19">
-        <block wx:for="{{f.num2arr(item.score)}}" wx:for-item="i">
-          <image src="{{'https://app.mmtcapp.com/mmtc/imgs/start'+(i?1:2)+'@2x.png'}}" class="star"></image>
-        </block>
-        <view class='fz28 ib text666 pl10 score-text'>{{item.score}}分</view>
+  num2arr: function(num, attrlen) {
+  attrlen = attrlen || 5;
+  num = parseInt(num);
+  var rt = [];
+  for (var i = 0; i < 5; i++) { if (i < num) { rt.push(1); } else { rt.push(0); } } return rt; } } </wxs> <view wx:for="{{items}}"
+    class='p30 border-b bg-white' wx:key="item.id">
+    <view class="flex" bindtap='showDetail' data-id="{{item.id}}">
+      <image class="avatar" src='{{c.absUrl(item.avatar)}}' background-size="cover"></image>
+      <view class="info">
+        <view class='fz32 ib text282828'>{{item.username}}</view>
+        <view class='fz24 ib text666 pl19'>{{item.type_name}}</view>
+        <view class='fz24 text666 pt20 flex'>
+          <text>擅长领域：</text>
+          <view style=" margin-right:10rpx;" wx:for="{{item.tags}}" wx:for-item="v">{{v.title}}</view>
+        </view>
+        <view class="pt19">
+          <block wx:for="{{f.num2arr(item.score)}}" wx:for-item="i">
+            <image src="{{'https://app.mmtcapp.com/mmtc/imgs/start'+(i?1:2)+'@2x.png'}}" class="star"></image>
+          </block>
+          <view class='fz28 ib text666 pl10 score-text'>{{item.score}}分</view>
+        </view>
       </view>
     </view>
-  </view>
-</view>
+    </view>
+    <!-- <include src="../common/more.wxml"></include> -->
 
-<include src="../common/more.wxml"></include>
+
+    <view class='noData' wx:if="{{items.length<1}}">
+      <image src='https://app.mmtcapp.com/mmtc/imgs/new_image/noData.png' class=''></image>
+      <view class='text-center'>
+        没有技师
+      </view>
+    </view>

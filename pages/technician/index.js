@@ -7,14 +7,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    items:[]
+    items: []
   },
-  showDetail:function(e){
+  showDetail: function (e) {
     var id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/technician/detail?id='+id,
+      url: '/pages/technician/detail?id=' + id,
     })
-  }, 
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -57,7 +57,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-      
+
   },
 
   /**

@@ -4,7 +4,7 @@
 <view class="azm-cardBag-pay">
     <i-cell-group class="marTop-12">
         <i-cell class="azm-header">
-            <image class="azm-header-img" slot="icon" mode="widthFix" src="../../../../image/icon-bitmap.png"></image>
+            <image class="azm-header-img" slot="icon" mode="widthFix" src="https://app.mmtcapp.com/mmtc/imgs/new_image/icon-bitmap.png"></image>
             <view class="azm-header-nickname">{{info.nickname}}</view>
         </i-cell>
     </i-cell-group>

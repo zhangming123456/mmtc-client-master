@@ -1,7 +1,8 @@
 /**
  * 小程序配置文件
  */
-var host = 'https://app.mmtcapp.com';//开发环境
+var host = 'https://app.mmtcapp.com';//开发环境?
+// var host = 'https://cs.mmtcapp.com';//测试环境
 // var host = 'http://192.168.3.81';//开发环境
 // var host = 'http://192.168.3.28';//开发环境(小康)
 // var host = 'http://192.168.3.900';//本地后台反向代理服务器
@@ -14,6 +15,8 @@ var config = {
     appApi: `${host}/app`,
 
     shopApi: `${host}/shopapi`,
+
+    nodeApi: `${host}/nodeapi`,
 
     bdApi: `${host}/bd`,
 

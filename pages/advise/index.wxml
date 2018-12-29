@@ -1,7 +1,0 @@
-<view class="holder-view">
-  <view  class='content'>
-    <textarea  class='input' maxlength="-1" bindblur='setContent' placeholder='多亏您的建议和支持，一直是我们前进的动力~'></textarea >
-  </view>
-  <input class='contact' bindblur='setContact' placeholder='手机/QQ/邮箱'></input>
-  <button class='sure-btn' bindtap='doSure'>确定</button>
-</view>

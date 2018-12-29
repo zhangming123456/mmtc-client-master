@@ -21,7 +21,7 @@
         <view class='flex-con'>
             <block wx:if="{{item.num<=item.num_used}}">
                 <view class='toptip-title'>
-                    {{item.is_used==1?'交易完成':'待使用'}}
+                    {{item.is_used==1?'交易完成':'待验证'}}
                 </view>
                 <view class='toptip-desc'>
                     祝您生活愉快，也期待您的意见与建议~
@@ -76,7 +76,7 @@
     <view class='p30'>
         <view class='flex flex-stretch' bindtap="showGoodDetail" data-id="{{item.group_id}}">
             <view class='item-cover-wrap'>
-                <image class='item-cover' src='{{c.absUrl(item.cover,300)}}'></image>
+                <image class='item-cover' src='{{c.absUrl(item.cover)}}'></image>
                 <view class='tuan-num'>{{item.num}}人团</view>
             </view>
             <view class='item-info flex-con'>
@@ -152,7 +152,7 @@
         <view class='flex'>
             <view class='field-label'>团单状态：</view>
             <view wx:if="{{item.num<=item.num_used}}">
-                {{item.is_used==1?'交易完成':'待使用'}}
+                {{item.is_used==1?'交易完成':'待验证'}}
             </view>
             <view wx:elif="{{item.status==0 || item.left_seconds<0}}">
                 团单失效，系统已自动退款

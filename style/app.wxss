@@ -1,12 +1,39 @@
 /**app.wxss**/
+img {
+  width: 100%;
+  height: auto;
+}
 page {
   line-height: 1;
+}
+input {
+  z-index: 1;
+}
+input::placeholder {
+  z-index: 1;
+}
+.input__placeholder {
+  z-index: 1;
+}
+.input__icon {
+  z-index: 1;
 }
 .azm-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   word-wrap: normal;
+}
+azm-login {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  margin: 0 auto;
+}
+azm-login .azm-login-fixed {
+  position: fixed;
 }
 .azm-zan text {
   color: #ff538b;
@@ -890,3 +917,4 @@ view .azm-stepper view {
   right: 30rpx;
   bottom: 30rpx;
 }
+/*# sourceMappingURL=app.wxss.map */

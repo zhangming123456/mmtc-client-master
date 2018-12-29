@@ -1,0 +1,667 @@
+page {
+  background-color: #F5F8F7;
+}
+#azm-index {
+  line-height: 1;
+}
+.banners .wx-swiper-dot {
+  width: 30rpx;
+  display: inline-flex;
+  height: 5rpx;
+  justify-content: space-between;
+}
+.banners .wx-swiper-dot::before {
+  content: '';
+  flex-grow: 1;
+  background: #cccccc;
+  border-radius: 20rpx;
+}
+.banners .wx-swiper-dot-active::before {
+  background: #FFFFFF;
+}
+/* 顶部搜索 */
+.searchBox {
+  background-color: #ffffff;
+  padding: 20rpx 37rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.location {
+  display: flex;
+  align-items: center;
+}
+.location text {
+  font-size: 29rpx;
+  color: #666666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 266rpx;
+}
+.location image {
+  width: 37rpx;
+  height: 37rpx;
+  margin-right: 20rpx;
+}
+.searchFarme {
+  display: flex;
+  background: #F5F8F7;
+  border-radius: 30rpx;
+  width: 288rpx;
+  height: 60rpx;
+  align-items: center;
+  font-size: 26rpx;
+  color: #999999;
+}
+.searchFarme image {
+  width: 36rpx;
+  height: 36rpx;
+  margin-left: 17rpx;
+  margin-right: 8rpx;
+}
+/* 轮播图 */
+.banners {
+  height: 466rpx;
+  width: 100%;
+  padding-left: 37rpx;
+  padding-right: 37rpx;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+.banners image {
+  border-radius: 10rpx;
+  width: 100%;
+  height: 100%;
+}
+/* 首页iocn */
+#azm-index .azm-grid {
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+  text-align: center;
+  padding: 0 0 32rpx;
+  font-size: 20rpx;
+  color: #6F7578;
+  border-bottom: 1px solid #eeeeee;
+}
+#azm-index .azm-grid view {
+  line-height: 1;
+}
+#azm-index .azm-grid > .flexBox-item {
+  margin-top: 32rpx;
+  width: 20%;
+  font-size: 20rpx;
+  color: #6F7578;
+}
+#azm-index .azm-grid > .flexBox-item .area-icon {
+  width: 77rpx;
+  height: 77rpx;
+  margin-bottom: 23rpx;
+}
+#azm-index .azm-grid > .flexBox-item .area-icon2 {
+  width: 50rpx;
+  height: 50rpx;
+  margin-bottom: 23rpx;
+}
+/* 优享惠卡 */
+.cardBox {
+  background-color: #ffffff;
+  box-sizing: border-box;
+  padding-right: 0;
+  padding-bottom: 30rpx;
+}
+.card-title {
+  font-size: 37rpx;
+  color: #333333;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 20rpx;
+  margin-top: 20rpx;
+}
+.card-subhead {
+  font-size: 26rpx;
+  text-align: center;
+  color: #999999;
+}
+.scrollCard {
+  width: 100%;
+  height: 206rpx;
+  display: flex;
+  padding-left: 37rpx;
+  white-space: nowrap;
+  padding-right: 0;
+  margin-top: 33rpx;
+  box-sizing: border-box;
+}
+.scrollCard-two {
+  padding-left: 37rpx;
+  padding-right: 37rpx;
+  box-sizing: border-box;
+  width: 100%;
+  height: 423rpx;
+  display: flex;
+  white-space: nowrap;
+  margin-top: 33rpx;
+}
+.scrollCard-two image {
+  border-radius: 10rpx;
+  width: 100%;
+  height: 100%;
+}
+.cardDetail {
+  width: 333rpx;
+  height: 100%;
+  display: inline-block;
+  margin-right: 18rpx;
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+}
+.cardDetail-two {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+}
+.cardBackgroundPicture {
+  border-radius: 10rpx;
+  width: 100%;
+  height: 100%;
+}
+.cardContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 30rpx;
+}
+.cardContent-two {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 50rpx;
+}
+.cardTitle {
+  font-size: 28rpx;
+  color: #ffffff;
+  margin-bottom: 18rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+.cardTitle-two {
+  font-size: 45rpx;
+  color: #ffffff;
+  margin-bottom: 30rpx;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cardSubhead {
+  font-size: 20rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #FFFFFF;
+}
+.cardSubhead-two {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 40rpx;
+  color: #FFFFFF;
+}
+.cardPrice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 40rpx;
+}
+.cardPrice text {
+  font-size: 26rpx;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+.cardPrice span {
+  font-size: 28rpx;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+.cardPrice span i {
+  font-size: 14rpx;
+  color: #FFFFFF;
+}
+.cardPrice-two {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 120rpx;
+}
+.cardPrice-two text {
+  font-size: 40rpx;
+  color: #FFFFFF;
+}
+.cardPrice-two span {
+  font-size: 45rpx;
+  color: #FFFFFF;
+}
+.cardPrice-two span i {
+  font-size: 24rpx;
+  color: #FFFFFF;
+}
+.cardValidity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14rpx;
+  color: #FFFFFF;
+  margin-top: 10rpx;
+}
+.cardValidity-two {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  margin-top: 20rpx;
+}
+/* 特色拼团 */
+.groupBox {
+  background-color: #ffffff;
+  box-sizing: border-box;
+  padding-right: 0;
+  padding-bottom: 30rpx;
+}
+.group-title {
+  text-align: center;
+  font-size: 37rpx;
+  color: #333333;
+  font-weight: 500;
+  margin-bottom: 20rpx;
+  margin-top: 20rpx;
+}
+.group-subhead {
+  text-align: center;
+  font-size: 26rpx;
+  color: #999999;
+}
+.scrollGroup {
+  padding-left: 37rpx;
+  width: 100%;
+  height: 330rpx;
+  display: flex;
+  white-space: nowrap;
+  margin-top: 33rpx;
+  box-sizing: border-box;
+}
+.scrollGroup-two {
+  padding-left: 37rpx;
+  padding-right: 37rpx;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  white-space: nowrap;
+  margin-top: 33rpx;
+}
+.groupDetail {
+  width: 213rpx;
+  height: 100%;
+  display: inline-block;
+  margin-right: 18rpx;
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+}
+.groupDetail-two {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+}
+.groupSign {
+  background-image: linear-gradient(-135deg, #FFC17A 0%, #EE557D 100%);
+  position: absolute;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  width: 82rpx;
+  height: 30rpx;
+  text-align: center;
+  top: 0;
+  left: 0;
+  line-height: 30rpx;
+  border-radius: 4rpx;
+}
+.groupPicture {
+  border-radius: 10rpx;
+  width: 100%;
+  height: 213rpx;
+}
+.groupPicture-two {
+  border-radius: 10rpx;
+  width: 100%;
+  height: 330rpx;
+}
+.groupName {
+  margin-top: 20rpx;
+}
+.gropTitle {
+  font-size: 24rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333333;
+}
+.groupPrice {
+  display: flex;
+  margin-top: 18rpx;
+}
+.rulingPrice {
+  font-size: 29rpx;
+  color: #F74884;
+  margin-right: 13rpx;
+}
+.rulingPrice i {
+  font-size: 20rpx;
+  color: #F74884;
+}
+.originalPrice {
+  font-size: 20rpx;
+  color: #999999;
+  text-decoration: line-through;
+  margin-top: 7rpx;
+}
+.groupText {
+  font-size: 25rpx;
+  color: #F74884;
+  font-weight: 500;
+}
+/* 店铺推荐 */
+.shopBox {
+  background-color: #ffffff;
+  box-sizing: border-box;
+  padding-right: 0;
+  padding-bottom: 30rpx;
+}
+.shop-title {
+  text-align: center;
+  font-size: 37rpx;
+  color: #333333;
+  font-weight: 500;
+  margin-bottom: 20rpx;
+  margin-top: 20rpx;
+}
+.shop-subhead {
+  text-align: center;
+  font-size: 26rpx;
+  color: #999999;
+}
+.scrollShop {
+  padding-left: 37rpx;
+  width: 100%;
+  height: 430rpx;
+  display: flex;
+  white-space: nowrap;
+  padding-right: 0;
+  margin-top: 33rpx;
+  box-sizing: border-box;
+}
+.scrollShop-two {
+  padding-left: 37rpx;
+  padding-right: 37rpx;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  white-space: nowrap;
+  margin-top: 33rpx;
+}
+.shopDetail {
+  width: 330rpx;
+  height: 100%;
+  display: inline-block;
+  margin-right: 18rpx;
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+}
+.shopDetail-two {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+}
+.shopPicture {
+  border-radius: 10rpx;
+  width: 100%;
+  height: 330rpx;
+}
+.shopPicture-two {
+  border-radius: 10rpx;
+  width: 100%;
+  height: 423rpx;
+}
+.shopName {
+  margin-top: 26rpx;
+}
+.shopTitle {
+  font-size: 24rpx;
+  color: #333333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.shopFlex {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15rpx;
+}
+.rulingPrice2 {
+  font-size: 29rpx;
+  color: #F02929;
+  margin-right: 13rpx;
+}
+.rulingPrice2 i {
+  font-size: 20rpx;
+  color: #F02929;
+}
+.originalPrice2 {
+  font-size: 20rpx;
+  color: #999999;
+  text-decoration: line-through;
+  margin-top: 7rpx;
+}
+.shopLike {
+  font-size: 20rpx;
+  color: #999999;
+  display: flex;
+  align-items: center;
+}
+.shopLike image {
+  width: 25rpx;
+  height: 25rpx;
+  margin-right: 10rpx;
+}
+/* 季节主推 */
+.seasonBox {
+  background-color: #ffffff;
+  padding-bottom: 105rpx;
+  box-sizing: border-box;
+}
+.season-title {
+  text-align: center;
+  margin-top: 30rpx;
+  font-size: 37rpx;
+  color: #333333;
+  font-weight: 500;
+  margin-bottom: 20rpx;
+}
+.season-subhead {
+  text-align: center;
+  font-size: 26rpx;
+  color: #999999;
+}
+.scrollSeason {
+  width: 100%;
+  height: 206rpx;
+  display: flex;
+  padding-left: 37rpx;
+  white-space: nowrap;
+  padding-right: 0;
+  margin-top: 33rpx;
+  box-sizing: border-box;
+}
+.scrollSeason-two {
+  width: 100%;
+  height: 423rpx;
+  display: flex;
+  white-space: nowrap;
+  margin-top: 33rpx;
+  padding-left: 37rpx;
+  padding-right: 37rpx;
+  box-sizing: border-box;
+}
+.seasonDetail {
+  width: 333rpx;
+  height: 100%;
+  display: inline-block;
+  margin-right: 18rpx;
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+}
+.seasonDetail-two {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+}
+.seasonPicture {
+  border-radius: 10rpx;
+  width: 100%;
+  height: 100%;
+}
+.seasonPicture-two {
+  border-radius: 10rpx;
+  width: 100%;
+  height: 100%;
+}
+/* 店铺介绍*/
+.shopIntroduce {
+  padding-left: 37rpx;
+  padding-right: 37rpx;
+  padding-bottom: 30rpx;
+  text-align: center;
+}
+.shopPhoto {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  margin-top: -50rpx;
+}
+.storeName {
+  font-size: 29rpx;
+  color: #323232;
+  font-weight: 500;
+  margin-top: 30rpx;
+  margin-bottom: 15rpx;
+}
+.shopIntro {
+  font-size: 26rpx;
+  color: #999999;
+}
+.shopMore {
+  font-size: 26rpx;
+  color: #666666;
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+  justify-content: center;
+}
+.shopLine {
+  width: 1px;
+  margin-left: 20rpx;
+  margin-right: 13rpx;
+  height: 22rpx;
+  background-color: #999999;
+}
+.knowMore {
+  display: flex;
+  align-items: center;
+}
+.knowMore image {
+  width: 25rpx;
+  height: 25rpx;
+  margin-left: 7rpx;
+}
+.shopLocation {
+  font-size: 26rpx;
+  color: #999999;
+  margin-top: 46rpx;
+}
+.shopBottom {
+  width: 446rpx;
+  height: 60rpx;
+  background: #FFFFFF;
+  box-shadow: 0 5rpx 10rpx 0 rgba(210, 210, 210, 0.5);
+  border-radius: 30rpx;
+  box-sizing: border-box;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 45rpx;
+}
+.locationShop {
+  width: 50%;
+  height: 100%;
+  border-right: 1px solid #F1F1F1;
+  display: flex;
+  font-size: 26rpx;
+  align-items: center;
+  color: #999999;
+}
+.locationShop image {
+  width: 50rpx;
+  margin-right: 27rpx;
+  margin-left: 6rpx;
+  height: 50rpx;
+}
+.shopPhone {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  font-size: 26rpx;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 30rpx;
+  padding-right: 6rpx;
+  color: #999999;
+  box-sizing: border-box;
+}
+.shopPhone image {
+  width: 50rpx;
+  height: 50rpx;
+}
+.whiteBg {
+  height: 70rpx;
+  width: 100%;
+  background-color: #ffffff;
+}
+.grayBg {
+  height: 20rpx;
+  width: 100%;
+  background-color: #eeeeee;
+}
+/*# sourceMappingURL=index.wxss.map */

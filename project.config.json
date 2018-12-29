@@ -1,17 +1,26 @@
 {
-	"description": "项目配置文件。",
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
-		"nodeModules": true
+		"nodeModules": true,
+		"autoAudits": true,
+		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.3.0",
+	"libVersion": "1.7.3",
 	"appid": "wx0df0e298b3b13290",
-	"projectname": "mmtc-client-master",
+	"projectname": "%E7%BE%8E%E7%BE%8E%E5%A4%A9%E6%88%90-%E7%94%A8%E6%88%B7%E7%AB%AF",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
 	"condition": {
 		"search": {
 			"current": -1,
@@ -26,216 +35,83 @@
 			"list": []
 		},
 		"game": {
-			"current": -1,
+			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": 33,
+			"current": 11,
 			"list": [
 				{
-					"id": 0,
-					"name": "确认订单",
-					"pathName": "pages/car/payOrder",
-					"query": "item_id=12&num=1",
-					"scene": "1001"
-				},
-				{
 					"id": -1,
-					"name": "立即一下",
-					"pathName": "pages/activity/wallet",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "拼团",
-					"pathName": "pages/group/detail",
-					"query": "id=170"
-				},
-				{
-					"id": -1,
-					"name": "美美天成分享",
-					"pathName": "pages/activity/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "分享领券",
-					"pathName": "pages/activity/wallet",
-					"query": ""
+					"name": "webview",
+					"pathName": "page/webView/pages/h5/index",
+					"query": "url=https%3a%2f%2fapp.mmtcapp.com%2fh5%2findex%2factivity%3factivity_id%3d249%26shop_id%3d8710%26copy%3d0"
 				},
 				{
 					"id": -1,
 					"name": "登入",
-					"pathName": "pages/login/index",
+					"pathName": "page/login/index",
 					"query": ""
+				},
+				{
+					"id": 2,
+					"name": "买单",
+					"pathName": "pages/onlineBuy/index",
+					"query": "shop_id=9185"
+				},
+				{
+					"id": 3,
+					"name": "项目详情",
+					"pathName": "page/shop/pages/goods/index",
+					"query": "id=10203"
+				},
+				{
+					"id": 4,
+					"name": "开团成功（参团）",
+					"pathName": "page/group/pages/shared/index",
+					"query": "id=313"
+				},
+				{
+					"id": 5,
+					"name": "开团成功2",
+					"pathName": "page/order/pages/groupDetails/index",
+					"query": "id=313"
 				},
 				{
 					"id": 6,
-					"name": "店铺项目",
-					"pathName": "pages/item/index",
-					"query": "id=10114"
+					"name": "我的拼团",
+					"pathName": "pages/group/mine",
+					"query": "id=275"
+				},
+				{
+					"id": -1,
+					"name": "新人分享",
+					"pathName": "page/activity/pages/newUser/index",
+					"query": ""
 				},
 				{
 					"id": 8,
-					"name": "店铺信息",
-					"pathName": "pages/home/detail",
-					"query": "shop_id=767"
-				},
-				{
-					"id": 8,
-					"name": "店铺买单",
-					"pathName": "pages/onlineBuy/index",
-					"query": "shop_id=2399"
-				},
-				{
-					"id": -1,
-					"name": "ddddddd",
-					"pathName": "pages/activity/index",
+					"name": "领取红包",
+					"pathName": "page/activity/pages/wallet/index",
 					"query": ""
 				},
 				{
 					"id": -1,
-					"name": "登入",
-					"pathName": "pages/login/index",
+					"name": "意见反馈",
+					"pathName": "page/public/pages/feedback/index",
 					"query": ""
 				},
 				{
-					"id": -1,
-					"name": "我的",
-					"pathName": "pages/mine/index",
-					"query": ""
-				},
-				{
-					"id": 12,
-					"name": "我的卡包",
-					"pathName": "page/cardBag/pages/myCard/index",
-					"query": ""
-				},
-				{
-					"id": 13,
-					"name": "我的首页",
-					"pathName": "page/tabBar/home/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "附近",
-					"pathName": "page/tabBar/near/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "地址定位",
-					"pathName": "page/public/pages/location/index",
-					"query": ""
-				},
-				{
-					"id": 16,
-					"name": "搜索结果 - new",
-					"pathName": "page/home/pages/searchResult/index",
-					"query": "w=美甲&type=2"
-				},
-				{
-					"id": -1,
-					"name": "店铺首页",
-					"pathName": "pages/home/index",
-					"query": "shop_id=69"
-				},
-				{
-					"id": -1,
-					"name": "套卡(购买）",
-					"pathName": "page/cardBag/pages/setDetails/index",
-					"query": "card_id=2"
-				},
-				{
-					"id": -1,
-					"name": "我的订单",
-					"pathName": "pages/order/all",
-					"query": ""
-				},
-				{
-					"id": 20,
-					"name": "套卡详情",
-					"pathName": "page/cardBag/pages/setDetails/index",
-					"query": "card_id=5"
-				},
-				{
-					"id": 21,
-					"name": "套卡购买",
-					"pathName": "page/cardBag/pages/setBuy/index",
-					"query": "nickname=%E8%89%BE%E9%9D%92%E7%BE%8E%E5%AE%B9%E5%BA%97&card_name=123456789&card_no=123456789&price=30&effective=13&market_price=566&cover=%2Fstatic%2Fupload%2Fimage%2F20180817%2F20180817113631_34928.png&card_id=5&service_phone=07558400081&telephone=13597331346&intro=%3Cimg%20src%3D%22https%3A%2F%2Fapp.mmtcapp.com%2Fstatic%2Fupload%2Fimage%2F20180817%2F20180817095530_78609.png%22%20alt%3D%22%22%3E123456677&shop_id=8710"
-				},
-				{
-					"id": -1,
-					"name": "全部订单",
-					"pathName": "page/tabBar/order/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "授权",
-					"pathName": "page/public/pages/authorization/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "我的（new）",
-					"pathName": "page/tabBar/mine/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "我的日记（new）",
-					"pathName": "page/mine/pages/mynotes/index",
-					"query": ""
-				},
-				{
-					"id": 26,
-					"name": "我的足迹（new）",
-					"pathName": "page/mine/pages/footprint/index",
-					"query": "scene=%7bid%3a10%2cyu%3a10%7d"
-				},
-				{
-					"id": -1,
-					"name": "意见反馈（new）",
-					"pathName": "page/mine/pages/feedback/index",
-					"query": ""
-				},
-				{
-					"id": 28,
-					"name": "店铺首页(new)",
-					"pathName": "page/shop/pages/home/index",
-					"query": "shop_id=8710"
-				},
-				{
-					"id": 29,
-					"name": "店铺详情(new)",
-					"pathName": "page/shop/pages/detail/index",
-					"query": "shop_id=69"
-				},
-				{
-					"id": 30,
-					"name": "项目详情(new)",
+					"id": 10,
+					"name": "项目首页",
 					"pathName": "page/shop/pages/goods/index",
-					"query": "id=10114"
+					"query": "id=10213"
 				},
 				{
-					"id": -1,
-					"name": "选择城市（new）",
-					"pathName": "page/public/pages/city/index",
-					"query": ""
-				},
-				{
-					"id": 32,
-					"name": "关于我们（new）",
-					"pathName": "page/mine/pages/aboutus/index",
-					"query": ""
-				},
-				{
-					"id": 33,
-					"name": "过渡页面",
-					"pathName": "pages/home/index",
-					"query": ""
+					"id": 11,
+					"name": "确认下单",
+					"pathName": "page/payment/pages/placeAnOrder/index",
+					"query": "item_id=10127"
 				}
 			]
 		}

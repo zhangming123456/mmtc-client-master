@@ -1,137 +1,72 @@
 <wxs src="../../utils/common.wxs" module="c" />
-<wxs module="f">
-  module.exports = {
-    num2arr: function(num) {
-      var rt = [];
-      num = Math.max(parseInt(num), 5);
-      for (var i = 0; i < num; i++) {
-        rt.push(i);
-      }
-      return rt;
-    },
-    parseInt: function(v) {
-      return parseInt(v);
-    },
-    num2arr2: function(strs) {
-      if (strs) {
-        strs = strs.split(',');
-        if (strs.length > 3) {
-          strs = strs.slice(0, 3);
-        }
-        return strs;
-      }
-      return [];
-    },
-    picCount: function(strs) {
-      if (strs) {
-        strs = strs.split(',');
-        if (strs.length > 3) {
-          return 3;
-        }
-        return strs.length;
-      }
-      return 0;
-    }
-  }
-</wxs>
-<view class="panel-no-margin bg-white">
-  <view class="flex">
-    <image src="{{c.absUrl(m.avatar,200) || 'https://app.mmtcapp.com/mmtc/default.png'}}" alt="" id="avatar"></image>
-    <view class="flex-con">
-      <view style="padding-left: 0.3rem;">
-        <span class="fz32 text282828">{{m.username}}</span>
-        <span class="fz24 text666 year">{{m.type_name}} | {{m.working_year}}年经验</span>
-        <span class="rz" wx:if="m.auth_status == 2">认证</span>
-        <view class="stars">
-          <block wx:if="{{m.score > 0}}">
-            <image src="https://app.mmtcapp.com/mmtc/imgs/start1@2x.png" wx:for="{{f.num2arr(m.score)}}" alt=""></image>
-          </block>
-          <block wx:if="{{5 - f.parseInt(m.score) > 0}}">
-            <image src="https://app.mmtcapp.com/mmtc/imgs/starhalf@2x.png" wx:for="{{f.num2arr(5 - f.parseInt(m.score))}}" alt=""></image>
-          </block>
-          <view class='ib'>
-            {{m.score}} 分
-          </view>
+<view>
+  <view class="technicianDetails">
+    <image class="detailsBackg" src="https://app.mmtcapp.com/mmtc/imgs/new_image/Bitmap.png"></image>
+    <view class="technicianIntroduce">
+      <image mode="aspectFill" class="technicianPhoto" src="{{c.absUrl(m.avatar)}}"></image>
+      <view class="technicianName">
+        <text>{{m.username}}</text>
+        <image wx:if="{{m.sex==='1'}}" src="https://app.mmtcapp.com/mmtc/imgs/new_image/icon-boy.png"></image>
+        <image wx:if="{{m.sex==='0'}}" src="https://app.mmtcapp.com/mmtc/imgs/new_image/icon-girl.png"></image>
+      </view>
+      <view class="technicianTitle">
+        <text wx:if="{{m.categories}}">{{m.categories}}</text>
+        <text class="partition"></text>
+        <text>{{m.type_name}}</text>
+        <text class="partition"></text>
+        <text>{{m.working_year}}年经验</text>
+      </view>
+      <view class="technicianTag">
+        <view wx:if="{{m.categories}}">{{m.categories}}</view>
 
-        </view>
-        <view class="pt01 fz24 text666">
-          专业：{{m.major_score}} 分 服务：{{m.service_score}} 分 效果：{{m.effect_score}} 分
-        </view>
       </view>
-    </view>
-  </view>
-</view>
-<view class="panel-no-margin fz28 bg-white mt24">
-  <view class="flex flex-stretch">
-    <view class="text282828">擅长：</view>
-    <view class="text666">{{m.categories}}</view>
-  </view>
-  <view class="flex flex-stretch pt20">
-    <view class="text282828">简介：</view>
-    <view class="text666 flex-con">
-      {{m.intro}}
-    </view>
-  </view>
-</view>
+      <view class="techinicianIntro">
+        <view class="introTitle">手艺人简介</view>
+        <view class="introLabel"></view>
+        <view class="introText">{{m.intro}}</view>
+      </view>
 
-<view class="mt24 bg-white border-t" wx:if="{{notes && notes.length}}">
-  <view class="panel-no-margin border-b fz32 text282828">
-    案例
-  </view>
-  <view wx:for="{{notes}}" bindtap="showNoteDetail(item.id)" wx:key="id">
-    <view class="panel-no-margin bg-white">
-      <view class="flex">
-        <view>
-          <image src="{{c.absUrl(item.avatar,200)||'https://app.mmtcapp.com/mmtc/imgs/default.png'}}" alt="" class="avatar"></image>
-        </view>
-        <view class="flex-con">
-          <view class="fz32 text666">{{item.nickname}}</view>
-          <view class="text999 time">{{item.create_time}}
+      <view class="clientGive">
+        <view class="introTitle">客户印象</view>
+        <view class="introLabel"></view>
+        <view class="labelBox">
+          <view class="clientLabel" wx:for="{{tag}}" wx:key="index" wx:for-index="i" wx:for-item="v">
+            {{v.title}}
           </view>
         </view>
-        <view>
-          <view class="fz28 text666">{{item.score}}分</view>
-        </view>
-        <view>
-          <view class="stars2">
-            <block wx:if="{{f.parseInt(item.score) > 0}}">
-              <image src="https://app.mmtcapp.com/mmtc/imgs/start1@2x.png" wx:for="{{f.num2arr(item.score)}}" alt="" wx:for-item="i"></image>
-            </block>
-            <block wx:if="{{5 - f.parseInt(item.score) > 0}}">
-              <image src="https://app.mmtcapp.com/mmtc/imgs/starhalf@2x.png" wx:for-item="i" wx:for="{{f.num2arr(5 - f.parseInt(item.score))}}" alt=""></image>
-            </block>
+
+      </view>
+
+
+      <view class="techinicianItem">
+        <view class="introTitle">手艺人项目</view>
+        <view class="introLabel"></view>
+
+        <view class="itemBox">
+          <view wx:for="{{items}}" bindtap="showItemDetail" data-id="{{item.id}}" class='box3-item' open-type='redirect'>
+            <image src="{{c.absUrl(item.cover)}}" class="azm-image-box" mode="aspectFill"></image>
+            <view class='box3-item-info'>
+              <view class="box3-item-title one-line">{{item.title}}</view>
+
+              <view class="box3-item-price-info">
+                <view class="price">
+                  <i>￥</i>
+                  <span>{{item.price}}</span>
+                  <view class='market-price'>￥{{item.market_price}}</view>
+                </view>
+                <view class="itemLike">{{item.like_count}}人喜欢</view>
+              </view>
+
+              <view class="itemName">
+                <view class="itemShop">{{item.shop_name}}</view>
+                <view>{{item.distance}}</view>
+              </view>
+            </view>
           </view>
         </view>
-      </view>
-      <navigator url="/pages/cases/detail?id={{item.id}}" hover-class="none">
-        <block wx:if="{{item.img_src}}">
-          <view class="pic-list{{f.picCount(item.img_src)}}">
-            <image src='{{c.absUrl(pic,400)}}' wx:for="{{f.num2arr2(item.img_src)}}" wx:key="*this" wx:for-item="pic"></image>
-          </view>
-        </block>
-        <view class="text666 fz32 ptb04 two-line content">
-          {{item.content}}
-        </view>
-      </navigator>
-      <view wx:if="{{item.item_id && item.item_id > 0}}" class="pt20">
-        <image src="https://app.mmtcapp.com/mmtc/imgs/clz@2x.png" class="img-sm"></image>
-        <view class="color-red fz26 ib pl10" bindtap='showItemDetail' data-id="{{item.item_id}}">{{item.item_title}}</view>
-      </view>
-    </view>
-    <view class="flex border-t toolbar-mini text666 fz24 text-center bg-white border-b">
-      <view class="flex-con border-r">
-        <image src="https://app.mmtcapp.com/mmtc/imgs/eye@2x.png" alt="" class='view-img'></image>
-        浏览 {{item.viewed_count}}
-      </view>
-      <view class="flex-con border-r {{c.zanedClass(item)}}" catchtap='zan' data-id="{{item.id}}">
-        <image src="https://app.mmtcapp.com/mmtc/imgs/zan{{item.zaned?'1':''}}@2x.png" alt="" class="zan-img"></image>
-        点赞 {{item.zan_count}}
-      </view>
-      <view class="flex-con" tapmode="hover">
-        <image src="https://app.mmtcapp.com/mmtc/imgs/msg@2x.png" alt="" class='comment-img'></image>
-        评论 {{item.comment_count}}
+
       </view>
     </view>
   </view>
+
 </view>
-<view class="hr24"></view>

@@ -89,7 +89,7 @@
             <view class='list-box-item border-b' bindtap='showShopDetail' data-id="{{item.id}}">
                 <view class='flex flex-stretch'>
                     <view>
-                        <image mode="top" src='{{c.absUrl(item.cover,200)}}' class='shop-cover'></image>
+                        <image mode="top" src='{{c.absUrl(item.cover)}}' class='shop-cover'></image>
                     </view>
                     <view class='flex-con'>
                         <view class='shop-info'>

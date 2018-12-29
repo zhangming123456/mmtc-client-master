@@ -1,136 +1,236 @@
-#avatar {
-  width: 112rpx;
-  height: 112rpx;
-  border-radius: 55rpx;
-  margin-right: 32rpx;
+page {
+  background-color: #ffffff;
 }
 
-.rz {
-  width: 72rpx;
-  height: 32rpx;
-  line-height: 32rpx;
-  border-radius: 15rpx;
-  border: solid 1px #ff538b;
-  margin-left: 30rpx;
-  font-size: 22rpx;
-  color: #ff538b;
-  display: inline-block;
-  text-align: center;
-  padding: 0 14rpx;
+.technicianDetails {
+  position: relative;
 }
 
-.pt01 {
-  padding-top: 20rpx;
-  color: #666;
-  font-size: 24rpx;
+
+.detailsBackg {
+  height: 228rpx;
+  width: 100%;
 }
 
-.year {
-  padding-left: 19rpx;
+.technicianIntroduce {
+
+  position: absolute;
+  width: 100%;
+  top: 132rpx;
 }
 
-.pt20 {
-  padding-top: 33rpx;
-}
-
-.note-item {
-  background-color: #fff;
-  margin-top: 24rpx;
-}
-
-.avatar {
-  width: 80rpx;
-  height: 80rpx;
+.technicianPhoto {
+  width: 160rpx;
+  height: 160rpx;
   border-radius: 50%;
-  margin-right: 33rpx;
+  margin: 0 auto;
+  display: block;
 }
 
-.content {
-  padding-top: 31rpx;
-  color: #2c2c2c;
+.technicianName {
+  display: flex;
+  justify-content: center;
+  margin-top: 12rpx;
+  align-items: center;
 }
 
-.view-img {
-  width: 30rpx;
-  height: 24rpx;
+.technicianName text {
+  font-size: 36rpx;
+  color: #333333;
 }
 
-.zan-img {
-  width: 26rpx;
-  height: 26rpx;
+.technicianName image {
+  width: 21rpx;
+  height: 30rpx;
+  margin-left: 6rpx;
 }
 
-.comment-img {
-  width: 27rpx;
-  height: 25rpx;
+.technicianTitle {
+  display: flex;
+  font-size: 24rpx;
+  color: #666666;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12rpx;
 }
 
-.toolbar-mini {
-  padding: 18rpx 0;
+.partition {
+  width: 1px;
+  height: 20rpx;
+  background-color: #666666;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+
+.technicianTag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12rpx;
+}
+
+.technicianTag view {
+  border: 1px solid #04D3AF;
+  border-radius: 4rpx;
+  height: 33rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  font-size: 24rpx;
+  color: #04D3AF;
+  text-align: center;
+  line-height: 33rpx;
+  margin-right: 10rpx;
+}
+
+
+.techinicianIntro {
+  text-align: center;
+  margin-top: 53rpx;
+}
+
+.introTitle {
+  font-size: 28rpx;
+  color: #4A4A4A;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.introLabel {
+  background: #EEEEEE;
+  border-radius: 4rpx;
+  width: 57rpx;
+  height: 6rpx;
+  margin: 0 auto;
+  margin-top: 15rpx;
+}
+
+.introText {
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  font-size: 28rpx;
+  color: #666666;
+  margin-top: 20rpx;
+}
+
+
+.clientGive {
+  margin-top: 38rpx;
+}
+
+
+.labelBox {
+  /* display: flex; */
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  margin-top: 30rpx;
+}
+
+.clientLabel {
+  background: #F4F4F4;
+  border-radius: 100rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #666666;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  display: inline-block;
+  margin-right: 20rpx;
+  margin-bottom: 10rpx;
+}
+
+
+.techinicianItem {
+  margin-top: 50rpx;
+}
+
+
+.box3-item {
+  width: 325rpx;
+  float: left;
+  margin-bottom: 30rpx;
+  padding-left: 30rpx;
+}
+
+.box3 .box3-item:nth-child(2n+1) {
+  float: left;
+}
+
+.box3 .box3-item:nth-child(2n) {
+  float: right;
+}
+
+.azm-image-box {
+  width: 325rpx;
+  height: 325rpx;
+  border-radius: 4rpx;
+}
+
+
+
+.box3-item-info {
+  padding-top: 20rpx;
+}
+
+.box3-item-price-info {
+  padding-top: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box3-item-title {
+  font-size: 32rpx;
+  color: #333333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+.price {
+  color: #ff538b;
+  font-size: 32rpx;
+  display: inline-block;
+}
+
+.price i {
   font-size: 24rpx;
 }
 
-.toolbar-mini image {
-  position: relative;
-  top: -1rpx;
+.market-price {
+  color: #999;
+  font-size: 24rpx;
+  text-decoration: line-through;
+  margin-left: 10rpx;
+  display: inline-block;
 }
 
-.pic-list3, .pic-list2, .pic-list1 {
-  padding-top: 31rpx;
+
+.itemLike {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.itemName {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24rpx;
+  color: #666666;
+  padding-top: 28rpx;
+}
+
+
+.itemBox {
+  margin-top: 36rpx;
+}
+
+
+.itemShop {
+  white-space: nowrap;
   overflow: hidden;
-}
-
-.pic-list3 image {
-  width: 220rpx;
-  height: 220rpx;
-  float: left;
-  margin-right: 15rpx;
-}
-
-.pic-list2 image, .pic-list1 image {
-  width: 337.5rpx;
-  height: 337.5rpx;
-  float: left;
-  margin-right: 15rpx;
-}
-
-.pic-list3 image:last-child, .pic-list2 image:last-child,
-.pic-list1 image:last-child {
-  margin-right: 0;
-}
-
-.stars {
-  padding: 20rpx 0;
-  font-size: 28rpx;
-  font-weight: normal;
-  font-stretch: normal;
-  color: #666;
-}
-
-.stars view.ib {
-  position: relative;
-  top: 1rpx;
-}
-
-.stars image,.stars2 image {
-  width: 32rpx;
-  height: 31rpx;
-  margin-right: 11rpx;
-}
-
-.time{
-  	font-size: 24rpx;
-	font-weight: normal;
-	font-stretch: normal;
-	color: #999999;
-  padding-top: 13rpx;
-}
-.content{
-   padding-top: 29rpx;
-}
-
-.stars2{
-  padding-left: 20rpx;
-  position: relative;
-  top:-2rpx;
+  text-overflow: ellipsis;
 }

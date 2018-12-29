@@ -1,7 +1,7 @@
 const app = getApp(),
     config = require('../../../../utils/config'),
     utilPage = require('../../../../utils/utilPage'),
-    ApiService = require('../../../../utils/ApiService'),
+    ApiService = require('../../../../utils/ApiService/index'),
     c = require("../../../../utils/common.js");
 
 const appPage = {
@@ -51,7 +51,7 @@ const appPage = {
     /**
      * 上拉触底
      */
-    onReachBottom() {
+    onReachBottom () {
 
     },
 
@@ -60,19 +60,20 @@ const appPage = {
  * 方法类
  */
 const methods = {
-    loadCb() {
+    loadCb () {
         let that = this,
             options = that.data.options,
             isShow = that.data.isShow,
             id = options.id;
+        that.data.bill_id = options.bill_id
         that.getOrderGetBillDetail(options.bill_id)
 
     },
-    loadData() {
+    loadData () {
 
     },
 
-    getOrderGetBillDetail(bill_id) {
+    getOrderGetBillDetail (bill_id) {
         let that = this;
 
         ApiService.getOrderGetBillDetail({
@@ -86,13 +87,13 @@ const methods = {
         })
     },
 
-    gotoMycard() {
+    gotoMycard () {
         this.$route.push({
             path: '/page/cardBag/pages/myCard/index'
         })
     },
 
-    makeCall() {
+    makeCall () {
         let that = this;
 
         wx.makePhoneCall({
@@ -101,7 +102,7 @@ const methods = {
 
     },
 
-    copyBtn(e) {
+    copyBtn (e) {
         var that = this;
         wx.setClipboardData({
             data: that.data.billDetail.order_no,
@@ -114,12 +115,26 @@ const methods = {
             }
         })
     },
-    gotoShop(){
-        var item = this.data.billDetail.shop_id;
+    gotoShop () {
+        wx.setStorageSync('shop_id', this.data.billDetail.shop_id)
+        wx.switchTab({
+            url: '/page/tabBar/home/index'
+        })
+    },
+
+    tel () {
+        var phone = this.data.billDetail.shop_find.service_phone;
+        wx.makePhoneCall({
+            phoneNumber: phone,
+        })
+    },
+
+    gotoBillDetail () {
+        var id = this.data.bill_id;
         this.$route.push({
-            path: '/page/shop/pages/home/index',
+            path: '/page/cardBag/pages/setDetails/index',
             query: {
-                shop_id: item
+                bill_id: id
             }
         })
     }

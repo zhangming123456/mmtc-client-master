@@ -1,0 +1,109 @@
+<!-- <view class="panel-no-margin text-center text999 fz26" id="position_name_wrap"
+      style="visibility:{{position_name?'visible':'hidden'}};">
+    <image src="https://app.mmtcapp.com/mmtc/imgs/addrloc@2x.png" alt="" class='addr'></image>
+    <span id="position_name">{{position_name}}</span>
+</view> -->
+
+<wxs src="../../../../utils/common.wxs" module="c"/>
+<i-toast id="toast"/>
+<i-message id="message"/>
+<azm-login id="azm-login-components" isShow="{{ isShowLogin }}" bindsuccess="loginCallback">
+    <view class="shopPay" catchtap="toHome">
+        <image mode="aspectFill" src="{{imageUrl+cover}}"></image>
+        <text>{{nickname}}</text>
+    </view>
+    <view class="t-expend">
+        <view class="flex">
+            <view>
+                消费总额：
+            </view>
+            <view class="flex-con inputControl" bindtap="onKeyUpBlur">
+                <text class="color-gray  text-right" id="totalMoney"> {{totalMoney == '' ||totalMoney == 0
+                    ?'':'￥'}}{{totalMoney || 0 }}
+                </text>
+            </view>
+        </view>
+    </view>
+    <view class="wbox fz30 tcolor" id="noDiscountArea">
+    <span bindtap="checkDiscount" class="discount" id="discountFlag">
+        <image src="{{hasDiscount?'https://app.mmtcapp.com/mmtc/imgs/frame_press.png':'https://app.mmtcapp.com/mmtc/imgs/frame.png'}}"></image>
+        输入不参与优惠金额
+    </span>
+        <view class="t-remark" bindtap="gotoRemarks">
+            {{isRemark?'修改备注':'添加备注'}}
+        </view>
+    </view>
+    <view class="t-noJoin" id="discount_area" hidden='{{!hasDiscount}}'>
+        <view class="flex">
+            <view>
+                不参与优惠金额：
+            </view>
+            <view class="flex-con">
+                <!-- <input type="digit" class="color-gray input-control text-right tcolor" placeholder="询问商家后输入" id="noDiscountMoney" bindinput='noDiscountMoneyInput'
+                    maxlength="8" bindfocus='onKeyUpFocus' style="width: 0; height: 0; opacity: 0;" hidden value='{{noDiscountMoney}}'></input>
+                <text id="noDiscountMoney" class="color-gray input-control text-right tcolor">{{noDiscountMoney}}</text> -->
+                <input bindconfirm="onKeyUpBlur" bindblur="onKeyUpBlur" bindfocus="onKeyUpBlur2" type="digit"
+                       class="color-gray input-control text-right tcolor"
+                       placeholder="询问商家后输入" id="noDiscountMoney" bindinput='noDiscountMoneyInput' maxlength="8"
+                       value="{{noDiscountMoney}}"></input>
+            </view>
+        </view>
+    </view>
+    <view class="t-discount">
+        <view class=''>
+            <view id="discount_area_1">
+                <view class="t-howDiscount">
+                    <view>
+                        <span id="discount_area_num">{{discount}}</span>
+                    </view>
+                    <view class="flex-con text-right">
+                        <span id="discountSum" class="tcolor">{{discountSum || 0}}</span>
+                    </view>
+                </view>
+            </view>
+            <view class="t-howDiscount">
+                <view>优惠券：</view>
+                <view class="flex-con text-right text-gray">暂无可用券</view>
+                <image src='https://app.mmtcapp.com/mmtc/imgs/gt@2x.png' class="gt"></image>
+            </view>
+            <view class="t-payment">
+                <text>实付金额</text>
+                <text id="actMoney"> {{hasDiscount ||totalMoney == '' ||totalMoney == 0 ?'':'￥'}} {{actMoney || '￥'+0}}
+                </text>
+            </view>
+        </view>
+
+        <!-- <image src='https://app.mmtcapp.com/mmtc/imgs/mask@2x.png' class='mask'></image> -->
+    </view>
+    <!-- <view class="main-btn {{submitBtnEnabled?'':'disabled'}}" id="submitBtn" bindtap="submitOrder">
+        确认买单
+        <span id="actMoney">
+            <b>{{actMoney}}</b>{{actMoneyUnit}}</span>
+    </view> -->
+
+    <view class='flex t-keyBoard' wx:if="{{isShowKey}}">
+        <view class='t-keyBoardNum flex'>
+            <text bindtap='clickNum' data-num='1'>1</text>
+            <text bindtap='clickNum' data-num='2'>2</text>
+            <text bindtap='clickNum' data-num='3'>3</text>
+            <text bindtap='clickNum' data-num='4'>4</text>
+            <text bindtap='clickNum' data-num='5'>5</text>
+            <text bindtap='clickNum' data-num='6'>6</text>
+            <text bindtap='clickNum' data-num='7'>7</text>
+            <text bindtap='clickNum' data-num='8'>8</text>
+            <text bindtap='clickNum' data-num='9'>9</text>
+            <text bindtap='clickNum' data-num=''></text>
+            <text bindtap='clickNum' data-num='0'>0</text>
+            <text bindtap='clickNum' data-num='.'>.</text>
+        </view>
+        <view class='t-keyBoardPay flex'>
+            <view class="t-reboke" bindtap='deleteNum'>
+                <image src="https://app.mmtcapp.com/mmtc/imgs/revoke.png"></image>
+            </view>
+            <view class="t-fixPayment" id="submitBtn" bindtap="submitOrder">
+                <text>确认</text>
+                <text>支付</text>
+            </view>
+        </view>
+    </view>
+</azm-login>

@@ -1,15 +1,17 @@
 <wxs src="../../utils/common.wxs" module="c" />
-<swiper indicator-dots='true' class='swiper' indicator-active-color='#ff538b' bindtap='prevImg' autoplay="true" circular="true">
+<swiper indicator-dots='true' class='swiper' indicator-active-color='#ff538b' bindtap='prevImg' autoplay="true"
+    circular="true">
     <block wx:for="{{c.str2attr(note.img_src)}}" wx:key="*this">
         <swiper-item>
-            <image mode="aspectFill" data-index="{{index}}" src="{{c.absUrl(item,750)}}" class="slide-image" />
+            <image mode="aspectFill" data-index="{{index}}" src="{{c.absUrl(item)}}" class="slide-image" />
         </swiper-item>
     </block>
 </swiper>
 <view class="p30 bg-white border-b">
     <view class="flex">
         <view>
-            <image mode="aspectFill" src="{{c.absUrl(note.avatar,200)||'https://app.mmtcapp.com/mmtc/imgs/default.png'}}" alt="" class="avatar"></image>
+            <image mode="aspectFill" src="{{c.absUrl(note.avatar)||'https://app.mmtcapp.com/mmtc/imgs/default.png'}}"
+                alt="" class="avatar"></image>
         </view>
         <view class="flex-con">
             <view class="fz32 text666">{{note.nickname}}</view>
@@ -24,7 +26,7 @@
         <navigator wx:key="id" class="pt20" wx:for="{{note.products}}" hover-class='none' wx:for-item="product" url='/page/shop/pages/goods/index?id={{product.id}}'>
             <view class="flex">
                 <view>
-                    <image src="{{c.absUrl(product.cover,300)}}" alt="" class="goods-img"></image>
+                    <image src="{{c.absUrl(product.cover)}}" alt="" class="goods-img"></image>
                 </view>
                 <view class="flex-con">
                     <view class="fz32 text282828 one-line">{{product.title}}</view>
@@ -74,7 +76,8 @@
     <view class="p30 bg-white border-b fz28" wx:for="{{comments}}" wx:key="id" wx:for-item="comment">
         <view class="flex flex-stretch">
             <view>
-                <image src="{{c.absUrl(comment.avatar,200) || 'https://app.mmtcapp.com/mmtc/imgs/default.png'}}" alt="" class="avatar"></image>
+                <image src="{{c.absUrl(comment.avatar) || 'https://app.mmtcapp.com/mmtc/imgs/default.png'}}" alt=""
+                    class="avatar"></image>
             </view>
             <view class="flex-con pt10">
                 <view class="flex">
@@ -86,7 +89,8 @@
                     </view>
                     <view class='zan-area {{c.zanedClass(comment)}}' catchtap='zanComment' data-id="{{comment.id}}">
                         <view class="y-btn">
-                            <image src="https://app.mmtcapp.com/mmtc/imgs/zan{{comment.zaned?'1':''}}@2x.png" alt="" class='zan-img'></image>
+                            <image src="https://app.mmtcapp.com/mmtc/imgs/zan{{comment.zaned?'1':''}}@2x.png" alt=""
+                                class='zan-img'></image>
                             {{comment.zan_count}}
                         </view>
                     </view>
@@ -125,8 +129,8 @@
             </view>
             <view class='flex-con'>
 
-                <input cursor-spacing="100" focus="{{focus}}" bindconfirm="sendComment" value="{{currentValue}}" bindblur='bindblurComment'
-                    class='txt-box' placeholder='{{placeholder}}' confirm-type='send'></input>
+                <input cursor-spacing="100" focus="{{focus}}" bindconfirm="sendComment" value="{{currentValue}}"
+                    bindblur='bindblurComment' class='txt-box' placeholder='{{placeholder}}' confirm-type='send'></input>
 
             </view>
         </view>

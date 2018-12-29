@@ -4,8 +4,8 @@
 
 <scroll-view scroll-left="{{scrollLeft}}" bindscroll="scroll" scroll-with-animation scroll-x class='bg-white border-b'>
     <view class='categories' id="navTab">
-        <view wx:for="{{categories}}" wx:key="{{index}}" bindtap='toggleCategory'
-              data-id="{{item.id}}" class="category-item {{item.id==cid?'active':''}}">
+        <view wx:for="{{categories}}" wx:key="{{index}}" bindtap='toggleCategory' data-id="{{item.id}}"
+              class="category-item {{item.id==cid?'active':''}}">
             {{item.title}}
         </view>
     </view>
@@ -13,10 +13,11 @@
 <scroll-view scroll-top="{{scrollTop}}" style="height:{{scrollHeight}}px;" scroll-with-animation scroll-y
              bindscrolltolower="scrolltolower" bindscroll="onViewScroll">
     <view class='hr'></view>
-    <view class='box3 bg-white'>
+    <view class='box3 bg-white' wx:if="{{projects.length>0}}">
         <block wx:for="{{projects}}" wx:for-item="val" wx:for-index="i" wx:key="{{i}}">
             <navigator url='/page/shop/pages/goods/index?id={{item.id}}' hover-class='none' class='box3-item'
-                       wx:key="item.id" wx:for="{{val}}" wx:key="{{index}}">
+                       wx:key="item.id"
+                       wx:for="{{val}}" wx:key="{{index}}">
                 <view class="box3-group-num" wx:if="{{item.group_num && item.group_num>0}}">{{item.group_num}}人团</view>
                 <azm-image src="{{item.cover}}" class="cover" mode="aspectFill" type="img"></azm-image>
                 <view class='box3-item-info'>
@@ -44,7 +45,16 @@
             </navigator>
         </block>
     </view>
-    <wxc-loadmore is-end="{{noMore}}" icon="随机/loading"></wxc-loadmore>
+    <wxc-loadmore wx:if="{{projects.length>1}}" is-end="{{true}}" text="没有更多"></wxc-loadmore>
+    <!-- <view wx:if="{{noMore===false}}">没有更多</view> -->
+
+    <view class='noData' wx:if="{{projects.length===0}}">
+        <image src='https://app.mmtcapp.com/mmtc/imgs/new_image/noData.png' class=''></image>
+        <view class='text-center'>
+            没有项目
+        </view>
+    </view>
 </scroll-view>
 
-<azm-gotop id="azmGoTop" catchazmtap="azmtap"></azm-gotop>
+
+<!-- <azm-gotop id="azmGoTop" catchazmtap="azmtap"></azm-gotop> -->

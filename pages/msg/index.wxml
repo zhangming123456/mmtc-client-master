@@ -21,7 +21,7 @@
   <view class='border-b content-item' wx:for="{{items}}" wx:key="id">
     <view class='flex flex-stretch'>
       <view>
-        <image src='{{c.absUrl(item.avatar,200) || "https://app.mmtcapp.com/mmtc/imgs/default.png"}}' class='avatar'></image>
+        <image src='{{c.absUrl(item.avatar) || "https://app.mmtcapp.com/mmtc/imgs/default.png"}}' class='avatar'></image>
       </view>
       <view class='item-info'>
         <view class="flex">
@@ -44,7 +44,7 @@
   <view class='border-b content-item' wx:for="{{items}}" wx:key="id">
     <view class='flex flex-stretch'>
       <view>
-        <image src='{{c.absUrl(item.avatar,200) || "https://app.mmtcapp.com/mmtc/imgs/default.png"}}' class='avatar'></image>
+        <image src='{{c.absUrl(item.avatar) || "https://app.mmtcapp.com/mmtc/imgs/default.png"}}' class='avatar'></image>
       </view>
       <view class='item-info'>
         <view class="flex">

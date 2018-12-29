@@ -2,7 +2,7 @@ const app = getApp(),
     util2 = app.util2,
     config = require('../../../../utils/config'),
     utilPage = require('../../../../utils/utilPage'),
-    ApiService = require('../../../../utils/ApiService');
+    ApiService = require('../../../../utils/ApiService/index');
 const appPage = {
     data: {
         text: "Page mmtcTabList",
@@ -54,7 +54,7 @@ const appPage = {
     /**
      * 上拉触底
      */
-    onReachBottom() {
+    onReachBottom () {
 
     },
 
@@ -63,7 +63,7 @@ const appPage = {
  * 方法类
  */
 const methods = {
-    loadCb() {
+    loadCb () {
         let that = this,
             options = that.data.options,
             isShow = that.data.isShow,
@@ -80,11 +80,9 @@ const methods = {
             invite_id
         })
     },
-    loadData() {
+    loadData () {
 
     },
-
-
     /* 点击减号 */
     bindMinus: function () {
         var num = this.data.num;
@@ -114,8 +112,7 @@ const methods = {
             num: num
         });
     },
-
-    bindpay() {
+    bindpay () {
         let that = this,
             invite_id = that.data.invite_id,
             info = that.data.info,
@@ -124,7 +121,7 @@ const methods = {
         if (num > 0 && card_id && !that.isBindPay) {
             that.isBindPay = true;
             util2.showLoading('支付中。。。');
-            ApiService.orderCardGetPayInfoOfBuyNow({card_id, num, invite_id}).finally(res => {
+            ApiService.Payment.cardsBuyNow({card_id, num, invite_id}).finally(res => {
                 if (res.status === 1) {
                     let info = res.info;
                     try {
@@ -137,7 +134,9 @@ const methods = {
                             if (res.errMsg === 'requestPayment:ok') {
                                 that.$route.replace({
                                     path: '/page/public/pages/paySucceed/index',
-
+                                    query: {
+                                        bill_id: billId
+                                    }
                                 })
                             } else if (res.errMsg === 'requestPayment:fail cancel') {
                                 util2.failToast('取消支付');

@@ -1,7 +1,7 @@
 const app = getApp(),
     util2 = app.util2,
     utilPage = require("../../../../utils/utilPage"),
-    ApiService = require("../../../../utils/ApiService"),
+    ApiService = require("../../../../utils/ApiService/index"),
     config = require("../../../../utils/config");
 
 const appPage = {
@@ -14,14 +14,13 @@ const appPage = {
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad (options) {
+    onLoad(options) {
         this.loadCb()
     },
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow () {
-    },
+    onShow() {},
     /**
      * 页面上拉触底事件的处理函数
      */
@@ -32,17 +31,20 @@ const appPage = {
     },
 };
 const methods = {
-    loadCb () {
+    loadCb() {
         this.getCouponGetCouponsOfMine()
     },
-    getCouponGetCouponsOfMine(p = 1, bol){
-        let that = this, setData = {};
-        if (that.isGetCouponGetCouponsOfMine)return;
+    getCouponGetCouponsOfMine(p = 1, bol) {
+        let that = this,
+            setData = {};
+        if (that.isGetCouponGetCouponsOfMine) return;
         this.isGetCouponGetCouponsOfMine = true;
         if (!bol) {
             util2.showLoading()
         }
-        ApiService.getCouponGetCouponsOfMine({p}).finally(res => {
+        ApiService.getCouponGetCouponsOfMine({
+            p
+        }).finally(res => {
             this.isGetCouponGetCouponsOfMine = false;
             util2.hideLoading(true);
             if (res.status === 1) {
@@ -71,10 +73,12 @@ const methods = {
     },
     touse: function (e) {
         let item = e.currentTarget.dataset.item;
-        if (item.shop_id == 0) {
-            this.$route.push('/pages/index/items');
-        } else if (!item.errmsg) {
-            this.$route.push({path: 'page/shop/pages/projects/index', query: {shop_id: item.shop_id}});
+        wx.setStorageSync('shop_id', item.shop_id)
+        if (item.shop_id) {
+
+            this.$route.tab({
+                path: '/page/tabBar/home/index',
+            });
         }
     }
 };

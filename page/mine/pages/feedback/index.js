@@ -3,7 +3,7 @@ const c = require("../../../../utils/common.js");
 const app = getApp(),
     util2 = app.util2,
     utilPage = require("../../../../utils/utilPage"),
-    ApiService = require("../../../../utils/ApiService"),
+    ApiService = require("../../../../utils/ApiService/index"),
     config = require("../../../../utils/config");
 
 const appPage = {

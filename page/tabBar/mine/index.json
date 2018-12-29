@@ -12,5 +12,6 @@
     "i-panel": "../../../lib/iview/panel/index",
     "wxc-label": "../../../lib/minui/wxc-label/dist/index",
     "wxc-loadmore": "../../../lib/minui/wxc-loadmore/dist/index"
+    
   }
 }

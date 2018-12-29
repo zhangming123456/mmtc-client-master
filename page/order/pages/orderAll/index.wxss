@@ -1,0 +1,611 @@
+page {
+    background-color: #F5F8F7;
+}
+
+.content {
+    margin-top: 79rpx;
+}
+
+.hr20 {
+    background: #F5F8F7;
+    height: 20rpx;
+    width: 100%;
+}
+
+.swiper-tab {
+    width: 100%;
+    border-bottom: 1px solid #EEEEEE;
+    text-align: center;
+    height: 88rpx;
+    line-height: 88rpx;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    padding-left: 37rpx;
+    padding-right: 37rpx;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.swiper-tab-item {
+    /* width: 20%; */
+    font-size: 28rpx;
+    color: #666666;
+}
+
+.active {
+    font-size: 32rpx;
+    color: #333333;
+    border-bottom: 4rpx solid #04D3AF;
+    font-weight: 500;
+}
+
+swiper {
+    text-align: center;
+}
+
+
+/* 套卡订单状态 */
+.billTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 90rpx;
+    border-bottom: 1px solid #EEEEEE;
+    padding-left: 37rpx;
+    padding-right: 37rpx;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+.billShop {
+    display: flex;
+    align-items: center;
+}
+
+.billShop text {
+    font-size: 28rpx;
+    color: #333333;
+}
+
+.billShop image {
+    width: 25rpx;
+    height: 25rpx;
+    margin-right: 15rpx;
+}
+
+.billTag {
+    display: flex;
+    align-items: center;
+    font-size: 26rpx;
+    color: #333333;
+}
+
+.billTag image {
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 13rpx;
+}
+
+.orderItem {
+    display: flex;
+    box-sizing: border-box;
+    border-bottom: 1px solid #EEEEEE;
+    padding: 30rpx 37rpx;
+    background-color: #ffffff;
+}
+
+.itemPicture {
+    width: 115rpx;
+    height: 115rpx;
+    border-radius: 10rpx;
+    margin-right: 30rpx;
+}
+
+.itemContent {
+    flex: 1;
+}
+
+.itemTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 26rpx;
+    color: #333333;
+}
+
+.itemTitle view:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 400rpx;
+}
+
+.itemTitle view:last-child {
+    color: #FF931E;
+}
+
+.itemTime {
+    font-size: 24rpx;
+    color: #999999;
+    margin-top: 15rpx;
+}
+
+.itemPirce {
+    display: flex;
+    align-items: center;
+    margin-top: 15rpx;
+    justify-content: space-between;
+
+}
+
+.pirce span {
+    font-size: 28rpx;
+    color: #FA5151;
+}
+
+.pirce span i {
+    font-size: 20rpx;
+}
+
+.pirce text {
+    font-size: 24rpx;
+    text-decoration: line-through;
+    color: #999999;
+    margin-left: 16rpx;
+}
+
+
+.itemButton {
+    border: 1px solid #FA5151;
+    border-radius: 20rpx;
+    color: #FA5151;
+    font-size: 26rpx;
+    width: 134rpx;
+    height: 40rpx;
+    text-align: center;
+    line-height: 40rpx;
+}
+
+.order-item {
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+
+
+.item-info {
+    line-height: 1;
+}
+
+.touse {
+    position: absolute;
+    right: 0;
+    bottom: -5rpx;
+    border: solid 1rpx #fc075f;
+    color: #fd0f5d;
+    height: 51rpx;
+    line-height: 51rpx;
+    border-radius: 24rpx;
+    padding-left: 24rpx;
+    padding-right: 24rpx;
+    display: inline-block;
+    font-size: 28rpx;
+    text-align: center;
+}
+
+.azm-card-bag .azm-card-bag-l {
+    flex: 2;
+}
+
+.azm-card-bag .azm-card-bag-r {
+    width: 72%;
+    position: relative;
+    box-sizing: border-box;
+    padding-left: 30rpx;
+    line-height: 45rpx;
+}
+
+.azm-card-bag .azm-card-bag-r .azm-label {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.azm-card-bag .azm-card-bag-r .azm-card-bag-title {
+    position: relative;
+    padding-bottom: 34rpx;
+    font-size: 32rpx;
+    color: #323232;
+    box-sizing: border-box;
+    padding-right: 80rpx;
+}
+
+.azm-card-bag .azm-card-bag-r .azm-card-bag-price {
+    padding-bottom: 9rpx;
+    font-size: 28rpx;
+    color: #FF6182;
+}
+
+.azm-card-bag .azm-card-bag-r .azm-card-bag-price .azm-m-price {
+    color: #666;
+    font-size: 24rpx;
+}
+
+.azm-card-bag .azm-card-bag-r .azm-card-bag-time {
+    color: #666;
+    font-size: 24rpx;
+}
+
+.navbar {
+    font-size: 28rpx;
+    color: #282828;
+    text-align: center;
+    background-color: #fff;
+    white-space: nowrap;
+    padding: 22rpx 0;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.navbar .flex-con {
+    white-space: nowrap;
+}
+
+.nav-item {
+    padding: 5rpx 0;
+    width: 131rpx;
+    text-align: center;
+}
+
+.navbar .active {
+    color: #ff538b;
+}
+
+page {
+    height: 100%;
+}
+
+.item {
+    background-color: #fff;
+    padding: 30rpx;
+    margin-top: 24rpx;
+}
+
+.avatar {
+    width: 188rpx;
+    height: 188rpx;
+    vertical-align: middle;
+}
+
+.item-info {
+    padding-left: 30rpx;
+    position: relative;
+}
+
+.item .title {
+    font-size: 32rpx;
+    color: #282828;
+}
+
+.price-area {
+    padding-top: 40rpx;
+    padding-bottom: 31rpx;
+}
+
+.price-area>view {
+    display: inline-block;
+}
+
+.unit {
+    font-size: 24rpx;
+    color: #ff538b;
+}
+
+.price {
+    font-size: 45rpx;
+    color: #ff538b;
+}
+
+.market-price {
+    font-size: 24rpx;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #999;
+    text-decoration: line-through;
+    margin-left: 32rpx;
+}
+
+.num {
+    font-size: 26rpx;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #666;
+}
+
+.bill-icon {
+    width: 36rpx;
+    height: 32rpx;
+    vertical-align: middle;
+    margin-right: 14rpx;
+}
+
+
+
+.order-items>.flex,
+.order-item>.flex {
+    padding: 10rpx 37rpx;
+}
+
+.status {
+    font-size: 24rpx;
+    color: #ff538b;
+}
+
+.order-info {
+    font-size: 28rpx;
+    color: #333333;
+}
+
+.btn0,
+.btn1 {
+    height: 40rpx;
+    line-height: 40rpx;
+    border-radius: 24rpx;
+    width: 140rpx;
+    display: inline-block;
+    font-size: 28rpx;
+    text-align: center;
+}
+
+.btn0 {
+    border: solid 1rpx #FA5151;
+    color: #FA5151;
+    margin-left: 11rpx;
+}
+
+.btn1 {
+    border: solid 1rpx #FA5151;
+    color: #FA5151;
+    margin-left: 11rpx;
+}
+
+.item-info .title {
+    font-size: 36rpx;
+    color: #282828;
+}
+
+.order-empty {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+    font-size: 26rpx;
+    color: #999999;
+}
+
+.order-empty image {
+    width: 213rpx;
+    height: 200rpx;
+    margin-bottom: 30rpx;
+}
+
+
+.qrcode-area {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.qrcode-dlg {
+    background-color: #fff;
+    width: 590rpx;
+    border-radius: 8px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 151rpx;
+}
+
+.qrcode {
+    width: 280rpx;
+    height: 280rpx;
+    margin-top: 28rpx;
+    margin-bottom: 45rpx;
+}
+
+.qrcode-no {
+    font-size: 36rpx;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 40rpx;
+    color: #666;
+}
+
+.qrcode-no .num {
+    font-size: 48rpx;
+    font-weight: normal;
+    color: #282828;
+    display: inline-block;
+}
+
+.qrcode-tip {
+    font-size: 24rpx;
+    line-height: 30rpx;
+    color: #999;
+    margin-top: 44rpx;
+    margin-bottom: 28rpx;
+}
+
+.qrcode-btn {
+    font-size: 32rpx;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #ff538b;
+    padding: 29rpx 0;
+}
+
+.qrcode-close {
+    margin-top: 85rpx;
+}
+
+.qrcode-close image {
+    width: 35rpx;
+    height: 35rpx;
+}
+
+.order-no {
+    padding-top: 50rpx;
+}
+
+.redfullbtn {
+    color: #fff;
+    background-color: #ff538b;
+}
+
+.isused {
+    position: absolute;
+    right: 0;
+    bottom: -5rpx;
+    border: solid 1rpx #ff538b;
+    color: #ff538b;
+    height: 51rpx;
+    line-height: 51rpx;
+    border-radius: 24rpx;
+    padding-left: 24rpx;
+    padding-right: 24rpx;
+    display: inline-block;
+    font-size: 28rpx;
+    text-align: center;
+}
+
+.order-price-unit {
+    font-size: 24rpx;
+    color: #ff538b;
+    display: inline-block;
+}
+
+.order-price {
+    font-size: 45rpx;
+    color: #ff538b;
+    display: inline-block;
+}
+
+.order-type1 {
+    display: inline-block;
+    width: 104rpx;
+    height: 33rpx;
+    line-height: 33rpx;
+    text-align: center;
+    background-color: #f8a461;
+    border-radius: 5rpx;
+    font-size: 22rpx;
+    margin-left: 25rpx;
+    color: #f4f4f4;
+}
+
+.order-type1-area {
+    padding: 48rpx 30rpx;
+}
+
+/* 退款订单 */
+.topStatus {
+    height: 91rpx;
+    width: 100%;
+    /* background-color: skyblue; */
+    border: 1rpx solid #eeeeee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+.topStatus .shop2 {
+    width: 36rpx;
+    height: 32rpx;
+    margin-left: 29rpx;
+}
+
+.shopName {
+    margin-left: -254rpx;
+}
+
+.refund {
+    margin-bottom: 24rpx;
+}
+
+.statusBar {
+    font-size: 24rpx;
+    color: #ff538b;
+    margin-right: 32rpx;
+}
+
+.item-info {
+    box-sizing: border-box;
+    height: 241rpx;
+    width: 100%;
+    padding-left: 30rpx;
+    padding-top: 30rpx;
+    position: relative;
+    background-color: #ffffff;
+}
+
+.item-info .shopPhoto {
+    width: 180rpx;
+    height: 180rpx;
+}
+
+.item-info .shopTitle {
+    font-size: 36rpx;
+    position: absolute;
+    top: 30rpx;
+    left: 220rpx;
+}
+
+.item-info .ShopUnit {
+    position: absolute;
+    font-size: 24rpx;
+    color: #ff538b;
+    top: 136rpx;
+    left: 230rpx;
+}
+
+.item-info .ShopPrice {
+    font-size: 45rpx;
+    color: #ff538b;
+    top: 121rpx;
+    left: 258rpx;
+    position: absolute;
+}
+
+.item-info .shop-price {
+    font-weight: normal;
+    font-stretch: normal;
+    text-decoration: line-through;
+    font-size: 24rpx;
+    color: #999999;
+    position: absolute;
+    top: 132rpx;
+    right: 183rpx;
+}
+
+.item-info .shopNum {
+    font-size: 26rpx;
+    color: #666666;
+    top: 186rpx;
+    left: 230rpx;
+    position: absolute;
+}

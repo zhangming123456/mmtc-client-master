@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "美美天成",
+  "navigationBarTitleText": "",
   "enablePullDownRefresh": true,
   "onReachBottomDistance": 200,
   "usingComponents": {

@@ -1,0 +1,178 @@
+<wxs src="../../../../utils/common.wxs" module="c" />
+
+
+<view>
+    <view class="hr20"></view>
+    <view wx:for="{{data.bills}}" wx:key="id">
+        <view class="orderItem" wx:for="{{item.items}}" bindtap="gotoItemsDetail" wx:key="id" wx:for-item="i" data-id="{{i.item_id}}">
+            <image class="itemPicture" mode="aspectFill" src='{{c.absUrl(i.cover)}}'></image>
+            <view class="itemContent">
+                <view class="itemTitle">
+                    <view>{{i.title}}</view>
+                    <view catchtap="record">{{i.item_status}}</view>
+                </view>
+                <view class="itemPirce">
+                    <view class="pirce">
+                        <span><i>¥</i>{{i.price}}</span>
+                        <text>￥{{i.market_price}}</text>
+                    </view>
+                    <view wx:if="{{item.payed==1&&i.is_used==0&&i.is_refund == 0}}" data-item="{{i}}" catchtap='touse'
+                        class="itemButton">
+                        查看券码
+                    </view>
+                    <block wx:elif="{{item.payed==1&&i.is_used==1}}">
+                        <view wx:if="{{i.is_noted==0}}" data-item="{{i}}" catchtap='tonote' class="itemButton">
+                            去点评
+                        </view>
+                        <view class="itemButton" wx:else data-item="{{i}}" data-item="{{i}}" catchtap='NewitemButton'>再来一单</view>
+                    </block>
+                    <view wx:if="{{i.is_refund == 1}}" data-item="{{i}}" catchtap='NewitemButton' class="itemButton">重新购买
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+
+    <view class="orderMessage">
+        <view class="orderTitle">
+            <view style="font-weight: 500;   font-size: 28rpx;">订单详情</view>
+            <!-- <view class="copy">退款</view> -->
+        </view>
+        <view class="orderContent">
+            <view class="orderList">
+                <view>订单原价</view>
+                <view>¥{{data.origin_total}}</view>
+            </view>
+            <view class="orderList">
+                <view>店铺优惠</view>
+                <view>-¥{{data.shop_discount_money||0}}</view>
+            </view>
+            <view class="orderList">
+                <view>平台优惠</view>
+                <view>-¥{{data.discount_money||0}}</view>
+            </view>
+            <view class="orderList">
+                <view style="font-weight: 500;">实付款</view>
+                <view style="color: #F74884;">¥{{data.total}}</view>
+            </view>
+            <view class="wire"></view>
+            <view class="orderList">
+                <view>订单号：{{data.order_no}}</view>
+                <view class="copy" bindtap="copyTBL">复制</view>
+            </view>
+            <view class="orderList">
+                <view>下单时间： {{data.create_time}}</view>
+            </view>
+            <view class="orderList">
+                <view>下单手机： {{data.telephone}}</view>
+            </view>
+        </view>
+    </view>
+
+
+    <view class="meOrder" bindtap="gotoShop">
+        <view class="orderTitle2">店铺信息</view>
+        <view class="orderMore">
+            <view>进入店铺</view>
+            <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/icon-arrows.png"></image>
+        </view>
+    </view>
+
+    <view class="shopLocation">
+        <view class="location">
+            <view class="place">
+                <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/pay-location.png"></image>
+                <text>{{data.shop_find.shop_name}}{{data.shop_find.distance}}</text>
+            </view>
+            <view class="site">{{data.shop_find.address}}</view>
+        </view>
+
+        <view class="locationPhone" bindtap='tel'>
+            <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/pay-phone.png"></image>
+        </view>
+    </view>
+
+
+    <view class="{{data.payed==0?'orderMessage-two':'orderMessageTwo'}}">
+        <view class="orderTitle">
+            <view style="font-weight: 500;   font-size: 28rpx;">购买须知</view>
+            <!-- <view class="copy">退款</view> -->
+        </view>
+        <view class="orderContent">
+            <view class="other">
+                <text>有效期： </text>
+                <text>{{data.start_date}}</text>
+            </view>
+            <view class="other">
+                <text>使用时间：</text>
+                <text>{{data.start_time}}</text>
+            </view>
+            <view class="other">
+                <text>禁忌人群：</text>
+                <text>{{data.taboo}}</text>
+            </view>
+            <view class="other">
+                <text>其他说明：</text>
+                <text>{{data.other}}</text>
+            </view>
+        </view>
+    </view>
+
+
+</view>
+
+
+<view class='footerbtns' wx:if="{{data.payed==0}}">
+    <view wx:if="{{data.is_cancelled==1}}" class='delete' bindtap='rmBill'>删除订单</view>
+    <view class='cancelled' wx:elif="{{data.payed==0}}">
+        <view class='' bindtap='cancelBill'>取消订单</view>
+        <view class='' bindtap='payBill'>去付款(¥{{data.total}})</view>
+    </view>
+</view>
+
+
+<!-- 弹出框 -->
+<view class='qrcode-area' wx:if="{{!record}}">
+    <view class='qrcode-dlg-two'>
+        <view class="qrcode-title">历史明细</view>
+        <view class="listBox">
+            <view class="qrcode-list" wx:key="{{index}}" wx:for="{{data.time_log}}">
+                <view class="sign">
+                    <view></view>
+                    <text>{{item.msg}}</text>
+                </view>
+                <view>{{item.time}}</view>
+            </view>
+        </view>
+
+
+        <view class="shut" bindtap="shut">
+            <image src="../../../../image/shut.png"></image>
+        </view>
+    </view>
+</view>
+
+<!-- 二维码 -->
+<view class='qrcode-area' wx:if="{{!qrcode.hidden}}">
+    <view class='qrcode-dlg'>
+        <view class='fz28 text666 order-no'>订单号：{{data.order_no}}</view>
+        <view>
+            <image src='{{qrcode.img}}' class='qrcode'></image>
+        </view>
+        <view class='qrcode-no'>
+            消费码:
+            <view class='num'>{{qrcode.num}}</view>
+        </view>
+        <view class='qrcode-tip'>
+            请您将二维码或着消费码
+            <view class='pt10'> 出示给商家使用~</view>
+        </view>
+        <view class='qrcode-btn border-t' bindtap='closeQrcode'>
+            手滑，下次再说吧
+        </view>
+    </view>
+    <view class='qrcode-close'>
+        <image src='https://app.mmtcapp.com/mmtc/imgs/btnclose.png' bindtap='closeQrcode'></image>
+    </view>
+</view>

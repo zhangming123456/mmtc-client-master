@@ -1,56 +1,57 @@
 const app = getApp(),
     util2 = app.util2,
-    ApiService = require("../../../../utils/ApiService"),
+    ApiService = require("../../../../utils/ApiService/index"),
     utilPage = require("../../../../utils/utilPage"),
     config = require("../../../../utils/config");
 
 let histories;
 const appPage = {
-    data: {},
+    data: {
+        name: '',
+        item: {}
+    },
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad (options) {
+    onLoad(options) {
         this.loadCb()
     },
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow () {
+    onShow() {
         let that = this;
-        if (that.data.isShow) {
-        }
+        if (that.data.isShow) {}
     },
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide () {
+    onHide() {
         let that = this;
     },
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload () {
+    onUnload() {
         let that = this;
     },
     /**
      * 页面渲染完成
      */
-    onReady () {
+    onReady() {
         let that = this;
     },
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh () {
+    onPullDownRefresh() {
         let that = this
     },
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom (options) {
-    },
-    onPageScroll(options){
+    onReachBottom(options) {},
+    onPageScroll(options) {
 
     },
     /**
@@ -61,62 +62,45 @@ const appPage = {
     }
 }
 const methods = {
-    loadCb () {
+    loadCb() {
         let that = this;
-        histories = wx.getStorageSync('histories') || [];
-        this.setData({histories: histories});
-        that.getKeywordsGetData()
     },
-    getKeywordsGetData(){
+
+    // 获取店铺数据
+    cancelSearch() {
         let that = this;
-        util2.showLoading();
-        ApiService.getKeywordsGetData().finally(res => {
-            util2.hideLoading(true);
+        var shop_id = this.data.options.shop_id;
+        var kw = this.data.name;
+        ApiService.getSearchItems({
+            shop_id,
+            kw
+        }).finally(res => {
             if (res.status === 1) {
                 that.setData({
-                    searches: res.info
+                    item: res.info
                 });
             }
         })
     },
-    refreshHistories(){
-        histories = wx.getStorageSync('histories') || [];
-        this.setData({histories: histories});
-    },
-    doSearch(e) {
-        let value = util2.trim(e.detail.value);
-        if (value) {
-            histories.every(function (el, idx) {
-                if (el.title == value) {
-                    histories.splice(idx, 1);
-                    return false;
+
+    gotoShopDetails(e) {
+        console.log(e, 546465465465465465321);
+        var item = e.currentTarget.dataset.item
+        if (item && item.id) {
+            this.$route.push({
+                path: '/page/shop/pages/goods/index',
+                query: {
+                    id: item.id
                 }
-                return true;
-            });
-            histories.unshift({title: value});
-            if (histories.length > 20) {
-                histories = histories.slice(0, 20);
-            }
-            this.setData({histories: histories});
-            wx.setStorageSync('histories', histories);
-            this.$route.replace({path: "/page/home/pages/searchResult/index", query: {w: value}});
+            })
         }
     },
-    cancelSearch() {
-        this.$route.back();
+
+    formName: function (e) {
+        this.setData({
+            name: e.detail.value
+        })
     },
-    clearHistory() {
-        wx.removeStorageSync('histories');
-        this.setData({histories: histories = []});
-    },
-    showResult(e) {
-        let item = e.currentTarget.dataset.item;
-        if (item && item.link) {
-            this.$route.push({path: "/pages/page/index", query: {token: item.link}});
-        } else {
-            this.$route.replace({path: "/page/home/pages/searchResult/index", query: {w: item.title}});
-        }
-    }
 }
 
 Page(new utilPage(appPage, methods));

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "我要点评",
+  "usingComponents": {
+    "i-icon": "../../../../lib/iview/icon/index",
+    "i-toast": "../../../../lib/iview/toast/index"
+  }
+}

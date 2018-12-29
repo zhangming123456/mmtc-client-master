@@ -1,0 +1,53 @@
+<view class="">
+    <view class="hr20"></view>
+    <view class="sharingImg">
+        <image src="../../../../image/sharing.png"></image>
+        <view>谢谢您的分享，这将帮</view>
+        <view>助很多人！</view>
+    </view>
+
+    <block wx:if="{{onteList.billRows.length>0}}">
+        <view class="sharingTitle">您还有以下订单也可以写点评哦~</view>
+        <view class="sharingItems">
+            <view wx:for="{{onteList.billRows}}" wx:key="{{index}}">
+                <view class="orderItem" wx:for="{{item.items}}" wx:key="{{index}}" wx:for-item="v">
+                    <image class="itemPicture" mode="aspectFill" src="{{imageUrl+v.cover}}"></image>
+                    <view class="itemContent">
+                        <view class="itemTitle">
+                            <view>{{v.title}}</view>
+                        </view>
+
+                        <view class="itemPirce">
+                            <view class="itemTime">{{item.shop_name}}</view>
+
+                            <view class="itemButton" bindtap="gotoNote" data-item="{{v}}">写点评</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+
+    <view class="itemsTitle">精彩继续</view>
+    <view class="itemsPadding">
+        <view bindtap="gotoShopDetails" data-item="{{item}}" wx:for="{{onteList.item_list}}" wx:key="{{index}}" class="shopDetail-two">
+            <image class="shopPicture-two" mode="aspectFill" src="{{imageUrl+item.cover}}"></image>
+            <view class="groupSign" wx:if="{{item.group_num}}">{{item.group_num}}人团</view>
+            <view class="shopName">
+                <view class="shopTitle">{{item.title}}</view>
+                <view class="shopFlex">
+                    <view class="shopPrice2">
+                        <span class="rulingPrice2"><i>¥</i>{{item.price}}</span>
+                        <span class="originalPrice2">¥{{item.market_price}}</span>
+                    </view>
+                    <view class="shopLike">
+                        <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/heart.png"></image>
+                        <text>{{item.viewed_count}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+
+</view>

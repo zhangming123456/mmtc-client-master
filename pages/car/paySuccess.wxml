@@ -1,15 +1,11 @@
-<view class="panel-no-margin2 bg-white text-center border-b">
-    <image src="https://app.mmtcapp.com/mmtc/imgs/ok@2x.png" class='avatar' alt=""></image>
-    <view class="text666 fz28">
-        订单支付成功，欢迎下次光临！
+<view class=" paySuccess bg-white text-center ">
+    <image class="image" src="https://app.mmtcapp.com/mmtc/imgs/new_image/BitmapCopy.png"></image>
+    <view class="success">
+        <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/Group38@2x.png"></image>
+        <view class="successText">支付成功</view>
+        <view class="successButton">
+            <view bindtap="backOrder">查看订单</view>
+            <view bindtap="backHome">返回首页</view>
+        </view>
     </view>
 </view>
-<!-- <view class="hr24"></view>
-<view class="panel-no-margin bg-white border-b border-t">
-    <view class="flex">
-        <view class="fz32 text282828 flex-con">
-            再逛逛其他项目
-        </view>
-        <view class="icon-next"></view>
-    </view>
-</view> -->

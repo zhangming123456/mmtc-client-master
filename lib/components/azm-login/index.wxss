@@ -1,0 +1,162 @@
+.azm-login-components .azm-login-view,
+.azm-login-components .azm-bind-mobile {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  margin: 0 auto;
+}
+.azm-login-components .azm-login-view .azm-footer,
+.azm-login-components .azm-bind-mobile .azm-footer {
+  box-sizing: border-box;
+  padding: 0 15px;
+  position: absolute;
+  text-align: center;
+  font-size: 26rpx;
+  color: #999999;
+  bottom: 50rpx;
+  height: 40rxp;
+  line-height: 40rpx;
+  left: 0;
+  width: 100%;
+}
+.azm-login-components .azm-login-view {
+  background-color: #EFEEF3;
+  border-top: 1px solid #EFEEF3;
+}
+.azm-login-components .azm-login-view .azm-image-icon {
+  box-sizing: border-box;
+  padding: 80rpx 30rpx 75rpx;
+  width: 100%;
+  height: 344rpx;
+  background-color: #fff;
+  text-align: center;
+}
+.azm-login-components .azm-login-view .azm-image-icon image {
+  width: 134rpx;
+  height: 134rpx;
+}
+.azm-login-components .azm-login-view .azm-image-icon .azm-image-icon-title {
+  margin-top: 14rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 28rpx;
+  color: #333333;
+  text-align: center;
+  font-weight: 500;
+}
+.azm-login-components .azm-login-view .azm-login-btns {
+  box-sizing: border-box;
+  padding: 0 30rpx;
+  margin-top: 60rpx;
+}
+.azm-login-components .azm-login-view .azm-login-btns .azm-btn-title,
+.azm-login-components .azm-login-view .azm-login-btns .azm-btn-subtitle {
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 28rpx;
+  color: #333333;
+  text-align: center;
+}
+.azm-login-components .azm-login-view .azm-login-btns .azm-btn-title {
+  color: #000;
+}
+.azm-login-components .azm-login-view .azm-login-btns .azm-btn-userInfo {
+  margin-top: 54rpx;
+  background: #04BE01;
+  border-radius: 8rpx;
+  color: #fff;
+  font-size: 32rpx;
+  border: none;
+  height: 90rpx;
+  line-height: 90rpx;
+}
+.azm-login-components .azm-bind-mobile {
+  z-index: 1002;
+  box-sizing: border-box;
+  padding: 87rpx 94rpx 0;
+  background-color: #fff;
+}
+.azm-login-components .azm-bind-mobile .azm-title {
+  font-weight: 500;
+  font-size: 37rpx;
+  color: #000;
+  letter-spacing: 0;
+  text-align: left;
+}
+.azm-login-components .azm-bind-mobile button.azm-binding-phone {
+  background-image: linear-gradient(227deg, #F0F0F0 0%, #CACACA 100%);
+  border-radius: 45px;
+  line-height: 45px;
+  margin-top: 60rpx;
+  font-size: 32rpx;
+  color: #FFF;
+  text-align: center;
+  border: none;
+}
+.azm-login-components .azm-bind-mobile button.azm-binding-phone.azm-binding-phone-active {
+  background-image: linear-gradient(227deg, #5EF56C 0%, #07C2B7 100%);
+}
+.azm-login-components .azm-bind-mobile .input-wrap {
+  position: relative;
+  box-sizing: border-box;
+  margin: 20rpx 0 0;
+  border-bottom: 1px solid #DDDDDD;
+}
+.azm-login-components .azm-bind-mobile .input-wrap .azm-input-image {
+  width: 30rpx;
+  height: auto;
+  margin-right: 20rpx;
+}
+.azm-login-components .azm-bind-mobile .input-wrap .azm-input-right {
+  position: relative;
+  min-width: 40rpx;
+  height: 46rpx;
+  line-height: 46rpx;
+}
+.azm-login-components .azm-bind-mobile .input-wrap .azm-input-right .azm-input-msm {
+  font-size: 26rpx;
+  color: #333333;
+  text-align: right;
+}
+.azm-login-components .azm-bind-mobile .input-wrap .azm-input-right .azm-input-msm.active {
+  color: #bbbbbb;
+}
+.azm-login-components .azm-bind-mobile .input-wrap .input-wrap-zIndex {
+  z-index: 1;
+}
+.azm-login-components.top100 {
+  top: 100%;
+}
+.azm-login-components .azm-txt {
+  padding-top: 50rpx;
+  padding-left: 41rpx;
+  padding-right: 41rpx;
+  line-height: 43rpx;
+}
+.azm-login-components .btns {
+  margin-top: 166rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  font-size: 32rpx;
+}
+.azm-login-components .btns view {
+  text-align: center;
+}
+.azm-login-components .btn-bywx {
+  height: 88rpx;
+  line-height: 88rpx;
+  color: white;
+  background-color: #09bb07;
+  border-radius: 10rpx;
+  border: solid 1px #029400;
+}
+.azm-login-components .btn-byphone {
+  margin-top: 30rpx;
+  height: 88rpx;
+  background-color: #fbfafc;
+  border-radius: 10rpx;
+  line-height: 88rpx;
+  border: solid 1rpx #d6d5d6;
+}
+/*# sourceMappingURL=index.wxss.map */

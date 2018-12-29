@@ -4,7 +4,7 @@
         <view style="display: inline-block;">
             <view class='flex'>
                 <view>
-                    <image src='https://app.mmtcapp.com/mmtc/imgs/nomore.png' class='nomore-image'></image>
+                    <image src='https://app.mmtcapp.com/mmtc/imgs/new_image/noData.png' class='nomore-image'></image>
                 </view>
                 <view class='nomore-text'>
                     <text>{{nomoreText}}</text>

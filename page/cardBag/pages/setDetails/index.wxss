@@ -8,23 +8,124 @@ view {
 
 .t-setCard {
     background-image: linear-gradient(-47deg, #FE561C 0%, #FFBB01 100%);
-    box-shadow: 0 5rpx 9rpx 0 rgba(254, 90, 26, 0.33);
-    border-radius: 40rpx;
-    width: 692rpx;
-    height: 354rpx;
+    border-top-left-radius: 10rpx;
+    border-top-right-radius: 10rpx;
+    width: 690rpx;
+    height: 433rpx;
     margin: 30rpx;
-    padding: 30rpx 40rpx;
     box-sizing: border-box;
     position: relative;
+    margin-bottom: 0;
+}
+
+.t-setCard image {
+    width: 100%;
+    height: 100%;
+}
+
+.cardPosition {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 30rpx 40rpx;
+    box-sizing: border-box;
+}
+
+.cardPositionTow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 30rpx;
+    box-sizing: border-box;
+}
+
+.cardName {
+    font-size: 64rpx;
+    color: #FFFFFF;
+}
+
+.cardTitle {
+    margin-top: 10rpx;
+    font-size: 28rpx;
+    color: #FFFFFF;
+    display: block;
+    margin-bottom: 126rpx;
+}
+
+.cardGrade {
+    font-size: 48rpx;
+    color: #ffffff;
+    display: block;
+    margin-bottom: 24rpx;
+}
+
+.cardIndate {
+    font-size: 24rpx;
+    color: #FFFFFF; 
+}
+
+
+.cardBottom {
+    width: 690rpx;
+    padding: 20rpx 30rpx;
+    background-color: #ffffff;
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+    margin-bottom: 30rpx;
+    box-sizing: border-box;
+}
+
+.cardTag {
+    background: #F25643;
+    border-radius: 4rpx;
+    width: 60rpx;
+    height: 30rpx;
+    text-align: center;
+    line-height: 30rpx;
+    font-size: 22rpx;
+    color: #FFFFFF;
+    margin-right: 30rpx;
+}
+
+.cardPrice {
+    font-size: 38rpx;
+    color: #FF7A00;
+    margin-right: 12rpx;
+}
+
+.cardMarketRrice {
+    font-size: 26rpx;
+    color: #6F7578;
+    text-decoration: line-through;
+    margin-right: 13rpx;
+}
+
+.cardDiscount {
+    font-size: 22rpx;
+    color: #FF7A00;
+    border: 1px solid #FF7A00;
+    border-radius: 4rpx;
+    height: 30rpx;
+    line-height: 30rpx;
+    text-align: center;
+    margin-right: 23rpx;
 }
 
 .t-setCard2 {
     background-color: skyblue;
     height: 450rpx;
     position: relative;
-    padding: 30rpx;
     box-sizing: border-box;
     position: relative;
+}
+
+.t-setCard2 .cardBackg {
+    width: 100%;
+    height: 100%;
 }
 
 .t-setCondition {

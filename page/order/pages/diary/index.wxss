@@ -1,0 +1,272 @@
+.hr20 {
+  background: #F5F8F7;
+  border-bottom: 1px solid #EEEEEE;
+  border-top: 1px solid #EEEEEE;
+  height: 20rpx;
+  width: 100%;
+
+}
+
+.diraryTitle {
+  font-size: 28rpx;
+  color: #333333;
+  width: 100%;
+  height: 90rpx;
+  padding-left: 37rpx;
+  border-bottom: 1px solid #EEEEEE;
+  line-height: 90rpx;
+  box-sizing: border-box;
+}
+
+.dirarySubmit {
+  padding-left: 37rpx;
+  padding-right: 37rpx;
+  box-sizing: border-box;
+  padding-top: 30rpx;
+}
+
+
+.t-all {
+  border-radius: 10rpx;
+  width: 100rpx;
+  padding: 13rpx 0;
+  font-size: 24rpx;
+  color: #666666;
+  text-align: center;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+  display: inline-block;
+  background: #F5F8F7;
+  box-sizing: border-box;
+}
+
+
+.t-active {
+  border-radius: 10rpx;
+  border: 1px solid #04D3AF;
+  background: #F5F8F7;
+  width: 100rpx;
+  padding: 13rpx 0;
+  font-size: 24rpx;
+  color: #04D3AF;
+  text-align: center;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+
+.diraryContent {
+  background: #F5F8F7;
+  border-radius: 4rpx;
+  width: 100%;
+  height: 240rpx;
+  font-size: 26rpx;
+  color: #333333;
+  padding: 20rpx 32rpx;
+  box-sizing: border-box;
+  margin-top: 20rpx;
+}
+
+
+.addBox {
+  margin-top: 30rpx;
+  display: flex;
+  align-items: center;
+  margin-bottom: 40rpx;
+}
+
+
+
+.addImage {
+  margin-right: 20rpx;
+  background: #F5F8F7;
+  border-radius: 4rpx;
+  width: 98rpx;
+  height: 98rpx;
+  text-align: center;
+  line-height: 98rpx;
+}
+
+.imgsBox {
+  position: relative;
+}
+
+.imgsBox .imgList {
+  width: 98rpx;
+  height: 98rpx;
+  border-radius: 4rpx;
+  margin-right: 20rpx;
+}
+
+.deleteImg {
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  right: 5rpx;
+  top: -13rpx;
+}
+
+.grade {
+  display: flex;
+  font-size: 28rpx;
+  color: #333333;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30rpx;
+}
+
+.gradeStar image {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 20rpx;
+}
+
+
+.gradeStar {
+  display: flex;
+  align-items: center;
+}
+
+.gradeStar view {
+  margin-right: 40rpx;
+}
+
+.state {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+
+.selectTeacher {
+  padding: 32rpx 37rpx;
+  box-sizing: border-box;
+}
+
+
+.all {
+  border-radius: 10rpx;
+  padding: 15rpx 20rpx;
+  box-sizing: border-box;
+
+  font-size: 24rpx;
+  color: #666666;
+  text-align: center;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+  display: inline-block;
+  background: #F5F8F7;
+}
+
+
+.active {
+  border-radius: 10rpx;
+  border: 1px solid #04D3AF;
+  background: #F5F8F7;
+  padding: 15rpx 20rpx;
+  font-size: 24rpx;
+  color: #04D3AF;
+  text-align: center;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+
+.submit {
+  background: #FFFFFF;
+  border-top: 1px solid #EEEEEE;
+  height: 90rpx;
+  line-height: 90rpx;
+  position: fixed;
+  bottom: 0;
+  padding-left: 37rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.selectSubmit {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: #666666;
+}
+
+
+.confirm {
+  height: 100%;
+  width: 270rpx;
+  background: #04D3AF;
+  font-size: 32rpx;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 90rpx;
+}
+
+/*  重写 checkbox 样式  */
+/* 未选中的 背景样式 */
+checkbox .wx-checkbox-input {
+  /* 圆角 */
+  width: 30rpx;
+  /* 背景的宽 */
+  height: 30rpx;
+  /* 背景的高 */
+}
+
+
+
+/* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  border-radius: 50%;
+  /* 圆角 */
+  width: 30rpx;
+  height: 30rpx;
+  /* 选中后对勾大小，不要超过背景的尺寸 */
+  line-height: 30rpx;
+  text-align: center;
+  font-size: 30rpx;
+  /* 对勾大小 30rpx */
+  color: #04D3AF;
+  /* 对勾颜色 白色 */
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+
+/*  重写 radio 样式  */
+/* 未选中的 背景样式 */
+radio .wx-radio-input {
+  border-radius: 50%;
+  /* 圆角 */
+  width: 40rpx;
+  height: 40rpx;
+}
+
+/* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
+radio .wx-radio-input.wx-radio-input-checked {
+  border: none;
+}
+
+/* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
+radio .wx-radio-input.wx-radio-input-checked::before {
+  border-radius: 50%;
+  /* 圆角 */
+  width: 40rpx;
+  /* 选中后对勾大小，不要超过背景的尺寸 */
+  height: 40rpx;
+  /* 选中后对勾大小，不要超过背景的尺寸 */
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 30rpx;
+  /* 对勾大小 30rpx */
+  color: #fff;
+  /* 对勾颜色 白色 */
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}

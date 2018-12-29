@@ -36,3 +36,4 @@ page {
 .azm-city-select .azm-cities .azm-cities-item:last-child {
   border-bottom: none;
 }
+/*# sourceMappingURL=index.wxss.map */

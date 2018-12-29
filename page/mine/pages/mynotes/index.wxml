@@ -1,6 +1,6 @@
-<wxs src="../../../../utils/common.wxs" module="c"/>
-<i-toast id="toast"/>
-<i-message id="message"/>
+<wxs src="../../../../utils/common.wxs" module="c" />
+<i-toast id="toast" />
+<i-message id="message" />
 
 <block wx:for="{{notes}}" wx:for-item="val" wx:for-index="i" wx:key="{{i}}">
     <view class='nav-item' wx:for="{{val}}" wx:key="{{index}}">
@@ -17,10 +17,10 @@
         </view>
         <view class='nav-content'>
             <navigator url="/pages/cases/detail?id={{item.id}}" hover-class="none">
-                <block wx:if="{{item.img_src}}">
+                <block wx:if="{{item.img_src !=0}}">
                     <view class="pic-list{{c.picCount(item.img_src)}}">
-                        <image src='{{c.absUrl(pic,400)}}' wx:for="{{c.str2arr(item.img_src)}}" wx:key="*this"
-                               wx:for-item="pic" mode="aspectFill"></image>
+                        <image src='{{c.absUrl(pic)}}' wx:for="{{c.str2arr(item.img_src)}}" wx:key="*this" wx:for-item="pic"
+                            mode="aspectFill"></image>
                     </view>
                 </block>
                 <view class="fz28 content two-line">
@@ -40,9 +40,8 @@
                 <text class="azm-text" decode>&nbsp;浏览&nbsp;</text>
                 <text class="azm-num">{{item.viewed_count}}</text>
             </view>
-            <view class="flexBox-item fb-8 azm-1px-r {{c.zanClass(item,noteZan)}}"
-                  catchtap="zan" data-item="{{item}}" data-page="{{i}}"
-                  data-index="{{index}}">
+            <view class="flexBox-item fb-8 azm-1px-r {{c.zanClass(item,noteZan)}}" catchtap="zan" data-item="{{item}}"
+                data-page="{{i}}" data-index="{{index}}">
                 <text class="iconfont icon-iconfontzhizuobiaozhun023148 azm-icon"></text>
                 <text class="azm-text" decode>&nbsp;点赞&nbsp;</text>
                 <text class="azm-num">{{item.zan_count}}</text>
@@ -56,4 +55,4 @@
     </view>
 </block>
 
-<wxc-loadmore is-end="{{noMore}}" icon="随机/loading"></wxc-loadmore>
+<wxc-loadmore is-end="{{noMore}}" text="没有更多"></wxc-loadmore>

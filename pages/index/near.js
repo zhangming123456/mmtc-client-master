@@ -1,7 +1,7 @@
 // pages/index/index.js
 const app = getApp(),
     utilPage = require('../../utils/utilPage'),
-    ApiService = require('../../utils/ApiService'),
+    ApiService = require('../../utils/ApiService/index'),
     config = require('../../utils/config'),
     c = require("../../utils/common.js");
 const stypes = ['智能排序', '销量最高', '价格最低', '案例最多', '好评优先', '离我最近'];

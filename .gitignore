@@ -1,10 +1,16 @@
-*swp
-*~
-.idea
-node_modules
-dist
+# Windows
+[Dd]esktop.ini
+Thumbs.db
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
 .svn
 .idea
-npm-debug.log
-.wepycache
-package-lock.json
+
+# Node.js
+node_modules/

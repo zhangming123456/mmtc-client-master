@@ -6,7 +6,7 @@
     <view class="panel-no-margin bg-white border-b" wx:for="{{v}}" wx:key="{{index}}">
         <view class="flex" data-id="{{item.id}}" bindtap='showItemDetail'>
             <view>
-                <image src="{{c.absUrl(item.cover,250)}}" alt="" mode='aspectFill' class="goods-img2"></image>
+                <image src="{{c.absUrl(item.cover)}}" alt="" mode='aspectFill' class="goods-img2"></image>
             </view>
             <view class="flex-con">
                 <view class='pl30'>
@@ -25,4 +25,4 @@
         </view>
     </view>
 </block>
-<wxc-loadmore is-end="{{noMore}}" icon="随机/loading"></wxc-loadmore>
+<wxc-loadmore is-end="{{noMore}}" ></wxc-loadmore>

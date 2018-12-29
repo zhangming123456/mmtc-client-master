@@ -4,32 +4,24 @@
     "page/tabBar/near/index",
     "page/tabBar/order/index",
     "page/tabBar/mine/index",
+    "pages/onlineBuy/index",
     "pages/home/index",
     "pages/chat/index",
     "pages/msg/index",
-    "pages/activity/wallet",
-    "pages/activity/index",
     "pages/conpons/platform",
-    "pages/order/detail",
     "pages/cases/detail",
     "pages/other/discount",
     "pages/other/discountlist",
     "pages/item/groupdetail",
-    "pages/advise/index",
-    "pages/group/shared",
     "pages/index/items",
     "pages/group/orderdetail",
     "pages/group/mine",
-    "pages/group/detail",
     "pages/index/near",
     "pages/car/index",
     "pages/page/index",
     "pages/msg/detail",
-    "pages/order/buyDetail",
     "pages/car/payOrder",
     "pages/conpons/index",
-    "pages/onlineBuy/index",
-    "pages/onlineBuy/step2",
     "pages/technician/detail",
     "pages/technician/index",
     "pages/order/note",
@@ -38,7 +30,6 @@
     "pages/dongtai/index",
     "pages/cases/index",
     "pages/order/orderDetails/index",
-    "pages/onlineBuy/remarks/index",
     "page/login/index"
   ],
   "subPackages": [
@@ -46,6 +37,13 @@
       "root": "pages/newPages",
       "pages": [
         "pages/mmtcTabList/index"
+      ]
+    },
+    {
+      "root": "page/activity",
+      "pages": [
+        "pages/newUser/index",
+        "pages/wallet/index"
       ]
     },
     {
@@ -66,6 +64,12 @@
       ]
     },
     {
+      "root": "page/group",
+      "pages": [
+        "pages/shared/index"
+      ]
+    },
+    {
       "root": "page/home",
       "pages": [
         "pages/search/index",
@@ -78,7 +82,19 @@
         "pages/home/index",
         "pages/detail/index",
         "pages/goods/index",
-        "pages/projects/index"
+        "pages/projects/index",
+        "pages/shopAlbum/index",
+        "pages/displayPicture/index"
+      ]
+    },
+    {
+      "root": "page/payment",
+      "pages": [
+        "pages/placeAnOrder/index",
+        "pages/orderPay/index",
+        "pages/payTheBill/index",
+        "pages/remarks/index",
+        "pages/itemPay/index"
       ]
     },
     {
@@ -89,7 +105,8 @@
         "pages/coupons/index",
         "pages/mynotes/index",
         "pages/footprint/index",
-        "pages/feedback/index"
+        "pages/feedback/index",
+        "pages/binding/index"
       ]
     },
     {
@@ -99,7 +116,25 @@
         "pages/location/index",
         "pages/locSearch/index",
         "pages/paySucceed/index",
-        "pages/authorization/index"
+        "pages/authorization/index",
+        "pages/feedback/index"
+      ]
+    },
+    {
+      "root": "page/order",
+      "pages": [
+        "pages/orderAll/index",
+        "pages/orderDetail/index",
+        "pages/diary/index",
+        "pages/buyDetail/index",
+        "pages/groupDetails/index",
+        "pages/remarkSucceed/index"
+      ]
+    },
+    {
+      "root": "page/webView",
+      "pages": [
+        "pages/h5/index"
       ]
     }
   ],
@@ -112,7 +147,7 @@
   },
   "tabBar": {
     "color": "#666666",
-    "selectedColor": "#e61b5a",
+    "selectedColor": "#4A4A4A",
     "backgroundColor": "#fffcfc",
     "position": "bottom",
     "borderStyle": "black",
@@ -122,12 +157,6 @@
         "iconPath": "image/tabBar/home_active.png",
         "pagePath": "page/tabBar/home/index",
         "text": "首页"
-      },
-      {
-        "selectedIconPath": "image/tabBar/near.png",
-        "iconPath": "image/tabBar/near_active.png",
-        "pagePath": "page/tabBar/near/index",
-        "text": "附近"
       },
       {
         "selectedIconPath": "image/tabBar/order.png",
@@ -142,6 +171,11 @@
         "text": "我的"
       }
     ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "地理位置将用于展示您和店铺位置距离"
+    }
   },
   "networkTimeout": {
     "request": 10000,

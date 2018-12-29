@@ -1,0 +1,222 @@
+<wxs src="../../../../utils/common.wxs" module="c" />
+<import src="../../../../wxParse/wxParse.wxml" />
+<i-toast id="toast" />
+<i-message id="message" />
+
+
+<view class='swiper-tab'>
+    <view class="swiper-tab-item {{type==0?'active':''}}" data-type="0" bindtap='setType'>全部</view>
+    <view class="swiper-tab-item {{type==1?'active':''}}" data-type="1" bindtap='setType'>待付款</view>
+    <view class="swiper-tab-item {{type==2?'active':''}}" data-type="2" bindtap='setType'>待验证</view>
+    <view class="swiper-tab-item {{type==3?'active':''}}" data-type="3" bindtap='setType'>待点评</view>
+    <view class="swiper-tab-item {{type==4?'active':''}}" data-type="4" bindtap='setType'>退款</view>
+</view>
+
+
+<view class='content'>
+    <block wx:if="{{items[type].length}}">
+        <view class="hr20"></view>
+        <block wx:for="{{items[type]}}" wx:for-index="i" wx:for-item="v" wx:key="{{i}}">
+            <block wx:for="{{v}}" wx:key="{{v.id}}" wx:for-item="bill">
+                <!--退款订单-->
+                <block wx:if="{{c.orderNumber(bill,type).status == 4 || bill.is_refund == 1}}">
+                    <block wx:for="{{bill.items}}" wx:key="{{val.id}}" wx:for-item="val" wx:for-index="j">
+                        <view class="billTitle" bindtap="val" data-item="{{items}}">
+                            <view class="billShop" bindtap="gotoShop" data-item="{{ bill }}">
+                                <text>{{bill.shop_name}}</text>
+                                <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/icon-arrows.png"></image>
+                            </view>
+                            <view class="billTag">
+                                <image wx:if="{{bill.order_type==='0' || bill.order_type==='2'}}" src="https://app.mmtcapp.com/mmtc/imgs/new_image/order-items.png"></image>
+                                <image wx:if="{{bill.order_type==='1'}}" src="https://app.mmtcapp.com/mmtc/imgs/new_image/order-pay.png"></image>
+                                <text wx:if="{{bill.order_type==='0' || bill.order_type==='2'}}">项目</text>
+                                <text wx:if="{{bill.order_type==='1'}}">买单</text>
+                            </view>
+                        </view>
+                        <view class="orderItem" bindtap="goOrderDetail" data-item="{{val}}">
+                            <image class="itemPicture" mode="aspectFill" src='{{c.absUrl(val.cover)}}'></image>
+                            <view class="itemContent">
+                                <view class="itemTitle">
+                                    <view>{{val.title}}</view>
+                                    <view>{{val.item_status}}</view>
+                                </view>
+                                <view class="itemTime">截止日期：{{bill.create_time}}</view>
+
+                                <view class="itemPirce">
+                                    <view class="pirce">
+                                        <span><i>¥</i>{{val.price}}</span>
+                                        <text>￥{{val.market_price}}</text>
+                                    </view>
+                                    <view data-item="{{val}}" catchtap='NewitemButton' class="itemButton">重新购买</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="hr24"></view>
+
+                    </block>
+                </block>
+                <block wx:else>
+                    <view class='order-item azm-1px-b' style="margin-bottom: 20rpx">
+                        <!-- 订单标题 -->
+                        <view wx:if="{{bill.order_type!=3}}" class="billTitle" bindtap="gotoShop" data-item="{{bill}}">
+                            <view class="billShop">
+                                <text>{{bill.shop_name}}</text>
+                                <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/icon-arrows.png"></image>
+                            </view>
+                            <view class="billTag">
+                                <image wx:if="{{bill.order_type==='0' || bill.order_type==='2'}}" src="https://app.mmtcapp.com/mmtc/imgs/new_image/order-items.png"></image>
+                                <image wx:if="{{bill.order_type==='1'}}" src="https://app.mmtcapp.com/mmtc/imgs/new_image/order-pay.png"></image>
+                                <text wx:if="{{bill.order_type==='0' || bill.order_type==='2'}}">项目</text>
+                                <text wx:if="{{bill.order_type==='1'}}">买单</text>
+                            </view>
+                        </view>
+
+                        <!-- 买单订单 -->
+                        <view class="orderItem" wx:if="{{bill.order_type==1}}" bindtap='showBuyOrderDetail' data-id="{{bill.id}}">
+                            <image class="itemPicture" mode="aspectFill" src="https://app.mmtcapp.com/mmtc/imgs/new_image/pay-template.png"></image>
+                            <view class="itemContent">
+                                <view class="itemTitle">
+                                    <view>买单订单</view>
+                                    <view>消费完成</view>
+                                </view>
+                                <view class="itemTime">下单时间：{{bill.create_time}}</view>
+                                <view class="itemPirce">
+                                    <view class="pirce">
+                                        <span><i>¥</i>{{bill.total}}</span>
+                                        <text>￥{{bill.discount_money}}</text>
+                                    </view>
+                                    <view catchtap="gotoPay" data-item="{{bill}}" class="itemButton">再来一单</view>
+                                </view>
+                            </view>
+                        </view>
+                        <block wx:if="{{bill.order_type==3}}" bindtap='showBuyOrderDetail'>
+                            <!-- 套卡订单 -->
+                            <view class="billTitle" bindtap="gotoShop" data-item="{{bill}}">
+                                <view class="billShop">
+                                    <text>{{bill.shop_name}}</text>
+                                    <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/icon-arrows.png"></image>
+                                </view>
+                                <view class="billTag">
+                                    <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/bill-icon.png"></image>
+                                    <text>套卡</text>
+                                </view>
+                            </view>
+                            <view class="orderItem" bindtap="toCardDetail" data-item="{{bill}}">
+                                <image class="itemPicture" mode="aspectFill" src="https://app.mmtcapp.com/mmtc/imgs/new_image/bill-template.png"></image>
+                                <view class="itemContent">
+                                    <view class="itemTitle">
+                                        <view>{{bill.card_name}}</view>
+                                        <view>{{bill.item_status}}</view>
+                                    </view>
+                                    <view class="itemTime">截止日期：{{bill.create_time}}</view>
+
+                                    <view class="itemPirce">
+                                        <view class="pirce">
+                                            <span><i>¥</i>{{bill.price}}</span>
+                                            <text>￥{{bill.market_price}}</text>
+                                        </view>
+                                        <view catchtap="gotoBillDetail" data-item="{{bill}}" class="itemButton">套卡详情
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </block>
+                        <block wx:else>
+                            <block wx:if="c.orderNumber(bill,type).flag">
+                                <!-- 项目订单 -->
+                                <view bindtap="goOrderDetail" data-item="{{v}}" class="orderItem" wx:for="{{bill.items}}"
+                                    wx:key="id" wx:for-item="v">
+                                    <image class="itemPicture" mode="aspectFill" src='{{c.absUrl(v.cover)}}'></image>
+                                    <view class="itemContent">
+                                        <view class="itemTitle">
+                                            <view>{{v.title}}</view>
+                                            <view>{{v.item_status}}</view>
+                                        </view>
+                                        <view class="itemTime" wx:if="{{bill.payed == 1&&v.is_used == 0&&v.is_refund == 0}}">
+                                            截止日期：{{bill.create_time}}
+                                        </view>
+                                        <view class="itemTime" wx:else>下单时间：{{bill.create_time}}</view>
+                                        <view class="itemPirce">
+                                            <view class="pirce">
+                                                <span><i>¥</i>{{v.price}}</span>
+                                                <text>￥{{v.market_price}}</text>
+                                            </view>
+                                            <view wx:if="{{bill.payed == 1&&v.is_used == 0&&v.is_refund == 0}}"
+                                                data-item="{{v}}" catchtap='touse' data-order_no="{{bill.order_no}}"
+                                                class="itemButton">查看券码
+                                            </view>
+                                            <block wx:elif="{{bill.payed==1&&v.is_used==1}}">
+                                                <view wx:if="{{v.is_noted==0}}" data-item="{{v}}" catchtap='tonote'
+                                                    class="itemButton">去点评
+                                                </view>
+                                                <view wx:else data-item="{{v}}" catchtap='NewitemButton' class="itemButton">
+                                                    再来一单
+                                                </view>
+                                            </block>
+                                            <view wx:if="{{v.is_refund == 1}}" data-item="{{v}}" catchtap='NewitemButton'
+                                                class="itemButton">重新购买
+                                            </view>
+                                        </view>
+                                    </view>
+                                </view>
+                                <view class='flex border-b' wx:if="{{bill.is_cancelled==1}}">
+                                    <view class='flex-con text-right'>
+                                        <view class='btn0' data-id="{{bill.id}}" data-page="{{i+','+index}}" bindtap='rmBill'>
+                                            <text>删除订单</text>
+                                        </view>
+                                    </view>
+                                </view>
+                                <view class='flex border-b' wx:elif="{{bill.payed==0}}">
+                                    <view class='flex-con order-info' wx:if="{{bill.order_type==0}}">
+                                        <text>{{bill.discount_money>0?'优惠:-¥'+bill.discount_money+' ':''}}</text>
+                                        <text>合计：{{bill.total}}</text>
+                                    </view>
+                                    <view class='text-right {{bill.order_type==1?"flex-con":""}}'>
+                                        <view class='btn0' data-id="{{bill.id}}" data-page="{{i+','+index}}" bindtap='cancelBill'>
+                                            <text>取消订单</text>
+                                        </view>
+                                        <view class='btn1' data-id="{{bill.id}}" data-page="{{i+','+index}}" bindtap='payBill'>
+                                            <text>去付款</text>
+                                        </view>
+                                    </view>
+                                </view>
+
+                            </block>
+                        </block>
+                    </view>
+                </block>
+            </block>
+        </block>
+    </block>
+    <block wx:else>
+        <view class='order-empty'>
+            <image src='../../../../image/order-empty.png'></image>
+            <view class="empty-text">您还没有相关的订单</view>
+        </view>
+    </block>
+</view>
+
+
+<!-- 查看券码 -->
+<view class='qrcode-area' wx:if="{{!qrcode.hidden}}">
+    <view class='qrcode-dlg'>
+        <view class='fz28 text666 order-no'>订单号：{{qrcode.order_no}}</view>
+        <view>
+            <image src='{{qrcode.img}}' class='qrcode'></image>
+        </view>
+        <view class='qrcode-no'>
+            消费码:
+            <view class='num'>{{qrcode.num}}</view>
+        </view>
+        <view class='qrcode-tip'>
+            请您将二维码或着消费码
+            <view class='pt10'> 出示给商家使用~</view>
+        </view>
+        <view class='qrcode-btn border-t' bindtap='closeQrcode'>
+            手滑，下次再说吧
+        </view>
+    </view>
+    <view class='qrcode-close'>
+        <image src='https://app.mmtcapp.com/mmtc/imgs/btnclose.png' bindtap='closeQrcode'></image>
+    </view>
+</view>

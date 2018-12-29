@@ -1,0 +1,57 @@
+<view class="{{ class }} azm-login-components">
+    <azm-drawer visible="{{ isShow }}" fullscreen="{{ true }}" mode="bottom">
+        <view class="azm-login-view">
+            <view class="azm-image-icon">
+                <image mode="widthFix" src="https://app.mmtcapp.com/mmtc/imgs/icon/miniprogram-icon.png"></image>
+                <view class="azm-image-icon-title">小程序</view>
+            </view>
+            <view class='azm-login-btns'>
+                <view class="azm-btn-title">我们想申请获取您的微信公开信息：</view>
+                <view class="azm-btn-subtitle">昵称、头像，用于个人中心展示和登录使用。</view>
+                <button class="azm-btn-userInfo" plain open-type="getUserInfo" lang="zh_CN"
+                        bindgetuserinfo="onGotUserInfo">授权并登录
+                </button>
+            </view>
+            <rich-text nodes="{{ddd}}"></rich-text>
+            <view class="azm-footer">Copyright © 2017 美美天成技术支持</view>
+        </view>
+    </azm-drawer>
+    <azm-drawer visible="{{ isShow && isShowMobile }}" fullscreen="{{ true }}" mode="bottom">
+        <view class="azm-bind-mobile">
+            <view class="azm-title">登录绑定手机</view>
+            <view class="input-wrap">
+                <azm-input type="number" inputCombineStyle="padding-left: 0;padding-right: 0;"
+                           placeholder-class="input-wrap-zIndex"
+                           isIcon="{{ true }}" value="{{mobileNumber}}" placeholder="手机" maxlength="11"
+                           data-type="mobile"
+                           bindinput="bindInput" bindblur="bindBlur">
+                    <image mode="widthFix" class="azm-input-image" slot="icon"
+                           src="https://app.mmtcapp.com/mmtc/imgs/new_image/binding-phone.png"></image>
+                    <view slot="right" class="azm-input-right">
+                        <text class="azm-input-msm" bindtap="bindGetMsm" wx:if="{{ !targetStatus }}">获取验证码</text>
+                        <view class="azm-input-msm active" wx:else>
+                            <text>重新获取(</text>
+                            <azm-count-down target="{{ targetTime }}" format="{{ myFormat }}"
+                                            clear-timer="{{ clearTimer }}" bindcallback="countDownFun"></azm-count-down>
+                            <text>)</text>
+                        </view>
+                    </view>
+                </azm-input>
+            </view>
+            <view class="input-wrap">
+                <azm-input type="number" inputCombineStyle="padding-left: 0;padding-right: 0;"
+                           isIcon="{{ true }}"
+                           value="{{msmNumber}}" placeholder="验证码" maxlength="4" data-type="msm"
+                           bindinput="bindInput" bindblur="bindBlur">
+                    <image mode="widthFix" class="azm-input-image" slot="icon"
+                           src="https://app.mmtcapp.com/mmtc/imgs/new_image/binding-code.png"></image>
+                </azm-input>
+            </view>
+            <button plain class="azm-binding-phone {{ isValidate ? 'azm-binding-phone-active' : '' }}"
+                    bindtap="bindBindingPhone">绑定
+            </button>
+            <view class="azm-footer">美美天成技术支持©Copy Right</view>
+        </view>
+    </azm-drawer>
+</view>
+<slot></slot>

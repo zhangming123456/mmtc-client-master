@@ -1,0 +1,11 @@
+<view class=" paySuccess bg-white text-center ">
+    <image class="image" src="https://app.mmtcapp.com/mmtc/imgs/new_image/BitmapCopy.png"></image>
+    <view class="success">
+        <image src="../../../image/Group38@2x.png"></image>
+        <view class="successText">点评成功</view>
+        <view class="successButton">
+            <view bindtap="backOrder">查看点评</view>
+            <view bindtap="backHome">返回首页</view>
+        </view>
+    </view>
+</view>

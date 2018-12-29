@@ -38,6 +38,7 @@ import regeneratorRuntime from './runtime';//使用async，await
 import config from './config'
 import { Amap, Qmap } from './map/index'
 
+
 class RegExpUtil {
     constructor () {
         this.pathReg = /^\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$/;
@@ -389,7 +390,8 @@ class ROUTER {
      * @param query
      * @return {Promise}
      */
-    push ({path = '', query = {}}) {
+    push () {
+        let {path, query} = arguments[0];
         let _arg = arguments[0];
         let that = this, stringify = '';
         if (typeof _arg !== 'string') {
@@ -443,10 +445,12 @@ class ROUTER {
 
     /**
      * 关闭当前，打开到应用内的某个页面
-     * @param {*} path
-     * @param {*} query
+     * @param path
+     * @param query
+     * @returns {Promise<any>}
      */
-    replace ({path = '', query = {}}) {
+    replace (options) {
+        let {path, query} = options;
         let _arg = arguments[0];
         let that = this, stringify = '';
         if (typeof _arg !== 'string') {
@@ -488,12 +492,8 @@ class ROUTER {
                 },
                 fail (err) {
                     reject({
-                        msg: `
-                    失败$
-                    {
-                        err.errMsg
-                    }
-                    `, status: 0
+                        msg: `失败${err.errMsg}`,
+                        status: 0
                     })
                 },
                 complete () {
@@ -572,12 +572,14 @@ class ROUTER {
 
     /**
      * 跳tab页面
+     * @param options
      * @param path
      * @param query
      * @param redirectedFrom
      * @return {Promise}
      */
-    tab ({path = '', query = {}, redirectedFrom = undefined}) {
+    tab (options) {
+        let {path = '', query = {}, redirectedFrom = undefined} = options;
         let _arg = arguments[0];
         let that = this, stringify = '';
         if (typeof _arg !== 'string') {
@@ -707,17 +709,14 @@ class QueryString {
     }
 
     parse (url) {
-        if (!regExpUtil.isPath(url)) {
-            url = `${config.host}?${url}`
-        }
-        if (!this.queryString(url))return;
+        if (!this.queryString(url)) return;
         const reg = /([^\?\=\&]+)\=([^\?\=\&]*)/g;
         let obj = {};
         while (reg.exec(this.location.search)) {
             obj[RegExp.$1] = RegExp.$2;
         }
         this.location.query = obj;
-        return obj;
+        return this.location;
     }
 
     stringifyPrimitive (v) {
@@ -794,14 +793,22 @@ class QueryString {
     queryString (href) {
         href = decodeURIComponent(href);
         if (!href || href.length === 0) {
-            if (!location)
-                return;
+            if (!location) return;
             href = location.href;
         }
-        const url = href.split('#'),
-            href_search = url[0].split('?'),
-            protocol_host_pathname = href_search[0].split('://'),
-            host_pathname = protocol_host_pathname[1].split('/'),
+        const url = href.split('#');
+        let href_search = '';
+        if (/\?/.test(url[0])) {
+            href_search = url[0].split('?')
+        } else {
+            href_search = ['', url[0]]
+        }
+
+        let protocol_host_pathname = href_search[0].split('://');
+        if (!/^https?:\/\//ig.test(href_search[0])) {
+            protocol_host_pathname.unshift('')
+        }
+        const host_pathname = protocol_host_pathname[1].split('/'),
             hostname_post = host_pathname[0].split(':');
         this.location = {
             href: href,
@@ -876,7 +883,10 @@ function showToast (option) {
         title: option,
         icon: 'success',
         mask: true,
-        duration: 2000
+        duration: 2000,
+        fail (err) {
+            console.log(err, 'showToast');
+        }
     };
     if (jude.isObject(option)) {
         data.title = option.title;
@@ -889,7 +899,9 @@ function showToast (option) {
                 option.success();
             }, data.duration)
         } : null;
-        data.fail = option.fail;
+        data.fail = option.fail || function () {
+
+        };
         data.complete = option.complete;
     } else {
         if (arguments[1] && jude.isFunction(arguments[1])) {
@@ -946,6 +958,7 @@ function failToast (option) {
  * @param option
  */
 let timer_loading = null;
+
 function showLoading (option) {
     clearTimeout(timer_loading);
     let data = {
@@ -993,6 +1006,7 @@ function hideLoading (bol) {
 
 const hideToast = wx.hideToast;
 
+
 /**
  * 获取经纬度 （微信再封装）
  * @param type
@@ -1006,37 +1020,25 @@ function chooseLocation ({type = 'gcj02', success, fail, complete}) {
     return new Promise(function (resolve, reject) {
         wx.chooseLocation({
             type, //返回可以用于wx.openLocation的经纬度
-            success: function (res) {
-                resolve({info: res, status: 1, message: '成功'});
-                success && success(res)
+            success: res => {
+                success && success(res);
             },
-            fail(res){
-                console.log(res);
-                if (res.errMsg === 'chooseLocation:fail cancel') {
-                    resolve({info: res, status: 0, message: '取消'});
-                } else {
-                    reject({info: res, status: 0, message: '未获取权限'});
-                    wx.showModal({
-                        title: '',
-                        content: `"美美天成商家端"要获取你的地理位置，请前往我的 -> 关于我的 -> 权限 -> 使用我的地理位置开启权限`,
-                        cancelText: '取消',
-                        cancelColor: '#000000',
-                        confirmText: '去开启',
-                        confirmColor: '#3CC51F',
-                        success: function (res) {
-                            if (res.confirm) {
-                                that.$route.push('/page/public/pages/authorization/index')
-                            }
-                        }
-                    })
-                }
-                fail && fail(res);
+            fail: res => {
+                fail && fail(res)
             },
             complete: res => {
-                complete && complete(res);
+                Authorize.completeModal(res, '地理位置', function (data) {
+                    complete && complete(res);
+                    if (data.status === 1) {
+                        resolve(data);
+                    } else {
+                        reject(data);
+                    }
+                });
             }
         })
     }).catch(res => {
+
     })
 }
 
@@ -1045,33 +1047,26 @@ function chooseLocation ({type = 'gcj02', success, fail, complete}) {
  * @param type
  * @return {Promise}
  */
-function getLocation ({type = 'gcj02'} = {}) {
+function getLocation ({type = 'gcj02', success, fail, complete} = {}) {
     let that = this;
     return new Promise(function (resolve, reject) {
         wx.getLocation({
             type, //返回可以用于wx.openLocation的经纬度
-            success: function (res) {
-                resolve({info: res, status: 1, message: '成功'});
+            success: res => {
+                success && success(res);
             },
-            fail(res){
-                if (res.errMsg === 'chooseLocation:fail cancel') {
-                    reject({info: res, status: 0, message: '取消'});
-                } else {
-                    reject({info: res, status: 0, message: '未获取权限'});
-                    wx.showModal({
-                        title: '',
-                        content: `"美美天成商家端"要获取你的地理位置，请前往我的 > 关于我的 > 权限 > 使用我的地理位置开启权限`,
-                        cancelText: '取消',
-                        cancelColor: '#000000',
-                        confirmText: '去开启',
-                        confirmColor: '#3CC51F',
-                        success: function (res) {
-                            if (res.confirm) {
-                                that.$route.push('/page/public/pages/authorization/index')
-                            }
-                        }
-                    })
-                }
+            fail: res => {
+                fail && fail(res)
+            },
+            complete: res => {
+                Authorize.completeModal(res, '地理位置', function (data) {
+                    complete && complete(res);
+                    if (data.status === 1) {
+                        resolve(data);
+                    } else {
+                        reject(data);
+                    }
+                });
             }
         })
     }).catch(res => {
@@ -1087,37 +1082,26 @@ function getLocation ({type = 'gcj02'} = {}) {
  * @param complete
  */
 function saveImageToPhotosAlbum ({filePath, success, fail, complete}) {
-    let that = router.getCurrentPage();
+    let self = router.getCurrentPage();
+    let that = this;
     return new Promise((resolve, reject) => {
         wx.saveImageToPhotosAlbum({
             filePath,
             success: res => {
-                resolve({info: res, status: 1, message: '保存成功'});
                 success && success(res);
             },
             fail: res => {
-                if (res.errMsg === 'saveImageToPhotosAlbum:fail cancel') {
-                    resolve({info: res, status: 0, message: '取消保存'});
-                } else {
-                    reject({info: res, status: 0, message: '未获取权限'});
-                    wx.showModal({
-                        title: '',
-                        content: `"美美天成商家端"要保存图片或视频到你的相册，请前往我的 > 关于我的 > 权限 > 保存到相册开启权限`,
-                        cancelText: '取消',
-                        cancelColor: '#000000',
-                        confirmText: '去开启',
-                        confirmColor: '#3CC51F',
-                        success: function (res) {
-                            if (res.confirm) {
-                                that.$route.push('/page/public/pages/authorization/index')
-                            }
-                        }
-                    })
-                }
-                fail && fail(res);
+                fail && fail(res)
             },
             complete: res => {
-                complete && complete(res);
+                Authorize.completeModal(res, '相册', function (data) {
+                    complete && complete(res);
+                    if (data.status === 1) {
+                        resolve(data);
+                    } else {
+                        reject(data);
+                    }
+                });
             }
         });
     }).catch(res => {
@@ -1125,21 +1109,149 @@ function saveImageToPhotosAlbum ({filePath, success, fail, complete}) {
     })
 }
 
+// 状态表
+class Status {
+    constructor () {
+
+    }
+
+    static OK = 1;
+    static NO = 0; //失败
+    static STATUS_CANCEL = 40101; //用户取消
+    static STATUS_AUTH_DENY = 40103; //权限不足
+    static STATUS_USER_DENY = 40104; //用户不允许
+}
+
+/**
+ * 权限弹窗
+ */
+class Authorize extends Status {
+    constructor () {
+        super()
+    }
+
+    static noop () {
+    }
+
+    static authList = {
+        ['scope.userLocation']: '地理位置',
+        ['scope.userInfo']: '用户信息',
+        ['scope.address']: '通讯地址',
+        ['scope.invoiceTitle']: '发票抬头',
+        ['scope.invoice']: '获取发票',
+        ['scope.werun']: '微信运动步数',
+        ['scope.record']: '录音功能',
+        ['scope.writePhotosAlbum']: '保存到相册',
+        ['scope.camera']: '摄像头',
+    };
+
+    static mapKeys (source, target, map) {
+        Object.keys(map).forEach(function (key) {
+            if (source[key]) {
+                target[map[key]] = source[key];
+            }
+        });
+    }
+
+    static showModal (options, type, success, fail, complete) {
+        let that = this;
+        for (let val of arguments) {
+            if (jude.isString(val)) {
+                options = type;
+                type = val;
+            } else if (jude.isEmptyObject(val)) {
+                type = options;
+                options = val;
+            }
+        }
+        if (jude.isString(options)) {
+            type = options;
+            options = type;
+        }
+        const opts = jude.isEmptyObject(options) ? {success, fail, complete, ...options} : {success, fail, complete};
+        let {title, content} = opts;
+        if (type && /^(scope).[a-z]+$/i.test(type)) {
+            type = 'scope.' + type.toLowerCase()
+        } else if (type) {
+            let fIndex = Object.values(this.authList).findIndex((n) => {
+                return new RegExp(type, 'ig').test(n)
+            })
+            if (fIndex > -1) {
+                type = Object.keys(this.authList)[fIndex]
+            } else {
+                type = null
+            }
+        } else {
+            type = null;
+        }
+        if (!content && (!type || !this.authList[type])) return;
+        content = `美美天成 需要${content || `获取你的${this.authList[type]}权限`}，或者前往我的 → 关于我的 → 权限 → 开启${content ? '相关' : this.authList[type]}权限`;
+        wx.showModal({
+            title: title || '',
+            content: content,
+            cancelText: '取消',
+            cancelColor: '#000000',
+            confirmText: '去开启',
+            confirmColor: '#3CC51F',
+            success: function (res) {
+                if (res.confirm) {
+                    wx.openSetting({
+                        success: (res) => {
+                            if (type) {
+                                if (res.authSetting[type]) {
+                                    showToast('授权成功');
+                                } else {
+                                    failToast('授权失败');
+                                }
+                            }
+                            opts.success && opts.success(res)
+                        },
+                        fail: (err) => {
+                            console.log(err);
+                            router.push('/page/public/pages/authorization/index');
+                            opts.fail && opts.fail(err)
+                        }
+                    })
+                } else {
+                    opts.fail && opts.fail(res)
+                }
+            },
+            fail: opts.fail,
+            complete: opts.complete
+        })
+    }
+
+    static completeModal (res, type, callback = this.noop) {
+        if (res.errMsg.indexOf('fail cancel') > -1) {
+            callback({info: res, status: this.STATUS_CANCEL, message: '取消'});
+        } else if (res.errMsg.indexOf('ok') > -1) {
+            callback({info: res, status: this.OK, message: '成功'});
+        } else if (res.errMsg.indexOf('fail auth deny') > -1) {
+            callback({info: res, status: this.STATUS_AUTH_DENY, message: '未获取权限'});
+            this.showModal(type);
+        } else if (res.errMsg.indexOf('fail user deny') > -1) {
+            failToast('用户不允许');
+            callback({info: res, status: this.STATUS_USER_DENY, message: '用户不允许'});
+        } else {
+            callback({info: res, status: this.NO, message: '失败'});
+        }
+    }
+}
+
+
 function login (bol) {
     return new Promise((resolve, reject) => {
-        function login () {
-            wx.login({
-                success (res) {
-                    resolve(res)
-                },
-                fail () {
-                    reject()
-                }
-            })
+        const options = {
+            timeout: 3000,
+            success (res) {
+                resolve(res)
+            },
+            fail () {
+                reject()
+            }
         }
-
         if (bol) {
-            login();
+            wx.login(options);
         } else {
             wx.checkSession({
                 success: function () {
@@ -1148,7 +1260,7 @@ function login (bol) {
                 },
                 fail: function () {
                     // session_key 已经失效，需要重新执行登录流程
-                    login()
+                    wx.login(options);
                 }
             });
         }
@@ -1158,14 +1270,20 @@ function login (bol) {
 /**
  * 判断是否登入
  * @param callback
+ * @param bol
  */
-function hasLogin (callback = () => {
-}) {
+function hasLogin (callback, bol) {
+    let _arg = arguments;
+    if (jude.isBoolean(_arg[0])) {
+        bol = _arg[0];
+        callback = null;
+    }
     let status = wx.getStorageSync('_loginStatus_') || 0;
+    if (bol) return status;
     if (status > 0) {
         callback && callback()
     } else {
-        router.push("/page/userLogin/pages/getUserInfo/index");
+        router.push("/page/login/index");
     }
 }
 
@@ -1337,7 +1455,12 @@ function go (a, options = {}) {
     }
 }
 
-
+/**
+ * 添加图片全链接
+ * @param url
+ * @param imgw
+ * @returns {*}
+ */
 function absUrl (url, imgw) {
     if (url) {
         var reg = /^https?:\/\//ig;
@@ -1528,7 +1651,7 @@ function getCity ({title = '深圳市', id = 1} = {}) {
             if (title) {
                 title = title.replace(/市$/, '');
                 let reg = new RegExp(title);
-                if (reg.test(v.title))return true;
+                if (reg.test(v.title)) return true;
             } else if (id && +v.id === id) {
                 return true;
             }
@@ -1648,22 +1771,11 @@ class Countdown {
         this.startUp(that);
         if (this.module) {
             that.setData({
-                [`
-                    ${this.module}
-                    Data.azm_$
-                    {
-                        this.text
-                    }
-                    `]: this
+                [`${this.module}Data.azm_${this.text}`]: this
             })
         } else {
             that.setData({
-                [`
-                    azm_$
-                    {
-                        this.text
-                    }
-                    `]: this
+                [`azm_${this.text}`]: this
             })
         }
     }
@@ -1680,46 +1792,14 @@ class Countdown {
         _this.clear();
         if (this.module) {
             that.setData({
-                [`
-                    ${this.module}
-                    Data.azm_$
-                    {
-                        this.text
-                    }
-                    `]: this,
-                [`
-                    ${this.module}
-                    Data.azm_$
-                    {
-                        this.text
-                    }
-                .
-                    countdownTime`]: countdownTime,
-                [`
-                    ${this.module}
-                    Data.azm_$
-                    {
-                        this.text
-                    }
-                .
-                    time`]: _this.time,
+                [`${this.module}Data.azm_${this.text}`]: this,
+                [`${this.module} Data.azm_${this.text}.countdownTime`]: countdownTime,
+                [`${this.module}Data.azm_${this.text}.time`]: _this.time,
             })
         } else {
             that.setData({
-                [`
-                    azm_$
-                    {
-                        _this.text
-                    }
-                .
-                    countdownTime`]: countdownTime,
-                [`
-                    azm_$
-                    {
-                        _this.text
-                    }
-                .
-                    time`]: _this.time,
+                [`azm_${_this.text}.countdownTime`]: countdownTime,
+                [`azm_${_this.text}.time`]: _this.time,
             });
         }
         if (_this.time <= 0) {
@@ -1829,67 +1909,59 @@ class LogManager {
  * 更新
  */
 class updateManager {
-    constructor () {
-        this.flag = wx.getUpdateManager ? true : false;
-        if (this.flag) {
-            this.updateManager = wx.getUpdateManager()
+    constructor (options) {
+        let that = this;
+        console.log(updateManager.self, "updateManager监听更新");
+        let arr = ['onCheckForUpdate', 'onUpdateFailed', 'onUpdateFailed'];
+        if (updateManager.self) {
+            arr.forEach(function (value) {
+                updateManager.self[value] = function () {
+                    that[value] && that[value].apply(that, arguments);
+                    options[value] && options[value](arguments);
+                }
+            })
         }
-        console.log(this.flag, "updateManager监听更新");
     }
 
-    onALL () {
-        this.onCheckForUpdate();
-        this.onUpdateFailed();
-        this.onUpdateFailed();
-    }
+    static self = wx.getUpdateManager ? wx.getUpdateManager() : null;
+
 
     /**
      * 请求完新版本信息的回调
      */
     onCheckForUpdate () {
-        if (this.flag) {
-            this.updateManager.onCheckForUpdate(function (res) {
-                console.log(res.hasUpdate, 'onCheckForUpdate监听更新')
-            })
-        }
+        console.log(res.hasUpdate, 'onCheckForUpdate监听更新')
     }
 
     onUpdateFailed () {
         let that = this;
-        if (this.flag) {
-            this.updateManager.onUpdateFailed(function (res) {
-                wx.showModal({
-                    title: '更新提示',
-                    content: '新版本已经准备好，是否重启应用？',
-                    success: function (res) {
-                        if (res.confirm) {
-                            // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
-                            that.updateManager.applyUpdate()
-                        }
-                    }
-                })
-            })
-        }
+        const self = updateManager.self;
+        wx.showModal({
+            title: '更新提示',
+            content: '新版本已经准备好，是否重启应用？',
+            success: function (res) {
+                if (res.confirm) {
+                    // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+                    self.applyUpdate()
+                }
+            }
+        })
     }
 
     onUpdateFailed (challback) {
         let that = this;
-        if (this.flag) {
-            this.updateManager.onUpdateFailed(function () {
-                // 新的版本下载失败
-                wx.showModal({
-                    title: '更新提示',
-                    content: '版本下载失败，是否重启应用？',
-                    success: function (res) {
-                        if (res.confirm) {
-                            // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
-                            that.updateManager.applyUpdate()
-                        }
-                    }
-                })
-            })
-        }
-
+        const self = updateManager.self;
+        // 新的版本下载失败
+        wx.showModal({
+            title: '更新提示',
+            content: '版本下载失败，是否重启应用？',
+            success: function (res) {
+                if (res.confirm) {
+                    // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+                    self.applyUpdate()
+                }
+            }
+        })
     }
 }
 
@@ -1919,12 +1991,99 @@ function compareVersion (v1, v2) {
     return 0
 }
 
+function getWebViewPath (path = 'merchanth5') {
+    if (/^https:\/\/app.mmtcapp.com$/ig.test(config.webViewUrl)) {
+        return `${config.webViewUrl}/${path}/?__wxjs_environment=miniprogram&`;
+    } else {
+        return config.webViewUrl + '/?__wxjs_environment=miniprogram&';
+    }
+}
+
+/****************************时间类start********************************/
+const DateUtilUnit = function () {
+    let obj = {
+        ms: 1,
+        s: 1000
+    }
+    obj.m = 60 * obj.s
+    obj.h = 60 * obj.m
+    obj.d = 60 * obj.h
+    return obj;
+}
+
+class DateUtil extends Date {
+    constructor (...args) {
+        super(...args)
+    }
+
+    static Unit = {...DateUtilUnit()};
+
+    static getTime (time = '5m') {
+        return new Date().getTime() + DateUtil.getTimeNumber(...arguments);
+    }
+
+    static getTimeNumber (time = '5m') {
+        let str = time.replace(/^\d{0,}.?\d{1,}([s|m|h|d|ms])$/, '$1');
+        let unitTime = DateUtil.Unit[str];
+        if (!unitTime) return 0;
+        return parseFloat(time) * unitTime;
+    }
+}
+
+/****************************时间类end********************************/
+
+/* options的默认值
+ *  表示首次调用返回值方法时，会马上调用func；否则仅会记录当前时刻，当第二次调用的时间间隔超过wait时，才调用func。
+ *  options.leading = true;
+ * 表示当调用方法时，未到达wait指定的时间间隔，则启动计时器延迟调用func函数，若后续在既未达到wait指定的时间间隔和func函数又未被调用的情况下调用返回值方法，则被调用请求将被丢弃。
+ *  options.trailing = true;
+ * 注意：当options.trailing = false时，效果与上面的简单实现效果相同
+ */
+/**
+ * 节流
+ * @param func
+ * @param wait
+ * @param options
+ * @returns {function(): *}
+ */
+const throttle = function (func, wait, options) {
+
+};
+
+/**
+ * 对象大写转小写
+ * @param object
+ * @param func
+ * @param isKey
+ * @constructor
+ */
+const ObjToLowerCase = (object, func, {isKey = true} = {}) => {
+    const self = object;
+    let obj = {};
+    try {
+        Object.keys(self).map((key, index) => {
+            if (func) {
+                obj[key.toLowerCase()] = func({value: self[key], key, index})
+            } else if (isKey) {
+                obj[key.toLowerCase()] = self[key];
+            } else {
+                obj[key] = typeof self[key] === 'string' ? self[key].toLowerCase() : self[key];
+            }
+        });
+    } catch (e) {
+
+    }
+    return obj
+};
+
+
 module.exports = {
     formatTime: formatTime,
     regeneratorRuntime,
     getSessionId,
     removeSessionId,
     router,
+    ROUTER,
     jude,
     queryString,
     querySelector,
@@ -1959,5 +2118,11 @@ module.exports = {
     MAP,
     LogManager: new LogManager(),
     dateCalendar,
-    updateManager
+    updateManager,
+    getWebViewPath,
+    date: DateUtil,
+    throttle,
+    ObjToLowerCase,
+    Authorize,
+    Status
 };

@@ -105,7 +105,7 @@ c.ajax = (opts) => {
             c.rmUserInfo();
             if (c.getCurrentPage().route != 'page/tabBar/mine/index') {
                 wx.navigateTo({
-                    url: '/page/userLogin/pages/getUserInfo/index',
+                    url: '/page/login/index',
                 });
                 return;
             }
@@ -272,7 +272,7 @@ c.hasLogin = function (callback) { // 异步
         callback && callback();
     } else {
         wx.navigateTo({
-            url: '/page/userLogin/pages/getUserInfo/index',
+            url: '/page/login/index',
         });
     }
 };

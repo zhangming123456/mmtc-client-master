@@ -1,0 +1,80 @@
+page {
+    background-color: #f4f4f4;
+}
+
+.binding {
+    padding: 0 94rpx;
+    padding-top: 87rpx;
+}
+
+.bindingTitle {
+    font-size: 37rpx;
+    font-weight: 500;
+    margin-bottom: 40rpx;
+    color: #000000;
+}
+
+.bindingPhone {
+    display: flex;
+    border-bottom: 1px solid #DDDDDD;
+    align-items: center;
+    justify-content: space-between;
+    height: 90rpx;
+}
+
+
+.phoneBox {
+    display: flex;
+    align-items: center;
+}
+
+.phoneBox image {
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 30rpx;
+}
+
+.phoneBox input {
+    font-size: 26rpx;
+}
+
+
+.code {
+    font-size: 26rpx;
+    color: #333333;
+    padding: 0;
+}
+
+.bindingButton {
+    background-image: linear-gradient(-227deg, #5EF56C 0%, #07C2B7 100%);
+    border-radius: 45rpx;
+    font-size: 32rpx;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 90rpx;
+    height: 90rpx;
+    width: 100%;
+    margin-top: 60rpx;
+}
+
+
+.bindingButtonTwo {
+    background-image: linear-gradient(-227deg, #CACACA 0%, #F0F0F0 100%);
+    border-radius: 45rpx;
+    font-size: 32rpx;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 90rpx;
+    height: 90rpx;
+    width: 100%;
+    margin-top: 60rpx;
+}
+
+.support {
+    position: absolute;
+    font-size: 26rpx;
+    color: #999999;
+    bottom: 50rpx;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}

@@ -1,4 +1,86 @@
 <view>
+    <view class="orderItem">
+        <image class="itemPicture" mode="aspectFill" src="https://app.mmtcapp.com/mmtc/imgs/new_image/bill-template.png"></image>
+        <view class="itemContent">
+            <view class="itemTitle">
+                <view>{{billDetail.shop_name}}</view>
+                <view>{{billDetail.status_c}}</view>
+            </view>
+            <view class="itemTime">下单时间：{{billDetail.create_time }}</view>
+
+            <view class="itemPirce">
+                <view class="pirce">
+                    <span><i>¥</i>{{billDetail.total}}</span>
+                    <text>￥{{billDetail.market_price }}</text>
+                </view>
+                <view class="itemButton" bindtap="gotoBillDetail">套卡详情</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="orderMessage">
+        <view class="orderTitle">订单信息</view>
+        <view class="orderContent">
+            <view class="orderList">
+                <view>订单原价</view>
+                <view>¥{{billDetail.total}}</view>
+            </view>
+            <view class="orderList">
+                <view>套卡优惠</view>
+                <view>-¥{{billDetail.discount_money }}</view>
+            </view>
+            <view class="orderList">
+                <view style="font-weight: 500;">实付款</view>
+                <view style="color: #F74884;">¥{{billDetail.total}}</view>
+            </view>
+            <view class="wire"></view>
+            <view class="orderList">
+                <view>订单号：{{billDetail.order_no}}</view>
+                <view class="copy" bindtap="copyBtn">复制</view>
+            </view>
+            <view class="orderList">
+                <view>下单时间： {{billDetail.create_time}}</view>
+            </view>
+            <view class="orderList">
+                <view>下单手机： {{billDetail.telephone}}</view>
+            </view>
+            <view class="orderList">
+                <view>有效期至：{{billDetail.end_day }}</view>
+            </view>
+            <view class="orderList">
+                <view>核销次数：{{billDetail.use_count }}</view>
+            </view>
+        </view>
+    </view>
+
+
+    <view class="meOrder" bindtap="gotoShop">
+        <view class="orderTitle2">店铺信息</view>
+        <view class="orderMore">
+            <view>进入店铺</view>
+            <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/icon-arrows.png"></image>
+        </view>
+    </view>
+
+    <view class="shopLocation">
+        <view class="location">
+            <view class="place">
+                <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/pay-location.png"></image>
+                <text>{{billDetail.shop_find.shop_name}}{{billDetail.shop_find.distance}}</text>
+            </view>
+            <view class="site">{{billDetail.shop_find.address}}</view>
+        </view>
+
+        <view class="locationPhone" bindtap='tel'>
+            <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/pay-phone.png"></image>
+        </view>
+    </view>
+</view>
+
+
+
+
+<!-- <view>
     <view class="h20"></view>
     <view class="t-shopName" bindtap="gotoShop">
         <view class="t-name">
@@ -15,7 +97,7 @@
                 <view>套卡</view>
             </view>
             <view class="t-cartPrice">
-                <text>￥{{billDetail.price}}</text>
+                <text>￥{{billDetail.total}}</text>
                 <text>￥{{billDetail.market_price }}</text>
             </view>
             <view class="t-cardTime">下单时间：{{billDetail.create_time }}</view>
@@ -51,10 +133,10 @@
 
 
     <view class="t-button">
-        <!-- 可退款 -->
+
         <view class="t-refund" wx:if="{{billDetail.is_refund ==0}}" bindtap="makeCall">退款</view>
-        <!-- 不可退款 -->
+
         <view class="t-refund2" wx:if="{{billDetail.is_refund==1}}">退款</view>
         <view bindtap="gotoMycard">前往卡包</view>
     </view>
-</view>
+</view> -->

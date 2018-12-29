@@ -1,34 +1,36 @@
-<view class="p1 border-b">
+<view class="p1 ">
     <view class='flex'>
         <view class='search flex-con rel'>
-            <image src='https://app.mmtcapp.com/mmtc/imgs/search@2x.png' style='width: 24rpx;height: 24rpx'
-                   class='search-img'></image>
-            <input class='search-input' focus="true" confirm-type="search" bindconfirm="doSearch"
-                   placeholder='找服务 找店铺 找案例'/>
+            <image src='https://app.mmtcapp.com/mmtc/imgs/new_image/search.png' style='width: 36rpx;height: 36rpx'
+                class='search-img'></image>
+            <input class='search-input' confirm-type='search' bindconfirm="cancelSearch" focus="true" value='{{name}}'
+                bindinput='formName' value='' name='name' placeholder='搜索项目' />
         </view>
-        <view class='cancel-text' bindtap='cancelSearch'>取消</view>
+        <view class='cancel-text' bindtap='cancelSearch'>确定</view>
     </view>
 </view>
 
-<view class="p2 border-b" wx:if="{{histories && histories.length}}">
-    <view class='flex'>
-        <view class='flex-con title'>历史记录:</view>
-        <view class='clearbtn' bindtap='clearHistory'>清除</view>
-    </view>
-    <view class='tags'>
-        <view class='tag' wx:key="index" bindtap='showResult' data-item="{{item}}" wx:for="{{histories}}">
-            <text>{{item.title}}</text>
-        </view>
-    </view>
-</view>
+<view class="padding">
+    <block wx:if="{{item.rows.length>0}}">
+        <view bindtap="gotoShopDetails" data-item="{{item}}" wx:for="{{item.rows}}" wx:key="{{index}}" class="shopDetail-two">
+            <image class="shopPicture-two" mode="aspectFill" src="{{imageUrl+item.cover}}"></image>
+            <view class="groupSign" wx:if="{{item.group_num}}">{{item.group_num}}人团</view>
+            <view class="shopName">
+                <view class="shopTitle">{{item.title}}</view>
+                <view class="shopFlex">
+                    <view class="shopPrice2">
+                        <span class="rulingPrice2"><i>¥</i>{{item.price}}</span>
+                        <span class="originalPrice2">¥{{item.market_price}}</span>
+                    </view>
 
-<view class="p2">
-    <view class='flex'>
-        <view class='flex-con title'>大家在搜：</view>
-    </view>
-    <view class='tags'>
-        <view class='tag' wx:key="{{index}}" bindtap='showResult' data-item="{{item}}" wx:for="{{searches}}">
-            <text>{{item.title}}</text>
+                </view>
+            </view>
         </view>
-    </view>
+    </block>
+    <block wx:if="{{item.rows.length===0}}">
+        <view class="noData">
+            <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/noData.png"></image>
+            <view>没找到任何数据</view>
+        </view>
+    </block>
 </view>

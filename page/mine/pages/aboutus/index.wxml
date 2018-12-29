@@ -8,8 +8,10 @@
         <image class="azm-cell-icon" slot="icon" src="https://app.mmtcapp.com/mmtc/imgs/agreement@2x.png"
                mode="widthFix"></image>
     </i-cell>
-    <i-cell title="分享" is-link data-url="/pages/activity/index" catchtap="$router" data-is-verify>
+    <!-- <i-cell title="分享" is-link data-url="/page/activity/pages/newUser/index" catchtap="$router" data-is-verify>
         <image class="azm-cell-icon" slot="icon" src="https://app.mmtcapp.com/mmtc/imgs/shared.png"
                mode="widthFix"></image>
-    </i-cell>
+    </i-cell> -->
 </i-cell-group>
+
+<view class="support">Copyright © 2017 美美天成技术支持</view>

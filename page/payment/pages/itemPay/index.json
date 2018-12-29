@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "确认订单",
+  "usingComponents": {
+    "i-message": "../../../../lib/iview/message/index",
+    "i-toast": "../../../../lib/iview/toast/index",
+    "wxc-popup": "../../../../lib/minui/wxc-popup/dist/index",
+    "wxc-counter": "../../../../lib/minui/wxc-counter/dist/index",
+    "azm-login": "../../../../lib/components/azm-login/index"
+  }
+}

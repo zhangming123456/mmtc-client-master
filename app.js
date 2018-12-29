@@ -2,10 +2,14 @@
 const config = require('./utils/config'),
     util = require('./utils/azm/util');
 const util2 = require('./utils/util');
-let isUpdate = true;
-let isLogin = true;
 let JudgeLogin = null;
+
 App({
+    to_path: '',
+    from_path: '',
+    isUpdate: true,
+    isLogin: true,
+    _t: 'miniprogramMmtc',
     globalData: {
         userInfo: null,
         shop: {},
@@ -22,29 +26,32 @@ App({
      */
     onLaunch: function (options) {
         console.warn('版本号：' + config.version);
-        console.log('App Launch', options)
+        console.log('App Launch', options);
+        new util2.updateManager(); //更新管理器
     },
     /**
      * 生命周期函数--监听小程序显示
      * @param options
      */
     onShow: function (options) {
-        console.warn('App Show', options, isUpdate, isLogin);
-        if (isUpdate) {
-            new util2.updateManager().onALL();
-            isUpdate = false;
-        }
+        console.warn('App Show', options, this.isUpdate, this.isLogin);
+        // debugger
+        // if (isUpdate || (UpdateExpired && UpdateExpired > +new Date())) {
+        //     UpdateExpired = util2.date.getTime('50s');
+        //     new util2.updateManager().onALL();
+        //     isUpdate = false;
+        // }
         this.judgeLogin();
     },
     /**
      * 判断登入状态
      * @return {Promise}
      */
-    judgeLogin(bol){
+    judgeLogin (bol) {
         let that = this,
             city = this.globalData.city,
             isLoginStatus = wx.getStorageSync('_loginStatus_') || 0;
-        if (!JudgeLogin || isLogin || bol) {
+        if (!JudgeLogin || this.isLogin || bol) {
             JudgeLogin = new Promise(resolve => {
                 if (city && city.id) {
 
@@ -61,12 +68,13 @@ App({
                         "Cookie": cookie,
                         "X-Requested-With": 'XMLHttpRequest'
                     },
-                    data: {_f: 1, _c: city.id},
+                    data: {_f: 1, _c: city.id, _t: that._t},
                     success: function (res) {
                         try {
-                            if (res.statusCode !== 200)return;
-                            if (+res.data.status === 1) {
+                            if (res.statusCode !== 200) return;
+                            if (+res.data.status === 1 && res.data.info) {
                                 wx.setStorageSync("_loginStatus_", 1);
+                                wx.setStorageSync('_userInfo_', res.data.info.userInfo);
                             } else if (+res.data.status === 202) {
                                 wx.setStorageSync("_loginStatus_", 0);
                                 wx.removeStorageSync('_userInfo_');
@@ -76,16 +84,16 @@ App({
                             } else {
                                 wx.setStorageSync("_loginStatus_", 0);
                             }
-                            isLogin = false;
+                            that.isLogin = false;
                         } catch (err) {
                             wx.setStorageSync("_loginStatus_", 0);
                         }
                         resolve({status: wx.getStorageSync('_loginStatus_')})
                     },
-                    fail(){
+                    fail () {
                         resolve({status: isLoginStatus})
                     },
-                    complete(res){
+                    complete (res) {
                         console.log('/wx2/checkSession', "请求后", res.data);
                         wx.hideNavigationBarLoading();
                     }
@@ -99,9 +107,9 @@ App({
      * @param options
      */
     onHide: function (options) {
-        console.warn('App Hide', options, isUpdate, isLogin);
-        isUpdate = true;
-        isLogin = true;
+        console.warn('App Hide', options, this.isUpdate, this.isLogin);
+        this.isUpdate = true;
+        this.isLogin = true;
         if ('userInfo' === wx.getStorageSync('authorizeUserInfo')) {
             wx.setStorageSync('authorizeUserInfo', '');
         }
@@ -123,11 +131,8 @@ App({
         }
         let query = options.query;
         console.warn('不存在页面监听', options);
-        if (query.scene && /^shop_id:[0-9]+$/.test(query.scene)) {
-            let scene = query.scene.split(":");
-            if (scene[1]) {
-                util2.router.reLaunch({path: '/pages/onlineBuy/index', query: {shop_id: scene[1]}})
-            }
+        if (query) {
+            util2.router.reLaunch({path: '/page/payment/pages/payTheBill/index', query: {...query}})
         } else {
             util2.router.tab('/page/tabBar/home/index')
         }

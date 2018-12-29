@@ -5,7 +5,7 @@
 
 <view class='msgitem' hidden='{{!groupData||!groupData.msg}}'>
     <view class='flex'>
-        <image class='msgitem-avatar' src='{{c.absUrl(groupData.avatar,200)}}'></image>
+        <image class='msgitem-avatar' src='{{c.absUrl(groupData.avatar)}}'></image>
         <view class='flex-con'>{{groupData.msg}}</view>
     </view>
 </view>
@@ -69,16 +69,16 @@
     <view class='tip-list border-b border-t' bindtap='showMasker'>
         <view class='flex'>
             <view class='flex-con t-flex'>
-                <image class='realnote-icon' src='https://app.mmtcapp.com/mmtc/imgs/book.png'></image>
-                <text>真实日记</text>
+                <image class='realnote-icon' src='https://app.mmtcapp.com/mmtc/imgs/realnote.png'></image>
+                <text>真实案例</text>
             </view>
             <view class='flex-con t-flex'>
-                <image class="t-tui" src="https://app.mmtcapp.com/mmtc/imgs/tui.png"></image>
-                <text>随时退</text>
+                <image class="t-tui" src="https://app.mmtcapp.com/mmtc/imgs/reback.png"></image>
+                <text>价格透明</text>
             </view>
             <view class='flex-con t-flex'>
-                <image class='safe-icon' src='https://app.mmtcapp.com/mmtc/imgs/fanghu.png'></image>
-                <text>消费保障</text>
+                <image class='safe-icon' src='https://app.mmtcapp.com/mmtc/imgs/safe.png'></image>
+                <text>消费服务保障</text>
             </view>
             <view class='last-gt-col'>
                 <image class='gt-icon' src='https://app.mmtcapp.com/mmtc/imgs/gt@2x.png'></image>
@@ -106,10 +106,12 @@
             </view>
             <form bindsubmit='reportSubmit' report-submit="true">
                 <view class='group-buy-list border-b'>
-                    <view class='border-b flex' wx:for="{{c.split(groupData.rows)}}" wx:key="{{index}}">
+                    <view class='border-b flex' wx:for="{{c.split(groupData.rows)}}" wx:key="{{index}}"
+                          bindtap="toGroup"
+                          data-id="{{item.id}}">
                         <view>
                             <image class='member-avatar'
-                                   src='{{c.absUrl(item.avatar,120)||"https://app.mmtcapp.com/mmtc/imgs/default.png"}}'></image>
+                                   src='{{c.absUrl(item.avatar)||"https://app.mmtcapp.com/mmtc/imgs/default.png"}}'></image>
                         </view>
                         <view class='flex-con group-buy-name'>{{item.nickname}}</view>
                         <view>
@@ -169,11 +171,14 @@
         </view>
         <view class="t-technician-box">
             <scroll-view class="t-introBox" scroll-x class="t-scroll">
-                <view class="t-intro" wx:for='{{technicianData}}' wx:key="{{index}}">
+                <view class="t-intro" wx:for='{{technicianData}}' data-id="{{item.id}}" bindtap="gotoTechnicianDetail"
+                      wx:key="id">
                     <azm-image class="t-head" type="img" lazy-load mode="aspectFill" ratio="1" round
                                src="{{item.avatar}}"></azm-image>
                     <view class="t-name">{{item.username}}</view>
-                    <veiw class="t-occupation">{{item.type_name}}</veiw>
+                    <veiw class="t-occupation">
+                        <text>{{item.type_name}}</text>
+                    </veiw>
                 </view>
             </scroll-view>
         </view>
@@ -254,17 +259,18 @@
                     <view>图文详情</view>
                 </view>
                 <view class='item-content' wx:if="{{type == 0}}">
+                    <!--<rich-text nodes="{{ introStr }}"></rich-text>-->
                     <template is="wxParse" data="{{wxParseData:intro.nodes}}"/>
                 </view>
             </view>
             <!-- 使用商品 -->
             <swiper indicator-active-color="#ff7aa5" indicator-dots="true" class="t-useshop"
-                    wx:if="{{goods.item_brand&&goods.item_brand.length>0}}">
+                    wx:if="{{ goods.item_brand&&goods.item_brand.length>0 }}">
                 <view class="t-useText">使用商品</view>
                 <swiper-item class="t-shopContent" wx:for="{{c.item_brand_cf(goods.item_brand)}}" wx:key="{{i}}}"
-                             wx:for-item="v" wx:for-index='i'>
+                             wx:for-item="v" wx:for-index="i">
                     <view class="t-commodity" wx:for="{{v}}" wx:key="{{index}}">
-                        <image class="t-shopPhoto" mode="aspectFill" src="{{imageUrl + item.cover}}"></image>
+                        <image class="t-shopPhoto" mode="aspectFill" src="{{c.absUrl(item.cover)}}"></image>
                         <view class="fz28 t-shopName">{{item.title}}</view>
                         <text class="fz24 text666 t-shopTrademark">品牌：{{item.brand}}</text>
                     </view>
@@ -321,14 +327,14 @@
             <viwe>
                 <view mode="aspectFill" class="t-diary" wx:key="{{index}}" wx:for="{{cases}}">
                     <image class="t-default"
-                           src="{{c.absUrl(item.avatar,100) || 'https://app.mmtcapp.com/mmtc/imgs/default.png '}}"></image>
+                           src="{{c.absUrl(item.avatar) || 'https://app.mmtcapp.com/mmtc/imgs/default.png '}}"></image>
                     <view class="t-nameDiary">{{item.nickname}}</view>
                     <view class="t-timeDiary">{{item.create_time}}</view>
                     <!-- <view class="t-attention">+ 关注</view> -->
                     <navigator class="t-diaryPhoto" url="/pages/cases/detail?id={{item.id}}" hover-class="none">
                         <block wx:if="{{item.img_src}}">
                             <view class="pic-list{{c.picCount(item.img_src)}}">
-                                <image mode="aspectFill" src='{{c.absUrl(pic,400)}}'
+                                <image mode="aspectFill" src='{{c.absUrl(pic)}}'
                                        wx:for="{{c.str2arr(item.img_src)}}" wx:key="{{index}}"
                                        wx:for-item="pic"></image>
                             </view>
@@ -365,7 +371,7 @@
     <!-- 广告 -->
     <view class="t-Journal" wx:if="{{currentTab !== 2}}">
         <image bindtap='showBannerLink' mode="aspectFill" data-link="{{goods.banner.link}}" class="t-journal"
-               src="{{imageUrl + goods.banner.cover}}"></image>
+               src="{{c.absUrl(goods.banner.cover)}}"></image>
     </view>
 
     <!-- 其他推荐 -->
@@ -400,7 +406,7 @@
                 </block>
             </view>
         </block>
-        <wxc-loadmore is-end="{{noMore}}" icon="随机/loading"></wxc-loadmore>
+        <wxc-loadmore is-end="{{true}}" text="没有更多"></wxc-loadmore>
     </view>
 </scroll-view>
 
@@ -502,9 +508,9 @@
                     <image class='realnote-icon' src='https://app.mmtcapp.com/mmtc/imgs/realnote.png'></image>
                 </view>
                 <view class='flex-con border-b'>
-                    <view class='tip-row-title'>真实日记</view>
+                    <view class='tip-row-title'>真实案例</view>
                     <view class='tip-row-content'>
-                        商家承诺项目案例由用户真实分享
+                        商家承诺项目案例由用户真实分享。
                     </view>
                 </view>
             </view>
@@ -513,8 +519,8 @@
                     <image class='reback-icon' src='https://app.mmtcapp.com/mmtc/imgs/reback.png'></image>
                 </view>
                 <view class='flex-con border-b'>
-                    <view class='tip-row-title'>随时退</view>
-                    <view class='tip-row-content'>未消费、过期未消费承诺过期退款</view>
+                    <view class='tip-row-title'>价格透明</view>
+                    <view class='tip-row-content'>线上价格和实体价格一致或更为优惠。</view>
                 </view>
             </view>
             <view class='tip-row flex flex-stretch'>
@@ -522,8 +528,8 @@
                     <image class='safe-icon ' src='https://app.mmtcapp.com/mmtc/imgs/safe.png'></image>
                 </view>
                 <view class='flex-con border-b'>
-                    <view class='tip-row-title'>消费保障</view>
-                    <view class='tip-row-content'>项目服务与价格描述如实承诺服务保障</view>
+                    <view class='tip-row-title'>消费服务保障</view>
+                    <view class='tip-row-content'>项目服务的描述，及服务质量如实承诺。</view>
                 </view>
             </view>
         </view>
@@ -541,10 +547,11 @@
             <scroll-view scroll-y style='height:640rpx;'>
                 <form bindsubmit='reportSubmit' report-submit="true">
                     <view class='group-buy-list border-b'>
-                        <view class='border-b flex' wx:for="{{groupData.rows}}" wx:key="{{index}}">
+                        <view class='border-b flex' wx:for="{{groupData.rows}}" wx:key="{{index}}" bindtap="toGroup"
+                              data-id="{{item.id}}">
                             <view>
                                 <image class='member-avatar'
-                                       src='{{c.absUrl(item.avatar,120)|| "https://app.mmtcapp.com/mmtc/imgs/default.png"}}'></image>
+                                       src='{{c.absUrl(item.avatar)|| "https://app.mmtcapp.com/mmtc/imgs/default.png"}}'></image>
                             </view>
                             <view class='flex-con text-left pl20'>
                                 <view class='group-buy-num'>
@@ -555,7 +562,7 @@
                                 </view>
                             </view>
                             <view>
-                                <button data-id="{{item.id}}" form-type='submit' bindtap='toGo' data-type="group_buy"
+                                <button data-id="{{item.id}}" form-type='submit' catchtap='toGo' data-type="group_buy"
                                         class='join-btn'>参团
                                 </button>
                             </view>
@@ -577,7 +584,7 @@
             <view class="t-discountTitle">{{shop.shop_name}}</view>
             <scroll-view scroll-y="true" class="t-coupons">
                 <view class="t-discountBack" wx:for="{{couponData}}" wx:key="{{index}}"
-                      style="background: url('{{imageUrl + item.cover}}');background-size: 680rpx 240rpx;">
+                      style="background: url('{{c.absUrl(item.cover)}}');background-size: 680rpx 240rpx;">
                     <view class="t-discountPrize">
                         <text class="t-symbol">¥</text>
                         <text class="t-money">{{item.price}}</text>

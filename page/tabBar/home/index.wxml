@@ -1,208 +1,292 @@
-<wxs src="../../../utils/common.wxs" module="c"/>
-<import src="../../../wxParse/wxParse.wxml"/>
-<i-toast id="toast"/>
-<i-message id="message"/>
+<wxs src="../../../utils/common.wxs" module="c" />
+<import src="../../../wxParse/wxParse.wxml" />
+<i-toast id="toast" />
+<i-message id="message" />
 
 <view id="azm-index">
-    <view class="p1">
-        <view class="flexBox">
-            <view class='flexBox-item'>
-                <!--地理位置-->
-                <azm-location style="display: none;" bindazmtap="azmLocationTap" position="pr"
-                              bindcallback="getLocationCallback"></azm-location>
-                <view class="azm-city azm-ellipsis" catchtap="doCitySelect">
-                    <text class="iconfont icon-address azm-icon"></text>
-                    <text>{{cityName}}</text>
-                    <text class="iconfont icon-jiantou azm-icon right"></text>
-                </view>
-            </view>
-            <view class="flexBox-item" style="flex: 3;box-sizing: border-box;padding-left: 20rpx;">
-                <view class='azm-search' bindtap='doSearch'>
-                    <image src='https://app.mmtcapp.com/mmtc/imgs/search@2x.png'
-                           style='width: 24rpx;	height: 24rpx'></image>
-                    <text>找店铺 找服务 找案例</text>
-                </view>
-            </view>
+    <!-- 顶部搜索 -->
+    <view class="searchBox">
+        <view class="location" catchtap="gotoBusiness">
+            <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/location.png"></image>
+            <text>{{shopInfo.shop.shop_name}}</text>
+        </view>
+        <view class="searchFarme" bindtap='doSearch'>
+            <image src='https://app.mmtcapp.com/mmtc/imgs/new_image/search.png'></image>
+            <text>搜索项目</text>
         </view>
     </view>
 
-    <swiper indicator-dots='true' class='banners' indicator-active-color='#ff538b' autoplay="true" circular="true">
-        <block wx:for="{{banners}}" wx:key="index">
+    <!-- 轮播图 -->
+    <swiper class="banners" autoplay="{{ true }}" circular="{{ true }}" wx:key="{{index}}" current="{{ current }}"
+        indicator-dots="{{ true }}">
+        <block wx:for="{{shopInfo.banner}}" wx:key="{{i}}">
             <swiper-item>
-                <image data-link="{{item.mini_link}}" data-index="{{index}}" src="{{c.absUrl(item.cover,750)}}"
-                       bindtap='showBannerLink' class="slide-image" mode="aspectFill"/>
+                <image class="slide-image" data-link="{{item.url}}" data-index="{{index}}" src="{{c.absUrl(item.cover)}}"
+                    bindtap='showBannerLink' mode="aspectFill" />
             </swiper-item>
         </block>
     </swiper>
 
     <!--九宫格-->
     <view class="azm-grid flexBox flexBox-start">
-        <navigator class="flexBox-item fb-6" hover-class='none' url='/pages/index/items?cid=4'>
-            <azm-image src="https://app.mmtcapp.com/mmtc/imgs/little/1@2x.png" class='area-icon'
-                       type="img" lazy-load="true" mode="aspectFill">
-            </azm-image>
-            <view class='text-center'>美容</view>
-        </navigator>
-        <navigator class="flexBox-item fb-6" hover-class='none' url='/pages/index/items?cid=13'>
-            <azm-image src="https://app.mmtcapp.com/mmtc/imgs/little/2@2x.png" class='area-icon'
-                       type="img" lazy-load="true" mode="aspectFill">
-            </azm-image>
-            <view class='text-center'>美甲</view>
-        </navigator>
-        <navigator class="flexBox-item fb-6" hover-class='none' url='/pages/index/items?cid=14'>
-            <image
-                    bindload='onLoadIcon' style="{{iconSize4}}" data-index="4"
-                    src='https://app.mmtcapp.com/mmtc/imgs/little/3@2x.png'
-                    class='area-icon'></image>
-            <view class='text-center'>
-                美睫
-            </view>
-        </navigator>
-        <navigator class="flexBox-item fb-6" hover-class='none' url='/pages/index/items?cid=16'>
-            <image bindload='onLoadIcon' style="{{iconSize5}}" data-index="5"
-                   src='https://app.mmtcapp.com/mmtc/imgs/little/4@2x.png' class='area-icon'></image>
-            <view class='text-center'>
-                化妆
-            </view>
-        </navigator>
-        <navigator class="flexBox-item fb-6" hover-class='none' url='/pages/index/items?cid=17'>
-            <image bindload='onLoadIcon' style="{{iconSize3}}" data-index="3"
-                   src='https://app.mmtcapp.com/mmtc/imgs/little/5@2x.png' class='area-icon'></image>
-            <view class='text-center'>
-                美发
-            </view>
-        </navigator>
-        <navigator class="flexBox-item fb-6" hover-class='none' url='/pages/index/items?cid=15'>
-            <image bindload='onLoadIcon' style="{{iconSize6}}" data-index="6"
-                   src='https://app.mmtcapp.com/mmtc/imgs/little/6@2x.png' class='area-icon'></image>
-            <view class='text-center'>
-                按摩护理
-            </view>
-        </navigator>
-        <navigator class="flexBox-item fb-6" hover-class='none' url='/pages/index/items?cid=18'>
-            <image bindload='onLoadIcon' style="{{iconSize8}}" data-index="7"
-                   src='https://app.mmtcapp.com/mmtc/imgs/little/7@2x.png' class='area-icon'></image>
-            <view class='text-center'>
-                纹绣
-            </view>
-        </navigator>
-        <navigator class="flexBox-item fb-6" hover-class='none' url='/pages/index/items'>
-            <image bindload='onLoadIcon' style="{{iconSize7}}" data-index="8"
-                   src='https://app.mmtcapp.com/mmtc/imgs/little/8@2x.png' class='area-icon'></image>
-            <view class='text-center'>
-                全部
-            </view>
-        </navigator>
-    </view>
-
-    <!--活动推广-->
-    <view class="weui-flex azm-promotion mTop16">
-        <navigator bindtap='showBannerLink' data-link="{{specialBanner[0].mini_link}}"
-                   class="weui-flex__item left azm-border_right_1px_f4f4f4">
-            <azm-image src="{{specialBanner[0].cover}}" lazy-load="true"
-                       define-image="http://app.mmtcapp.com/mmtc/imgs/promotion/promotion-1.png"
-                       mode="aspectFill"></azm-image>
-        </navigator>
-        <view class="weui-flex__item right azm-border_left_1px_f4f4f4">
-            <navigator bindtap='showBannerLink' data-link="{{specialBanner[1].mini_link}}"
-                       class="azm-border_bottom_1px_f4f4f4">
-                <azm-image src="{{specialBanner[1].cover}}" lazy-load="true"
-                           define-image="http://app.mmtcapp.com/mmtc/imgs/promotion/promotion-2.png"
-                           mode="aspectFill"></azm-image>
-            </navigator>
-            <navigator bindtap='showBannerLink' data-link="{{specialBanner[2].mini_link}}"
-                       class="azm-border_top_1px_f4f4f4">
-                <azm-image src="{{specialBanner[2].cover}}" lazy-load="true"
-                           define-image="http://app.mmtcapp.com/mmtc/imgs/promotion/promotion-3.png"
-                           mode="aspectFill"></azm-image>
-            </navigator>
+        <view class="flexBox-item" bindtap="gotoUrl" data-item="{{item}}" wx:for="{{shopInfo.icon_r}}" wx:key="index">
+            <image src="{{c.absUrl(item.cover)}}" class='area-icon' type="img" lazy-load="true" mode="aspectFill">
+            </image>
+            <view class='text-center'>{{item.title}}</view>
+        </view>
+        <view class="flexBox-item" bindtap="gotoProjects" data-item="{{item}}" wx:for="{{shopInfo.icon_c}}" wx:key="{{index}}">
+            <image src="{{c.absUrl(item.cover)}}" class='area-icon2' type="img" lazy-load="true" mode="aspectFill"></image>
+            <view class='text-center'>{{item.title}}</view>
         </view>
     </view>
-
-    <!--专题商品列表-->
-    <block wx:for="{{ tabListData }}" wx:key="{{index}}" wx:if="{{item.info && item.info.length>=3}}">
-        <view class="azm-row azm-daily_new mTop16">
-            <view class="h2 flexBox flexBox-start">
-                <view class="flexBox-item fb-18 left zan-ellipsis">
-                    <text class="title">{{item.title}}</text>
-                    <text wx:if="{{ item.str }}"> · {{ item.str }}</text>
+    <!-- 热销商品 -->
+    <!-- <view class="groupBox" wx:if="{{shopInfo.group.length>0}}">
+        <view class="grayBg"></view>
+        <view class="group-title">热销商品</view>
+        <view class="group-subhead">热销商品，为你推荐</view>
+        <block wx:if="{{shopInfo.group.length>1}}">
+            <scroll-view class="scrollGroup" scroll-x>
+                <view bindtap="gotoShopDetails" data-item="{{item}}" wx:key="{{index}}" class="groupDetail" wx:for="{{shopInfo.group}}">
+                    <image class="groupPicture" mode="aspectFill" src="{{c.absUrl(item.cover)}}"></image>
+                    <view class="groupSign" wx:if="{{item.group_num}}">{{item.group_num}}人团</view>
+                    <view class="groupName">
+                        <view class="gropTitle">{{item.title}}</view>
+                        <view class="groupPrice">
+                            <span class="rulingPrice"><i>¥</i>{{item.group_price}}</span>
+                            <span class="originalPrice">¥{{item.price}}</span>
+                        </view>
+                        <view class="groupText">拼团价</view>
+                    </view>
                 </view>
-                <navigator url="/pages/newPages/pages/mmtcTabList/index?id={{item.id}}"
-                           class="flexBox-item fb-6 zan-right right azm-col">
-                    <text>更多</text>
-                    <text class="iconfont icon-jiantou azm-icon"></text>
-                </navigator>
+            </scroll-view>
+        </block>
+
+        <block wx:if="{{shopInfo.group.length===1}}">
+            <view class="scrollGroup-two">
+                <view class="groupDetail-two" bindtap="gotoShopDetails" data-item="{{item}}" wx:key="{{index}}" wx:for="{{shopInfo.group}}">
+                    <image class="groupPicture-two" mode="aspectFill" src="{{c.absUrl(item.cover)}}"></image>
+                    <view class="groupSign" wx:if="{{item.group_num}}">{{item.group_num}}人团</view>
+                    <view class="groupName">
+                        <view class="gropTitle">{{item.title}}</view>
+                        <view class="groupPrice">
+                            <span class="rulingPrice"><i>¥</i>{{item.group_price}}</span>
+                            <span class="originalPrice">¥{{item.price}}</span>
+                        </view>
+                        <view class="groupText">拼团价</view>
+                    </view>
+                </view>
             </view>
-            <view class="weui-flex azm-content">
-                <block wx:for="{{ item.info }}" wx:key="{{item.item_id}}" wx:for-index="i" wx:for-item="v"
-                       wx:if="{{ i<3 }}">
-                    <navigator url="/page/shop/pages/goods/index?id={{v.item_id}}"
-                               class="weui-flex__item azm-col-8 azm-col">
-                        <view class="azm-content">
-                            <view wx:if="{{!!v.group_num}}" class="azm-group-num">{{v.group_num}}人团</view>
-                            <azm-image src="{{v.cover}}" lazy-load="true" mode="aspectFill"></azm-image>
-                            <view class="p title zan-ellipsis">{{v.title}}</view>
-                            <view class="p money">
-                                <text decode>¥{{v.group_num > 0?v.group_price:v.price}}&nbsp;&nbsp;</text>
-                                <text class="market_price zan-text-deleted">¥{{v.group_num >0?v.price:v.market_price}}
-                                </text>
+        </block>
+    </view> -->
+    <!-- 优享惠卡 -->
+    <view class="cardBox" wx:if="{{shopInfo.cards.length>0}}">
+        <view class="grayBg"></view>
+        <view class="card-title">优享惠卡</view>
+        <view class="card-subhead">我愿属于，专一的你</view>
+        <block wx:if="{{shopInfo.cards.length>1}}">
+            <scroll-view class="scrollCard" scroll-x>
+                <view bindtap="gotoCardDetails" data-item="{{item}}" class="cardDetail" wx:key="{{index}}" wx:for="{{shopInfo.cards}}"
+                    wx:for-index="i" wx:key="{{i}}">
+                    <image class="cardBackgroundPicture" mode="aspectFill" src="{{c.absUrl(item.bg)}}"></image>
+                    <view class="cardContent">
+                        <view class="cardTitle">{{item.card_name}}</view>
+                        <view class="cardSubhead">{{item.card_title}}</view>
+                        <view class="cardPrice">
+                            <text>{{item.card_type_name}}</text>
+                            <span>
+                                <i>¥</i>
+                                {{item.price}}
+                            </span>
+                        </view>
+                        <view class="cardValidity">
+                            <text>{{item.effective}}</text>
+                            <text>原价:{{item.market_price}}</text>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+        </block>
+        <block wx:if="{{shopInfo.cards.length===1}}">
+            <view class="scrollCard-two">
+                <view class="cardDetail-two" data-item="{{item}}" bindtap="gotoCardDetails" wx:key="{{index}}" wx:for="{{shopInfo.cards}}"
+                    wx:for-index="i" wx:key="{{i}}">
+                    <image mode="aspectFill" src="{{c.absUrl(item.bg)}}"></image>
+                    <view class="cardContent-two">
+                        <view class="cardTitle-two">{{item.card_name}}</view>
+                        <view class="cardSubhead-two">{{item.card_title}}</view>
+                        <view class="cardPrice-two">
+                            <text>{{item.card_type_name}}</text>
+                            <span>
+                                <i>¥</i>
+                                {{item.price}}
+                            </span>
+                        </view>
+                        <view class="cardValidity-two">
+                            <text>{{item.effective}}</text>
+                            <text>原价:{{item.market_price}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+
+    <!-- 特色拼团 -->
+    <view class="groupBox" wx:if="{{shopInfo.group.length>0}}">
+        <view class="grayBg"></view>
+        <view class="group-title">特色拼团</view>
+        <view class="group-subhead">和朋友一起，更优惠哦</view>
+        <block wx:if="{{shopInfo.group.length>1}}">
+            <scroll-view class="scrollGroup" scroll-x>
+                <view bindtap="gotoShopDetails" data-item="{{item}}" wx:key="{{index}}" class="groupDetail" wx:for="{{shopInfo.group}}">
+                    <image class="groupPicture" mode="aspectFill" src="{{c.absUrl(item.cover)}}"></image>
+                    <view class="groupSign" wx:if="{{item.group_num}}">{{item.group_num}}人团</view>
+                    <view class="groupName">
+                        <view class="gropTitle">{{item.title}}</view>
+                        <view class="groupPrice">
+                            <span class="rulingPrice"><i>¥</i>{{item.group_price}}</span>
+                            <span class="originalPrice">¥{{item.price}}</span>
+                        </view>
+                        <view class="groupText">拼团价</view>
+                    </view>
+                </view>
+            </scroll-view>
+        </block>
+
+        <block wx:if="{{shopInfo.group.length===1}}">
+            <view class="scrollGroup-two">
+                <view class="groupDetail-two" bindtap="gotoShopDetails" data-item="{{item}}" wx:key="{{index}}" wx:for="{{shopInfo.group}}">
+                    <image class="groupPicture-two" mode="aspectFill" src="{{c.absUrl(item.cover)}}"></image>
+                    <view class="groupSign" wx:if="{{item.group_num}}">{{item.group_num}}人团</view>
+                    <view class="groupName">
+                        <view class="gropTitle">{{item.title}}</view>
+                        <view class="groupPrice">
+                            <span class="rulingPrice"><i>¥</i>{{item.group_price}}</span>
+                            <span class="originalPrice">¥{{item.price}}</span>
+                        </view>
+                        <view class="groupText">拼团价</view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+
+
+    <!-- 店铺推荐 -->
+    <view class="shopBox" wx:if="{{shopInfo.items.length>0}}">
+        <view class="grayBg"></view>
+        <view class="shop-title">店铺推荐</view>
+        <view class="shop-subhead">首推服务，优质保证</view>
+        <block wx:if="{{shopInfo.items.length>1}}">
+            <scroll-view class="scrollShop" scroll-x>
+                <view bindtap="gotoShopDetails" data-item="{{item}}" class="shopDetail" wx:key="{{index}}" wx:for="{{shopInfo.items}}">
+                    <image class="shopPicture" mode="aspectFill" src="{{c.absUrl(item.cover)}}"></image>
+                    <view class="groupSign" wx:if="{{item.group_num}}">{{item.group_num}}人团</view>
+                    <view class="shopName">
+                        <view class="shopTitle">{{item.title}}</view>
+                        <view class="shopFlex">
+                            <view class="shopPrice2">
+                                <span class="rulingPrice2"><i>¥</i>{{item.group_num?item.group_price:item.price}}</span>
+                                <span class="originalPrice2">¥{{item.group_num?item.price:item.market_price}}</span>
+                            </view>
+                            <view class="shopLike">
+                                <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/heart.png"></image>
+                                <text>{{item.sell_count}}</text>
                             </view>
                         </view>
-                    </navigator>
-                </block>
-            </view>
-        </view>
-    </block>
-
-    <!--附近项目-->
-    <view class='zan-row azm-nearby_project mTop16'>
-        <view class='title-area'>
-            <view class="azm-text">
-                <text class="title_1_1 title_area_round left"></text>
-                <text class="title_1_2 title_area_round left"></text>
-                <text>附近项目</text>
-                <text class="title_1_2 title_area_round right"></text>
-                <text class="title_1_1 title_area_round right"></text>
-            </view>
-        </view>
-        <view class='p2'>
-            <block wx:for="{{shops}}" wx:for-index="i" wx:for-item="v" wx:key="i">
-                <block wx:for="{{shops}}" wx:for-index="i" wx:for-item="v" wx:key="i">
-                    <block wx:for="{{v}}" wx:for-index="index" wx:for-item="item" wx:key="item.id">
-                        <navigator url='/page/shop/pages/goods/index?id={{item.id}}'
-                                   hover-class='none' class='box3-item'>
-                            <view class='rel'>
-                                <view class='box3-group-num' wx:if="{{item.group_num > 0}}">{{item.group_num}}人团</view>
-                                <image src="{{c.absUrl(item.cover,400)}}" class="cover" background-size="cover"
-                                       mode="aspectFill"></image>
-                                <view class='box3-item-info'>
-                                    <view class="box3-item-title one-line">{{item.title}}</view>
-                                    <view class="box3-item-desc one-line">{{item.shop_name}}</view>
-                                    <view class='box3-item-num'>
-                                        <text>{{item.loved_count}}人喜欢</text>
-                                        <text decode>&nbsp;{{c.mToKm(item.distance)}}</text>
-                                    </view>
-                                    <view class="box3-item-price-info">
-                                        <view class="price" wx:if="{{item.group_num > 0}}">
-                                            <text>拼团价</text>
-                                            <text>¥{{item.group_price}}</text>
-                                        </view>
-                                        <view class="price" wx:else>
-                                            <text>¥{{item.price}}</text>
-                                        </view>
-                                        <view class='market-price'>
-                                            <text>¥{{item.group_num > 0?item.price:item.market_price}}</text>
-                                        </view>
-                                    </view>
-                                </view>
+                    </view>
+                </view>
+            </scroll-view>
+        </block>
+        <block wx:if="{{shopInfo.items.length===1}}">
+            <view class="scrollShop-two">
+                <view bindtap="gotoShopDetails" data-item="{{item}}" class="shopDetail-two" wx:key="{{index}}" wx:for="{{shopInfo.items}}">
+                    <image class="shopPicture-two" mode="aspectFill" src="{{c.absUrl(item.cover)}}"></image>
+                    <view class="shopName">
+                        <view class="shopTitle">{{item.title}}</view>
+                        <view class="shopFlex">
+                            <view class="shopPrice2">
+                                <span class="rulingPrice2"><i>¥</i>{{item.group_num?item.group_price:item.price}}</span>
+                                <span class="originalPrice2">¥{{item.group_num?item.price:item.market_price}}</span>
                             </view>
-                        </navigator>
-                        <!-- <view class="t-boredr"></view> -->
-                    </block>
-                </block>
-            </block>
+                            <view class="shopLike">
+                                <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/heart.png"></image>
+                                <text>{{item.sell_count}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+
+
+    <!-- 季节主推 -->
+    <view class="seasonBox" wx:if="{{shopInfo.activity.length>0}}">
+        <view class="grayBg"></view>
+        <view class="season-title">冬季主推</view>
+        <view class="season-subhead">每个季节都有不一样的美</view>
+        <block wx:if="{{shopInfo.activity.length>1}}">
+            <!-- <scroll-view class="scrollSeason" scroll-x>
+                <view class="seasonDetail" wx:for="{{shopInfo.activity}}" wx:key="{{index}}">
+                    <image data-link="{{item.url}}" bindtap='gotoActivity' class="seasonPicture" mode="aspectFill" src="{{c.absUrl(item.cover)}}"></image>
+
+                </view>
+            </scroll-view> -->
+            <scroll-view class="scrollSeason" scroll-x>
+                <view bindtap="gotoCardDetails" data-item="{{item}}" class="cardDetail" wx:key="{{index}}" wx:for="{{shopInfo.activity}}"
+                    wx:for-index="i" wx:key="{{i}}">
+                    <image data-link="{{item.url}}" bindtap='gotoActivity' class="seasonPicture" mode="aspectFill" src="{{c.absUrl(item.cover)}}"></image>
+
+                </view>
+            </scroll-view>
+        </block>
+
+        <block wx:if="{{shopInfo.activity.length===1}}">
+            <view class="scrollSeason-two">
+                <view class="seasonDetail-two" wx:for="{{shopInfo.activity}}" wx:key="{{index}}">
+                    <image class="seasonPicture-two" data-link="{{item.url}}" bindtap='gotoActivity' mode="aspectFill"
+                        src="{{c.absUrl(item.cover)}}"></image>
+                    <view class="">
+                    </view>
+                </view>
+            </view>
+        </block>
+
+    </view>
+
+
+    <view class="whiteBg" wx:if="{{shopInfo.activity.length===0}}"></view>
+
+    <!-- 店铺介绍 -->
+    <view class="shopIntroduce">
+        <image class="shopPhoto" mode="aspectFill" src="{{c.absUrl(shopInfo.shop.pic)}}"></image>
+        <view class="storeName">{{shopInfo.shop.shop_name}}</view>
+        <!-- <view class="shopIntro">{{shopInfo.shop.intro}}</view> -->
+        <view class="shopMore">
+            <view class="shopTime">营业时间：{{shopInfo.shop.open_starttime}}-{{shopInfo.shop.open_endtime}}</view>
+            <view class="shopLine"></view>
+            <view class="knowMore" bindtap="gotoShop">
+                <text>了解更多</text>
+                <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/icon-arrows.png"></image>
+            </view>
+        </view>
+
+        <view class="shopLocation">{{shopInfo.shop.address}}</view>
+
+
+        <view class="shopBottom">
+            <view class="locationShop" bindtap="showLocation">
+                <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/shopLocation.png"></image>
+                <text>导航到店</text>
+            </view>
+            <view class="shopPhone" bindtap="Dialing">
+                <text>电话咨询</text>
+                <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/shopPhone.png"></image>
+            </view>
         </view>
     </view>
+
 </view>
-<azm-more no-more="{{noMore}}" loading="true"></azm-more>
-<azm-gotop is-show="{{goToTopShow}}"></azm-gotop>
+<!-- <azm-more no-more="{{noMore}}" loading="true"></azm-more> -->
+<!-- <azm-gotop is-show="{{goToTopShow}}"></azm-gotop> -->

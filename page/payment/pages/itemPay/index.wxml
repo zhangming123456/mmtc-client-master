@@ -1,0 +1,279 @@
+<wxs src="../../../../utils/common.wxs" module="c"/>
+<i-toast id="toast"/>
+<i-message id="message"/>
+
+<azm-login id="azm-login-components" isShow="{{ isShowLogin }}" bindsuccess="loginCallback">
+    <block wx:for="{{cart_items}}" wx:for-item="shop" wx:for-index="sindex" wx:key="{{sindex}}">
+        <view class="azm-payOrder">
+            <view class='azm-cells azm-shop__item border-t'>
+                <view class='azm-shop_name'>
+                    <text class="iconfont icon-shop azm-icon azm-icon__left"></text>
+                    <text class='azm-shop_name_text'>{{shop.shop_name}}</text>
+                    <!--<text class="iconfont icon-jiantou azm-icon azm-icon__right"></text>-->
+                </view>
+                <!--项目信息-->
+                <block wx:for="{{shop.items}}" wx:key="{{index}}">
+                    <view class="flexBox azm-item__box">
+                        <view class="flexBox-item left" catchtap="azmRoute"
+                              data-path="/page/shop/pages/goods/index?id={{item.item_id}}">
+                            <view wx:if="{{!!item.group_num}}" class="azm-group-num">{{item.group_num}}人团</view>
+                            <image class='azm-image' src='{{c.absUrl(item.cover)}}' mode="aspectFill"></image>
+                        </view>
+                        <view class="flexBox-item fb-all right pr">
+                            <view class="azm-title">{{item.title}}</view>
+                            <block wx:if="{{!item.group_num}}">
+                                <view class="azm-label">
+                                    <!-- <text class="iconfont icon-tui1 azm-icon"></text>
+                                    <text class="fz24 text666 t-text">随时退</text> -->
+                                    <text class="iconfont icon-iconfont-5 azm-icon"></text>
+                                    <text class="fz24 text666">消费服务保障</text>
+                                </view>
+                                <view class="azm-money flexBox flexBox-start">
+                                    <view class="flexBox-item left fb-all">
+                                        <text class='azm-unit'>￥</text>
+                                        <text class='t-Price fz30'>{{item.price}}</text>
+                                    </view>
+                                    <view class="flexBox-item right fb-12">
+                                        <view class="azm-stepper-box">
+                                            <wxc-counter my-class="azm-stepper" number="{{item.num}}"
+                                                         max="{{stepper.max}}"
+                                                         min="{{stepper.min}}"
+                                                         data-key="cart_items[{{sindex}}].items[{{index}}].num"
+                                                         color="#333"
+                                                         bind:changenumber="onChangeNumber"></wxc-counter>
+                                        </view>
+                                        <!--<view class="flexBox azm-stepper">-->
+                                        <!--<view class="flexBox-item left {{ item.num <= stepper.min ? 'azm-stepper&#45;&#45;disabled' : '' }}"-->
+                                        <!--data-stepper="{{item.num}}"-->
+                                        <!--data-key="cart_items[{{sindex}}].items[{{index}}].num"-->
+                                        <!--data-disabled="{{ item.num <= stepper.min }}"-->
+                                        <!--catchtap="handleAzmStepperMinus">-->
+                                        <!--<text>-</text>-->
+                                        <!--</view>-->
+                                        <!--<view class="flexBox-item fb-all center">{{item.num}}</view>-->
+                                        <!--<view class="flexBox-item right {{ item.num >= stepper.max ? 'azm-stepper&#45;&#45;disabled' : '' }}"-->
+                                        <!--data-stepper="{{item.num}}"-->
+                                        <!--data-key="cart_items[{{sindex}}].items[{{index}}].num"-->
+                                        <!--data-disabled="{{ item.num >= stepper.max }}"-->
+                                        <!--catchtap="handleAzmStepperPlus">-->
+                                        <!--<text>+</text>-->
+                                        <!--</view>-->
+                                        <!--</view>-->
+                                    </view>
+                                </view>
+                            </block>
+                            <block wx:else>
+                                <view class="azm-group">
+                                    <text class='group-price'>拼团价 ¥{{item.group_price}}</text>
+                                    <text class='origin-price'>¥{{item.price}}</text>
+                                </view>
+                            </block>
+                        </view>
+                    </view>
+                </block>
+                <!--店铺优惠-->
+                <view class="azm-cell__group">
+                    <view class="azm-cell flexBox">
+                        <view class="azm-cell__bd flexBox-item">
+                            <text class="azm-label">店铺优惠</text>
+                        </view>
+                        <view class="azm-cell__ft flexBox-item" data-key="shopCoupons{{sindex}}"
+                              data-coupons="{{shop.coupons}}" wx:if="{{shop.coupons&&shop.coupons.length}}"
+                              catchtap='bindShowCouponPopup'>
+                            <block wx:if="{{selectCoupons['shopCoupons'+sindex] && selectCoupons['shopCoupons'+sindex].title}}">
+                                <view class="zan-ellipsis azm-cell__ft_bd w100 pr"
+                                      wx:if="{{selectCoupons['shopCoupons'+sindex].id}}">
+                                    <text class="azm-price__primary" decode>-&nbsp;¥</text>
+                                    <text class="azm-price__primary">{{selectCoupons['shopCoupons'+sindex].price}}
+                                    </text>
+                                    <text class="azm-text__color">元{{selectCoupons['shopCoupons' + sindex].title}}
+                                    </text>
+                                    <text class="azm-text__color">({{selectCoupons['shopCoupons' + sindex].title2}})
+                                    </text>
+                                </view>
+                                <view class="zan-ellipsis azm-cell__ft_bd w100 pr" wx:else>
+                                    <text>{{selectCoupons['shopCoupons' + sindex].title}}</text>
+                                </view>
+                            </block>
+                            <block wx:else>
+                                <text class="iconfont icon-gantanhao azm-icon azm-color_primary azm-icon_left"></text>
+                                <text class="azm-not_perfection azm-color_primary">请选择</text>
+                            </block>
+                            <text class="iconfont icon-jiantou azm-icon azm-icon_right"></text>
+                        </view>
+                        <view class="azm-cell__ft flexBox-item" wx:else catchtap="bindShowToast"
+                              data-message="暂无可用优惠券">
+                            <text class="azm-color_doNotUseCoupons">暂无可用优惠券</text>
+                            <text class="iconfont icon-jiantou azm-icon azm-icon_right"></text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+
+    <!--购买须知弹窗-->
+    <view class='masker' wx:if='{{isOpenNotice}}' catchtap='bindShowNotice'>
+        <view class='msg-box-wrap'>
+            <view class='msg-box' catchtap='noop'>
+                <view class='msg-box-title'>购买须知</view>
+                <view class='msg-box-content'>
+                    <view>·有效期为自开团时刻起的24小时内，若期间产品下架，则以下架时间为准。</view>
+                    <view>·拼团成功后不享受退款服务。</view>
+                    <view>·拼团失败，系统自动退款。</view>
+                </view>
+            </view>
+            <view class='text-center msg-box-footer'>
+                <text class="iconfont icon-close azm-icon"></text>
+            </view>
+        </view>
+    </view>
+    <!--购买须知-->
+    <block wx:if="{{is_group}}">
+        <view class="azm-cells_notice azm-cells">
+            <view class="azm-cell flexBox flexBox-start">
+                <view class="azm-cell__bd flexBox-item">
+                    <text class="azm-label">购买须知</text>
+                </view>
+                <view class="azm-cell__ft flexBox-item fb-all" catchtap="bindShowNotice">
+                    <text class="azm-color_16d6c3">·拼团限时 ·成团不退款 ·人不满退款</text>
+                    <text class="iconfont icon-jiantou azm-icon azm-icon_right"></text>
+                </view>
+            </view>
+        </view>
+    </block>
+
+    <!--平台优惠券-->
+    <view class="azm-cell__platform azm-cells">
+        <view class="azm-cell flexBox flexBox-start">
+            <view class="azm-cell__bd flexBox-item">
+                <text class="azm-label">平台优惠</text>
+            </view>
+            <view class="azm-cell__ft flexBox-item fb-all" data-key="platformCoupons"
+                  wx:if="{{platformCoupons&&platformCoupons.length}}"
+                  data-coupons="{{platformCoupons}}" catchtap='bindShowCouponPopup'>
+                <block wx:if="{{selectCoupons.platformCoupons && selectCoupons.platformCoupons.title}}">
+                    <view class="zan-ellipsis azm-cell__ft_bd w100 pr"
+                          wx:if="{{selectCoupons.platformCoupons.id}}">
+                        <text class="azm-price__primary" decode>-&nbsp;¥</text>
+                        <text class="azm-price__primary">{{selectCoupons.platformCoupons.price}}</text>
+                        <text class="azm-text__color">元{{selectCoupons.platformCoupons.title}}</text>
+                        <text class="azm-text__color">({{selectCoupons.platformCoupons.title2}})</text>
+                    </view>
+                    <view class="zan-ellipsis azm-cell__ft_bd w100 pr" wx:else>
+                        <text>{{selectCoupons.platformCoupons.title}}</text>
+                    </view>
+                </block>
+                <block wx:else>
+                    <text class="iconfont icon-gantanhao azm-icon azm-color_primary azm-icon_left"></text>
+                    <text class="azm-not_perfection azm-color_primary">请选择</text>
+                </block>
+                <text class="iconfont icon-jiantou azm-icon azm-icon_right"></text>
+            </view>
+            <view class="azm-cell__ft flexBox-item fb-all" wx:else catchtap="bindShowToast" data-message="暂无可用优惠券">
+                <text class="azm-color_doNotUseCoupons">暂无可用优惠券</text>
+                <text class="iconfont icon-jiantou azm-icon azm-icon_right"></text>
+            </view>
+        </view>
+        <view class="azm-cell flexBox flexBox-start">
+            <view class="azm-cell__bd flexBox-item">
+                <text class="azm-label">抵用券</text>
+            </view>
+            <view class="azm-cell__ft flexBox-item fb-all" catchtap="bindShowToast" data-message="暂无可用优惠券">
+                <text class="azm-color_doNotUseCoupons">抵用券与平台优惠券不可通用</text>
+                <text class="iconfont icon-jiantou azm-icon azm-icon_right"></text>
+            </view>
+        </view>
+    </view>
+
+    <!--支付方式-->
+    <view class="azm-cell__platform azm-cells">
+        <view class="azm-cell flexBox flexBox-start">
+            <view class="azm-cell__bd flexBox-item">
+                <text class="azm-label">支付方式</text>
+            </view>
+            <view class="azm-cell__ft flexBox-item fb-all">
+                <text class="azm-font-24 azm-col-282828">微信支付</text>
+            </view>
+        </view>
+    </view>
+
+
+    <!--<view class="t-login">-->
+    <!--<view class="fz28">未登录</view>-->
+    <!--<view>-->
+    <!--<image class="t-gt" src="https://app.mmtcapp.com/mmtc/imgs/gt@2x.png"></image>-->
+    <!--</view>-->
+    <!--</view>-->
+
+    <view id="footer" class="flex flex-stretch">
+        <view class="flex-con text-left border-t border-b">
+            <view class='footer-left'>
+                <text class="fz26 text666">实付金额:</text>
+                <text class="unit fz32">¥{{total_money}}元</text>
+            </view>
+        </view>
+        <form bindsubmit='saveFormIds' report-submit="true">
+            <button class="btn2" bindgetuserinfo="bindBuyNow" open-type="getUserInfo" form-type='submit'>
+                立即付款
+            </button>
+        </form>
+    </view>
+
+    <!--优惠券弹框-->
+    <view class='masker' catchtap='bindHideCouponPopup' wx:if='{{isOpenCouponPopup}}'>
+        <view class='masker-box' catchtap='tapMaskerBox'>
+            <view class='p30-outer'>
+                <view class="border-b p30-inner {{cc.cond <= original_price?'':'azm-unavailable'}}"
+                      wx:key="{{cc.id}}"
+                      wx:for="{{popupData}}" wx:for-item="cc"
+                      catchtap='bindSelectItem' data-key="{{popupDataKey}}" data-item="{{cc}}">
+                    <view class='flex'>
+                        <view class='flex-con'>
+                            <view class='coupon-titles'>
+                                <view class='coupon-money'>
+                                    <view class='inline'>
+                                        <text>-￥</text>
+                                    </view>
+                                    <view class="cm">
+                                        <text>{{cc.price}}</text>
+                                    </view>
+                                </view>
+                                <view class='coupon-title'>
+                                    <text>{{cc.title}}</text>
+                                    <view class='title2'>
+                                        <text>({{cc.title2}})</text>
+                                        <block wx:if="{{cc.cond > original_price}}">
+                                            <text decode>&nbsp;&nbsp;此券不可用</text>
+                                        </block>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class='coupon-time'>
+                                <text>有效期：{{cc.valid_time}}</text>
+                            </view>
+                        </view>
+                        <icon type="success" size="20" color="#ff538b"
+                              wx:if="{{cc.id === selectCoupons[popupDataKey].id}}"></icon>
+                        <text class="iconfont icon-radiooff azm-icon" wx:else
+                              style="font-size: 40rpx;color: #999999;"></text>
+                    </view>
+                </view>
+                <view class='border-b p55-inner' catchtap='bindSelectItem' data-key="{{popupDataKey}}"
+                      data-item="{{doNotUseCoupons}}">
+                    <view class='flex'>
+                        <view class='flex-con fz28 text666'>
+                            不使用优惠券
+                        </view>
+                        <icon type="success" size="20" color="#ff538b"
+                              wx:if="{{0 === selectCoupons[popupDataKey].id}}"></icon>
+                        <text class="iconfont icon-radiooff azm-icon" wx:else
+                              style="font-size: 40rpx;color: #999999;"></text>
+                    </view>
+                </view>
+            </view>
+            <button class='close-btn' catchtap='bindHideCouponPopup'>关闭</button>
+        </view>
+    </view>
+</azm-login>
+

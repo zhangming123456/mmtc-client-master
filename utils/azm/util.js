@@ -473,7 +473,7 @@ function failToast (option) {
     let data = {
         title: option,
         icon: 'fail',
-        image: '/image/icon/fail.png',
+        image: '/image/icon/failToast.png',
         mask: true,
         duration: 2000
     };

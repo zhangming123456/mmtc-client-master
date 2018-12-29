@@ -2,7 +2,7 @@ const app = getApp(),
     util2 = app.util2,
     utilPage = require("../../../utils/utilPage"),
     config = require('../../../utils/config'),
-    ApiService = require('../../../utils/ApiService');
+    ApiService = require('../../../utils/ApiService/index');
 const appPage = {
     /**
      * 页面的初始数据
@@ -22,8 +22,8 @@ const appPage = {
      * 生命周期函数--监听页面显示
      */
     onShow: function (options) {
+        this.wx2CheckSession()
         if (this.data.isShow) {
-            this.wx2CheckSession()
         }
     },
     /**
@@ -63,15 +63,15 @@ const appPage = {
      * 页面滚动
      * @param options
      */
-    onPageScroll(options){
+    onPageScroll (options) {
     },
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage(options) {
+    onShareAppMessage (options) {
 
     },
-    onTabItemTap(options){
+    onTabItemTap (options) {
         if (this.data.canOnTabItemTap > -1) {
             this.wx2CheckSession();
         }
@@ -81,21 +81,17 @@ const appPage = {
  * 方法类
  */
 const methods = {
-    loadCb(){
+    loadCb () {
         this.setData({userInfo: wx.getStorageSync('_userInfo_')});
-        this.wx2CheckSession()
     },
-    loadData(){
-
-    },
-    wx2CheckSession(setData = {}, bol){
+    wx2CheckSession (setData = {}, bol) {
         let that = this;
-        if (that.isLogin)return;
+        if (that.isLogin) return;
         that.isLogin = true;
         if (!bol) {
             util2.showLoading();
         }
-        return app.judgeLogin(bol).finally(res => {
+        return app.judgeLogin(true).finally(res => {
             console.warn("登入状态", res);
             that.isLogin = false;
             util2.hideLoading(true);
@@ -110,15 +106,23 @@ const methods = {
             that.setData(setData);
         })
     },
-    onLogin(e){
+    onLogin (e) {
         this.$route.push('/page/login/index');
     },
-    toMsg(e){
+    toMsg (e) {
         let dataset = e.currentTarget.dataset;
         if (dataset && dataset.type) {
             this.$route.push({path: '/pages/msg/index', query: {type: dataset.type}})
         }
     },
+    bindToLogin () {
+        var login = util2.hasLogin(true)
+        if (login === 1) return;
+        this.$route.push('/page/login/index');
+    },
+    outLogin () {
+
+    }
 };
 
 Page(new utilPage(appPage, methods));

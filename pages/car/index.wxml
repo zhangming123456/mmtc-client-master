@@ -41,7 +41,7 @@
                 <checkbox value='{{index}}' checked='{{!!item.checked}}' />
               </view>
               <view>
-                <image class='avatar' src='{{c.absUrl(item.cover,250)}}'></image>
+                <image class='avatar' src='{{c.absUrl(item.cover)}}'></image>
               </view>
               <view class='item-info flex-con'>
                 <view class='title one-line'>{{item.title}}</view>

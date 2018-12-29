@@ -4,21 +4,24 @@ const app = getApp(),
     regeneratorRuntime = util2.regeneratorRuntime,
     config = require('../../../../utils/config'),
     utilPage = require('../../../../utils/utilPage'),
-    ApiService = require('../../../../utils/ApiService');
+    ApiService = require('../../../../utils/ApiService/index');
 
 const appPage = {
     data: {
         text: "page shop projects",
         projects: [],
         page: [],
-        noMore: false,
+        noMore: true,
         categories: [],
         cid: 0,
         _scrollLeft: 0,
         scrollLeft: 0,
         scrollHeight: 0,
         loadingMore: false,
-        hasMore: true
+        hasMore: true,
+        hidden: true,
+        mtype: 1
+
     },
     onLoad: function () {
         let that = this;
@@ -45,8 +48,7 @@ const appPage = {
     /**
      * 页面渲染完成
      */
-    onReady: function () {
-    },
+    onReady: function () {},
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
@@ -57,6 +59,11 @@ const appPage = {
      * 上拉触底
      */
     onReachBottom() {
+        console.log("lower");
+        var that = this;
+        var page = that.data.page + 1; //当前页+1 = 下一页
+        that.getPhotoInfo(page);
+        that.noMore = false;
     },
     /**
      * 页面滚动
@@ -67,19 +74,35 @@ const appPage = {
     }
 };
 const methods = {
-    loadCb(){
+    loadCb() {
         let that = this;
         let options = that.data.options;
         that.data.shop_id = options.shop_id;
-        that.getShopProjects()
+        let category_id = options.category_id;
+        that.getShopProjects({
+            category_id
+        })
     },
-    getShopProjects({p = 1, category_id = 0} = {}){
+
+
+
+
+    getShopProjects({
+        p = 1,
+        category_id = 0
+    } = {}) {
         let that = this;
         let shop_id = that.data.shop_id;
-        if (!shop_id)return;
-        ApiService.getShopProjects({p, category_id, shop_id}).finally(res => {
+        if (!shop_id) return;
+        ApiService.getSearchItems({
+            p,
+            category_id,
+            shop_id
+        }).finally(res => {
             if (res.status === 1) {
-                let setData = {};
+                let setData = {
+                    cid: category_id
+                };
                 let categories = res.info.categories;
                 if (categories && categories.length > 0) {
                     setData.categories = categories;
@@ -91,15 +114,17 @@ const methods = {
                     } else {
                         setData[`projects[${p - 1}]`] = info
                     }
+
                     setData[`page`] = p + 1;
-                    setData.noMore = info.length !== 10;
+                    setData.noMore = info.length !== 4;
                 } else if (info.length === 0) {
                     if (p > 1) {
                         setData[`page`] = p - 1;
                     } else {
                         setData[`projects`] = []
                     }
-                    setData.noMore = true;
+                    setData.noMore = false;
+
                 }
                 that.setData(setData, function () {
                     if (categories && categories.length > 0) {
@@ -111,16 +136,21 @@ const methods = {
             }
         })
     },
-    setHeight(){
+    setHeight() {
         let that = this;
         let dom = that.querySelector("#navTab");
         dom.boundingClientRect(function (rect) {
             let windowHeight = that.data.systemInfo.windowHeight,
                 H = rect.height;
-            that.setData({scrollHeight: windowHeight - H});
+            that.setData({
+                scrollHeight: windowHeight - H
+            });
         }).exec();
     },
-    toggleCategory ({currentTarget, target}) {
+    toggleCategory({
+        currentTarget,
+        target
+    }) {
         let that = this;
         let windowWidth = that.data.systemInfo.windowWidth
         let scrollLeft = this.data._scrollLeft;
@@ -131,27 +161,38 @@ const methods = {
             left = 0;
         }
         let cid = currentTarget.dataset.id;
-        if (cid <= -1)return;
+        if (cid <= -1) return;
         if (category_id !== cid) {
             page = 1;
         }
-        this.setData({cid, scrollLeft: left});
-        this.getShopProjects({category_id: cid, p: page});
+        this.setData({
+            cid,
+            scrollLeft: left
+        });
+        this.getShopProjects({
+            category_id: cid,
+            p: page
+        });
     },
-    scrolltolower(){
+    scrolltolower() {
         let category_id = this.data.cid;
         let p = this.data.page;
-        this.getShopProjects({category_id, p})
+        this.getShopProjects({
+            category_id,
+            p
+        })
     },
-    scroll({detail}){
+    scroll({
+        detail
+    }) {
         this.data._scrollLeft = detail.scrollLeft
     },
-    onViewScroll({detail}){
-        this.selectComponent('#azmGoTop').scroll(detail)
-    },
-    azmtap(e){
+
+    azmtap(e) {
         console.log(e);
-        this.setData({scrollTop: 0})
+        this.setData({
+            scrollTop: 0
+        })
     }
 };
 Page(new utilPage(appPage, methods));

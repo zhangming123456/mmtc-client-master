@@ -2,11 +2,11 @@
   "navigationBarTitleText": "关于我们",
   "enablePullDownRefresh": false,
   "usingComponents": {
-    "i-message": "../../../lib/iview/message/index",
-    "i-toast": "../../../lib/iview/toast/index",
-    "azm-image": "../../../lib/components/azm-image/index",
-    "i-cell-group": "../../../lib/iview/cell-group/index",
-    "i-cell": "../../../lib/iview/cell/index",
-    "i-panel": "../../../lib/iview/panel/index"
+    "i-message": "../../../../lib/iview/message/index",
+    "i-toast": "../../../../lib/iview/toast/index",
+    "azm-image": "../../../../lib/components/azm-image/index",
+    "i-cell-group": "../../../../lib/iview/cell-group/index",
+    "i-cell": "../../../../lib/iview/cell/index",
+    "i-panel": "../../../../lib/iview/panel/index"
   }
 }

@@ -1,7 +1,7 @@
 const app = getApp(),
     util2 = app.util2,
     utilPage = require("../../../../utils/utilPage"),
-    ApiService = require("../../../../utils/ApiService"),
+    ApiService = require("../../../../utils/ApiService/index"),
     config = require("../../../../utils/config");
 
 const appPage = {
@@ -78,7 +78,7 @@ const methods = {
         if (that.isDeleteNote)return;
         if (!id)return;
         wx.showActionSheet({
-            itemList: ['修改日记', '删除日记'],
+            itemList: ['修改点评', '删除日记'],
             success: function (res) {
                 if (res.tapIndex == 1) { // for delete
                     wx.showModal({

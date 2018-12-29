@@ -2,7 +2,7 @@
 const app = getApp(),
     c = require("../../utils/common.js"),
     utilPage = require("../../utils/utilPage"),
-    ApiService = require("../../utils/ApiService"),
+    ApiService = require("../../utils/ApiService/index"),
     config = require("../../utils/config");
 const stypes = ['智能排序', '销量最高', '价格最低', '案例最多', '好评优先', '离我最近'];
 const ltypes = ['全部', '拼团特惠'];

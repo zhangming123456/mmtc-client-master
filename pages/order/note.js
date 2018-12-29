@@ -1,5 +1,13 @@
 // pages/order/note.js
-const c = require("../../utils/common.js");
+
+const app = getApp(),
+    util2 = app.util2,
+    regeneratorRuntime = app.util2.regeneratorRuntime,
+    utilPage = require('../../utils/utilPage'),
+    c = require("../../utils/common.js"),
+    ApiService = require('../../utils/ApiService/index'),
+    config = require('../../utils/config');
+let $wxParse = require('../../wxParse/wxParse');
 var oid = 0;
 Page({
 
@@ -24,7 +32,9 @@ Page({
         if (this.note_id) {
             c.showLoading();
             let that = this;
-            c.get('/api/note2/getDetail', {id: this.note_id}, function (ret) {
+            c.get('/api/note2/getDetail', {
+                id: this.note_id
+            }, function (ret) {
                 c.hideLoading();
                 if (ret.status == 1) {
                     let imgs = [];
@@ -126,7 +136,9 @@ Page({
                 } else {
                     c.excPrevPage('refreshData');
                 }
-                wx.navigateBack({});
+                wx.navigateTo({
+                    url: '/pages/order/remarkSucceed/paySuccess'
+                });
             } else {
                 c.alert(ret.info);
             }

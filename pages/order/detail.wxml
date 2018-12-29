@@ -16,7 +16,7 @@
         </view>
     </view>
     <view class='flex border-b' wx:for="{{item.items}}" wx:key="id" wx:for-item="i" data-id="{{i.item_id}}" bindtap='showItemDetail'>
-        <image class='avatar' mode="aspectFill" src='{{c.absUrl(i.cover,300)}}'></image>
+        <image class='avatar' mode="aspectFill" src='{{c.absUrl(i.cover)}}'></image>
         <view class='item-info flex-con'>
             <view class='title'>{{i.title}}</view>
             <view class='price-area'>

@@ -1,5 +1,5 @@
 <wxs src="../../utils/common.wxs" module="c" />
-<image class='big-cover' src='{{c.absUrl(album.album.cover,750)}}'>
+<image class='big-cover' src='{{c.absUrl(album.album.cover)}}'>
 </image>
 
 <scroll-view scroll-left="{{scrollLeft}}" scroll-x="true" class='bg-white border-b' scroll-with-animation="true">
@@ -15,7 +15,7 @@
     <navigator url='/page/shop/pages/goods/index?id={{item.id}}' hover-class='none' class='box3-item' wx:key="item.id" wx:for="{{items}}" wx:for-index="index" wx:for-item="item">
       <view class='rel'>
         <view class='box3-group-num' wx:if="{{item.group_num && item.group_num>0}}">{{item.group_num}}人团</view>
-        <image src="{{c.absUrl(item.cover,400)}}" class="cover" background-size="cover"></image>
+        <image src="{{c.absUrl(item.cover)}}" class="cover" background-size="cover"></image>
         <view class='box3-item-info'>
           <view class="box3-item-title one-line">{{item.title}}</view>
           <view class="box3-item-desc one-line">{{item.shop_name}}</view>

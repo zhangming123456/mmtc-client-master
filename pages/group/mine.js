@@ -42,7 +42,7 @@ Page({
     tonote: function (e) {
         let item = e.currentTarget.dataset.item;
         wx.navigateTo({
-            url: '/pages/order/note?oid=' + item.id + '&order_info_id=' + item.order_info_id
+            url: '/page/order/pages/diary/index?oid=' + item.id + '&order_info_id=' + item.order_info_id
         });
     },
     touse(e){

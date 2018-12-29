@@ -3,7 +3,7 @@ const app = getApp(),
     util2 = app.util2,
     util = app.util,
     utilPage = require('../../../../utils/utilPage'),
-    ApiService = require('../../../../utils/ApiService'),
+    ApiService = require('../../../../utils/ApiService/index'),
     config = require('../../../../utils/config'),
     c = require("../../../../utils/common.js");
 const appPage = {
@@ -16,7 +16,7 @@ const appPage = {
         shop_id: null,
         qrcode: ''
     },
-    onLoad(){
+    onLoad () {
         this.loadCb();
     }
 };
@@ -39,7 +39,7 @@ const methods = {
             }
         })
     },
-    showQrcode() {
+    showQrcode () {
         let that = this,
             shop_id = this.data.shop_id,
             setData = {};
@@ -61,33 +61,28 @@ const methods = {
             that.setData(setData)
         }
     },
-    onLoadQrcode(){
+    onLoadQrcode () {
         util2.hideLoading(true);
     },
-    closeMasker(){
+    closeMasker () {
         this.setData({showMasker: false});
     },
-    noop(){
+    noop () {
 
     },
-    saveImage(){
+    saveImage () {
         let that = this,
             tempFilePath = this.data.qrcode;
         if (tempFilePath) {
-            wx.saveImageToPhotosAlbum({
-                filePath: tempFilePath,
-                complete(res){
-                    if (res.errMsg === 'saveImageToPhotosAlbum:fail cancel') {
-                        util2.failToast('取消保存')
-                    } else if (res.errMsg === 'saveImageToPhotosAlbum:ok') {
-                        util2.showToast('保存成功');
-                    } else if (res.errMsg === 'saveImageToPhotosAlbum:fail auth deny') {
-                        that.$route.push('/page/public/pages/authorization/index')
-                    } else {
-                        util2.failToast('保存失败')
-                    }
+            util2.saveImageToPhotosAlbum({filePath: tempFilePath}).finally(res => {
+                if (res.status === 40101) {
+                    util2.failToast('取消保存')
+                } else if (res.status === 1) {
+                    util2.showToast('保存成功');
+                } else {
+                    util2.failToast(res.message)
                 }
-            })
+            });
         }
     }
 };

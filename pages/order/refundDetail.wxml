@@ -16,7 +16,7 @@
         <!-- <view class="statusBar">完成退款</view> -->
     </view>
     <view class='item-info'>
-        <image class='shopPhoto' src='{{imageUrl + info.cover}}'></image>
+        <image class='shopPhoto' src='{{c.absUrl(info.cover)}}'></image>
         <view class='shopTitle'>【{{info.cate_name}}】{{info.item_name}}</view>
         <view class='ShopUnit'>￥</view>
         <view class='ShopPrice'>{{info.price}}</view>

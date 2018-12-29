@@ -8,7 +8,8 @@ Page({
   data: {
     m: {},
     notes: [],
-    items: []
+    items: [],
+    tag: []
   },
 
   /**
@@ -19,14 +20,18 @@ Page({
     if (id) { // id 
       c.showLoading();
       var that = this;
-      c.get('/api/shop/technicianDetail', { id: id }, function (ret) {
+      c.get('/app/technician/technicianDetail', {
+        id: id
+      }, function (ret) {
         c.hideLoading();
         if (ret.status == 1) {
           that.data.m = ret.info.m;
+          that.data.tag = ret.info.tag;
           that.data.notes = ret.info.notes;
           that.data.items = ret.info.items;
           that.setData({
             m: that.data.m,
+            tag: that.data.tag,
             notes: c.wrapZan(that.data.notes),
             items: that.data.items
           });
@@ -87,6 +92,10 @@ Page({
     wx.navigateTo({
       url: '/page/shop/pages/goods/index?id=' + e.currentTarget.dataset.id,
     })
+  },
+
+  gotoItemsDetail(){
+
   },
   zan: function (e) {
     var id = e.currentTarget.dataset.id;

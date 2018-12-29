@@ -9,7 +9,6 @@ view {
   width: 690rpx;
   height: 353rpx;
   margin: 30rpx;
-  padding: 30rpx 30rpx 0;
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
@@ -75,3 +74,4 @@ view {
   text-align: center;
   display: flex;
 }
+/*# sourceMappingURL=myCard.wxss.map */

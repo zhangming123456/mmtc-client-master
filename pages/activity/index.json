@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "分享有礼",
-  "usingComponents": {
-    "wxc-toast": "../../lib/minui/wxc-toast/dist/index",
-    "wxc-popup": "../../lib/minui/wxc-popup/dist/index"
-  }
-}

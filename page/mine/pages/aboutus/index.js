@@ -3,7 +3,7 @@ const app = getApp(),
     util2 = app.util2,
     utilPage = require("../../../../utils/utilPage"),
     config = require('../../../../utils/config'),
-    ApiService = require('../../../../utils/ApiService');
+    ApiService = require('../../../../utils/ApiService/index');
 
 const appPage = {
     /**

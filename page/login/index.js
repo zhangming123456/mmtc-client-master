@@ -2,19 +2,21 @@
 const app = getApp(),
     util = app.util,
     regeneratorRuntime = app.util2.regeneratorRuntime,
-    ApiService = require('../../utils/ApiService'),
-    utilPage = require('../../utils/utilPage'),
-    c = require("../../utils/common.js");
+    ApiService = require('../../utils/ApiService/index'),
+    utilPage = require('../../utils/utilPage');
+
 const appPage = {
     /**
      * 页面的初始数据
      */
     data: {
         text: 'Page loginIndex',
+        isShow2: true,
         isLogin: true,
         userInfo: {},
         invite_id: '',//邀请码
-        telephone: ''
+        telephone: '',
+        isBindTelephone: true
     },
     /**
      * 生命周期函数--监听页面加载
@@ -41,7 +43,6 @@ const appPage = {
      * 生命周期函数--监听页面卸载
      */
     onUnload () {
-        app.judgeLogin(true);
     },
     /**
      * 页面渲染完成
@@ -61,13 +62,13 @@ const appPage = {
     onReachBottom (options) {
 
     },
-    onPageScroll(options){
+    onPageScroll (options) {
 
     },
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage(options) {
+    onShareAppMessage (options) {
 
     }
 };
@@ -88,205 +89,11 @@ const methods = {
         } else if (app.globalData.invite_id) {
             invite_id = app.globalData.invite_id
         }
-        that.setData({invite_id});
-        if (!c.hasLoginWx()) {
-            that.wxLogon();
-        }
+        that.setData({scene: {invite_id}});
     },
-    showPhoneWin () {
-        let invite_id = this.data.invite_id;
-        util.go(`phone?invite_id=${invite_id || 0}`)
-    },
-    doGetPhone(e, r){
-        let that = this, invite_id = that.data.invite_id;
-        if (e.detail.encryptedData) {
-            c.showLoading();
-            r = r || {};
-            ApiService.wx2LoginByPhone({
-                encryptedData: e.detail.encryptedData,
-                iv: e.detail.iv,
-                encryptedData_1: r.encryptedData,
-                iv_1: r.iv,
-                invite_id
-            }).then(
-                res => {
-                    c.hideLoading();
-                    if (res.status === 1) {
-                        if (!util.common.isEmptyObject(that.data.userInfo)) {
-                            that.data.userInfo = {
-                                avatarUrl: res.info.avatar,
-                                nickName: res.info.nickname
-                            };
-                        }
-                        that.setUserInfo(e);
-                    } else if (res.status === 202) {
-                        c.logoff();
-                        that.wxLogon(e);
-                    } else {
-                        c.alert(res.message);
-                    }
-                }
-            )
-        }
-    },
-    wxLogon(e){
-        let that = this,
-            invite_id = that.data.invite_id;
-        that.__login(true).then(
-            res => {
-                if (res.code) {
-                    ApiService.wx2Login({code: res.code, invite_id}).then(
-                        res => {
-                            if (res.status === 1) {
-                                if (e) {
-                                    that.getPhoneNumber(e);
-                                } else {
-                                    c.setHasLoginWx()
-                                }
-                            }
-                        }
-                    )
-                }
-            }
-        )
-    },
-    userLogin(){
-        app.util.go('/page/userLogin/pages/getUserInfo/index')
-    },
-
-    getPhoneNumber (e) {
-        let that = this;
-        if (e.detail.errMsg !== "getPhoneNumber:fail user deny") {
-            this.__getUserInfo({withCredentials: true}).then(
-                res => {
-                    if (res.userInfo) {
-                        that.data.userInfo = res.userInfo;
-                        // that.startLogin(e);
-                        that.doGetPhone(e, res);
-                    }
-                },
-                rsp => {
-                    that.doGetPhone(e);
-                    that.data.userInfo = {};
-                }
-            ).finally(() => {
-
-            });
-        }
-    },
-
-
-    async startLogin(e){
-        let that = this, invite_id = that.data.invite_id,
-            p1 = new Promise(resole => {
-                this.wx2Login().then(res => {
-                    let code = that.data.code;
-                    ApiService.wx2Login({code}).then(
-                        res => {
-                            if (res.status === 1) {
-                                c.setHasLoginWx();
-                                resole();
-                            }
-                        }
-                    )
-                })
-            });
-        await p1;
-        if (invite_id) {
-            await this.register();
-        }
-        await this.wx2LoginByPhone(e);
-    },
-    async wx2Login(e){
-        let that = this;
-        let p1 = that.__login(true),
-            p2 = that.__getUserInfo({withCredentials: true});
-        p1.then(res => {
-            that.data.code = res.code;
-            console.log(res);
-            console.log(1);
-        });
-        p2.then(res => {
-            that.data.userInfo = res.userInfo;
-        });
-        await p1;
-        await p2;
-    },
-    register(){
-        console.log(2);
-        return ApiService.setActivityRegister();
-    },
-    wx2LoginByPhone(e){
-        console.log(3);
-        let that = this, invite_id = that.data.invite_id;
-        if (e.detail.encryptedData) {
-            c.showLoading();
-            return ApiService.wx2LoginByPhone({
-                encryptedData: e.detail.encryptedData,
-                iv: e.detail.iv,
-                invite_id
-            }).then(
-                res => {
-                    c.hideLoading();
-                    if (res.status === 1) {
-                        that.setUserInfo(e)
-                    } else if (res.status === 202) {
-                        c.logoff();
-                    } else {
-                        c.alert(res.message);
-                    }
-                }
-            )
-        }
-    },
-
-    setUserInfo(rt){
-        let that = this,
-            userInfo = that.data.userInfo;
-        c.post('/api/wx2/updateUserInfo', userInfo);
-        c.setUserInfo(userInfo);
-        c.refreshPrevPage();
-        if (util.getCurrentPages().length > 1) {
-            app.util.go(-1)
-        } else {
-            app.util.go('/page/tabBar/mine/index', {type: 'tab'})
-        }
-    },
-
-    onGotUserInfo(e){
-        let encryptedData = e.detail.encryptedData,
-            iv = e.detail.iv,
-            userInfo = e.detail.userInfo;
-        this.__login(true).finally(res => {
-            console.log(res, e);
-            this.setData({isBindTelephone: false});
-            if (res.errMsg === 'login:ok') {
-                ApiService.login2wxLogin({code: res.code, encryptedData, iv, userInfo}).finally(res => {
-                    if (res.status === 1) {
-
-                    } else if (res.status === 0) {
-                        this.setData({isBindTelephone: true})
-                    }
-                })
-            }
-        })
-    },
-    inputTelephone(e){
-        console.log(e);
-        let value = e.detail.value;
-        this.setData({telephone: value})
-    },
-    getCode(){
-        if (this.data.telephone) {
-            ApiService.login2bindSMS({telephone: this.data.telephone})
-        }
-    },
-    formSubmit(e){
-        let value = e.detail.value;
-        if (value.telephone && value.code) {
-            ApiService.login2bindPhone({telephone: value.telephone, code: value.code})
-        }
+    loginCallback (res) {
+        this.$route.back();
     }
 };
 
-Page(new utilPage(appPage, methods))
+Page(new utilPage(appPage, methods));

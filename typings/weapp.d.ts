@@ -1626,7 +1626,7 @@ declare namespace wx {
          * 同 [transform-function matrix3d](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/matrix3d?t=1477656494026)
          */
         matrix3d(a1: number, b1: number, c1: number, d1: number, a2: number, b2: number, c2: number, d2: number,
-            a3: number, b3: number, c3: number, d3: number, a4: number, b4: number, c4: number, d4: number): this;
+                 a3: number, b3: number, c3: number, d3: number, a4: number, b4: number, c4: number, d4: number): this;
     }
 
     export interface AnimationOptions {
@@ -1712,7 +1712,7 @@ declare namespace wx {
         /**
          * 在画布上绘制被填充的文本。
          * @param text 在画布上输出的文本
-         * @param x	绘制文本的左上角x坐标位置
+         * @param x    绘制文本的左上角x坐标位置
          * @param y 绘制文本的左上角y坐标位置
          */
         fillText(text: string, x: number, y: number): void;
@@ -1729,6 +1729,7 @@ declare namespace wx {
          * 对当前路径进行填充
          */
         fill(): void;
+
         /**
          * 对当前路径进行描边
          */

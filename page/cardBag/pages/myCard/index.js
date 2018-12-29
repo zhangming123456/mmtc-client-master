@@ -3,7 +3,7 @@ const app = getApp(),
     regeneratorRuntime = app.util2.regeneratorRuntime,
     config = require('../../../../utils/config'),
     utilPage = require('../../../../utils/utilPage'),
-    ApiService = require('../../../../utils/ApiService');
+    ApiService = require('../../../../utils/ApiService/index');
 
 const appPage = {
     data: {
@@ -119,9 +119,6 @@ const methods = {
             })
         }
     },
-
-
-
 
     toggle(e) {
         var that = this;

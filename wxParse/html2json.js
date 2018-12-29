@@ -35,6 +35,7 @@ var fillAttrs = makeMap("checked,compact,declare,defer,disabled,ismap,multiple,n
 
 // Special Elements (can contain anything)
 var special = makeMap("wxxxcode-style,script,style,view,scroll-view,block");
+
 function makeMap (str) {
     var obj = {}, items = str.split(",");
     for (var i = 0; i < items.length; i++)
@@ -290,7 +291,7 @@ function transEmojiStr (str) {
     return emojiObjs;
 }
 
-function emojisInit (reg = '', baseSrc = "/wxParse/emojis/", emojis) {
+function emojisInit (reg = '', baseSrc = "https://app.mmtcapp.com/mmtc/imgs/wxParse/emojis/", emojis) {
     __emojisReg = reg;
     __emojisBaseSrc = baseSrc;
     __emojis = emojis;

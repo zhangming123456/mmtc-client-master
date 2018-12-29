@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "azm-drawer": "../azm-drawer/index",
+    "azm-input": "../azm-input/index",
+    "azm-count-down": "../azm-count-down/index"
+  }
+}

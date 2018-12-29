@@ -25,7 +25,7 @@
         </view>
         <view data-id="2" bindtap='toggleType' class='flex-con {{type==2?"active":""}}'>
 
-            待写日记
+            待点评
         </view>
     </view>
 </view>
@@ -45,7 +45,7 @@
                     已下架
                 </block>
                 <block wx:else>
-                    {{item.is_expired==1?'已过期':(item.num <= item.num_used?(item.is_used==1?'交易完成':'待使用'):'拼团中')}}
+                    {{item.is_expired==1?'已过期':(item.num <= item.num_used?(item.is_used==1?'交易完成':'待验证'):'拼团中')}}
                 </block>
             </view>
         </view>
@@ -53,7 +53,7 @@
     <view class='p30'>
         <view class='flex flex-stretch' bindtap="showGoodDetail" data-id="{{item.group_id}}">
             <view class='item-cover-wrap'>
-                <image class='item-cover' src='{{c.absUrl(item.cover,250)}}'></image>
+                <image class='item-cover' src='{{c.absUrl(item.cover)}}'></image>
                 <view class='tuan-num'>{{item.num}}人团</view>
             </view>
             <view class='item-info flex-con'>
@@ -88,15 +88,15 @@
         </view>
     </view>
     <view class='border-t text-right btns' wx:if="{{!item.is_expired}}">
-        <navigator url='/pages/group/shared?id={{item.group_id}}' hover-class="none" wx:if="{{item.num > item.num_used}}"
+        <navigator url='/page/group/pages/shared/index?id={{item.group_id}}' hover-class="none" wx:if="{{item.num > item.num_used}}"
                    class="btn full-red">邀请好友
         </navigator>
         <block wx:else>
-            <navigator class='btn btn-red' url='/pages/car/payOrder?item_id={{item.id}}&num=1&group=1'>再来一单</navigator>
+            <navigator class='btn btn-red' url='/page/payment/pages/itemPay/index?item_id={{item.id}}&num=1&group=1'>再来一单</navigator>
             <view class='btn btn-red' wx:if="{{c.isEmpty(item.is_used)}}" data-item="{{item}}" bindtap='touse'>查看券码
             </view>
             <view class='btn btn-red' wx:elif="{{c.isEmpty(item.is_noted)}}" data-item="{{item}}" bindtap='tonote'
-                  data-id="{{item.order_info_id}}">去写日记
+                  data-id="{{item.order_info_id}}">去点评
             </view>
         </block>
     </view>

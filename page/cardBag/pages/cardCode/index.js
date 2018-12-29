@@ -2,7 +2,7 @@ const app = getApp(),
   util2 = app.util2,
   config = require('../../../../utils/config'),
   utilPage = require('../../../../utils/utilPage'),
-  ApiService = require('../../../../utils/ApiService'),
+  ApiService = require('../../../../utils/ApiService/index'),
   qrcode = require("../../../../utils/qrcode.js");
 const appPage = {
   data: {
@@ -78,9 +78,6 @@ const methods = {
     let that = this;
     var bill_id = this.data.options.bill_id;
     var card_item_id = this.data.options.card_item_id;
-
-
-
     ApiService.getOrderCardCheckPwd({
       bill_id,
       card_item_id

@@ -1,0 +1,252 @@
+.hr20 {
+    width: 100%;
+    height: 20rpx;
+    background: #F5F8F7;
+    border-top: 1px solid #EEEEEE;
+    border-bottom: 1px solid #EEEEEE;
+    box-sizing: border-box;
+}
+
+
+.sharingImg {
+    margin: 0 auto;
+    font-size: 26rpx;
+    text-align: center;
+    color: #999999;
+    margin-top: 66rpx;
+}
+
+.sharingImg image {
+    width: 213rpx;
+    height: 200rpx;
+}
+
+.sharingImg view {
+    margin-bottom: 10rpx;
+}
+
+.sharingTitle {
+    font-size: 28rpx;
+    color: #333333;
+    background: #FFFFFF;
+    height: 90rpx;
+    text-align: center;
+    line-height: 90rpx;
+    border-top: 1px solid #EEEEEE;
+    border-bottom: 1px solid #EEEEEE;
+    margin-top: 60rpx;
+    font-weight: 500;
+    box-sizing: border-box;
+}
+
+
+.sharingItems {
+    padding: 0rpx 37rpx;
+    padding-bottom: 30rpx;
+    box-sizing: border-box;
+}
+
+.items {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #DDDDDD;
+    padding-bottom: 20rpx;
+    box-sizing: border-box;
+}
+
+.items image {
+    width: 115rpx;
+    height: 115rpx;
+    border-radius: 10rpx;
+    margin-right: 30rpx;
+}
+
+
+.orderItem {
+    display: flex;
+    box-sizing: border-box;
+    border-bottom: 1px solid #EEEEEE;
+    margin-top: 20rpx;
+    padding-bottom: 20rpx;
+    background-color: #ffffff;
+}
+
+.itemPicture {
+    width: 115rpx;
+    height: 115rpx;
+    border-radius: 10rpx;
+    margin-right: 30rpx;
+}
+
+.itemContent {
+    flex: 1;
+}
+
+.itemTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 26rpx;
+    color: #333333;
+}
+
+.itemTitle view:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 400rpx;
+}
+
+
+
+.itemTime {
+    font-size: 24rpx;
+    color: #999999;
+}
+
+.itemPirce {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.pirce span {
+    font-size: 28rpx;
+    color: #FA5151;
+}
+
+.pirce span i {
+    font-size: 20rpx;
+}
+
+.pirce text {
+    font-size: 24rpx;
+    text-decoration: line-through;
+    color: #999999;
+    margin-left: 16rpx;
+}
+
+
+.itemButton {
+    border: 1px solid #FA5151;
+    border-radius: 4rpx;
+    color: #FA5151;
+    font-size: 26rpx;
+    width: 134rpx;
+    height: 60rpx;
+    text-align: center;
+    line-height: 60rpx;
+    margin-top: 30rpx;
+}
+
+
+.itemsTitle {
+    background: #FFFFFF;
+    border-top: 1px solid #EEEEEE;
+    border-bottom: 1px solid #EEEEEE;
+    height: 90rpx;
+    line-height: 90rpx;
+    padding-left: 37rpx;
+    font-size: 28rpx;
+    color: #333333;
+    font-weight: 500;
+}
+
+
+.shopDetail-two {
+    width: 333rpx;
+    height: 100%;
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 10rpx;
+    margin-top: 20rpx;
+}
+
+.shopDetail-two:nth-child(2n+1) {
+    float: left;
+}
+
+.shopDetail-two:nth-child(2n) {
+    float: right;
+}
+
+
+.shopPicture-two {
+    border-radius: 10rpx;
+    background-color: skyblue;
+    width: 100%;
+    height: 183px;
+}
+
+
+.shopName {
+    margin-top: 26rpx;
+}
+
+.shopTitle {
+    font-size: 29rpx;
+    color: #666666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.shopFlex {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15rpx;
+}
+
+.itemsPadding {
+    padding-left: 37rpx;
+    padding-right: 37rpx;
+    box-sizing: border-box;
+}
+
+.shopPrice2 {}
+
+.rulingPrice2 {
+    font-size: 29rpx;
+    color: #F74884;
+    margin-right: 13rpx;
+}
+
+.rulingPrice2 i {
+    font-size: 20rpx;
+    color: #F74884;
+}
+
+.originalPrice2 {
+    font-size: 20rpx;
+    color: #999999;
+    text-decoration: line-through;
+    margin-top: 7rpx;
+}
+
+
+.shopLike {
+    font-size: 20rpx;
+    color: #999999;
+    display: flex;
+    align-items: center;
+}
+
+.shopLike image {
+    width: 25rpx;
+    height: 25rpx;
+    margin-right: 10rpx;
+}
+
+.noData {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 26rpx;
+    color: #666666;
+}
+
+.noData image {
+    width: 100%;
+    height: 784rpx;
+}

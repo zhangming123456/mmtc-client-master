@@ -32,7 +32,7 @@ module.exports = {
         <view class='flex'>
           <view class='shop-avatar' bindtap='touse' data-item='{{item}}'>
             <image wx:if="{{item.shop_id==0}}" src='https://app.mmtcapp.com/mmtc/imgs/mei.png' class='is-mei'></image>
-            <image wx:else src='{{c.absUrl(item.avatar,150)}}'></image>
+            <image wx:else src='{{c.absUrl(item.avatar)}}'></image>
           </view>
           <view class='flex-con'>
             <view class='flex'>

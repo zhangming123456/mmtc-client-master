@@ -1,6 +1,11 @@
-<view class="panel-no-margin2 bg-white text-center border-b">
-    <image src="https://app.mmtcapp.com/mmtc/imgs/ok@2x.png" class='avatar' alt=""></image>
-    <view class="text666 fz28"  bindtap="gotoMycard">
-        订单支付成功，请前往我的-卡包中查看
+<view class=" paySuccess bg-white text-center ">
+    <image class="image" src="https://app.mmtcapp.com/mmtc/imgs/new_image/BitmapCopy.png"></image>
+    <view class="success">
+        <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/Group38@2x.png"></image>
+        <view class="successText">支付成功</view>
+        <view class="successButton">
+            <view bindtap="backOrder">立即使用</view>
+            <view bindtap="backHome">返回首页</view>
+        </view>
     </view>
 </view>

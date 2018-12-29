@@ -1,0 +1,21 @@
+<view class="shopAlbum">
+    <view class="albumBox" wx:for="{{img}}" wx:key="{{index}}" data-item="{{item}}"  bindtap="gotoDisplayPicture">
+        <image mode="aspectFill" src="{{c.absUrl(item.cover)}}"></image>
+        <view class="albumText">
+            <text>{{item.title}}</text>
+            <text>（{{item.pic_count}}）</text>
+        </view>
+    </view>
+    <!-- <view class="albumBox">
+        <image style="  width: 120rpx; height: 120rpx; margin-top: 72rpx" src="../../../../image/case.png"></image>
+        <view class="albumText">作品案例</view>
+    </view>
+    <view class="albumBox" style="margin-right: 30rpx">
+        <image style="  width: 120rpx; height: 120rpx; margin-top: 72rpx" src="../../../../image/team.png"></image>
+        <view class="albumText">团队风采</view>
+    </view>
+    <view class="albumBox">
+        <image style="  width: 120rpx; height: 120rpx; margin-top: 72rpx" src="../../../../image/brand.png"></image>
+        <view class="albumText">品牌展示</view>
+    </view> -->
+</view>

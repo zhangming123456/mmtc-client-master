@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "我的日记",
+  "navigationBarTitleText": "我的点评",
   "enablePullDownRefresh": false,
   "usingComponents": {
     "i-message": "../../../../lib/iview/message/index",

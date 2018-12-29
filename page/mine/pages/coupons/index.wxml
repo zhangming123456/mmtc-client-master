@@ -36,4 +36,4 @@
         </view>
     </block>
 </view>
-<wxc-loadmore is-end="{{noMore}}" icon="随机/loading"></wxc-loadmore>
+<wxc-loadmore is-end="{{noMore}}" ></wxc-loadmore>

@@ -9,6 +9,18 @@ const app = getApp(),
     Fly = require('./fly.min'),
     ContentType = "Content-Type";
 let retryNum = 0
+
+const verifyApiFilter = [
+    '/api/wx2/loginByUnionid_new',
+    '/api/wx2/checkSession',
+    'pages/login/getUserInfo/index',
+    'page/login/index',
+    "page/tabBar/home/index",
+    "page/tabBar/near/index",
+    "page/tabBar/order/index",
+    "page/tabBar/mine/index",
+];
+
 function failCallback (res) {
     retryNum++;
     let text = '网络连接失败，或服务器错误' + '{' + res.errMsg + '}';
@@ -107,12 +119,27 @@ function getFly (params = {}) {
                     }
                     wx.setStorageSync('sid', setCookie);
                 }
-                let page = router.getCurrentPages(),
-                    path = page[page.length - 1].route;
-                // path !== 'page/tabBar/me/index'
-                if (res.data.status === 202 && (path !== 'pages/login/getUserInfo/index' || path !== 'pages/login/index')) {
-                    if (str !== 'checkSession') {
-                        router.push('/page/userLogin/pages/getUserInfo/index');
+                const page = router.getCurrentPage(),
+                    path = page.route;
+                const fIndex = verifyApiFilter.findIndex(function (v) {
+                    try {
+                        return url.indexOf(v) > -1 || path.indexOf(v) > -1
+                    } catch (e) {
+                        return false
+                    }
+                });
+                const nodesRef = wx.createSelectorQuery().select('#azm-login-components');
+                if (res.data.status === 202) {
+                    if (fIndex === -1) {
+                        nodesRef.fields({dataset: true}, function (res) {
+                            if (!res) {
+                                if (path.indexOf('page/tabBar/') > -1) {
+                                    router.push('/page/login/index');
+                                } else {
+                                    router.replace('/page/login/index');
+                                }
+                            }
+                        }).exec();
                     }
                     return {
                         info: null,
@@ -141,6 +168,9 @@ function getFly (params = {}) {
                         } else if (res.cancel) {
                             console.log('用户点击取消')
                         }
+                    },
+                    fail () {
+
                     }
                 });
                 return {
@@ -182,7 +212,7 @@ class HttpRequest {
                 delete data[k]
             } else if (util2.jude.isObject(data[k]) && !util2.jude.isEmptyObject(data[k])) {
                 delete data[k]
-            } else if (util2.jude.isArray(data[k]) && data[k].length > 0) {
+            } else if (util2.jude.isArray(data[k]) && data[k].length === 0) {
                 delete data[k]
             } else if (util2.jude.isString(data[k]) && util2.trim(data[k]) === '') {
                 data[k] = ""
@@ -215,6 +245,7 @@ class HttpRequest {
         delete params.url;
 
         if (params.data.options && jude.isEmptyObject(params.data.options)) {
+
             url += '?' + queryString.stringify(params.data.options);
             delete params.data.options;
         }
@@ -237,6 +268,9 @@ class HttpRequest {
                     params.data = {};
                 }
                 params.data['_f'] = 1;
+                if (app._t) {
+                    params.data['_t'] = app._t || '';
+                }
                 let city = app.globalData.city;
                 if (city && city.id) {
 

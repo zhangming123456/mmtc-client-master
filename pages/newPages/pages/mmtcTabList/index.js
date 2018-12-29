@@ -1,7 +1,7 @@
 const app = getApp(),
     config = require('../../../../utils/config'),
     utilPage = require('../../../../utils/utilPage'),
-    ApiService = require('../../../../utils/ApiService'),
+    ApiService = require('../../../../utils/ApiService/index'),
     c = require("../../../../utils/common.js");
 const appPage = {
     data: {

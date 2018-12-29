@@ -146,7 +146,7 @@ function wxParseTemArray (temArrayName, bindNameReg, total, that) {
  *
  */
 
-function emojisInit (reg = '', baseSrc = "/wxParse/emojis/", emojis) {
+function emojisInit (reg = '', baseSrc = "https://app.mmtcapp.com/mmtc/imgs/wxParse/emojis/", emojis) {
     HtmlToJson.emojisInit(reg, baseSrc, emojis);
 }
 

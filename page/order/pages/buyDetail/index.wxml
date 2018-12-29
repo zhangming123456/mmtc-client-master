@@ -1,0 +1,72 @@
+<view>
+  <view class="orderItem">
+    <image class="itemPicture" mode="aspectFill" src="https://app.mmtcapp.com/mmtc/imgs/new_image/pay-template.png"></image>
+    <view class="itemContent">
+      <view class="itemTitle">
+        <view>买单订单</view>
+        <view>消费完成</view>
+      </view>
+      <view class="itemTime">截止日期：{{item.create_time}}</view>
+
+      <view class="itemPirce">
+        <view class="pirce">
+          <span><i>¥</i>{{item.total}}</span>
+          <text>￥{{item.payed}}</text>
+        </view>
+        <view class="itemButton" bindtap="gotoShopPay">再来一单</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="orderMessage">
+    <view class="orderTitle">订单信息</view>
+    <view class="orderContent">
+      <view class="orderList">
+        <view>订单原价</view>
+        <view>¥{{item.payed}}</view>
+      </view>
+      <!-- <view class="orderList">
+        <view>满200减20</view>
+        <view>-¥10</view>
+      </view> -->
+      <view class="orderList">
+        <view style="font-weight: 500;">实付款</view>
+        <view style="color: #F74884;">¥{{item.total}}</view>
+      </view>
+      <view class="wire"></view>
+      <view class="orderList">
+        <view>订单号：{{item.order_no}}</view>
+        <view class="copy" bindtap="copyTBL">复制</view>
+      </view>
+      <view class="orderList">
+        <view>下单时间： {{item.pay_time}}</view>
+      </view>
+      <view class="orderList" wx:if="{{item.telephone}}">
+        <view>下单手机： {{item.telephone}}</view>
+      </view>
+    </view>
+  </view>
+
+
+  <view class="meOrder" bindtap="gotoShop">
+    <view class="orderTitle2">店铺信息</view>
+    <view class="orderMore">
+      <view>进入店铺</view>
+      <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/icon-arrows.png"></image>
+    </view>
+  </view>
+
+  <view class="shopLocation">
+    <view class="location">
+      <view class="place">
+        <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/pay-location.png"></image>
+        <text>{{item.shop.shop_name}}{{item.shop.distance}}</text>
+      </view>
+      <view class="site">{{item.shop.address}}</view>
+    </view>
+
+    <view class="locationPhone" bindtap='tel'>
+      <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/pay-phone.png"></image>
+    </view>
+  </view>
+</view>

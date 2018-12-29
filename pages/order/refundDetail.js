@@ -4,7 +4,7 @@ const app = getApp(),
     qrcode = require("../../utils/qrcode.js"),
     config = require('../../utils/config'),
     utilPage = require('../../utils/utilPage'),
-    ApiService = require('../../utils/ApiService');
+    ApiService = require('../../utils/ApiService/index');
 const appPage = {
     /**
      * 页面的初始数据

@@ -6,102 +6,90 @@
 <view class="azm-userInfo-login-btn">
     <!--获取用户信息-->
     <block wx:if="{{!isLogin}}">
-        <button wx:if="{{canIUse}}" id="login" open-type="getUserInfo" bindgetuserinfo="getUserInfoCallback"></button>
-        <button wx:else id="login" bindtap="getUserInfo"></button>
+        <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfoCallback"></button>
+        <button wx:else bindtap="getUserInfo"></button>
     </block>
     <!--意见反馈 （小程序后台）-->
     <button id="feedback" wx:if="{{canFeedback}}" open-type="feedback"></button>
 </view>
 
 <view class="azm-mine">
-    <label for="login">
-        <i-cell-group>
-            <i-cell>
-                <azm-image slot="icon" class="azm-userInfo-avatar" mode="aspectFill"
-                           src="{{c.absUrl(userInfo.avatarUrl||'https://app.mmtcapp.com/mmtc/imgs/default.png')}}"></azm-image>
-                <view class="azm-userInfo">
-                    <view class="azm-userInfo-text">您好</view>
-                    <view class='azm-userInfo-nickName'>
-                        <block wx:if="{{isLogin}}">
-                            <text>{{userInfo.nickName}}</text>
-                        </block>
-                        <block wx:else>
-                            <text>暂未登录</text>
-                        </block>
-                    </view>
-                </view>
-                <button plain size="mini" class="azm-exit-btn" catchtap="logoff" wx:if="{{isLogin}}" slot="footer">
-                    <text>退出账号</text>
-                </button>
-            </i-cell>
-        </i-cell-group>
-    </label>
-
-    <i-panel hide-top hide-border class="marTop-12 azm-mine-info">
-        <view class="azm-mine-info-title azm-1px-b">我的消息</view>
-        <view class="azm-mine-info-box flexBox">
-            <view class="flexBox-item fb-8" bindtap="toMsg" data-type="0">
-                <view class="azm-icon">
-                    <text class="iconfont icon-iconfontzhizuobiaozhun023148"></text>
-                </view>
-                <view>赞</view>
-            </view>
-            <view class="flexBox-item fb-8" bindtap="toMsg" data-type="1">
-                <view class="azm-icon">
-                    <text class="iconfont icon-pinglun"></text>
-                </view>
-                <view>评论</view>
-            </view>
-            <view class="flexBox-item fb-8" bindtap="toMsg" data-type="2">
-                <view class="azm-icon">
-                    <text class="iconfont icon-tongzhi"></text>
-                </view>
-                <view>通知</view>
-            </view>
+    <!-- 我的信息 -->
+    <view class="mineMesssage">
+        <image class="mineBg" mode="aspectFill" src="https://app.mmtcapp.com/mmtc/imgs/new_image/mineBg.png"></image>
+        <view class="mineUser" bindtap="bindToLogin">
+            <image wx:if="{{userInfo.avatar}}" mode="aspectFill" src="{{userInfo.avatar}}"></image>
+            <image wx:else src="../../../image/userphone.png"></image>
+            <view wx:if="{{userInfo.nickname}}" class="mineLogin">{{userInfo.nickname}}</view>
+            <view wx:else class="mineLogin">登录/注册</view>
         </view>
-    </i-panel>
-
-    <i-cell-group class="marTop-12">
-        <i-cell title="我的卡包" is-link url="/page/cardBag/pages/myCard/index">
-            <image class="azm-cell-icon" slot="icon" src="../../../image/card_bag.png" mode="widthFix"></image>
-        </i-cell>
-        <i-cell title="我的拼团" is-link url="/pages/group/mine">
-            <image class="azm-cell-icon" slot="icon" src="https://app.mmtcapp.com/mmtc/imgs/pintuan@2x.png"
-                   mode="widthFix"></image>
-        </i-cell>
-        <i-cell title="我的优惠券" is-link url="/page/mine/pages/coupons/index">
-            <image class="azm-cell-icon" slot="icon" src="https://app.mmtcapp.com/mmtc/imgs/discount@2x.png"
-                   mode="widthFix"></image>
-        </i-cell>
-        <i-cell title="我的收藏" is-link url="/page/mine/pages/collection/index">
-            <image class="azm-cell-icon" slot="icon" src="https://app.mmtcapp.com/mmtc/imgs/collection@2x.png"
-                   mode="widthFix"></image>
-        </i-cell>
-    </i-cell-group>
-
-    <i-cell-group class="marTop-12">
-        <i-cell title="我的日记/评论" is-link url="/page/mine/pages/mynotes/index">
-            <image class="azm-cell-icon" slot="icon" src="https://app.mmtcapp.com/mmtc/imgs/note@2x.png"
-                   mode="widthFix"></image>
-        </i-cell>
-        <i-cell title="我的足迹" is-link url="/page/mine/pages/footprint/index">
-            <image class="azm-cell-icon" slot="icon" src="https://app.mmtcapp.com/mmtc/imgs/print@2x.png"
-                   mode="widthFix"></image>
-        </i-cell>
-        <label for="feedback">
-            <i-cell title="意见反馈" is-link url="{{canFeedback?'':'/pages/advise/index'}}">
-                <image class="azm-cell-icon" slot="icon" src="https://app.mmtcapp.com/mmtc/imgs/advise.png"
-                       mode="widthFix"></image>
-            </i-cell>
-        </label>
-        <i-cell title="关于我们" is-link url="/page/mine/pages/aboutus/index">
-            <image class="azm-cell-icon" slot="icon" src="https://app.mmtcapp.com/mmtc/imgs/aboutus.png"
-                   mode="widthFix"></image>
-        </i-cell>
-    </i-cell-group>
-
-    <view class="azm-footer">
-        <view class="text-center">技术支持 美美天成 Tel:400-184-8008</view>
-        <view class="text-center">copyright © 2017 深圳市美美天成科技有限公司</view>
+        <view bindtap="outLogin" catchtap="logoff" wx:if="{{isLogin}}" slot="footer" class="quitLogin">退出</view>
     </view>
+
+
+    <!-- 菜单 -->
+    <view class="mineMenu">
+        <view class="mineModule">
+            <navigator class="clickModule" hover-class="none" url="/page/cardBag/pages/myCard/index">
+                <image class="" src="https://app.mmtcapp.com/mmtc/imgs/new_image/carbag.png"></image>
+                <view>我的卡包</view>
+            </navigator>
+            <navigator class="clickModule" hover-class="none" url="/pages/group/mine">
+                <image class="" src="https://app.mmtcapp.com/mmtc/imgs/new_image/groubbuying.png"></image>
+                <view>我的拼团</view>
+            </navigator>
+            <navigator class="clickModule" hover-class="none" url="/page/mine/pages/coupons/index">
+                <image class="" src="https://app.mmtcapp.com/mmtc/imgs/new_image/coupontwo.png"></image>
+                <view>我的优惠券</view>
+            </navigator>
+            <navigator class="clickModule" hover-class="none" url="/page/mine/pages/mynotes/index">
+                <image class="" src="https://app.mmtcapp.com/mmtc/imgs/new_image/dianping.png"></image>
+                <view>我的点评</view>
+            </navigator>
+        </view>
+        <view class="mineModule">
+            <!-- <navigator class="clickModule" hover-class="none">
+                <image class="" src="https://app.mmtcapp.com/mmtc/imgs/new_image/attention.png"></image>
+                <view>我的关注</view>
+            </navigator> -->
+            <navigator class="clickModule" hover-class="none" url="/page/mine/pages/collection/index">
+                <image class="" src="https://app.mmtcapp.com/mmtc/imgs/new_image/collect.png"></image>
+                <view>我的收藏</view>
+            </navigator>
+            <navigator class="clickModule" hover-class="none" url="/page/mine/pages/footprint/index">
+                <image class="" src="https://app.mmtcapp.com/mmtc/imgs/new_image/footprint.png"></image>
+                <view>我的足迹</view>
+            </navigator>
+        </view>
+    </view>
+
+    <view class="h20"></view>
+
+    <view class="minePerson">
+        <view class="mineTrack" hover-class="none" bindtap="toMsg" data-type="0">
+            <image class="" src="https://app.mmtcapp.com/mmtc/imgs/new_image/zan.png"></image>
+            <view>赞</view>
+        </view>
+        <view class="mineTrack" hover-class="none" bindtap="toMsg" data-type="1">
+            <image class="" src="https://app.mmtcapp.com/mmtc/imgs/new_image/pinglun.png"></image>
+            <view>评论</view>
+        </view>
+        <view class="mineTrack" hover-class="none" bindtap="toMsg" data-type="2">
+            <image class="" src="https://app.mmtcapp.com/mmtc/imgs/new_image/tongzhi.png"></image>
+            <view>通知</view>
+        </view>
+    </view>
+    <view class="h20"></view>
+
+    <navigator class="withMine" hover-class="none" url="/page/mine/pages/aboutus/index">
+        <view>关于我们</view>
+        <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/icon-arrows.png"></image>
+    </navigator>
+    <label for="feedback">
+        <navigator class="withMine" hover-class="none" url="{{canFeedback?'':'/page/public/pages/feedback/index'}}">
+            <view>意见反馈</view>
+            <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/icon-arrows.png"></image>
+        </navigator>
+    </label>
+    <view class="support">Copyright © 2017 美美天成技术支持</view>
 </view>

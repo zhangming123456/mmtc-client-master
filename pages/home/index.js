@@ -63,13 +63,13 @@ const appPage = {
     onReachBottom (options) {
 
     },
-    onPageScroll(options){
+    onPageScroll (options) {
 
     },
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage(options) {
+    onShareAppMessage (options) {
 
     }
 };
@@ -77,12 +77,12 @@ const appPage = {
  * 方法类
  */
 const methods = {
-    loadCb(){
+    loadCb () {
         let options = this.data.options;
         if (options.scene && /^shop_id:[0-9]+$/.test(options.scene)) {
             let scene = options.scene.split(":");
             if (scene[1]) {
-                this.$route.reLaunch({path: '/pages/onlineBuy/index', query: {shop_id: scene[1]}})
+                this.$route.reLaunch({path: '/page/payment/pages/payTheBill/index', query: {shop_id: scene[1]}})
             }
         } else {
             this.$route.tab('/page/tabBar/home/index')

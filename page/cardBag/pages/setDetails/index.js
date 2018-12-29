@@ -2,7 +2,7 @@ const app = getApp(),
     util2 = app.util2,
     config = require('../../../../utils/config'),
     utilPage = require('../../../../utils/utilPage'),
-    ApiService = require('../../../../utils/ApiService');
+    ApiService = require('../../../../utils/ApiService/index');
 let $wxParse = require('../../../../wxParse/wxParse');
 const appPage = {
     data: {
@@ -75,7 +75,7 @@ const appPage = {
     /**
      * 上拉触底
      */
-    onReachBottom() {
+    onReachBottom () {
 
     },
 
@@ -84,7 +84,7 @@ const appPage = {
  * 方法类
  */
 const methods = {
-    loadCb() {
+    loadCb () {
         let that = this,
             options = that.data.options,
             isShow = that.data.isShow,
@@ -102,7 +102,7 @@ const methods = {
                 card_id: options.card_id
             })
         } else if (options.scene) {
-            let data = util2.queryString.parse(options.scene)
+            let data = util2.queryString.parse(options.scene).query;
             if (data.card_id) {
                 that.getOrderShopCardInfo(data.card_id);
                 that.setData({
@@ -114,12 +114,12 @@ const methods = {
             that.$route.back();
         }
     },
-    loadData() {
+    loadData () {
 
     },
 
     // 跳转到项目详情
-    gotoShopDetails(e) {
+    gotoShopDetails (e) {
         console.log(e, 546465465465465465321);
         var item = e.currentTarget.dataset.item
         if (item && item.id) {
@@ -134,12 +134,12 @@ const methods = {
 
 
     // 分享二维码
-    gotoShare() {
+    gotoShare () {
 
     },
 
     // 导航到店
-    gotoNavShop() {
+    gotoNavShop () {
         if (this.data.buyCardList.info) {
             let data = {
                 latitude: parseFloat(this.data.buyCardList.info.latitude),
@@ -154,7 +154,7 @@ const methods = {
     },
 
     // 跳转到体验记录
-    gotoRecord() {
+    gotoRecord () {
         var item = this.data.bill_id;
 
         console.log(item, 444444444444444444444);
@@ -168,9 +168,11 @@ const methods = {
     },
 
     // 套卡详情(购买)
-    getOrderShopCardInfo(card_id) {
+    getOrderShopCardInfo (card_id) {
         let that = this;
-        ApiService.getOrderShopCardInfo({card_id}).finally(res => {
+        ApiService.getOrderShopCardInfo({
+            card_id
+        }).finally(res => {
             if (res.status === 1) {
                 let info = res.info;
                 that.setData({
@@ -185,7 +187,7 @@ const methods = {
 
 
     // 拨打商家电话
-    makeCall(e) {
+    makeCall (e) {
         let that = this;
         if (this.data.bill_id) {
             var service_phone = this.data.buyCardList.info.service_phone;
@@ -207,16 +209,14 @@ const methods = {
             })
         }
     },
-
-
-    gotoMakeCall() {
+    gotoMakeCall () {
         wx.makePhoneCall({
             phoneNumber: '4001848008' //仅为示例，并非真实的电话号码
         });
     },
 
     // 套卡详情(已购买)
-    getOrderCardInfo(bill_id, status) {
+    getOrderCardInfo (bill_id, status) {
         let that = this,
             imageUrl = that.data.imageUrl;
         ApiService.getOrderCardInfo({
@@ -224,10 +224,10 @@ const methods = {
             status
         }).finally(res => {
             if (res.status === 1) {
-                let img = imageUrl + res.info.bj.bj2;
+                let img = imageUrl + res.info.cover;
                 let info = res.info;
                 if (!status) {
-                    img = imageUrl + res.info.bj.bj1
+                    img = imageUrl + res.info.cover
                 }
                 that.setData({
                     buyCardList: res.info,
@@ -241,7 +241,7 @@ const methods = {
     },
 
     // 点击查看卷码
-    gotoLookCard(e) {
+    gotoLookCard (e) {
         console.log(e, 5121212121212);
         var item = this.data.options.bill_id;
         var card_id = e.currentTarget.dataset.item;
@@ -256,44 +256,40 @@ const methods = {
                 }
             })
         }
-
-
     },
 
     // 购买
-    bindbuy() {
+    bindbuy () {
         let card_id = this.data.card_id,
             invite_id = this.data.invite_id,
             cardList = this.data.cardList;
+        let activity_id = this.data.options.activity_id;
         if (!card_id) return;
         this.$route.push({
             path: '/page/cardBag/pages/setBuy/index',
             query: {
                 ...cardList.info,
-                invite_id
+                invite_id,
+                activity_id
             }
         })
     },
 
     // 跳转到店铺
-    gotoShop() {
+    gotoShop () {
         if (this.data.bill_id) {
-            var item = this.data.buyCardList.info.shop_id;
-            console.log(item, 866666666666);
-            this.$route.push({
-                path: '/page/shop/pages/home/index',
-                query: {
-                    shop_id: item
-                }
+            var shop_id = this.data.buyCardList.info.shop_id;
+            wx.setStorageSync('shop_id', shop_id)
+            this.$route.tab({
+                path: "/page/tabBar/home/index"
+
             })
         } else if (this.data.card_id) {
-            var item = this.data.cardList.info.shop_id;
-            console.log(item, 866666666666);
-            this.$route.push({
-                path: '/page/shop/pages/home/index',
-                query: {
-                    shop_id: item
-                }
+            var shop_id = this.data.cardList.info.shop_id;
+            wx.setStorageSync('shop_id', shop_id)
+            this.$route.tab({
+                path: "/page/tabBar/home/index"
+
             })
         } else {
 
@@ -304,10 +300,9 @@ const methods = {
 
 
     // 获取分享二维码
-    showShopQRCode() {
+    showShopQRCode () {
         let that = this;
         let card_id = that.data.card_id
-
         if (!card_id) return;
         ApiService.showShopQrcodeOp({
             page: `page/cardBag/pages/setDetails/index`,
@@ -326,7 +321,7 @@ const methods = {
     },
 
 
-    togglePopup() {
+    togglePopup () {
         this.setData({
             isShowT: !this.data.isShowT
         });
@@ -352,23 +347,19 @@ const methods = {
         }
     },
     // 点击下载二维码
-    downloadImage(){
-        let qrCode = this.data.qrCode, that = this;
+    downloadImage () {
+        let qrCode = this.data.qrCode,
+            that = this;
         if (qrCode) {
-            wx.saveImageToPhotosAlbum({
-                filePath: qrCode,
-                complete(res){
-                    if (res.errMsg === 'saveImageToPhotosAlbum:fail cancel') {
-                        util2.failToast('取消保存')
-                    } else if (res.errMsg === 'saveImageToPhotosAlbum:ok') {
-                        util2.showToast('保存成功');
-                    } else if (res.errMsg === 'saveImageToPhotosAlbum:fail auth deny') {
-                        that.$route.push('/page/public/pages/authorization/index')
-                    } else {
-                        util2.failToast('保存失败')
-                    }
+            util2.saveImageToPhotosAlbum({filePath: qrCode}).finally(res => {
+                if (res.status === 40101) {
+                    util2.failToast('取消保存')
+                } else if (res.status === 1) {
+                    util2.showToast('保存成功');
+                } else {
+                    util2.failToast(res.message)
                 }
-            })
+            });
         }
     }
 

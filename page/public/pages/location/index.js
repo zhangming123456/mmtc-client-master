@@ -2,7 +2,7 @@ const app = getApp(),
     util2 = app.util2,
     map = new util2.MAP(),
     utilPage = require("../../../../utils/utilPage"),
-    ApiService = require("../../../../utils/ApiService");
+    ApiService = require("../../../../utils/ApiService/index");
 
 const appPage = {
     data: {

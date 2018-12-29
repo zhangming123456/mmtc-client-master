@@ -1,0 +1,25 @@
+<view class="binding">
+    <view class="bindingTitle">登录绑定手机</view>
+    <view class="bindingPhone">
+        <view class="phoneBox">
+            <image src="../../../../image/binding-phone.png"></image>
+            <input type="number" placeholder="手机" bindinput="userNameInput" maxlength="11" />
+        </view>
+        <view class="code" disabled='{{disabled}}' data-id="2" bindtap="getVerificationCode">
+            {{time}}
+        </view>
+    </view>
+    <view class="bindingPhone">
+        <view class="phoneBox">
+            <image src="../../../../image/binding-code.png"></image>
+            <input type="number" bindinput="userCodeInput" placeholder="验证码" maxlength="6" />
+        </view>
+    </view>
+
+    <view class="bindingButton" wx:if="{{telephone.length>10 && code.length>4}}">绑定</view>
+    <view class="bindingButtonTwo" wx:else>绑定</view>
+
+    <view class="support">美美天成技术支持©Copy Right</view>
+</view>
+
+<i-toast id="toast" />

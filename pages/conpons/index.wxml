@@ -1,26 +1,41 @@
-<view class='text-center p30' wx:if="{{status==0}}">
-  {{m}}
-</view>
-<view class='bg-white rel text-center' wx:if="{{status==1}}">
-  <view class='conpons-wrap {{m.is_valid==0?"disabled":""}}'>
-    <image src="https://app.mmtcapp.com/mmtc/imgs/conpons.png" class="conpons"></image>
-    <view class='disabled-tag' wx:if="{{m.is_valid==0}}">
-      <image src='https://app.mmtcapp.com/mmtc/imgs/d1.png' class='disabled-img'></image>
-      <view class='disabled-txt'>{{m.errmsg}}</view>
-    </view>
-    <view class='price'>
-      <view class='ib'>{{m.price}}</view>
-      <view class='unit'>元</view>
-    </view>
-    <view class='cover-info'>
-      <view class='title'>{{m.title}}
-        <view class='discount'>({{m.title2}})</view>
+<view>
+  <view class="couponBox">
+    <block wx:if="{{coupon.coupons.length>0}}">
+      <view class="coupon" wx:for="{{coupon.coupons}}" wx:key="{{index}}">
+        <image class="couponImg" src="https://app.mmtcapp.com/mmtc/imgs/new_image/coupon.png"></image>
+        <view class="couponFlex" style="z-index: 100;">
+          <view class="couponsPrice">
+            <span>
+              <i>￥</i>
+              <i>{{item.price}}</i>
+            </span>
+            <view>{{item.title}}</view>
+          </view>
+          <view class="validity">
+            <view>{{item.title2}}</view>
+            <view>有效期至:{{item.valid_time}}</view>
+          </view>
+        </view>
+        <view class="Receive" wx:if="{{item.status===1}}" style="z-index: 100;">
+          <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/Receive.png"></image>
+          <view bindtap="doItmes" data-item="{{item}}" class="Voucher2">去使用</view>
+        </view>
+        <view class="Receive" wx:if="{{item.status===0}}" style="z-index: 100;">
+          <wxc-progress percent="{{item.p}}" active-color="#FF8C73,#FF8275 "></wxc-progress>
+          <view style="font-size: 24rpx; color: #FF8C73; margin-top: 10rpx;">已抢{{item.p}}%</view>
+          <view bindtap="doPicker" data-item="{{item}}" class="Voucher">领取</view>
+        </view>
       </view>
-      <view>有效期：{{m.valid_time}}</view>
-    </view>
+    </block>
+
+    <block wx:else>
+      <view class="noCoupon">
+        <image src="https://app.mmtcapp.com/mmtc/imgs/new_image/noCoupon.png"></image>
+        <view>没有可领的券，看看其他的活动吧</view>
+      </view>
+    </block>
+
   </view>
-  <view class='btn' bindtap='doPicker' wx:if="{{m.is_valid==1}}">确认领</view>
-  <view class='picked' wx:elif="m.errmsg=='已领取'">
-    已领取，请在<navigator url='/page/mine/pages/coupons/index' class='ib color-red'>我的优惠券</navigator>里查看>
-  </view>
+
+
 </view>

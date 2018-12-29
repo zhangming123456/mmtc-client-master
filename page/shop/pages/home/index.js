@@ -3,7 +3,9 @@ const app = getApp(),
     regeneratorRuntime = util2.regeneratorRuntime,
     config = require('../../../../utils/config'),
     utilPage = require('../../../../utils/utilPage'),
-    ApiService = require('../../../../utils/ApiService');
+    ApiService = require('../../../../utils/ApiService/index');
+let $wxParse = require('../../../../wxParse/wxParse');
+
 const appPage = {
     data: {
         text: "page shop home",
@@ -15,7 +17,8 @@ const appPage = {
         page: 1,
         shopItems: [],
         coupons: [],
-        ShopcardList: []
+        ShopcardList: [],
+        shopOpen: false
     },
     onLoad: function () {
         let that = this;
@@ -42,23 +45,22 @@ const appPage = {
     /**
      * 页面渲染完成
      */
-    onReady: function () {
-    },
+    onReady: function () {},
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
         let that = this;
-        this.getHomeIndex(1, true).finally(res => {
-            wx.stopPullDownRefresh();
-        });
+        this.getShopNewDetail()
+        wx.stopPullDownRefresh()
     },
     /**
      * 上拉触底
      */
     onReachBottom() {
-        let that = this, page = that.data.page;
-        this.getHomeIndex(page)
+        let that = this,
+            page = that.data.page;
+
     },
     /**
      * 页面滚动
@@ -73,172 +75,117 @@ const methods = {
         let that = this,
             options = that.data.options,
             shop_id = options.shop_id;
-        if (options.scene) {
-            let scene = decodeURIComponent(options.scene);
-            if (scene) {
-                let kv = scene.split(':');
-                if (kv[0] == 'shop_id') {
-                    shop_id = kv[1];
-                }
-            }
-        }
-        if (shop_id) {
-            that.setData({shop_id});
-            that.getHomeIndex();
-            that.getOrderCardShopcard();
-        } else {
-            that.$route.back()
-        }
+        this.getShopNewDetail()
     },
-    async getHomeIndex(p = 1, bol){
-        let that = this, lat, lon,
-            shop_id = that.data.shop_id;
-        if (that.isLoading || that.data.noMore) {
-            return;
-        }
-        that.isLoading = true;
-        that.setData({loadingMore: true});
-        await util2.getLocation().finally(res => {
+    // 获取店铺介绍数据
+    getShopNewDetail(
+
+    ) {
+        let that = this;
+        var shop_id = this.data.options.shop_id;
+        var lat = wx.getStorageSync('lat');
+        var lon = wx.getStorageSync('lon');
+        ApiService.getShopNewDetail({
+            shop_id,
+            lat,
+            lon
+        }).finally(res => {
             if (res.status === 1) {
                 let info = res.info;
-                lat = info.latitude;
-                lon = info.longitude;
-            }
-        });
-        if (!bol) {
-            util2.showLoading();
-        }
-        await ApiService.getHomeIndex({shop_id, lat, lon, p}).finally(res => {
-            that.isLoading = false;
-            util2.hideLoading(true);
-            if (res.status === 1) {
-                let setData = {};
-                let items = res.info.items;
-                if (items.length > 0) {
-                    if (p === 1) {
-                        setData[`shopItems`] = [items]
-                    } else {
-                        setData[`shopItems[${p - 1}]`] = items
-                    }
-                    setData[`page`] = p + 1;
-                    setData.noMore = items.length !== 10;
-                } else if (items.length === 0) {
-                    if (p > 1) {
-                        setData[`page`] = p - 1;
-                    }
-                    setData.noMore = true;
-                }
-                if (p > 1) {
-                    that.setData(setData)
-                } else {
-                    that.setHomeData(res.info, setData)
-                }
-            }
-        });
-    },
-    /**
-     * 卡包使用记录
-     */
-    getOrderCardShopcard() {
-        let that = this,
-            shop_id = this.data.shop_id;
-        ApiService.getOrderCardShopcard({shop_id}).finally(res => {
-            if (res.status === 1) {
-                that.setData({ShopcardList: res.info})
+                that.setData({
+                    shop: res.info
+                });
+                $wxParse.wxParse('intro', 'html', res.info.shop.intro, that)
             }
         })
     },
-    setHomeData(info = {}, setData = {}){
-        let that = this;
-        let shop = info.shop;
-        wx.setNavigationBarTitle({
-            title: shop.shop_name
+
+
+    open() {
+        var shopOpen = this.data.shopOpen;
+        this.setData({
+            shopOpen: !shopOpen
         });
-        let reduce_discount, str;
-        if (shop.discount_type == 1) {
-            str = [
-                {
-                    name: 'div',
-                    attrs: {
-                        class: 'ib'
-                    },
-                    children: [{
-                        name: 'span',
-                        attrs: {
-                            class: 'discount0'
-                        },
-                        children: [{
-                            type: 'text',
-                            text: shop.discount
-                        }
-                        ]
-                    },
-                        {
-                            type: 'text',
-                            text: '折'
-                        }]
-                }];
-        } else {
-            let v = shop.discount.split(':');
-            reduce_discount = {
-                count_money: parseInt(v[0]) || 0,
-                reduce_money: parseInt(v[1]) || 0,
-                max_reduce: parseInt(v[2]) || 0,
-                repeated: parseInt(v[3]) || 0
-            };
-            str = '<span class="color-red">' + (reduce_discount.repeated ? '每' : '') + '满' + reduce_discount.count_money + '减' + reduce_discount.reduce_money + ' </span>';
-        }
-        let noMore = false;
-        that.setData(Object.assign(setData, {
-            discount: str,
-            noMore,
-            shop,
-            coupons: info.coupons,
-            discountAreaWidth: 350 * (info.coupons.length + 1) + 60
-        }));
     },
+
+    // 跳转到首页
+    gotoHome() {
+        let shop_id = this.data.shop.shop.shop_id;
+        wx.setStorageSync('shop_id', shop_id)
+        this.$route.tab({
+            path: "/page/tabBar/home/index"
+
+        })
+    },
+
+    // 拨打电话
+    Dialing() {
+        var service_phone = this.data.shop.shop.telephone;
+        wx.makePhoneCall({
+            phoneNumber: service_phone //仅为示例，并非真实的电话号码
+        });
+    },
+
+    // 导航到店
     showLocation(e) {
-        let shop = this.data.shop;
-        if (shop) {
+        if (this.data.shop.shop) {
             let data = {
-                latitude: shop.lat_new,
-                longitude: shop.lon_new,
-                name: shop.shop_name,
-                address: shop.address,
+                latitude: parseFloat(this.data.shop.shop.lat),
+                longitude: parseFloat(this.data.shop.shop.lon),
+                name: this.data.shop.shop.name,
+                address: this.data.shop.shop.address,
                 scale: 28
             };
+            console.log(data);
             wx.openLocation(data);
         }
     },
-    gotoCardDetails(e) {
-        let item = e.currentTarget.dataset.item
-        if (item && item.card_id) {
+
+    // 买单
+    gotoBuy() {
+        let shop_id = this.data.options.shop_id
+        if (shop_id) {
             this.$route.push({
-                path: '/page/cardBag/pages/setDetails/index',
+                path: '/page/payment/pages/payTheBill/index',
                 query: {
-                    card_id: item.card_id
+                    shop_id
                 }
             })
         }
     },
-    showCouponDetail (e) {
-        let id = e.currentTarget.dataset.id;
-        if (id) {
-            this.$route.push({path: '/pages/conpons/index', query: {id}})
-        }
+
+
+    // 关注店铺
+    follow(shop_id) {
+        let that = this;
+        var shop_id = this.data.options.shop_id;
+        ApiService.getFollow({
+            shop_id
+        }).finally(res => {
+            if (res.status === 1) {
+                wx.showToast({
+                    title: res.info,
+                    icon: 'none',
+                    duration: 2000,
+                })
+                that.setData({
+                    ['shop.follow_shop']: !that.data.shop.follow_shop ? 1 : 0
+                })
+            }
+        })
     },
-    showShopDetail () {
-        let shop_id = this.data.shop_id
-        if (shop_id) {
-            this.$route.push({path: '/page/shop/pages/detail/index', query: {shop_id}})
-        }
-    },
-    gotoBuy () {
-        let shop_id = this.data.shop_id
-        if (shop_id) {
-            this.$route.push({path: '/pages/onlineBuy/index', query: {shop_id}})
-        }
-    },
+
+
+    gotoAlbum() {
+        let shop_id = this.data.shop.shop.shop_id;
+        this.$route.push({
+            path: '/page/shop/pages/shopAlbum/index',
+            query: {
+                shop_id
+            }
+        })
+    }
+
 }
 
 Page(new utilPage(appPage, methods));

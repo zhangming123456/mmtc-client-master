@@ -1,2 +1,2 @@
-<text class="countdown-class">{{time}}</text>
+<text class="countdown-class">{{ time2Status? time2 : time}}</text>
 
